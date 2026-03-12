@@ -31,11 +31,11 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
   val baseUrl: String = TestEnvironment.url("nova-imports-notification-frontend")
 
   object Locators {
-    val pageHeading: By = By.className("govuk-heading-l")
+    val pageHeading: By    = By.className("govuk-heading-l")
     val continueButton: By = By.className("govuk-button")
-    val backButton: By = By.className("govuk-back-link")
-    val yes: By = By.id("value")
-    val no: By = By.id("value-no")
+    val backButton: By     = By.className("govuk-back-link")
+    val yes: By            = By.id("value")
+    val no: By             = By.id("value-no")
   }
 
   private def fluentWait: Wait[WebDriver] = new FluentWait[WebDriver](Driver.instance)
@@ -44,7 +44,8 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
 
   def waitForUrl(expectedUrl: String): Unit = fluentWait.until(ExpectedConditions.urlToBe(expectedUrl))
 
-  def waitForVisibilityOfElement(locator: By): WebElement = fluentWait.until(ExpectedConditions.visibilityOfElementLocated(locator))
+  def waitForVisibilityOfElement(locator: By): WebElement =
+    fluentWait.until(ExpectedConditions.visibilityOfElementLocated(locator))
 
   def verifyPageUrl(expectedUrl: String): Unit = {
     waitForUrl(expectedUrl)
@@ -77,7 +78,6 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
     executor.executeScript("arguments[1].click()", Locators.no)
   }
 
-  def clickContinue(): Unit = {
+  def clickContinue(): Unit =
     click(Locators.continueButton)
-  }
 }
