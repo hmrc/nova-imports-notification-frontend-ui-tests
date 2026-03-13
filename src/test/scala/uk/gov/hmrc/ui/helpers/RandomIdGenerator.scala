@@ -1,4 +1,4 @@
-package uk.gov.hmrc.ui.utils
+package uk.gov.hmrc.ui.helpers
 
 import scala.util.Random
 
