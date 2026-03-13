@@ -78,6 +78,7 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
     executor.executeScript("arguments[1].click()", Locators.no)
   }
 
-  def clickContinue(): Unit =
-    click(Locators.continueButton)
+  def clickContinue(): Unit = click(Locators.continueButton)
+
+  def goToPage(url: String): Unit = driver.navigate().to(url)
 }
