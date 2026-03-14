@@ -56,10 +56,10 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
   }
 
   def verifyPageHeading(expectedHeading: String): Unit = {
-    waitForVisibilityOfElement(Locators.pageHeading)
+    val actualHeading = waitForVisibilityOfElement(Locators.pageHeading).getText
     assert(
-      driver.getTitle == expectedHeading,
-      s"Page header mismatch! Expected Heading: $expectedHeading, Actual Heading: ${driver.findElement(Locators.pageHeading).getText}"
+      actualHeading == expectedHeading,
+      s"Page URL mismatch! Expected Heading: $expectedHeading, Actual Heading: $actualHeading"
     )
   }
 
@@ -68,17 +68,21 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
     verifyPageHeading(expectedHeading)
   }
 
-  def selectYes(): Unit = {
-    val executor = driver.asInstanceOf[JavascriptExecutor]
-    executor.executeScript("arguments[0].click()", Locators.yes)
-  }
+  def selectYes(): Unit = click(Locators.yes)
 
-  def selectNo(): Unit = {
-    val executor = driver.asInstanceOf[JavascriptExecutor]
-    executor.executeScript("arguments[1].click()", Locators.no)
-  }
+  def selectNo(): Unit = click(Locators.no)
 
   def clickContinue(): Unit = click(Locators.continueButton)
 
+  def clickBack(): Unit = click(Locators.backButton)
+
   def goToPage(url: String): Unit = driver.navigate().to(url)
+
+  def verifyText(expectedText: String, locator: By): Unit = {
+    val actualText = waitForVisibilityOfElement(locator).getText
+    assert(
+      actualText == expectedText,
+      s"Text mismatch! Expected: $expectedText, Actual: $actualText"
+    )
+  }
 }
