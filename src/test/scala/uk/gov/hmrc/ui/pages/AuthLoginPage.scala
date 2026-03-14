@@ -2,7 +2,7 @@ package uk.gov.hmrc.ui.pages
 
 import org.openqa.selenium.By
 import uk.gov.hmrc.configuration.TestEnvironment
-import uk.gov.hmrc.ui.utils.AffinityGroup
+import uk.gov.hmrc.ui.helpers.AffinityGroup
 
 object AuthLoginPage extends BasePage {
   override val pageUrl: String = TestEnvironment.url("auth-login-stub")

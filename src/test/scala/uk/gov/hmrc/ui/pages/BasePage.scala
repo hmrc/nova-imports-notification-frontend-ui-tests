@@ -47,6 +47,8 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
   def waitForVisibilityOfElement(locator: By): WebElement =
     fluentWait.until(ExpectedConditions.visibilityOfElementLocated(locator))
 
+  def goToPage(url: String): Unit = driver.navigate().to(url)
+
   def verifyPageUrl(expectedUrl: String): Unit = {
     waitForUrl(expectedUrl)
     assert(
