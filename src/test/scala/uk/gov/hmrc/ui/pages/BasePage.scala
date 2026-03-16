@@ -61,7 +61,7 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
     val actualHeading = waitForVisibilityOfElement(Locators.pageHeading).getText
     assert(
       actualHeading == expectedHeading,
-      s"Page URL mismatch! Expected Heading: $expectedHeading, Actual Heading: $actualHeading"
+      s"Page Heading mismatch! Expected Heading: $expectedHeading, Actual Heading: $actualHeading"
     )
   }
 
@@ -77,14 +77,4 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
   def clickContinue(): Unit = click(Locators.continueButton)
 
   def clickBack(): Unit = click(Locators.backButton)
-
-  def goToPage(url: String): Unit = driver.navigate().to(url)
-
-  def verifyText(expectedText: String, locator: By): Unit = {
-    val actualText = waitForVisibilityOfElement(locator).getText
-    assert(
-      actualText == expectedText,
-      s"Text mismatch! Expected: $expectedText, Actual: $actualText"
-    )
-  }
 }

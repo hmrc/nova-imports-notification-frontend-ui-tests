@@ -20,7 +20,4 @@ object VehicleBroughtIntoNIFromEUPage extends BasePage {
     selectNo()
     clickContinue()
   }
-
-  def goBack(): Unit =
-    clickBack()
 }
