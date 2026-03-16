@@ -10,14 +10,4 @@ object VehicleBroughtIntoNIFromEUPage extends BasePage {
       expectedHeading =
         "Are you completing a notification for a vehicle brought into Northern Ireland from an EU country?"
     )
-
-  def selectYesAndContinue(): Unit = {
-    selectYes()
-    clickContinue()
-  }
-
-  def selectNoAndContinue(): Unit = {
-    selectNo()
-    clickContinue()
-  }
 }

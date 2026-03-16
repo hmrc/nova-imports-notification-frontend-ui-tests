@@ -77,4 +77,14 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
   def clickContinue(): Unit = click(Locators.continueButton)
 
   def clickBack(): Unit = click(Locators.backButton)
+
+  def selectYesAndContinue(): Unit = {
+    selectYes()
+    clickContinue()
+  }
+
+  def selectNoAndContinue(): Unit = {
+    selectNo()
+    clickContinue()
+  }
 }
