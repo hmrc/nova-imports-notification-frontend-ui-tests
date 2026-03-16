@@ -12,7 +12,4 @@ object VehicleBroughtIntoNIFromOutsideEUPage extends BasePage {
       expectedHeading =
         "You need to make an import declaration if you've brought a vehicle into Northern Ireland from outside the EU"
     )
-
-  def validatePageContent(): Unit =
-    verifyPageDisplayed()
 }
