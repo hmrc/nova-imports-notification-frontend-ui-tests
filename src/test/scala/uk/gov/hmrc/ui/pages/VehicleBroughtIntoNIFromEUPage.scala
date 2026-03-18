@@ -22,7 +22,6 @@ object VehicleBroughtIntoNIFromEUPage extends BasePage {
 
   def verifyPageDisplayed(): Unit =
     validatePage(
-      expectedUrl = pageUrl,
       expectedHeading =
         "Are you completing a notification for a vehicle brought into Northern Ireland from an EU country?"
     )

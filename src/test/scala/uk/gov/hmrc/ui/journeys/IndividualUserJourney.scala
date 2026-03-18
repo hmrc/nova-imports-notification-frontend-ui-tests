@@ -1,10 +1,9 @@
 package uk.gov.hmrc.ui.journeys
 
 import uk.gov.hmrc.ui.helpers.AffinityGroup
-import uk.gov.hmrc.ui.pages.{AuthLoginPage, BasePage, VehicleBroughtIntoNIFromEUPage, VehicleBroughtIntoNIFromOutsideEUPage}
+import uk.gov.hmrc.ui.pages.{AuthLoginPage, VehicleBroughtIntoNIFromEUPage, VehicleBroughtIntoNIFromOutsideEUPage}
 
-object IndividualUserJourney extends BasePage {
-  override val pageUrl: String                           = "" // Needed due to extending BasePage
+object IndividualUserJourney {
   def userCompletesFlowWithManualEntryOfAVehicle(): Unit = {
     // TODO: This would eventually go page to page
   }
@@ -20,7 +19,7 @@ object IndividualUserJourney extends BasePage {
   def userNeedsToImportAVehicleFromOutsideEU(): Unit = {
     AuthLoginPage.login(AffinityGroup.Individual)
     VehicleBroughtIntoNIFromEUPage.verifyPageDisplayed()
-    selectNoAndContinue()
+    VehicleBroughtIntoNIFromEUPage.selectNoAndContinue()
     VehicleBroughtIntoNIFromOutsideEUPage.verifyPageDisplayed()
   }
 }
