@@ -16,12 +16,29 @@
 
 package uk.gov.hmrc.ui.pages
 
-object VehicleBroughtIntoNIFromOutsideEUPage extends BasePage {
+import org.openqa.selenium.By
 
-  override val pageUrl: String = s"$baseUrl/vehicle-outside-eu"
+object AreYouABusinessOrPrivateIndividual extends BasePage {
+
+  override val pageUrl: String = s"$baseUrl/business-or-private-individual"
+
+  object PageLocators {
+    val business: By          = By.id("businessType")
+    val privateIndividual: By = By.id("businessType-2")
+  }
 
   def verifyPageDisplayed(): Unit =
     validatePage(
-      expectedHeading = "If you've brought a vehicle into Northern Ireland from outside the EU"
+      expectedHeading = "Are you a business or a private individual?"
     )
+
+  def selectBusinessAndContinue(): Unit = {
+    click(PageLocators.business)
+    click(Locators.continueButton)
+  }
+
+  def selectPrivateIndividualAndContinue(): Unit = {
+    click(PageLocators.privateIndividual)
+    click(Locators.continueButton)
+  }
 }
