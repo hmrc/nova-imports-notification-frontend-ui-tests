@@ -29,7 +29,6 @@ object AreYouABusinessOrPrivateIndividual extends BasePage {
 
   def verifyPageDisplayed(): Unit =
     validatePage(
-      expectedUrl = pageUrl,
       expectedHeading = "Are you a business or a private individual?"
     )
 

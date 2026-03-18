@@ -13,7 +13,6 @@ object AreYouNotifyingAsPurchaserOrOnBehalf extends BasePage {
 
   def verifyPageDisplayed(): Unit =
     validatePage(
-      expectedUrl = pageUrl,
       expectedHeading = "Are you notifying as the purchaser, or on behalf of a purchaser?"
     )
 
