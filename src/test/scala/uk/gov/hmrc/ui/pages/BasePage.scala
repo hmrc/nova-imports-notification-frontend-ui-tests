@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.ui.pages
 
-import org.openqa.selenium.{By, JavascriptExecutor, WebDriver, WebElement}
+import org.openqa.selenium.{By, WebDriver, WebElement}
 import org.openqa.selenium.support.ui.{ExpectedConditions, FluentWait, Wait}
 import org.scalatest.matchers.should.Matchers
 import uk.gov.hmrc.configuration.TestEnvironment
@@ -49,11 +49,11 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
 
   def goToPage(url: String): Unit = driver.navigate().to(url)
 
-  def verifyPageUrl(expectedUrl: String): Unit = {
-    waitForUrl(expectedUrl)
+  def verifyPageUrl(): Unit = {
+    waitForUrl(pageUrl)
     assert(
-      driver.getCurrentUrl.contains(expectedUrl),
-      s"Page URL mismatch! Expected Url: $expectedUrl, Actual Url: ${driver.getCurrentUrl}"
+      driver.getCurrentUrl.contains(pageUrl),
+      s"Page URL mismatch! Expected Url: $pageUrl, Actual Url: ${driver.getCurrentUrl}"
     )
   }
 
@@ -65,8 +65,8 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
     )
   }
 
-  def validatePage(expectedUrl: String, expectedHeading: String): Unit = {
-    verifyPageUrl(expectedUrl)
+  def validatePage(expectedHeading: String): Unit = {
+    verifyPageUrl()
     verifyPageHeading(expectedHeading)
   }
 
