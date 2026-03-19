@@ -3,8 +3,8 @@ package uk.gov.hmrc.ui.specs
 import uk.gov.hmrc.ui.journeys.IndividualUserJourney
 
 class IndividualUserSpec extends BaseSpec {
-  Feature("Individual User who is a 'Private Individual' and the 'Purchaser'"){
-    Scenario("A user completing an import as a private individual and as the purchaser"){
+  Feature("Individual User who is a 'Private Individual' and the 'Purchaser'") {
+    Scenario("A user completing an import as a private individual and as the purchaser") {
       When("the user sets out to import a vehicle as the buyer and as a private individual")
       Then("the user successfully imports a vehicle into NI")
       IndividualUserJourney.userStartsJourneyAsAPrivateIndividualAndAsThePurchaser()

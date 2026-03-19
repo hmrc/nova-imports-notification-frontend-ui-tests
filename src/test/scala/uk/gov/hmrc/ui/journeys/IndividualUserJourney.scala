@@ -9,12 +9,12 @@ object IndividualUserJourney {
     VehicleBroughtIntoNIFromEUPage.verifyPageDisplayed()
     VehicleBroughtIntoNIFromEUPage.selectYesAndContinue()
     AreYouABusinessOrPrivateIndividual.verifyPageDisplayed()
-    //TODO: THIS WILL CHANGE FROM NO TO OPTION TWO / AS PRIVATE INDIVIDUAL
+    // TODO: THIS WILL CHANGE FROM NO TO OPTION TWO / AS PRIVATE INDIVIDUAL
     AreYouABusinessOrPrivateIndividual.selectNoAndContinue()
     AreYouNotifyingAsPurchaserOrOnBehalf.verifyPageDisplayed()
-    //TODO: THIS WILL CHANGE FROM YES TO OPTION ONE / AS THE PURCHASER
+    // TODO: THIS WILL CHANGE FROM YES TO OPTION ONE / AS THE PURCHASER
     AreYouNotifyingAsPurchaserOrOnBehalf.selectYesAndContinue()
-    //TODO: NOW ON SUMMARY PAGE
+    // TODO: NOW ON SUMMARY PAGE
   }
 
   def userStartsJourneyAsAPrivateIndividualAndOnBehalfOfPurchaserThatIsARegisteredBusiness(): Unit = {
@@ -22,15 +22,15 @@ object IndividualUserJourney {
     VehicleBroughtIntoNIFromEUPage.verifyPageDisplayed()
     VehicleBroughtIntoNIFromEUPage.selectYesAndContinue()
     AreYouABusinessOrPrivateIndividual.verifyPageDisplayed()
-    //TODO: THIS WILL CHANGE FROM NO TO OPTION TWO / AS PRIVATE INDIVIDUAL
+    // TODO: THIS WILL CHANGE FROM NO TO OPTION TWO / AS PRIVATE INDIVIDUAL
     AreYouABusinessOrPrivateIndividual.selectNoAndContinue()
     AreYouNotifyingAsPurchaserOrOnBehalf.verifyPageDisplayed()
-    //TODO: THIS WILL CHANGE FROM NO TO OPTION TWO / ON BEHALF OF PURCHASER
+    // TODO: THIS WILL CHANGE FROM NO TO OPTION TWO / ON BEHALF OF PURCHASER
     AreYouNotifyingAsPurchaserOrOnBehalf.selectNoAndContinue()
     PurchaserOnBehalfOfABusinessOrIndividual.verifyPageDisplayed()
-    //TODO: THIS WILL CHANGE FROM YES TO OPTION ONE / NON-VAT REGISTERED BUSINESS
+    // TODO: THIS WILL CHANGE FROM YES TO OPTION ONE / NON-VAT REGISTERED BUSINESS
     PurchaserOnBehalfOfABusinessOrIndividual.selectYesAndContinue()
-    //TODO: NOW ON SUMMARY PAGE
+    // TODO: NOW ON SUMMARY PAGE
   }
 
   def userStartsJourneyAsAPrivateIndividualAndOnBehalfOfPurchaserThatIsAPrivateIndividual(): Unit = {
@@ -38,15 +38,15 @@ object IndividualUserJourney {
     VehicleBroughtIntoNIFromEUPage.verifyPageDisplayed()
     VehicleBroughtIntoNIFromEUPage.selectYesAndContinue()
     AreYouABusinessOrPrivateIndividual.verifyPageDisplayed()
-    //TODO: THIS WILL CHANGE FROM NO TO OPTION TWO / AS PRIVATE INDIVIDUAL
+    // TODO: THIS WILL CHANGE FROM NO TO OPTION TWO / AS PRIVATE INDIVIDUAL
     AreYouABusinessOrPrivateIndividual.selectNoAndContinue()
     AreYouNotifyingAsPurchaserOrOnBehalf.verifyPageDisplayed()
-    //TODO: THIS WILL CHANGE FROM NO TO OPTION TWO / ON BEHALF OF PURCHASER
+    // TODO: THIS WILL CHANGE FROM NO TO OPTION TWO / ON BEHALF OF PURCHASER
     AreYouNotifyingAsPurchaserOrOnBehalf.selectNoAndContinue()
     PurchaserOnBehalfOfABusinessOrIndividual.verifyPageDisplayed()
-    //TODO: THIS WILL CHANGE FROM NO TO OPTION TWO / NON-VAT REGISTERED PRIVATE INDIVIDUAL
+    // TODO: THIS WILL CHANGE FROM NO TO OPTION TWO / NON-VAT REGISTERED PRIVATE INDIVIDUAL
     PurchaserOnBehalfOfABusinessOrIndividual.selectNoAndContinue()
-    //TODO: NOW ON SUMMARY PAGE
+    // TODO: NOW ON SUMMARY PAGE
   }
 
   def userNeedsToImportAVehicleFromOutsideEU(): Unit = {
