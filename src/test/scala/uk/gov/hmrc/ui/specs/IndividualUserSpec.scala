@@ -7,7 +7,7 @@ class IndividualUserSpec extends BaseSpec {
     Scenario("A user completing an import as a private individual and as the purchaser") {
       When("the user sets out to import a vehicle as the buyer and as a private individual")
       Then("the user successfully imports a vehicle into NI")
-      IndividualUserJourney.userStartsJourneyAsAPrivateIndividualAndAsThePurchaser()
+      IndividualUserJourney.privateIndividualAsPurchaser()
     }
   }
 
@@ -15,7 +15,7 @@ class IndividualUserSpec extends BaseSpec {
     Scenario("A user completing an import as a private individual on behalf of a business") {
       When("the user sets out to import a vehicle as a private individual on behalf of a business")
       Then("the user successfully imports a vehicle into NI")
-      IndividualUserJourney.userStartsJourneyAsAPrivateIndividualAndOnBehalfOfPurchaserThatIsARegisteredBusiness()
+      IndividualUserJourney.privateIndividualOnBehalfOfBusiness()
     }
   }
 
@@ -23,7 +23,7 @@ class IndividualUserSpec extends BaseSpec {
     Scenario("A user completing an import as a private individual on behalf of a private individual") {
       When("the user sets out to import a vehicle on the behalf of a private individual")
       Then("the user successfully imports a vehicle into NI")
-      IndividualUserJourney.userStartsJourneyAsAPrivateIndividualAndOnBehalfOfPurchaserThatIsAPrivateIndividual()
+      IndividualUserJourney.privateIndividualOnBehalfOfPrivateIndividual()
     }
   }
 
