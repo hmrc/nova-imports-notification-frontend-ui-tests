@@ -4,7 +4,7 @@ import uk.gov.hmrc.ui.helpers.AffinityGroup
 import uk.gov.hmrc.ui.pages.{AreYouABusinessOrPrivateIndividual, AreYouNotifyingAsPurchaserOrOnBehalf, AuthLoginPage, PurchaserOnBehalfOfABusinessOrIndividual, VehicleBroughtIntoNIFromEUPage, VehicleBroughtIntoNIFromOutsideEUPage}
 
 object IndividualUserJourney {
-  def userStartsJourneyAsAPrivateIndividualAndAsThePurchaser(): Unit = {
+  def privateIndividualAsPurchaser(): Unit = {
     AuthLoginPage.login(AffinityGroup.Individual)
     VehicleBroughtIntoNIFromEUPage.verifyPageDisplayed()
     VehicleBroughtIntoNIFromEUPage.selectYesAndContinue()
@@ -17,7 +17,7 @@ object IndividualUserJourney {
     // TODO: NOW ON SUMMARY PAGE
   }
 
-  def userStartsJourneyAsAPrivateIndividualAndOnBehalfOfPurchaserThatIsARegisteredBusiness(): Unit = {
+  def privateIndividualOnBehalfOfBusiness(): Unit = {
     AuthLoginPage.login(AffinityGroup.Individual)
     VehicleBroughtIntoNIFromEUPage.verifyPageDisplayed()
     VehicleBroughtIntoNIFromEUPage.selectYesAndContinue()
@@ -33,7 +33,7 @@ object IndividualUserJourney {
     // TODO: NOW ON SUMMARY PAGE
   }
 
-  def userStartsJourneyAsAPrivateIndividualAndOnBehalfOfPurchaserThatIsAPrivateIndividual(): Unit = {
+  def privateIndividualOnBehalfOfPrivateIndividual(): Unit = {
     AuthLoginPage.login(AffinityGroup.Individual)
     VehicleBroughtIntoNIFromEUPage.verifyPageDisplayed()
     VehicleBroughtIntoNIFromEUPage.selectYesAndContinue()
