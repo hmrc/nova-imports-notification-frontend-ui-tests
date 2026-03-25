@@ -30,12 +30,22 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
   val pageUrl: String
   val baseUrl: String = TestEnvironment.url("nova-imports-notification-frontend")
 
+  // TODO:
+  // IQ1 has a different value for radio button
+  // IQ1.1 has a different header class name
+  // Speak to devs / maybe just change the radio button so its consistent
+  // For now just doing a quick fix
+  // Will also implement an override for radio buttons to reduce POMs and keep code DRY, will do once more pages available
+
   object Locators {
-    val pageHeading: By    = By.className("govuk-heading-l")
-    val continueButton: By = By.className("govuk-button")
-    val backButton: By     = By.className("govuk-back-link")
-    val yes: By            = By.id("value")
-    val no: By             = By.id("value-no")
+    val questionPageHeading: By = By.className("govuk-fieldset__heading")
+    val pageHeading: By         = By.className("govuk-heading-l")
+    val continueButton: By      = By.className("govuk-button")
+    val backButton: By          = By.className("govuk-back-link")
+    val yes: By                 = By.id("value")
+    val no: By                  = By.id("value-no")
+    val option1: By             = By.id("value")
+    val option2: By             = By.id("value-2")
   }
 
   private def fluentWait: Wait[WebDriver] = new FluentWait[WebDriver](Driver.instance)
@@ -57,17 +67,23 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
     )
   }
 
-  def verifyPageHeading(expectedHeading: String): Unit = {
-    val actualHeading = waitForVisibilityOfElement(Locators.pageHeading).getText
+  def verifyPageHeading(expectedHeading: String, defaultHeading: Boolean): Unit = {
+    // Question header will be our default but IQ1.1 and potentially future screens have a different class name
+    var actualHeading: String = ""
+    if (!defaultHeading) {
+      actualHeading = waitForVisibilityOfElement(Locators.pageHeading).getText
+    } else {
+      actualHeading = waitForVisibilityOfElement(Locators.questionPageHeading).getText
+    }
     assert(
       actualHeading == expectedHeading,
       s"Page Heading mismatch! Expected Heading: $expectedHeading, Actual Heading: $actualHeading"
     )
   }
 
-  def validatePage(expectedHeading: String): Unit = {
+  def validatePage(expectedHeading: String, defaultHeading: Boolean = true): Unit = {
     verifyPageUrl()
-    verifyPageHeading(expectedHeading)
+    verifyPageHeading(expectedHeading, defaultHeading)
   }
 
   def selectYes(): Unit = click(Locators.yes)
@@ -85,6 +101,16 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
 
   def selectNoAndContinue(): Unit = {
     selectNo()
+    clickContinue()
+  }
+
+  def selectOptionOneAndContinue(): Unit = {
+    click(Locators.option1)
+    clickContinue()
+  }
+
+  def selectOptionTwoAndContinue(): Unit = {
+    click(Locators.option2)
     clickContinue()
   }
 }

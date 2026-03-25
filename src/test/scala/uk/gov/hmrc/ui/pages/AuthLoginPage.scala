@@ -25,6 +25,8 @@ object AuthLoginPage extends BasePage {
   def serviceUrl: String       = TestEnvironment.url("nova-imports-notification-frontend")
   def pageTitle: String        = "Authority Wizard"
 
+  def tempEntryPoint: String = "http://localhost:10300/nova-imports/start"
+
   val redirectUrl: By    = By.id("redirectionUrl")
   val affinityGroup: By  = By.id("affinityGroupSelect")
   val enrolmentKey: By   = By.id(s"enrolment[0].name") // Enrolment Key
@@ -33,7 +35,9 @@ object AuthLoginPage extends BasePage {
   val btnSubmit: By      = By.id("submit")
 
   def fillAuthInputs(affGroup: AffinityGroup): Unit = {
-    driver.findElement(redirectUrl).sendKeys(serviceUrl)
+    // TODO: Uncomment when service works as expected
+    // driver.findElement(redirectUrl).sendKeys(serviceUrl)
+    driver.findElement(redirectUrl).sendKeys(tempEntryPoint)
     driver.findElement(affinityGroup).sendKeys(affGroup.getAffinityGroup)
     driver.findElement(enrolmentKey).sendKeys(affGroup.getEnrolmentKey)
     driver.findElement(enrolmentId).sendKeys(affGroup.getIdentifierName)
