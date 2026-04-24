@@ -84,9 +84,16 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
     )
   }
 
-  def validatePage(expectedHeading: String, defaultHeading: Boolean = true): Unit = {
+  /** Two methods to dictate if we need to verify a question page heading or a standard page.
+   *  So far in our service if we have radio buttons the heading will be different CSS class as its inside a fieldset*/
+  def validateQuestionPage(expectedHeading: String): Unit = {
     verifyPageUrl()
-    verifyPageHeading(expectedHeading, defaultHeading)
+    verifyPageHeadingQuestionPage(expectedHeading)
+  }
+  
+  def validateStandardPage(expectedHeading: String): Unit = {
+    verifyPageUrl()
+    verifyPageHeadingStandardPage(expectedHeading)
   }
 
   def selectYes(): Unit = click(Locators.yes)
