@@ -16,14 +16,13 @@
 
 package uk.gov.hmrc.ui.pages
 
-object VehicleBroughtIntoNIFromEUPage extends BasePage {
+object RetrievingYourClientList extends BasePage {
 
-  override val pageUrl: String = s"$baseUrl/vehicle-from-eu"
+  override val pageUrl: String = s"$baseUrl/view-clients/loading"
 
   def verifyPageDisplayed(): Unit =
     validatePage(
-      expectedHeading =
-        "Are you completing a notification for a vehicle brought into Northern Ireland from an EU country?",
+      expectedHeading = "Retrieving your client list",
       defaultHeading = false
     )
 }

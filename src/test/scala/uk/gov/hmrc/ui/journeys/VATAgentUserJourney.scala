@@ -14,16 +14,18 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.pages
+package uk.gov.hmrc.ui.journeys
 
-object VehicleBroughtIntoNIFromEUPage extends BasePage {
+import uk.gov.hmrc.ui.helpers.AffinityGroup
+import uk.gov.hmrc.ui.pages.{AuthLoginPage, RetrievingYourClientList}
 
-  override val pageUrl: String = s"$baseUrl/vehicle-from-eu"
-
-  def verifyPageDisplayed(): Unit =
-    validatePage(
-      expectedHeading =
-        "Are you completing a notification for a vehicle brought into Northern Ireland from an EU country?",
-      defaultHeading = false
-    )
+object VATAgentUserJourney {
+  // TODO: Refine the below method to reflect the actual user journey/behaviour
+  def agentNotifyingOnBehalfOfClient(): Unit = {
+    AuthLoginPage.login(AffinityGroup.AgentVAT)
+    // TODO: BEFORE YOU CONTINUE (AGENT)
+    // TODO: SELECT CLIENT AND CONTINUE
+    RetrievingYourClientList.verifyPageDisplayed()
+    // TODO: COMPLETE THE REST OF THE JOURNEY
+  }
 }
