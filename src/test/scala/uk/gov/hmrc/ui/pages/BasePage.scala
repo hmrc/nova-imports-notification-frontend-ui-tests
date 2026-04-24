@@ -67,14 +67,17 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
     )
   }
 
-  def verifyPageHeading(expectedHeading: String, defaultHeading: Boolean): Unit = {
-    // Question header will be our default but IQ1.1 and potentially future screens have a different class name
-    var actualHeading: String = ""
-    if (!defaultHeading) {
-      actualHeading = waitForVisibilityOfElement(Locators.pageHeading).getText
-    } else {
-      actualHeading = waitForVisibilityOfElement(Locators.questionPageHeading).getText
-    }
+  /** Based on if the page had radio buttons or not dictates which page locator we need to use to grab the heading */
+  def verifyPageHeadingQuestionPage(expectedHeading: String): Unit = {
+    val actualHeading = waitForVisibilityOfElement(Locators.questionPageHeading).getText
+    assert(
+      actualHeading == expectedHeading,
+      s"Page Heading mismatch! Expected Heading: $expectedHeading, Actual Heading: $actualHeading"
+    )
+  }
+
+  def verifyPageHeadingStandardPage(expectedHeading: String): Unit = {
+    val actualHeading = waitForVisibilityOfElement(Locators.pageHeading).getText
     assert(
       actualHeading == expectedHeading,
       s"Page Heading mismatch! Expected Heading: $expectedHeading, Actual Heading: $actualHeading"
