@@ -28,7 +28,7 @@ object AreYouNotifyingAsPurchaserOrOnBehalf extends BasePage {
   }
 
   def verifyPageDisplayed(): Unit =
-    validateStandardPage(
+    validateQuestionPage(
       expectedHeading = "Are you notifying as the purchaser, or on behalf of a purchaser?"
     )
 

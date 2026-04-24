@@ -20,5 +20,5 @@ object BeforeYouContinue extends BasePage {
   override val pageUrl: String = s"$baseUrl/before-you-continue"
 
   def verifyPageDisplayed(): Unit =
-    validateQuestionPage(expectedHeading = "Before you continue")
+    validateStandardPage(expectedHeading = "Before you continue")
 }
