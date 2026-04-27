@@ -67,23 +67,34 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
     )
   }
 
-  def verifyPageHeading(expectedHeading: String, defaultHeading: Boolean): Unit = {
-    // Question header will be our default but IQ1.1 and potentially future screens have a different class name
-    var actualHeading: String = ""
-    if (!defaultHeading) {
-      actualHeading = waitForVisibilityOfElement(Locators.pageHeading).getText
-    } else {
-      actualHeading = waitForVisibilityOfElement(Locators.questionPageHeading).getText
-    }
+  /** Based on if the page had radio buttons or not dictates which page locator we need to use to grab the heading */
+  def verifyQuestionPageHeading(expectedHeading: String): Unit = {
+    val actualHeading = waitForVisibilityOfElement(Locators.questionPageHeading).getText
     assert(
       actualHeading == expectedHeading,
       s"Page Heading mismatch! Expected Heading: $expectedHeading, Actual Heading: $actualHeading"
     )
   }
 
-  def validatePage(expectedHeading: String, defaultHeading: Boolean = true): Unit = {
+  def verifyStandardPageHeading(expectedHeading: String): Unit = {
+    val actualHeading = waitForVisibilityOfElement(Locators.pageHeading).getText
+    assert(
+      actualHeading == expectedHeading,
+      s"Page Heading mismatch! Expected Heading: $expectedHeading, Actual Heading: $actualHeading"
+    )
+  }
+
+  /** Two methods to dictate if we need to verify a question page heading or a standard page. So far in our service if
+    * we have radio buttons the heading will be different CSS class as its inside a fieldset
+    */
+  def validateQuestionPage(expectedHeading: String): Unit = {
     verifyPageUrl()
-    verifyPageHeading(expectedHeading, defaultHeading)
+    verifyQuestionPageHeading(expectedHeading)
+  }
+
+  def validateStandardPage(expectedHeading: String): Unit = {
+    verifyPageUrl()
+    verifyStandardPageHeading(expectedHeading)
   }
 
   def selectYes(): Unit = click(Locators.yes)
