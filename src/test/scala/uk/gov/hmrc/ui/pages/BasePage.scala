@@ -68,7 +68,7 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
   }
 
   /** Based on if the page had radio buttons or not dictates which page locator we need to use to grab the heading */
-  def verifyPageHeadingQuestionPage(expectedHeading: String): Unit = {
+  def verifyQuestionPageHeading(expectedHeading: String): Unit = {
     val actualHeading = waitForVisibilityOfElement(Locators.questionPageHeading).getText
     assert(
       actualHeading == expectedHeading,
@@ -76,7 +76,7 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
     )
   }
 
-  def verifyPageHeadingStandardPage(expectedHeading: String): Unit = {
+  def verifyStandardPageHeading(expectedHeading: String): Unit = {
     val actualHeading = waitForVisibilityOfElement(Locators.pageHeading).getText
     assert(
       actualHeading == expectedHeading,
@@ -89,12 +89,12 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
     */
   def validateQuestionPage(expectedHeading: String): Unit = {
     verifyPageUrl()
-    verifyPageHeadingQuestionPage(expectedHeading)
+    verifyQuestionPageHeading(expectedHeading)
   }
 
   def validateStandardPage(expectedHeading: String): Unit = {
     verifyPageUrl()
-    verifyPageHeadingStandardPage(expectedHeading)
+    verifyStandardPageHeading(expectedHeading)
   }
 
   def selectYes(): Unit = click(Locators.yes)
