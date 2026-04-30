@@ -97,6 +97,9 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
     verifyStandardPageHeading(expectedHeading)
   }
 
+  /** Temp navigation work around until we have the actual flow mapped out */
+  def navigateToPage(url: String): Unit = driver.navigate().to(url)
+
   def selectYes(): Unit = click(Locators.yes)
 
   def selectNo(): Unit = click(Locators.no)
