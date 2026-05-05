@@ -58,7 +58,7 @@ enum AffinityGroup:
     case Agent           => ""
     case OrganisationVRN => RandomIdGenerator.generateRandomIdentifierValue()
     case OrganisationVAT => RandomIdGenerator.generateRandomIdentifierValue()
-    case AgentVAT        => ""
+    case AgentVAT        => RandomIdGenerator.generateRandomIdentifierValue()
     case AgentVRN1       => "DVA0001"
     case AgentVRN2       => "DVLA002"
   }
