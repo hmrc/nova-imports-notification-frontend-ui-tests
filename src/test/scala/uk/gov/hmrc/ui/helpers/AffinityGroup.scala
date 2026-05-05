@@ -17,7 +17,7 @@
 package uk.gov.hmrc.ui.helpers
 
 enum AffinityGroup:
-  case Individual, Organisation, Agent, OrganisationVRN, OrganisationVAT, AgentVAT, AgentVRN
+  case Individual, Organisation, Agent, OrganisationVRN, OrganisationVAT, AgentVAT, AgentVRN1, AgentVRN2
 
   def getAffinityGroup: String = this match {
     case Organisation    => "Organisation"
@@ -26,7 +26,8 @@ enum AffinityGroup:
     case OrganisationVRN => "Organisation"
     case OrganisationVAT => "Organisation"
     case AgentVAT        => "Agent"
-    case AgentVRN        => "Agent"
+    case AgentVRN1       => "Agent"
+    case AgentVRN2       => "Agent"
   }
 
   def getEnrolmentKey: String = this match {
@@ -36,7 +37,8 @@ enum AffinityGroup:
     case OrganisationVRN => "HMRC-MTD-VAT"
     case OrganisationVAT => "HMCE-VATDEC-ORG"
     case AgentVAT        => "HMCE-VAT-AGNT"
-    case AgentVRN        => "HMRC-NOVRN-AGNT"
+    case AgentVRN1       => "HMRC-NOVRN-AGNT"
+    case AgentVRN2       => "HMRC-NOVRN-AGNT"
   }
 
   def getIdentifierName: String = this match {
@@ -46,7 +48,8 @@ enum AffinityGroup:
     case OrganisationVRN => "VRN"
     case OrganisationVAT => "VATRegNo"
     case AgentVAT        => "AgentRefNo"
-    case AgentVRN        => "VATAgentRefNo"
+    case AgentVRN1       => "VATAgentRefNo"
+    case AgentVRN2       => "VATAgentRefNo"
   }
 
   def getIdentifierValue: String = this match {
@@ -55,6 +58,7 @@ enum AffinityGroup:
     case Agent           => ""
     case OrganisationVRN => RandomIdGenerator.generateRandomIdentifierValue()
     case OrganisationVAT => RandomIdGenerator.generateRandomIdentifierValue()
-    case AgentVAT        => "DVA0001"
-    case AgentVRN        => "DVLA002"
+    case AgentVAT        => ""
+    case AgentVRN1       => "DVA0001"
+    case AgentVRN2       => "DVLA002"
   }

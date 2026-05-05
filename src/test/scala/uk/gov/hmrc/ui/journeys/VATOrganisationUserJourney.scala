@@ -23,7 +23,7 @@ object VATOrganisationUserJourney {
   // TODO: Finish this flow once we have more screens
   def acquisitionBringingAVehicleInForBusinessUse(): Unit = {
     AuthLoginPage.login(AffinityGroup.OrganisationVAT)
-    BeforeYouContinue.verifyPageDisplayed()
+    BeforeYouContinue.verifyMultipleVehiclesSectionPresent()
     BeforeYouContinue.clickContinue()
     VehicleBroughtIntoNIFromEUPage.verifyPageDisplayed()
     VehicleBroughtIntoNIFromEUPage.selectYesAndContinue()
@@ -33,7 +33,7 @@ object VATOrganisationUserJourney {
 
   def acquisitionVehicleForPrivateUse(): Unit = {
     AuthLoginPage.login(AffinityGroup.OrganisationVAT)
-    BeforeYouContinue.verifyPageDisplayed()
+    BeforeYouContinue.verifyMultipleVehiclesSectionPresent()
     BeforeYouContinue.clickContinue()
     VehicleBroughtIntoNIFromEUPage.verifyPageDisplayed()
     VehicleBroughtIntoNIFromEUPage.selectYesAndContinue()
@@ -43,7 +43,7 @@ object VATOrganisationUserJourney {
 
   def importBringingAVehicleInForBusinessUse(): Unit = {
     AuthLoginPage.login(AffinityGroup.OrganisationVAT)
-    BeforeYouContinue.verifyPageDisplayed()
+    BeforeYouContinue.verifyMultipleVehiclesSectionPresent()
     BeforeYouContinue.clickContinue()
     VehicleBroughtIntoNIFromEUPage.verifyPageDisplayed()
     VehicleBroughtIntoNIFromEUPage.selectNoAndContinue()
@@ -53,7 +53,7 @@ object VATOrganisationUserJourney {
 
   def importVehicleForPrivateUse(): Unit = {
     AuthLoginPage.login(AffinityGroup.OrganisationVAT)
-    BeforeYouContinue.verifyPageDisplayed()
+    BeforeYouContinue.verifyMultipleVehiclesSectionPresent()
     BeforeYouContinue.clickContinue()
     VehicleBroughtIntoNIFromEUPage.verifyPageDisplayed()
     VehicleBroughtIntoNIFromEUPage.selectNoAndContinue()
