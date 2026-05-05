@@ -16,9 +16,23 @@
 
 package uk.gov.hmrc.ui.pages
 
+import org.openqa.selenium.By
+
 object BeforeYouContinue extends BasePage {
   override val pageUrl: String = s"$baseUrl/before-you-continue"
 
+  val notifyingForMultipleVehiclesHeading: By = By.xpath("//h2[contains(text(), 'Notifying for multiple vehicles')]")
+
   def verifyPageDisplayed(): Unit =
     validateStandardPage(expectedHeading = "Before you continue")
+
+  def verifyMultipleVehiclesSectionNotPresent(): Unit = {
+    verifyPageDisplayed()
+    verifyElementNotPresent(notifyingForMultipleVehiclesHeading)
+  }
+
+  def verifyMultipleVehiclesSectionPresent(): Unit = {
+    verifyPageDisplayed()
+    verifyElementDisplayed(notifyingForMultipleVehiclesHeading)
+  }
 }

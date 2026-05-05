@@ -17,20 +17,20 @@
 package uk.gov.hmrc.ui.journeys
 
 import uk.gov.hmrc.ui.helpers.AffinityGroup
-import uk.gov.hmrc.ui.pages.{AuthLoginPage, RetrievingYourClientList, WeCouldNotRetrieveYourClientList, YouHaveNoAuthorisedClients}
+import uk.gov.hmrc.ui.pages.{AuthLoginPage, BeforeYouContinue, RetrievingYourClientList, WeCouldNotRetrieveYourClientList, YouHaveNoAuthorisedClients}
 
 object VATAgentUserJourney {
 
   /** The main user journey for an Agent, they will choose a client and submit a notification on their behalf */
   def agentNotifyingOnBehalfOfClient(): Unit = {
     AuthLoginPage.login(AffinityGroup.AgentVAT)
+    // TODO: LANDING PAGE (AGENT)
     // TODO: SELECT CLIENT AND CONTINUE
+    BeforeYouContinue.verifyMultipleVehiclesSectionPresent()
 
     // TODO: Remove once flow is actually implemented
     RetrievingYourClientList.navigateToPage(RetrievingYourClientList.pageUrl)
     RetrievingYourClientList.verifyPageDisplayed()
-    // TODO: LANDING PAGE (AGENT)
-    // TODO: BEFORE YOU CONTINUE (AGENT)
     // TODO: COMPLETE THE REST OF THE JOURNEY
   }
 
@@ -39,6 +39,7 @@ object VATAgentUserJourney {
   def agentNotifyingOnBehalfOfClientClientListFailedToLoad(): Unit = {
     AuthLoginPage.login(AffinityGroup.AgentVAT)
     // TODO: SELECT CLIENT AND CONTINUE
+    BeforeYouContinue.verifyMultipleVehiclesSectionPresent()
 
     // TODO: Remove once flow is actually implemented
     RetrievingYourClientList.navigateToPage(RetrievingYourClientList.pageUrl)
@@ -53,7 +54,7 @@ object VATAgentUserJourney {
     */
   def agentNotifyingOnBehalfOfThemself(): Unit = {
     AuthLoginPage.login(AffinityGroup.AgentVAT)
-    // TODO: SELECT CLIENT AND CONTINUE
+    BeforeYouContinue.verifyMultipleVehiclesSectionNotPresent()
 
     // TODO: Remove once flow is actually implemented
     RetrievingYourClientList.navigateToPage(RetrievingYourClientList.pageUrl)

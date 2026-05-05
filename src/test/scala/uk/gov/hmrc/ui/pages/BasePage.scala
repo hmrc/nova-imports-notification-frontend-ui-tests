@@ -127,4 +127,20 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
     click(Locators.option2)
     clickContinue()
   }
+
+  def verifyElementDisplayed(locator: By): Unit = {
+    val element = waitForVisibilityOfElement(locator)
+    assert(
+      element.isDisplayed,
+      s"Expected element to be displayed, but it was not: $locator"
+    )
+  }
+
+  def verifyElementNotPresent(locator: By): Unit = {
+    val elements = driver.findElements(locator)
+    assert(
+      elements.isEmpty,
+      s"Expected element not to be present, but it was found: $locator"
+    )
+  }
 }

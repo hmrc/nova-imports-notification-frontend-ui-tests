@@ -22,7 +22,7 @@ import uk.gov.hmrc.ui.pages.{AreYouABusinessOrPrivateIndividual, AreYouNotifying
 object IndividualUserJourney {
   def privateIndividualAsPurchaser(): Unit = {
     AuthLoginPage.login(AffinityGroup.Individual)
-    BeforeYouContinue.verifyPageDisplayed()
+    BeforeYouContinue.verifyMultipleVehiclesSectionNotPresent()
     BeforeYouContinue.clickContinue()
     VehicleBroughtIntoNIFromEUPage.verifyPageDisplayed()
     VehicleBroughtIntoNIFromEUPage.selectYesAndContinue()
@@ -35,7 +35,7 @@ object IndividualUserJourney {
 
   def privateIndividualOnBehalfOfBusiness(): Unit = {
     AuthLoginPage.login(AffinityGroup.Individual)
-    BeforeYouContinue.verifyPageDisplayed()
+    BeforeYouContinue.verifyMultipleVehiclesSectionNotPresent()
     BeforeYouContinue.clickContinue()
     VehicleBroughtIntoNIFromEUPage.verifyPageDisplayed()
     VehicleBroughtIntoNIFromEUPage.selectYesAndContinue()
@@ -50,7 +50,7 @@ object IndividualUserJourney {
 
   def privateIndividualOnBehalfOfPrivateIndividual(): Unit = {
     AuthLoginPage.login(AffinityGroup.Individual)
-    BeforeYouContinue.verifyPageDisplayed()
+    BeforeYouContinue.verifyMultipleVehiclesSectionNotPresent()
     BeforeYouContinue.clickContinue()
     VehicleBroughtIntoNIFromEUPage.verifyPageDisplayed()
     VehicleBroughtIntoNIFromEUPage.selectYesAndContinue()
@@ -65,7 +65,7 @@ object IndividualUserJourney {
 
   def userNeedsToImportAVehicleFromOutsideEU(): Unit = {
     AuthLoginPage.login(AffinityGroup.Individual)
-    BeforeYouContinue.verifyPageDisplayed()
+    BeforeYouContinue.verifyMultipleVehiclesSectionNotPresent()
     BeforeYouContinue.clickContinue()
     VehicleBroughtIntoNIFromEUPage.verifyPageDisplayed()
     VehicleBroughtIntoNIFromEUPage.selectNoAndContinue()
