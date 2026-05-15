@@ -17,11 +17,13 @@
 package uk.gov.hmrc.ui.journeys
 
 import uk.gov.hmrc.ui.helpers.AffinityGroup
-import uk.gov.hmrc.ui.pages.{AreYouABusinessOrPrivateIndividual, AreYouNotifyingAsPurchaserOrOnBehalf, AuthLoginPage, BeforeYouContinue, PurchaserOnBehalfOfABusinessOrIndividual, VehicleBroughtIntoNIFromEUPage, VehicleBroughtIntoNIFromOutsideEUPage}
+import uk.gov.hmrc.ui.pages.{AreYouABusinessOrPrivateIndividual, AreYouNotifyingAsPurchaserOrOnBehalf, AuthLoginPage, BeforeYouContinue, LandingPage, PurchaserOnBehalfOfABusinessOrIndividual, VehicleBroughtIntoNIFromEUPage, VehicleBroughtIntoNIFromOutsideEUPage}
 
 object IndividualUserJourney {
   def privateIndividualAsPurchaser(): Unit = {
     AuthLoginPage.login(AffinityGroup.Individual)
+    LandingPage.verifyPageDisplayed()
+    LandingPage.createANewNotification()
     BeforeYouContinue.verifyMultipleVehiclesSectionNotPresent()
     BeforeYouContinue.clickContinue()
     VehicleBroughtIntoNIFromEUPage.verifyPageDisplayed()
@@ -35,6 +37,8 @@ object IndividualUserJourney {
 
   def privateIndividualOnBehalfOfBusiness(): Unit = {
     AuthLoginPage.login(AffinityGroup.Individual)
+    LandingPage.verifyPageDisplayed()
+    LandingPage.createANewNotification()
     BeforeYouContinue.verifyMultipleVehiclesSectionNotPresent()
     BeforeYouContinue.clickContinue()
     VehicleBroughtIntoNIFromEUPage.verifyPageDisplayed()
@@ -50,6 +54,8 @@ object IndividualUserJourney {
 
   def privateIndividualOnBehalfOfPrivateIndividual(): Unit = {
     AuthLoginPage.login(AffinityGroup.Individual)
+    LandingPage.verifyPageDisplayed()
+    LandingPage.createANewNotification()
     BeforeYouContinue.verifyMultipleVehiclesSectionNotPresent()
     BeforeYouContinue.clickContinue()
     VehicleBroughtIntoNIFromEUPage.verifyPageDisplayed()
@@ -65,6 +71,8 @@ object IndividualUserJourney {
 
   def userNeedsToImportAVehicleFromOutsideEU(): Unit = {
     AuthLoginPage.login(AffinityGroup.Individual)
+    LandingPage.verifyPageDisplayed()
+    LandingPage.createANewNotification()
     BeforeYouContinue.verifyMultipleVehiclesSectionNotPresent()
     BeforeYouContinue.clickContinue()
     VehicleBroughtIntoNIFromEUPage.verifyPageDisplayed()
