@@ -16,9 +16,30 @@
 
 package uk.gov.hmrc.ui.pages
 
+import org.openqa.selenium.By
+
 object LandingPage extends BasePage {
   override val pageUrl: String = s"$baseUrl/notification-of-vehicle-arrivals"
 
+  object PageLocators {
+    val createANewNotificationLink: By       = By.xpath("//a[normalize-space()='Create a new notification']")
+    val updateASubmittedNotificationLink: By = By.xpath("//a[normalize-space()='Update a submitted notification']")
+    val manageASavedNotificationLink: By     = By.xpath("//a[normalize-space()='Manage a saved notification']")
+    val noSavedNotificationText: By          = By.xpath("//p[normalize-space()='You do not have a saved notifications']")
+  }
+
   def verifyPageDisplayed(): Unit =
     validateStandardPage(expectedHeading = "Notification of Vehicle Arrivals (NOVA)")
+
+  def createANewNotification(): Unit =
+    click(PageLocators.createANewNotificationLink)
+
+  def updateASubmittedNotification(): Unit =
+    click(PageLocators.updateASubmittedNotificationLink)
+
+  def manageASavedNotificationForUserWithDraft(): Unit =
+    click(PageLocators.manageASavedNotificationLink)
+
+  def verifyManageASavedNotificationDisabled(): Unit =
+    verifyElementDisplayed(PageLocators.noSavedNotificationText)
 }

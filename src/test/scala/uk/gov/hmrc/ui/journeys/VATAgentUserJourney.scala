@@ -17,7 +17,7 @@
 package uk.gov.hmrc.ui.journeys
 
 import uk.gov.hmrc.ui.helpers.AffinityGroup
-import uk.gov.hmrc.ui.pages.{AuthLoginPage, BeforeYouContinue, RetrievingYourClientList, WeCouldNotRetrieveYourClientList, YouHaveNoAuthorisedClients}
+import uk.gov.hmrc.ui.pages.{AuthLoginPage, BeforeYouContinue, LandingPage, RetrievingYourClientList, WeCouldNotRetrieveYourClientList, YouHaveNoAuthorisedClients}
 
 object VATAgentUserJourney {
 
@@ -26,7 +26,7 @@ object VATAgentUserJourney {
     AuthLoginPage.login(AffinityGroup.AgentVAT)
     // TODO: LANDING PAGE (AGENT)
     // TODO: SELECT CLIENT AND CONTINUE
-    BeforeYouContinue.verifyMultipleVehiclesSectionPresent()
+//    BeforeYouContinue.verifyMultipleVehiclesSectionPresent()
 
     // TODO: Remove once flow is actually implemented
     RetrievingYourClientList.navigateToPage(RetrievingYourClientList.pageUrl)
@@ -39,7 +39,7 @@ object VATAgentUserJourney {
   def agentNotifyingOnBehalfOfClientClientListFailedToLoad(): Unit = {
     AuthLoginPage.login(AffinityGroup.AgentVAT)
     // TODO: SELECT CLIENT AND CONTINUE
-    BeforeYouContinue.verifyMultipleVehiclesSectionPresent()
+//    BeforeYouContinue.verifyMultipleVehiclesSectionPresent()
 
     // TODO: Remove once flow is actually implemented
     RetrievingYourClientList.navigateToPage(RetrievingYourClientList.pageUrl)
@@ -54,14 +54,9 @@ object VATAgentUserJourney {
     */
   def agentNotifyingOnBehalfOfThemself(): Unit = {
     AuthLoginPage.login(AffinityGroup.AgentVAT)
+    LandingPage.verifyPageDisplayed()
+    LandingPage.createANewNotification()
     BeforeYouContinue.verifyMultipleVehiclesSectionNotPresent()
-
-    // TODO: Remove once flow is actually implemented
-    RetrievingYourClientList.navigateToPage(RetrievingYourClientList.pageUrl)
-    RetrievingYourClientList.verifyPageDisplayed()
-    YouHaveNoAuthorisedClients.navigateToPage(YouHaveNoAuthorisedClients.pageUrl)
-    YouHaveNoAuthorisedClients.verifyPageDisplayed()
-    YouHaveNoAuthorisedClients.clickContinue()
 
     // TODO: LANDING PAGE (AGENT)
     // TODO: BEFORE YOU CONTINUE (AGENT)

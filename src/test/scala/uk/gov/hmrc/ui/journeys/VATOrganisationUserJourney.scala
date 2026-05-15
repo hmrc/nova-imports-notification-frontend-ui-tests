@@ -17,12 +17,14 @@
 package uk.gov.hmrc.ui.journeys
 
 import uk.gov.hmrc.ui.helpers.AffinityGroup
-import uk.gov.hmrc.ui.pages.{AuthLoginPage, BeforeYouContinue, HaveYouBroughtAVehicleIntoTheUKForBusinessUse, VehicleBroughtIntoNIFromEUPage}
+import uk.gov.hmrc.ui.pages.{AuthLoginPage, BeforeYouContinue, HaveYouBroughtAVehicleIntoTheUKForBusinessUse, LandingPage, VehicleBroughtIntoNIFromEUPage}
 
 object VATOrganisationUserJourney {
   // TODO: Finish this flow once we have more screens
   def acquisitionBringingAVehicleInForBusinessUse(): Unit = {
     AuthLoginPage.login(AffinityGroup.OrganisationVAT)
+    LandingPage.verifyPageDisplayed()
+    LandingPage.createANewNotification()
     BeforeYouContinue.verifyMultipleVehiclesSectionPresent()
     BeforeYouContinue.clickContinue()
     VehicleBroughtIntoNIFromEUPage.verifyPageDisplayed()
@@ -33,6 +35,8 @@ object VATOrganisationUserJourney {
 
   def acquisitionVehicleForPrivateUse(): Unit = {
     AuthLoginPage.login(AffinityGroup.OrganisationVAT)
+    LandingPage.verifyPageDisplayed()
+    LandingPage.createANewNotification()
     BeforeYouContinue.verifyMultipleVehiclesSectionPresent()
     BeforeYouContinue.clickContinue()
     VehicleBroughtIntoNIFromEUPage.verifyPageDisplayed()
@@ -43,6 +47,8 @@ object VATOrganisationUserJourney {
 
   def importBringingAVehicleInForBusinessUse(): Unit = {
     AuthLoginPage.login(AffinityGroup.OrganisationVAT)
+    LandingPage.verifyPageDisplayed()
+    LandingPage.createANewNotification()
     BeforeYouContinue.verifyMultipleVehiclesSectionPresent()
     BeforeYouContinue.clickContinue()
     VehicleBroughtIntoNIFromEUPage.verifyPageDisplayed()
@@ -53,6 +59,8 @@ object VATOrganisationUserJourney {
 
   def importVehicleForPrivateUse(): Unit = {
     AuthLoginPage.login(AffinityGroup.OrganisationVAT)
+    LandingPage.verifyPageDisplayed()
+    LandingPage.createANewNotification()
     BeforeYouContinue.verifyMultipleVehiclesSectionPresent()
     BeforeYouContinue.clickContinue()
     VehicleBroughtIntoNIFromEUPage.verifyPageDisplayed()
