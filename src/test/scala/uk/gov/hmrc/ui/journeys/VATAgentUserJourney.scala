@@ -17,30 +17,40 @@
 package uk.gov.hmrc.ui.journeys
 
 import uk.gov.hmrc.ui.helpers.AffinityGroup
-import uk.gov.hmrc.ui.pages.{AuthLoginPage, BeforeYouContinue, LandingPage, RetrievingYourClientList, WeCouldNotRetrieveYourClientList, YouHaveNoAuthorisedClients}
+import uk.gov.hmrc.ui.pages.{AuthLoginPage, BeforeYouContinue, HasYourClientBroughtAVehicleIntoTheUkForBusinessUse, LandingPage, RetrievingYourClientList, TestOnlySessionPage, VehicleBroughtIntoNIFromEUPage, WeCouldNotRetrieveYourClientList, YouHaveNoAuthorisedClients}
 
 object VATAgentUserJourney {
 
   /** The main user journey for an Agent, they will choose a client and submit a notification on their behalf */
   def agentNotifyingOnBehalfOfClient(): Unit = {
     AuthLoginPage.login(AffinityGroup.AgentVAT)
-    // TODO: LANDING PAGE (AGENT)
-    // TODO: SELECT CLIENT AND CONTINUE
-//    BeforeYouContinue.verifyMultipleVehiclesSectionPresent()
-
-    // TODO: Remove once flow is actually implemented
+    LandingPage.verifyPageDisplayed()
+    // TODO: Verify Landing Page LP3.0 for Agents with Clients.
+    // TODO: SELECT CLIENT AND CONTINUE,
+    //  but the page to select a client and continue is not yet implemented, so for now we will just set the client in the session and navigate to the landing page.
     RetrievingYourClientList.navigateToPage(RetrievingYourClientList.pageUrl)
     RetrievingYourClientList.verifyPageDisplayed()
-    // TODO: COMPLETE THE REST OF THE JOURNEY
+    // TODO: Remove TestOnlySessionPage once flow is actually implemented
+    TestOnlySessionPage.setSelectedClientInSession()
+    LandingPage.navigateToPage(LandingPage.pageUrl)
+    LandingPage.verifyPageDisplayed()
+    LandingPage.createANewNotification()
+    BeforeYouContinue.verifyMultipleVehiclesSectionPresent()
+    BeforeYouContinue.clickContinue()
+    VehicleBroughtIntoNIFromEUPage.verifyPageDisplayed()
+    VehicleBroughtIntoNIFromEUPage.selectYesAndContinue()
+    HasYourClientBroughtAVehicleIntoTheUkForBusinessUse.verifyPageDisplayed()
+    HasYourClientBroughtAVehicleIntoTheUkForBusinessUse.selectYesAndContinue()
+    // TODO: CONTINUE WITH THE REST OF THE JOURNEY. CURRENTLY GOES BACK TO LANDING PAGE
   }
 
   // NOTE: Not sure if CS2.0 will actually be reachable?
   /** A short journey to reach an error page and then will end the journey */
   def agentNotifyingOnBehalfOfClientClientListFailedToLoad(): Unit = {
     AuthLoginPage.login(AffinityGroup.AgentVAT)
+    LandingPage.verifyPageDisplayed()
+    // TODO: Verify Landing Page LP3.0 for Agents with Clients.
     // TODO: SELECT CLIENT AND CONTINUE
-//    BeforeYouContinue.verifyMultipleVehiclesSectionPresent()
-
     // TODO: Remove once flow is actually implemented
     RetrievingYourClientList.navigateToPage(RetrievingYourClientList.pageUrl)
     RetrievingYourClientList.verifyPageDisplayed()

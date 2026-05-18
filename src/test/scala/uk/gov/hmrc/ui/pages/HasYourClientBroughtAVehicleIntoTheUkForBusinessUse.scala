@@ -21,7 +21,6 @@ object HasYourClientBroughtAVehicleIntoTheUkForBusinessUse extends BasePage {
 
   def verifyPageDisplayed(): Unit =
     validateQuestionPage(
-      expectedHeading =
-        "Has your client brought a vehicle into the UK for business use? - Notification of Vehicle Arrivals"
+      expectedHeading = "Has your client brought a vehicle into the UK for business use?"
     )
 }
