@@ -45,5 +45,6 @@ object TestOnlySessionPage extends BasePage {
     sessionDataTextArea.sendKeys(selectedClientJson)
 
     click(PageLocators.saveButton)
+    verifyPageUrl()
   }
 }

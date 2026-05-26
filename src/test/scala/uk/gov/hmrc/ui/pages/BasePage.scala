@@ -49,7 +49,7 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
   }
 
   private def fluentWait: Wait[WebDriver] = new FluentWait[WebDriver](Driver.instance)
-    .withTimeout(Duration.ofSeconds(2))
+    .withTimeout(Duration.ofSeconds(5))
     .pollingEvery(Duration.ofMillis(200))
 
   def waitForUrl(expectedUrl: String): Unit = fluentWait.until(ExpectedConditions.urlToBe(expectedUrl))
