@@ -33,6 +33,7 @@ object VATAgentUserJourney {
     // TODO: Remove TestOnlySessionPage once flow is actually implemented
     TestOnlySessionPage.setSelectedClientInSession()
     LandingPage.navigateToPage(LandingPage.pageUrl)
+    LandingPage.waitForUrl(LandingPage.pageUrl)
     LandingPage.verifyPageDisplayed()
     LandingPage.createANewNotification()
     BeforeYouContinue.verifyMultipleVehiclesSectionPresent()
