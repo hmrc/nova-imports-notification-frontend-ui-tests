@@ -15,12 +15,14 @@
  */
 
 package uk.gov.hmrc.ui.pages
+import uk.gov.hmrc.ui.helpers.CYAPage
 
-object AddYourDetailsPhoneNumber extends BasePage {
-  override val pageUrl: String = s"$baseUrl/phone-number"
+class CheckYourAnswers(whichCYAPage: CYAPage) extends BasePage {
+  override val pageUrl: String = s"$baseUrl/check-answers/${whichCYAPage.getCYAPageUrl}"
 
-  def verifyPageDisplayed(): Unit =
+  def verifyPageDisplayed(whichCYAPage: CYAPage): Unit = {
     verifyQuestionPageHeading(
-      expectedHeading = "What is your phone number?"
+      expectedHeading = "Check your answers"
     )
+  }
 }

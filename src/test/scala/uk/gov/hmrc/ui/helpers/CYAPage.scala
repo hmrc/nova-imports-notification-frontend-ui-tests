@@ -14,13 +14,11 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.pages
+package uk.gov.hmrc.ui.helpers
 
-object AddYourDetailsPhoneNumber extends BasePage {
-  override val pageUrl: String = s"$baseUrl/phone-number"
+enum CYAPage:
+  case InitialQuestions
 
-  def verifyPageDisplayed(): Unit =
-    verifyQuestionPageHeading(
-      expectedHeading = "What is your phone number?"
-    )
-}
+  def getCYAPageUrl: String = this match {
+    case InitialQuestions => "initial-questions"
+  }
