@@ -18,7 +18,7 @@ package uk.gov.hmrc.ui.pages
 
 object VehicleBroughtIntoNIFromOutsideEUPage extends BasePage {
 
-  override val pageUrl: String = s"$baseUrl/vehicle-outside-eu"
+  override val pageUrl: String = s"$baseUrl/vehicle-from-outside-eu-into-northern-ireland"
 
   def verifyPageDisplayed(): Unit =
     validateStandardPage(
