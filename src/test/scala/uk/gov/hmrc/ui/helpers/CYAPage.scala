@@ -31,10 +31,12 @@ enum CYAPage:
 object CYAPage {
   def getContent(page: CYAPage, group: AffinityGroup): String =
     (page, group) match {
-      case (CYAPage.InitialQuestions, AffinityGroup.Individual)      => "Are you a business or private individual?"
+      case (CYAPage.InitialQuestions, AffinityGroup.Individual)      =>
+        "Are you a business or private individual?"
       case (CYAPage.InitialQuestions, AffinityGroup.OrganisationVAT) =>
         "Have you brought a vehicle into the UK for business use?"
       case (CYAPage.InitialQuestions, AffinityGroup.AgentVAT)        =>
         "Has your client brought a vehicle into the UK for business use?"
+      case(_,_) => "No content matches"
     }
 }

@@ -34,7 +34,10 @@ object IndividualUserJourney {
     AreYouNotifyingAsPurchaserOrOnBehalf.selectOptionOneAndContinue()
     CheckYourAnswers(CYAPage.InitialQuestions).verifyPageDisplayed()
     CheckYourAnswers(CYAPage.InitialQuestions).checkContentIsCorrect(CYAPage.InitialQuestions, AffinityGroup.Individual)
-    // todo
+    //TODO: TASK LIST
+    //AYD1.1
+    //PHONE NUMBER
+    //EMAIL ADDRESS
   }
 
   def privateIndividualOnBehalfOfBusiness(): Unit = {
@@ -52,6 +55,11 @@ object IndividualUserJourney {
     PurchaserOnBehalfOfABusinessOrIndividual.verifyPageDisplayed()
     PurchaserOnBehalfOfABusinessOrIndividual.selectOptionOneAndContinue()
     CheckYourAnswers(CYAPage.InitialQuestions).verifyPageDisplayed()
+    CheckYourAnswers(CYAPage.InitialQuestions).checkContentIsCorrect(CYAPage.InitialQuestions, AffinityGroup.Individual)
+    //TODO: TASK LIST
+    //TODO: AYD1.4
+    //AYD1.2
+    //AYD1.3
   }
 
   def privateIndividualOnBehalfOfPrivateIndividual(): Unit = {
@@ -69,6 +77,9 @@ object IndividualUserJourney {
     PurchaserOnBehalfOfABusinessOrIndividual.verifyPageDisplayed()
     PurchaserOnBehalfOfABusinessOrIndividual.selectOptionTwoAndContinue()
     CheckYourAnswers(CYAPage.InitialQuestions).verifyPageDisplayed()
+    CheckYourAnswers(CYAPage.InitialQuestions).checkContentIsCorrect(CYAPage.InitialQuestions, AffinityGroup.Individual)
+    //TODO: TASK LIST
+    //TODO: SUPPLIER DETAILS?
   }
 
   def userNeedsToImportAVehicleFromOutsideEU(): Unit = {
