@@ -16,12 +16,29 @@
 
 package uk.gov.hmrc.ui.pages
 
-object AddYourDetailsName extends BasePage {
+import org.openqa.selenium.By
 
+object AddYourDetailsName extends BasePage {
+  object PageLocators {
+    val title: By     = By.xpath("/html/body/div/main/div/div/form/div[1]/input")
+    val firstName: By = By.xpath("/html/body/div/main/div/div/form/div[2]/input")
+    val lastName: By  = By.xpath("/html/body/div/main/div/div/form/div[3]/input")
+  }
   override val pageUrl: String = s"$baseUrl/name"
 
   def verifyPageDisplayed(): Unit =
-    validateQuestionPage(
+    verifyStandardPageHeading(
       expectedHeading = "What is your name?"
     )
+
+  def inputUserDetails(): Unit = {
+    val title = waitForVisibilityOfElement(PageLocators.title)
+    val fName = waitForVisibilityOfElement(PageLocators.firstName)
+    val lName = waitForVisibilityOfElement(PageLocators.lastName)
+
+    title.sendKeys("Mr")
+    fName.sendKeys("Test")
+    lName.sendKeys("McTester")
+    clickContinue()
+  }
 }

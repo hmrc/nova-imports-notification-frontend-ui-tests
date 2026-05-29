@@ -24,16 +24,14 @@ object VATAgentUserJourney {
   /** The main user journey for an Agent, they will choose a client and submit a notification on their behalf */
   def agentNotifyingOnBehalfOfClient(): Unit = {
     AuthLoginPage.login(AffinityGroup.AgentVAT)
-    // TODO: Remove TestOnlySessionPage once flow is actually implemented
-    TestOnlySessionPage.setSelectedClientInSession()
-    LandingPage.navigateToPage(LandingPage.pageUrl)
-    // FLOW ACTUALLY BEGINS
     LandingPage.verifyPageDisplayed()
     LandingPage.manageYourClients()
     RetrievingYourClientList.verifyPageDisplayed()
-    //TODO: WOULD SELECT A CLIENT HERE
-    //FOR NOW GOING BACK TO LP SIMULATING WE HAVE A CLIENT SELECTED
+    // TODO: Remove TestOnlySessionPage once flow is actually implemented
+    TestOnlySessionPage.setSelectedClientInSession()
     LandingPage.navigateToPage(LandingPage.pageUrl)
+    LandingPage.waitForUrl(LandingPage.pageUrl)
+    // TODO: WOULD BE CLIENT SELECTION
     LandingPage.verifyPageDisplayed()
     LandingPage.createANewNotification()
     BeforeYouContinue.verifyMultipleVehiclesSectionPresent()
@@ -44,8 +42,8 @@ object VATAgentUserJourney {
     HasYourClientBroughtAVehicleIntoTheUkForBusinessUse.selectYesAndContinue()
     CheckYourAnswers(CYAPage.InitialQuestions).verifyPageUrl()
     CheckYourAnswers(CYAPage.InitialQuestions).checkContentIsCorrect(CYAPage.InitialQuestions, AffinityGroup.AgentVAT)
-    //TODO: TASK LIST
-    //TODO: CONTACT DETAILS
+    // TODO: TASK LIST
+    // TODO: CONTACT DETAILS
     // PHONE NUMBERS
     // EMAIL
   }

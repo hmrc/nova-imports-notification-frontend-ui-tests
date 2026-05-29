@@ -32,11 +32,12 @@ object VATOrganisationUserJourney {
     HaveYouBroughtAVehicleIntoTheUKForBusinessUse.verifyPageDisplayed()
     HaveYouBroughtAVehicleIntoTheUKForBusinessUse.selectYesAndContinue()
     CheckYourAnswers(CYAPage.InitialQuestions).verifyPageDisplayed()
-    CheckYourAnswers(CYAPage.InitialQuestions).checkContentIsCorrect(CYAPage.InitialQuestions, AffinityGroup.OrganisationVAT)
-    //TODO: TASK LIST
-    //ABOUT YOUR DETAILS
-    //PHONE
-    //EMAIL
+    CheckYourAnswers(CYAPage.InitialQuestions)
+      .checkContentIsCorrect(CYAPage.InitialQuestions, AffinityGroup.OrganisationVAT)
+    // TODO: TASK LIST
+    // ABOUT YOUR DETAILS
+    // PHONE
+    // EMAIL
   }
 
   def acquisitionVehicleForPrivateUse(): Unit = {
@@ -50,10 +51,10 @@ object VATOrganisationUserJourney {
     HaveYouBroughtAVehicleIntoTheUKForBusinessUse.verifyPageDisplayed()
     HaveYouBroughtAVehicleIntoTheUKForBusinessUse.selectNoAndContinue()
 
-    //ABOUT YOUR DETAILS
-    //WHAT IS YOUR NAME
-    //PHONE
-    //EMAIL
+    // ABOUT YOUR DETAILS
+    // WHAT IS YOUR NAME
+    // PHONE
+    // EMAIL
   }
 
   def importBringingAVehicleInForBusinessUse(): Unit = {
@@ -67,10 +68,10 @@ object VATOrganisationUserJourney {
     HaveYouBroughtAVehicleIntoTheUKForBusinessUse.verifyPageDisplayed()
     HaveYouBroughtAVehicleIntoTheUKForBusinessUse.selectYesAndContinue()
 
-    //TODO: TASK LIST
-    //ABOUT YOUR DETAILS
-    //PHONE
-    //EMAIL
+    // TODO: TASK LIST
+    // ABOUT YOUR DETAILS
+    // PHONE
+    // EMAIL
   }
 
   def importVehicleForPrivateUse(): Unit = {
@@ -84,9 +85,9 @@ object VATOrganisationUserJourney {
     HaveYouBroughtAVehicleIntoTheUKForBusinessUse.verifyPageDisplayed()
     HaveYouBroughtAVehicleIntoTheUKForBusinessUse.selectNoAndContinue()
 
-    //ABOUT YOUR DETAILS
-    //WHAT IS YOUR NAME
-    //PHONE
-    //EMAIL
+    // ABOUT YOUR DETAILS
+    // WHAT IS YOUR NAME
+    // PHONE
+    // EMAIL
   }
 }

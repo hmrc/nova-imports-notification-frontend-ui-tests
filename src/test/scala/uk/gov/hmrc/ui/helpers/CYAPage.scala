@@ -37,6 +37,6 @@ object CYAPage {
         "Have you brought a vehicle into the UK for business use?"
       case (CYAPage.InitialQuestions, AffinityGroup.AgentVAT)        =>
         "Has your client brought a vehicle into the UK for business use?"
-      case(_,_) => "No content matches"
+      case (_, _)                                                    => "No content matches"
     }
 }

@@ -20,7 +20,12 @@ object AddYourDetailsPhoneNumber extends BasePage {
   override val pageUrl: String = s"$baseUrl/phone-number"
 
   def verifyPageDisplayed(): Unit =
-    verifyQuestionPageHeading(
+    verifyInputPageHeading(
       expectedHeading = "What is your phone number?"
     )
+
+  def inputPhoneNumber(): Unit =
+    val field = waitForVisibilityOfElement(Locators.inputField)
+    field.sendKeys("123456789")
+    clickContinue()
 }

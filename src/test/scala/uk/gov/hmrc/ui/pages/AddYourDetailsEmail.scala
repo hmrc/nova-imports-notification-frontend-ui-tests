@@ -20,7 +20,12 @@ object AddYourDetailsEmail extends BasePage {
   override val pageUrl: String = s"$baseUrl/email-address"
 
   def verifyPageDisplayed(): Unit =
-    verifyQuestionPageHeading(
+    verifyInputPageHeading(
       expectedHeading = "What is your email address?"
     )
+
+  def inputEmailAddress(): Unit =
+    val field = waitForVisibilityOfElement(Locators.inputField)
+    field.sendKeys("test@example.com")
+    clickContinue()
 }
