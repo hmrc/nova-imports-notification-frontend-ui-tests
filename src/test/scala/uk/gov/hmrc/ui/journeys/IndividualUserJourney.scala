@@ -16,8 +16,8 @@
 
 package uk.gov.hmrc.ui.journeys
 
-import uk.gov.hmrc.ui.helpers.AffinityGroup
-import uk.gov.hmrc.ui.pages.{AreYouABusinessOrPrivateIndividual, AreYouNotifyingAsPurchaserOrOnBehalf, AuthLoginPage, BeforeYouContinue, LandingPage, PurchaserOnBehalfOfABusinessOrIndividual, VehicleBroughtIntoNIFromEUPage, VehicleBroughtIntoNIFromOutsideEUPage}
+import uk.gov.hmrc.ui.helpers.{AffinityGroup, CYAPage}
+import uk.gov.hmrc.ui.pages.{AreYouABusinessOrPrivateIndividual, AreYouNotifyingAsPurchaserOrOnBehalf, AuthLoginPage, BeforeYouContinue, CheckYourAnswers, LandingPage, PurchaserOnBehalfOfABusinessOrIndividual, VehicleBroughtIntoNIFromEUPage, VehicleBroughtIntoNIFromOutsideEUPage}
 
 object IndividualUserJourney {
   def privateIndividualAsPurchaser(): Unit = {
@@ -32,7 +32,9 @@ object IndividualUserJourney {
     AreYouABusinessOrPrivateIndividual.selectOptionTwoAndContinue()
     AreYouNotifyingAsPurchaserOrOnBehalf.verifyPageDisplayed()
     AreYouNotifyingAsPurchaserOrOnBehalf.selectOptionOneAndContinue()
-    // TODO: NOW ON SUMMARY PAGE
+    CheckYourAnswers(CYAPage.InitialQuestions).verifyPageDisplayed()
+    CheckYourAnswers(CYAPage.InitialQuestions).checkContentIsCorrect(CYAPage.InitialQuestions, AffinityGroup.Individual)
+    // todo
   }
 
   def privateIndividualOnBehalfOfBusiness(): Unit = {
@@ -49,7 +51,7 @@ object IndividualUserJourney {
     AreYouNotifyingAsPurchaserOrOnBehalf.selectOptionTwoAndContinue()
     PurchaserOnBehalfOfABusinessOrIndividual.verifyPageDisplayed()
     PurchaserOnBehalfOfABusinessOrIndividual.selectOptionOneAndContinue()
-    // TODO: NOW ON SUMMARY PAGE
+    CheckYourAnswers(CYAPage.InitialQuestions).verifyPageDisplayed()
   }
 
   def privateIndividualOnBehalfOfPrivateIndividual(): Unit = {
@@ -66,7 +68,7 @@ object IndividualUserJourney {
     AreYouNotifyingAsPurchaserOrOnBehalf.selectOptionTwoAndContinue()
     PurchaserOnBehalfOfABusinessOrIndividual.verifyPageDisplayed()
     PurchaserOnBehalfOfABusinessOrIndividual.selectOptionTwoAndContinue()
-    // TODO: NOW ON SUMMARY PAGE
+    CheckYourAnswers(CYAPage.InitialQuestions).verifyPageDisplayed()
   }
 
   def userNeedsToImportAVehicleFromOutsideEU(): Unit = {

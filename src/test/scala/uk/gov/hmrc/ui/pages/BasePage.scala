@@ -46,6 +46,7 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
     val no: By                  = By.id("value-no")
     val option1: By             = By.id("value")
     val option2: By             = By.id("value-2")
+    val cyaPageTextContent      = By.xpath("/html/body/div/main/div/div/dl/div[2]/dt")
   }
 
   private def fluentWait: Wait[WebDriver] = new FluentWait[WebDriver](Driver.instance)

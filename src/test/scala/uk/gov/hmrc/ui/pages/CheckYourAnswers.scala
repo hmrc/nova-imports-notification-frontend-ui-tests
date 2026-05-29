@@ -15,14 +15,22 @@
  */
 
 package uk.gov.hmrc.ui.pages
-import uk.gov.hmrc.ui.helpers.CYAPage
+import uk.gov.hmrc.ui.helpers.{AffinityGroup, CYAPage}
 
 class CheckYourAnswers(whichCYAPage: CYAPage) extends BasePage {
   override val pageUrl: String = s"$baseUrl/check-answers/${whichCYAPage.getCYAPageUrl}"
 
-  def verifyPageDisplayed(whichCYAPage: CYAPage): Unit = {
-    verifyQuestionPageHeading(
+  def verifyPageDisplayed(): Unit =
+    verifyStandardPageHeading(
       expectedHeading = "Check your answers"
+    )
+
+  def checkContentIsCorrect(page: CYAPage, group: AffinityGroup): Unit = {
+    val expectedContent = CYAPage.getContent(page, group)
+    val actualContent   = waitForVisibilityOfElement(Locators.cyaPageTextContent).getText
+    assert(
+      actualContent == expectedContent,
+      s"Check Your Answers Page content mismatch! Expected Content: $expectedContent, Actual Content: $actualContent"
     )
   }
 }
