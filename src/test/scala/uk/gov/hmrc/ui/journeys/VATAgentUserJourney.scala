@@ -17,7 +17,7 @@
 package uk.gov.hmrc.ui.journeys
 
 import uk.gov.hmrc.ui.helpers.{AffinityGroup, CYAPage}
-import uk.gov.hmrc.ui.pages.{AuthLoginPage, BeforeYouContinue, CheckYourAnswers, HasYourClientBroughtAVehicleIntoTheUkForBusinessUse, LandingPage, RetrievingYourClientList, TestOnlySessionPage, VehicleBroughtIntoNIFromEUPage, WeCouldNotRetrieveYourClientList, YouHaveNoAuthorisedClients}
+import uk.gov.hmrc.ui.pages.{AddYourDetailsEmail, AddYourDetailsName, AddYourDetailsPhoneNumber, AreYouABusinessOrPrivateIndividual, AreYouNotifyingAsPurchaserOrOnBehalf, AuthLoginPage, BeforeYouContinue, CheckYourAnswers, HasYourClientBroughtAVehicleIntoTheUkForBusinessUse, LandingPage, RetrievingYourClientList, TestOnlySessionPage, VehicleBroughtIntoNIFromEUPage, WeCouldNotRetrieveYourClientList, YouHaveNoAuthorisedClients}
 
 object VATAgentUserJourney {
 
@@ -44,8 +44,12 @@ object VATAgentUserJourney {
     CheckYourAnswers(CYAPage.InitialQuestions).checkContentIsCorrect(CYAPage.InitialQuestions, AffinityGroup.AgentVAT)
     // TODO: TASK LIST
     // TODO: CONTACT DETAILS
-    // PHONE NUMBERS
-    // EMAIL
+    // TODO: REMOVE URL HOP ONCE NAVIGATION IS IN PLACE
+    AddYourDetailsPhoneNumber.navigateToPage(AddYourDetailsPhoneNumber.pageUrl)
+    AddYourDetailsPhoneNumber.verifyPageDisplayed()
+    AddYourDetailsPhoneNumber.inputPhoneNumber()
+    AddYourDetailsEmail.verifyPageDisplayed()
+    AddYourDetailsEmail.inputEmailAddress()
   }
 
   // NOTE: Not sure if CS2.0 will actually be reachable?
@@ -71,9 +75,20 @@ object VATAgentUserJourney {
     LandingPage.verifyPageDisplayed()
     LandingPage.createANewNotification()
     BeforeYouContinue.verifyMultipleVehiclesSectionNotPresent()
-
-    // TODO: LANDING PAGE (AGENT)
-    // TODO: BEFORE YOU CONTINUE (AGENT)
-    // TODO: COMPLETE THE REST OF THE JOURNEY
+    BeforeYouContinue.clickContinue()
+    VehicleBroughtIntoNIFromEUPage.verifyPageDisplayed()
+    VehicleBroughtIntoNIFromEUPage.selectYesAndContinue()
+    AreYouABusinessOrPrivateIndividual.verifyPageDisplayed()
+    AreYouABusinessOrPrivateIndividual.selectOptionTwoAndContinue()
+    AreYouNotifyingAsPurchaserOrOnBehalf.verifyPageDisplayed()
+    AreYouNotifyingAsPurchaserOrOnBehalf.selectOptionOneAndContinue()
+    // TODO: ONCE NAVIGATION IS IN PLACE REMOVE THIS
+    AddYourDetailsName.navigateToPage(AddYourDetailsName.pageUrl)
+    AddYourDetailsName.verifyPageDisplayed()
+    AddYourDetailsName.inputUserDetails()
+    AddYourDetailsPhoneNumber.verifyPageDisplayed()
+    AddYourDetailsPhoneNumber.inputPhoneNumber()
+    AddYourDetailsEmail.verifyPageDisplayed()
+    AddYourDetailsEmail.inputEmailAddress()
   }
 }
