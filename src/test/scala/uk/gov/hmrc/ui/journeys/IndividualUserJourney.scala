@@ -16,8 +16,8 @@
 
 package uk.gov.hmrc.ui.journeys
 
-import uk.gov.hmrc.ui.helpers.AffinityGroup
-import uk.gov.hmrc.ui.pages.{AreYouABusinessOrPrivateIndividual, AreYouNotifyingAsPurchaserOrOnBehalf, AuthLoginPage, BeforeYouContinue, LandingPage, PurchaserOnBehalfOfABusinessOrIndividual, VehicleBroughtIntoNIFromEUPage, VehicleBroughtIntoNIFromOutsideEUPage}
+import uk.gov.hmrc.ui.helpers.{AffinityGroup, CYAPage}
+import uk.gov.hmrc.ui.pages.{AddYourDetailsEmail, AddYourDetailsName, AddYourDetailsPhoneNumber, AreYouABusinessOrPrivateIndividual, AreYouNotifyingAsPurchaserOrOnBehalf, AuthLoginPage, BeforeYouContinue, CheckYourAnswers, LandingPage, PurchaserOnBehalfOfABusinessOrIndividual, VehicleBroughtIntoNIFromEUPage, VehicleBroughtIntoNIFromOutsideEUPage}
 
 object IndividualUserJourney {
   def privateIndividualAsPurchaser(): Unit = {
@@ -32,7 +32,19 @@ object IndividualUserJourney {
     AreYouABusinessOrPrivateIndividual.selectOptionTwoAndContinue()
     AreYouNotifyingAsPurchaserOrOnBehalf.verifyPageDisplayed()
     AreYouNotifyingAsPurchaserOrOnBehalf.selectOptionOneAndContinue()
-    // TODO: NOW ON SUMMARY PAGE
+    CheckYourAnswers(CYAPage.InitialQuestions).verifyPageDisplayed()
+    CheckYourAnswers(CYAPage.InitialQuestions).checkContentIsCorrect(CYAPage.InitialQuestions, AffinityGroup.Individual)
+    // TODO: UNCOMMENT ONCE NAVIGATION IS IN PLACE
+    // CheckYourAnswers(CYAPage.InitialQuestions).clickContinue()
+    // TODO: TASK LIST
+    // TODO: REMOVE ONCE NAVIGATION IN PLACE
+    AddYourDetailsName.navigateToPage(AddYourDetailsName.pageUrl)
+    AddYourDetailsName.verifyPageDisplayed()
+    AddYourDetailsName.inputUserDetails()
+    AddYourDetailsPhoneNumber.verifyPageDisplayed()
+    AddYourDetailsPhoneNumber.inputPhoneNumber()
+    AddYourDetailsEmail.verifyPageDisplayed()
+    AddYourDetailsEmail.inputEmailAddress()
   }
 
   def privateIndividualOnBehalfOfBusiness(): Unit = {
@@ -49,7 +61,18 @@ object IndividualUserJourney {
     AreYouNotifyingAsPurchaserOrOnBehalf.selectOptionTwoAndContinue()
     PurchaserOnBehalfOfABusinessOrIndividual.verifyPageDisplayed()
     PurchaserOnBehalfOfABusinessOrIndividual.selectOptionOneAndContinue()
-    // TODO: NOW ON SUMMARY PAGE
+    CheckYourAnswers(CYAPage.InitialQuestions).verifyPageDisplayed()
+    CheckYourAnswers(CYAPage.InitialQuestions).checkContentIsCorrect(CYAPage.InitialQuestions, AffinityGroup.Individual)
+    // TODO: ONCE NAVIGATION IN PLACE UNCOMMENT
+    // CheckYourAnswers(CYAPage.InitialQuestions).clickContinue()
+    // TODO: TASK LIST
+    // TODO: AYD1.4
+    // TODO: ONCE NAVIGATION IN PLACE REMOVE
+    AddYourDetailsPhoneNumber.goToPage(AddYourDetailsPhoneNumber.pageUrl)
+    AddYourDetailsPhoneNumber.verifyPageDisplayed()
+    AddYourDetailsPhoneNumber.inputPhoneNumber()
+    AddYourDetailsEmail.verifyPageDisplayed()
+    AddYourDetailsEmail.inputEmailAddress()
   }
 
   def privateIndividualOnBehalfOfPrivateIndividual(): Unit = {
@@ -66,7 +89,10 @@ object IndividualUserJourney {
     AreYouNotifyingAsPurchaserOrOnBehalf.selectOptionTwoAndContinue()
     PurchaserOnBehalfOfABusinessOrIndividual.verifyPageDisplayed()
     PurchaserOnBehalfOfABusinessOrIndividual.selectOptionTwoAndContinue()
-    // TODO: NOW ON SUMMARY PAGE
+    CheckYourAnswers(CYAPage.InitialQuestions).verifyPageDisplayed()
+    CheckYourAnswers(CYAPage.InitialQuestions).checkContentIsCorrect(CYAPage.InitialQuestions, AffinityGroup.Individual)
+    // TODO: TASK LIST
+    // TODO: SUPPLIER DETAILS?
   }
 
   def userNeedsToImportAVehicleFromOutsideEU(): Unit = {

@@ -1,0 +1,36 @@
+/*
+ * Copyright 2026 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package uk.gov.hmrc.ui.pages
+import uk.gov.hmrc.ui.helpers.{AffinityGroup, CYAPage}
+
+class CheckYourAnswers(whichCYAPage: CYAPage) extends BasePage {
+  override val pageUrl: String = s"$baseUrl/check-answers/${whichCYAPage.getCYAPageUrl}"
+
+  def verifyPageDisplayed(): Unit =
+    verifyStandardPageHeading(
+      expectedHeading = "Check your answers"
+    )
+
+  def checkContentIsCorrect(page: CYAPage, group: AffinityGroup): Unit = {
+    val expectedContent = CYAPage.getContent(page, group)
+    val actualContent   = waitForVisibilityOfElement(Locators.cyaPageTextContent).getText
+    assert(
+      actualContent == expectedContent,
+      s"Check Your Answers Page content mismatch! Expected Content: $expectedContent, Actual Content: $actualContent"
+    )
+  }
+}

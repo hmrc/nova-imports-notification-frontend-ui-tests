@@ -30,15 +30,9 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
   val pageUrl: String
   val baseUrl: String = TestEnvironment.url("nova-imports-notification-frontend")
 
-  // TODO:
-  // IQ1 has a different value for radio button
-  // IQ1.1 has a different header class name
-  // Speak to devs / maybe just change the radio button so its consistent
-  // For now just doing a quick fix
-  // Will also implement an override for radio buttons to reduce POMs and keep code DRY, will do once more pages available
-
   object Locators {
     val questionPageHeading: By = By.className("govuk-fieldset__heading")
+    val inputPageHeading: By    = By.className("govuk-label-wrapper")
     val pageHeading: By         = By.className("govuk-heading-l")
     val continueButton: By      = By.className("govuk-button")
     val backButton: By          = By.className("govuk-back-link")
@@ -46,6 +40,8 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
     val no: By                  = By.id("value-no")
     val option1: By             = By.id("value")
     val option2: By             = By.id("value-2")
+    val inputField: By          = By.className("govuk-input")
+    val cyaPageTextContent: By  = By.xpath("/html/body/div/main/div/div/dl/div[2]/dt")
   }
 
   private def fluentWait: Wait[WebDriver] = new FluentWait[WebDriver](Driver.instance)
@@ -76,6 +72,16 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
     )
   }
 
+  /** Based on if the page has input field, i.e. text box which dictates which page locator we need to use */
+  def verifyInputPageHeading(expectedHeading: String): Unit = {
+    val actualHeading = waitForVisibilityOfElement(Locators.inputPageHeading).getText
+    assert(
+      actualHeading == expectedHeading,
+      s"Page Heading mismatch! Expected Heading: $expectedHeading, Actual Heading: $actualHeading"
+    )
+  }
+
+  /** Finally non-interactive pages have a different heading class */
   def verifyStandardPageHeading(expectedHeading: String): Unit = {
     val actualHeading = waitForVisibilityOfElement(Locators.pageHeading).getText
     assert(

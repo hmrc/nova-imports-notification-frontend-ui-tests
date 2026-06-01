@@ -26,6 +26,7 @@ object LandingPage extends BasePage {
     val updateASubmittedNotificationLink: By = By.xpath("//a[normalize-space()='Update a submitted notification']")
     val manageASavedNotificationLink: By     = By.xpath("//a[normalize-space()='Manage a saved notification']")
     val noSavedNotificationText: By          = By.xpath("//p[normalize-space()='You do not have a saved notifications']")
+    val manageYourClients: By                = By.xpath("//a[normalize-space()='Manage your clients']")
   }
 
   def verifyPageDisplayed(): Unit =
@@ -42,4 +43,7 @@ object LandingPage extends BasePage {
 
   def verifyManageASavedNotificationDisabled(): Unit =
     verifyElementDisplayed(PageLocators.noSavedNotificationText)
+
+  def manageYourClients(): Unit =
+    click(PageLocators.manageYourClients)
 }

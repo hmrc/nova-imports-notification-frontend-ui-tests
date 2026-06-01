@@ -16,8 +16,8 @@
 
 package uk.gov.hmrc.ui.journeys
 
-import uk.gov.hmrc.ui.helpers.AffinityGroup
-import uk.gov.hmrc.ui.pages.{AuthLoginPage, BeforeYouContinue, HaveYouBroughtAVehicleIntoTheUKForBusinessUse, LandingPage, VehicleBroughtIntoNIFromEUPage}
+import uk.gov.hmrc.ui.helpers.{AffinityGroup, CYAPage}
+import uk.gov.hmrc.ui.pages.{AddYourDetailsEmail, AddYourDetailsGuidancePage, AddYourDetailsName, AddYourDetailsPhoneNumber, AuthLoginPage, BeforeYouContinue, CheckYourAnswers, HaveYouBroughtAVehicleIntoTheUKForBusinessUse, LandingPage, VehicleBroughtIntoNIFromEUPage}
 
 object VATOrganisationUserJourney {
   // TODO: Finish this flow once we have more screens
@@ -31,6 +31,18 @@ object VATOrganisationUserJourney {
     VehicleBroughtIntoNIFromEUPage.selectYesAndContinue()
     HaveYouBroughtAVehicleIntoTheUKForBusinessUse.verifyPageDisplayed()
     HaveYouBroughtAVehicleIntoTheUKForBusinessUse.selectYesAndContinue()
+    CheckYourAnswers(CYAPage.InitialQuestions).verifyPageDisplayed()
+    CheckYourAnswers(CYAPage.InitialQuestions)
+      .checkContentIsCorrect(CYAPage.InitialQuestions, AffinityGroup.OrganisationVAT)
+    // TODO: TASK LIST
+    // TODO: REMOVE URL NAVIGATION ONCE WE HAVE THE REAL FLOW
+    AddYourDetailsGuidancePage.navigateToPage(AddYourDetailsGuidancePage.pageUrl)
+    AddYourDetailsGuidancePage.verifyPageDisplayed()
+    AddYourDetailsGuidancePage.clickContinue()
+    AddYourDetailsPhoneNumber.verifyPageDisplayed()
+    AddYourDetailsPhoneNumber.inputPhoneNumber()
+    AddYourDetailsEmail.verifyPageDisplayed()
+    AddYourDetailsEmail.inputEmailAddress()
   }
 
   def acquisitionVehicleForPrivateUse(): Unit = {
@@ -43,6 +55,19 @@ object VATOrganisationUserJourney {
     VehicleBroughtIntoNIFromEUPage.selectYesAndContinue()
     HaveYouBroughtAVehicleIntoTheUKForBusinessUse.verifyPageDisplayed()
     HaveYouBroughtAVehicleIntoTheUKForBusinessUse.selectNoAndContinue()
+    CheckYourAnswers(CYAPage.InitialQuestions).verifyPageDisplayed()
+    CheckYourAnswers(CYAPage.InitialQuestions)
+      .checkContentIsCorrect(CYAPage.InitialQuestions, AffinityGroup.OrganisationVAT)
+    // TODO: REMOVE URL NAVIGATION ONCE WE HAVE THE REAL FLOW
+    AddYourDetailsGuidancePage.navigateToPage(AddYourDetailsGuidancePage.pageUrl)
+    AddYourDetailsGuidancePage.verifyPageDisplayed()
+    AddYourDetailsGuidancePage.clickContinue()
+    AddYourDetailsName.verifyPageDisplayed()
+    AddYourDetailsName.inputUserDetails()
+    AddYourDetailsPhoneNumber.verifyPageDisplayed()
+    AddYourDetailsPhoneNumber.inputPhoneNumber()
+    AddYourDetailsEmail.verifyPageDisplayed()
+    AddYourDetailsEmail.inputEmailAddress()
   }
 
   def importBringingAVehicleInForBusinessUse(): Unit = {
@@ -55,6 +80,18 @@ object VATOrganisationUserJourney {
     VehicleBroughtIntoNIFromEUPage.selectNoAndContinue()
     HaveYouBroughtAVehicleIntoTheUKForBusinessUse.verifyPageDisplayed()
     HaveYouBroughtAVehicleIntoTheUKForBusinessUse.selectYesAndContinue()
+    CheckYourAnswers(CYAPage.InitialQuestions).verifyPageDisplayed()
+    CheckYourAnswers(CYAPage.InitialQuestions)
+      .checkContentIsCorrect(CYAPage.InitialQuestions, AffinityGroup.OrganisationVAT)
+    // TODO: TASK LIST
+    // TODO: REMOVE URL NAVIGATION ONCE WE HAVE THE REAL FLOW
+    AddYourDetailsGuidancePage.navigateToPage(AddYourDetailsGuidancePage.pageUrl)
+    AddYourDetailsGuidancePage.verifyPageDisplayed()
+    AddYourDetailsGuidancePage.clickContinue()
+    AddYourDetailsPhoneNumber.verifyPageDisplayed()
+    AddYourDetailsPhoneNumber.inputPhoneNumber()
+    AddYourDetailsEmail.verifyPageDisplayed()
+    AddYourDetailsEmail.inputEmailAddress()
   }
 
   def importVehicleForPrivateUse(): Unit = {
@@ -67,5 +104,19 @@ object VATOrganisationUserJourney {
     VehicleBroughtIntoNIFromEUPage.selectNoAndContinue()
     HaveYouBroughtAVehicleIntoTheUKForBusinessUse.verifyPageDisplayed()
     HaveYouBroughtAVehicleIntoTheUKForBusinessUse.selectNoAndContinue()
+    CheckYourAnswers(CYAPage.InitialQuestions).verifyPageDisplayed()
+    CheckYourAnswers(CYAPage.InitialQuestions)
+      .checkContentIsCorrect(CYAPage.InitialQuestions, AffinityGroup.OrganisationVAT)
+    // TODO: TASK LIST PAGE
+    // TODO: REMOVE URL NAVIGATION ONCE WE HAVE THE REAL FLOW
+    AddYourDetailsGuidancePage.navigateToPage(AddYourDetailsGuidancePage.pageUrl)
+    AddYourDetailsGuidancePage.verifyPageDisplayed()
+    AddYourDetailsGuidancePage.clickContinue()
+    AddYourDetailsName.verifyPageDisplayed()
+    AddYourDetailsName.inputUserDetails()
+    AddYourDetailsPhoneNumber.verifyPageDisplayed()
+    AddYourDetailsPhoneNumber.inputPhoneNumber()
+    AddYourDetailsEmail.verifyPageDisplayed()
+    AddYourDetailsEmail.inputEmailAddress()
   }
 }

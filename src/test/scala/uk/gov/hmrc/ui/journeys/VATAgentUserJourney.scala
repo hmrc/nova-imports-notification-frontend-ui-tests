@@ -16,8 +16,8 @@
 
 package uk.gov.hmrc.ui.journeys
 
-import uk.gov.hmrc.ui.helpers.AffinityGroup
-import uk.gov.hmrc.ui.pages.{AuthLoginPage, BeforeYouContinue, HasYourClientBroughtAVehicleIntoTheUkForBusinessUse, LandingPage, RetrievingYourClientList, TestOnlySessionPage, VehicleBroughtIntoNIFromEUPage, WeCouldNotRetrieveYourClientList, YouHaveNoAuthorisedClients}
+import uk.gov.hmrc.ui.helpers.{AffinityGroup, CYAPage}
+import uk.gov.hmrc.ui.pages.{AddYourDetailsEmail, AddYourDetailsName, AddYourDetailsPhoneNumber, AreYouABusinessOrPrivateIndividual, AreYouNotifyingAsPurchaserOrOnBehalf, AuthLoginPage, BeforeYouContinue, CheckYourAnswers, HasYourClientBroughtAVehicleIntoTheUkForBusinessUse, LandingPage, RetrievingYourClientList, TestOnlySessionPage, VehicleBroughtIntoNIFromEUPage, WeCouldNotRetrieveYourClientList, YouHaveNoAuthorisedClients}
 
 object VATAgentUserJourney {
 
@@ -25,15 +25,13 @@ object VATAgentUserJourney {
   def agentNotifyingOnBehalfOfClient(): Unit = {
     AuthLoginPage.login(AffinityGroup.AgentVAT)
     LandingPage.verifyPageDisplayed()
-    // TODO: Verify Landing Page LP3.0 for Agents with Clients.
-    // TODO: SELECT CLIENT AND CONTINUE,
-    //  but the page to select a client and continue is not yet implemented, so for now we will just set the client in the session and navigate to the landing page.
-    RetrievingYourClientList.navigateToPage(RetrievingYourClientList.pageUrl)
+    LandingPage.manageYourClients()
     RetrievingYourClientList.verifyPageDisplayed()
     // TODO: Remove TestOnlySessionPage once flow is actually implemented
     TestOnlySessionPage.setSelectedClientInSession()
     LandingPage.navigateToPage(LandingPage.pageUrl)
     LandingPage.waitForUrl(LandingPage.pageUrl)
+    // TODO: WOULD BE CLIENT SELECTION
     LandingPage.verifyPageDisplayed()
     LandingPage.createANewNotification()
     BeforeYouContinue.verifyMultipleVehiclesSectionPresent()
@@ -42,7 +40,16 @@ object VATAgentUserJourney {
     VehicleBroughtIntoNIFromEUPage.selectYesAndContinue()
     HasYourClientBroughtAVehicleIntoTheUkForBusinessUse.verifyPageDisplayed()
     HasYourClientBroughtAVehicleIntoTheUkForBusinessUse.selectYesAndContinue()
-    // TODO: CONTINUE WITH THE REST OF THE JOURNEY. CURRENTLY GOES BACK TO LANDING PAGE
+    CheckYourAnswers(CYAPage.InitialQuestions).verifyPageUrl()
+    CheckYourAnswers(CYAPage.InitialQuestions).checkContentIsCorrect(CYAPage.InitialQuestions, AffinityGroup.AgentVAT)
+    // TODO: TASK LIST
+    // TODO: CONTACT DETAILS
+    // TODO: REMOVE URL HOP ONCE NAVIGATION IS IN PLACE
+    AddYourDetailsPhoneNumber.navigateToPage(AddYourDetailsPhoneNumber.pageUrl)
+    AddYourDetailsPhoneNumber.verifyPageDisplayed()
+    AddYourDetailsPhoneNumber.inputPhoneNumber()
+    AddYourDetailsEmail.verifyPageDisplayed()
+    AddYourDetailsEmail.inputEmailAddress()
   }
 
   // NOTE: Not sure if CS2.0 will actually be reachable?
@@ -68,9 +75,20 @@ object VATAgentUserJourney {
     LandingPage.verifyPageDisplayed()
     LandingPage.createANewNotification()
     BeforeYouContinue.verifyMultipleVehiclesSectionNotPresent()
-
-    // TODO: LANDING PAGE (AGENT)
-    // TODO: BEFORE YOU CONTINUE (AGENT)
-    // TODO: COMPLETE THE REST OF THE JOURNEY
+    BeforeYouContinue.clickContinue()
+    VehicleBroughtIntoNIFromEUPage.verifyPageDisplayed()
+    VehicleBroughtIntoNIFromEUPage.selectYesAndContinue()
+    AreYouABusinessOrPrivateIndividual.verifyPageDisplayed()
+    AreYouABusinessOrPrivateIndividual.selectOptionTwoAndContinue()
+    AreYouNotifyingAsPurchaserOrOnBehalf.verifyPageDisplayed()
+    AreYouNotifyingAsPurchaserOrOnBehalf.selectOptionOneAndContinue()
+    // TODO: ONCE NAVIGATION IS IN PLACE REMOVE THIS
+    AddYourDetailsName.navigateToPage(AddYourDetailsName.pageUrl)
+    AddYourDetailsName.verifyPageDisplayed()
+    AddYourDetailsName.inputUserDetails()
+    AddYourDetailsPhoneNumber.verifyPageDisplayed()
+    AddYourDetailsPhoneNumber.inputPhoneNumber()
+    AddYourDetailsEmail.verifyPageDisplayed()
+    AddYourDetailsEmail.inputEmailAddress()
   }
 }
