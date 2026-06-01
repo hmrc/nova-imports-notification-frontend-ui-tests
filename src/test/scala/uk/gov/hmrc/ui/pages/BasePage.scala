@@ -106,13 +106,25 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
   /** Temp navigation work around until we have the actual flow mapped out */
   def navigateToPage(url: String): Unit = driver.navigate().to(url)
 
-  def selectYes(): Unit = click(Locators.yes)
+  def selectYes(): Unit = {
+    val yes = waitForVisibilityOfElement(Locators.yes)
+    yes.click()
+  }
 
-  def selectNo(): Unit = click(Locators.no)
+  def selectNo(): Unit = {
+    val no = waitForVisibilityOfElement(Locators.no)
+    no.click()
+  }
 
-  def clickContinue(): Unit = click(Locators.continueButton)
+  def clickContinue(): Unit = {
+    val continue = waitForVisibilityOfElement(Locators.continueButton)
+    continue.click()
+  }
 
-  def clickBack(): Unit = click(Locators.backButton)
+  def clickBack(): Unit = {
+    val back = waitForVisibilityOfElement(Locators.backButton)
+    back.click()
+  }
 
   def selectYesAndContinue(): Unit = {
     selectYes()
@@ -125,12 +137,14 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
   }
 
   def selectOptionOneAndContinue(): Unit = {
-    click(Locators.option1)
+    val option1 = waitForVisibilityOfElement(Locators.option1)
+    option1.click()
     clickContinue()
   }
 
   def selectOptionTwoAndContinue(): Unit = {
-    click(Locators.option2)
+    val option2 = waitForVisibilityOfElement(Locators.option2)
+    option2.click()
     clickContinue()
   }
 
