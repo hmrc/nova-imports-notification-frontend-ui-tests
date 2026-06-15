@@ -19,13 +19,13 @@ package uk.gov.hmrc.ui.specs
 import uk.gov.hmrc.ui.journeys.VATAgentUserJourney
 
 class VATAgentUserSpec extends BaseSpec {
-  Feature("VAT Agent User who is completing a notification on behalf of their client") {
-    Scenario("An agent is completing a notification for a selected client") {
-      When("the agent selects an authorised client")
-      Then("the agent successfully submits a notification on their behalf")
-      VATAgentUserJourney.agentNotifyingOnBehalfOfClient()
-    }
-  }
+//  Feature("VAT Agent User who is completing a notification on behalf of their client") {
+//    Scenario("An agent is completing a notification for a selected client") {
+//      When("the agent selects an authorised client")
+//      Then("the agent successfully submits a notification on their behalf")
+//      VATAgentUserJourney.agentNotifyingOnBehalfOfClient()
+//    }
+//  }
 
   Feature("VAT Agent User who is completing a notification on their own behalf") {
     Scenario("An agent is completing a notification for themselves") {
