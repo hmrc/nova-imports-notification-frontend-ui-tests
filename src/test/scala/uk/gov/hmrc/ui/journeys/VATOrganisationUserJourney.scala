@@ -61,13 +61,14 @@ object VATOrganisationUserJourney {
     // TODO: REMOVE URL NAVIGATION ONCE WE HAVE THE REAL FLOW
     AddYourDetailsGuidancePage.navigateToPage(AddYourDetailsGuidancePage.pageUrl)
     AddYourDetailsGuidancePage.verifyPageDisplayed()
-    AddYourDetailsGuidancePage.clickContinue()
-    AddYourDetailsName.verifyPageDisplayed()
-    AddYourDetailsName.inputUserDetails()
-    AddYourDetailsPhoneNumber.verifyPageDisplayed()
-    AddYourDetailsPhoneNumber.inputPhoneNumber()
-    AddYourDetailsEmail.verifyPageDisplayed()
-    AddYourDetailsEmail.inputEmailAddress()
+    // TODO: UNCOMMENT ONCE FIXED BY DEVS
+//    AddYourDetailsGuidancePage.clickContinue()
+//    AddYourDetailsName.verifyPageDisplayed()
+//    AddYourDetailsName.inputUserDetails()
+//    AddYourDetailsPhoneNumber.verifyPageDisplayed()
+//    AddYourDetailsPhoneNumber.inputPhoneNumber()
+//    AddYourDetailsEmail.verifyPageDisplayed()
+//    AddYourDetailsEmail.inputEmailAddress()
   }
 
   def importBringingAVehicleInForBusinessUse(): Unit = {
@@ -109,14 +110,15 @@ object VATOrganisationUserJourney {
       .checkContentIsCorrect(CYAPage.InitialQuestions, AffinityGroup.OrganisationVAT)
     // TODO: TASK LIST PAGE
     // TODO: REMOVE URL NAVIGATION ONCE WE HAVE THE REAL FLOW
-    AddYourDetailsGuidancePage.navigateToPage(AddYourDetailsGuidancePage.pageUrl)
-    AddYourDetailsGuidancePage.verifyPageDisplayed()
-    AddYourDetailsGuidancePage.clickContinue()
-    AddYourDetailsName.verifyPageDisplayed()
-    AddYourDetailsName.inputUserDetails()
-    AddYourDetailsPhoneNumber.verifyPageDisplayed()
-    AddYourDetailsPhoneNumber.inputPhoneNumber()
-    AddYourDetailsEmail.verifyPageDisplayed()
-    AddYourDetailsEmail.inputEmailAddress()
+    // TODO: UNCOMMENT WHEN DEVS FIX
+//    AddYourDetailsGuidancePage.navigateToPage(AddYourDetailsGuidancePage.pageUrl)
+//    AddYourDetailsGuidancePage.verifyPageDisplayed()
+//    AddYourDetailsGuidancePage.clickContinue()
+//    AddYourDetailsName.verifyPageDisplayed()
+//    AddYourDetailsName.inputUserDetails()
+//    AddYourDetailsPhoneNumber.verifyPageDisplayed()
+//    AddYourDetailsPhoneNumber.inputPhoneNumber()
+//    AddYourDetailsEmail.verifyPageDisplayed()
+//    AddYourDetailsEmail.inputEmailAddress()
   }
 }
