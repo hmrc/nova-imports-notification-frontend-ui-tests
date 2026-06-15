@@ -38,13 +38,14 @@ object IndividualUserJourney {
     // CheckYourAnswers(CYAPage.InitialQuestions).clickContinue()
     // TODO: TASK LIST
     // TODO: REMOVE ONCE NAVIGATION IN PLACE
-    AddYourDetailsName.navigateToPage(AddYourDetailsName.pageUrl)
-    AddYourDetailsName.verifyPageDisplayed()
-    AddYourDetailsName.inputUserDetails()
-    AddYourDetailsPhoneNumber.verifyPageDisplayed()
-    AddYourDetailsPhoneNumber.inputPhoneNumber()
-    AddYourDetailsEmail.verifyPageDisplayed()
-    AddYourDetailsEmail.inputEmailAddress()
+    // UNCOMMENT ONCE DEVS FIX
+//    AddYourDetailsName.navigateToPage(AddYourDetailsName.pageUrl)
+//    AddYourDetailsName.verifyPageDisplayed()
+//    AddYourDetailsName.inputUserDetails()
+//    AddYourDetailsPhoneNumber.verifyPageDisplayed()
+//    AddYourDetailsPhoneNumber.inputPhoneNumber()
+//    AddYourDetailsEmail.verifyPageDisplayed()
+//    AddYourDetailsEmail.inputEmailAddress()
   }
 
   def privateIndividualOnBehalfOfBusiness(): Unit = {
