@@ -18,33 +18,26 @@ package uk.gov.hmrc.ui.pages
 
 import org.openqa.selenium.By
 
-object InternationalManualEntryOfAddress extends BasePage {
+object ChooseYourAddress extends BasePage {
   override val pageUrl: String = s"$addressLookupBaseUrl"
-  val endOfUrl: String         = "/international/edit"
+  val endOfUrl: String         = "select?postcode="
 
   object ALFPageLocators {
-    val line1: By    = By.id("line1")
-    val line2: By    = By.id("line2")
-    val line3: By    = By.id("line3")
-    val line4: By    = By.id("town")
-    val postcode: By = By.id("postcode")
-    val country: By  = By.id("countryName")
+    val radioButton1: By = By.id("addressId")
+    val noneOfThese: By  = By.id("addressId-none")
   }
 
   def verifyPartialUrl(): Unit =
     verifyEndOfUrl(endOfUrl)
 
   def verifyPageDisplayed(): Unit =
-    verifyInputPageHeading(
-      expectedHeading = "Enter your address"
+    verifyQuestionPageHeading(
+      expectedHeading = "Choose your address"
     )
 
-  def inputUserAddress(): Unit = {
-    val line1 = waitForVisibilityOfElement(ALFPageLocators.line1)
-    val line2 = waitForVisibilityOfElement(ALFPageLocators.line2)
-
-    line1.sendKeys("1")
-    line2.sendKeys("2")
-    clickContinue()
+  def selectAnAddress(): Unit = {
+    // For now selecting the first address
+    val address = waitForVisibilityOfElement(ALFPageLocators.radioButton1)
+    address.click()
   }
 }
