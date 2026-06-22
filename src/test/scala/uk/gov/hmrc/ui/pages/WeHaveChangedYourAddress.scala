@@ -21,6 +21,6 @@ object WeHaveChangedYourAddress extends BasePage {
 
   def verifyPageDisplayed(): Unit =
     validateStandardPage(
-      expectedHeading = "We've changed your address"
+      expectedHeading = "We’ve changed your address"
     )
 }
