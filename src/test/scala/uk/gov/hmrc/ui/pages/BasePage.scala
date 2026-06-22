@@ -28,7 +28,8 @@ import java.time.Duration
 
 trait BasePage extends PageObject with Matchers with BrowserDriver {
   val pageUrl: String
-  val baseUrl: String = TestEnvironment.url("nova-imports-notification-frontend")
+  val baseUrl: String              = TestEnvironment.url("nova-imports-notification-frontend")
+  val addressLookupBaseUrl: String = TestEnvironment.url("address-lookup-frontend")
 
   object Locators {
     val questionPageHeading: By = By.className("govuk-fieldset__heading")
@@ -62,6 +63,12 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
       s"Page URL mismatch! Expected Url: $pageUrl, Actual Url: ${driver.getCurrentUrl}"
     )
   }
+
+  def verifyEndOfUrl(expectedEndOfUrl: String): Unit =
+    assert(
+      driver.getCurrentUrl.endsWith(expectedEndOfUrl),
+      s"End of URL mismatch! Expected Url: $expectedEndOfUrl, Actual Url: ${driver.getCurrentUrl}"
+    )
 
   /** Based on if the page had radio buttons or not dictates which page locator we need to use to grab the heading */
   def verifyQuestionPageHeading(expectedHeading: String): Unit = {
