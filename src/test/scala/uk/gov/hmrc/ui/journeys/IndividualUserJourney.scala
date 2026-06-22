@@ -17,9 +17,11 @@
 package uk.gov.hmrc.ui.journeys
 
 import uk.gov.hmrc.ui.helpers.{AffinityGroup, CYAPage}
-import uk.gov.hmrc.ui.pages.{AddYourDetailsEmail, AddYourDetailsName, AddYourDetailsPhoneNumber, AreYouABusinessOrPrivateIndividual, AreYouNotifyingAsPurchaserOrOnBehalf, AuthLoginPage, BeforeYouContinue, CheckYourAnswers, LandingPage, PurchaserOnBehalfOfABusinessOrIndividual, VehicleBroughtIntoNIFromEUPage, VehicleBroughtIntoNIFromOutsideEUPage}
+import uk.gov.hmrc.ui.pages.{AddYourDetailsEmail, AddYourDetailsName, AddYourDetailsPhoneNumber, AreYouABusinessOrPrivateIndividual, AreYouNotifyingAsPurchaserOrOnBehalf, AuthLoginPage, BeforeYouContinue, CheckYourAnswers, FindYourAddress, IsYourAddressInTheUK, LandingPage, PurchaserOnBehalfOfABusinessOrIndividual, ReviewAndConfirmAddress, VehicleBroughtIntoNIFromEUPage, VehicleBroughtIntoNIFromOutsideEUPage}
 
 object IndividualUserJourney {
+  // TODO: Break these into sections that will allow for address for notifier / supplier to be
+  // UK and International... for now just UK implemented...
   def privateIndividualAsPurchaser(): Unit = {
     AuthLoginPage.login(AffinityGroup.Individual)
     LandingPage.verifyPageDisplayed()
@@ -34,8 +36,7 @@ object IndividualUserJourney {
     AreYouNotifyingAsPurchaserOrOnBehalf.selectOptionOneAndContinue()
     CheckYourAnswers(CYAPage.InitialQuestions).verifyPageDisplayed()
     CheckYourAnswers(CYAPage.InitialQuestions).checkContentIsCorrect(CYAPage.InitialQuestions, AffinityGroup.Individual)
-    // TODO: UNCOMMENT ONCE NAVIGATION IS IN PLACE
-    // CheckYourAnswers(CYAPage.InitialQuestions).clickContinue()
+    CheckYourAnswers(CYAPage.InitialQuestions).clickContinue()
     // TODO: TASK LIST
     // TODO: REMOVE ONCE NAVIGATION IN PLACE
     // UNCOMMENT ONCE DEVS FIX
@@ -46,6 +47,14 @@ object IndividualUserJourney {
 //    AddYourDetailsPhoneNumber.inputPhoneNumber()
 //    AddYourDetailsEmail.verifyPageDisplayed()
 //    AddYourDetailsEmail.inputEmailAddress()
+    // TODO: UNCOMMENT ONCE NAVIGATION IS IN PLACE
+    IsYourAddressInTheUK.navigateToPage(IsYourAddressInTheUK.pageUrl)
+    IsYourAddressInTheUK.verifyPageDisplayed()
+    IsYourAddressInTheUK.selectOptionOneAndContinue()
+    FindYourAddress.verifyPageDisplayed()
+    FindYourAddress.inputUserAddressForSearch()
+    ReviewAndConfirmAddress.verifyPageDisplayed()
+    ReviewAndConfirmAddress.clickContinue()
   }
 
   def privateIndividualOnBehalfOfBusiness(): Unit = {

@@ -38,5 +38,6 @@ object FindYourAddress extends BasePage {
   def inputUserAddressForSearch(): Unit = {
     val postcode = waitForVisibilityOfElement(ALFPageLocators.postcode)
     postcode.sendKeys("NW8 9AY")
+    clickContinue()
   }
 }
