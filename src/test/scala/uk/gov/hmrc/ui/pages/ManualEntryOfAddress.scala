@@ -39,7 +39,7 @@ object ManualEntryOfAddress extends BasePage {
     verifyEndOfUrl(endOfInternationalUrl)
 
   def verifyPageDisplayed(): Unit =
-    verifyInputPageHeading(
+    verifyStandardPageHeading(
       expectedHeading = "Enter your address"
     )
 

@@ -26,7 +26,7 @@ object SelectYourCountryOrTerritory extends BasePage {
     verifyEndOfUrl(endOfUrl)
 
   def verifyPageDisplayed(): Unit =
-    verifyInputPageHeading(
+    verifyStandardPageHeading(
       expectedHeading = "Select your country or territory"
     )
 }

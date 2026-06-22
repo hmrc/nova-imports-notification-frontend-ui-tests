@@ -31,13 +31,11 @@ object ChooseYourAddress extends BasePage {
     verifyEndOfUrl(endOfUrl)
 
   def verifyPageDisplayed(): Unit =
-    verifyQuestionPageHeading(
+    verifyStandardPageHeading(
       expectedHeading = "Choose your address"
     )
 
-  def selectAnAddress(): Unit = {
+  def selectAnAddress(): Unit =
     // For now selecting the first address
-    val address = waitForVisibilityOfElement(ALFPageLocators.radioButton1)
-    address.click()
-  }
+    clickElement(ALFPageLocators.radioButton1)
 }

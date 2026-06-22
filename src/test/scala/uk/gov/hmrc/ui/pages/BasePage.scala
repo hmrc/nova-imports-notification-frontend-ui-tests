@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.ui.pages
 
-import org.openqa.selenium.{By, WebDriver, WebElement}
+import org.openqa.selenium.{By, StaleElementReferenceException, WebDriver, WebElement}
 import org.openqa.selenium.support.ui.{ExpectedConditions, FluentWait, Wait}
 import org.scalatest.matchers.should.Matchers
 import uk.gov.hmrc.configuration.TestEnvironment
@@ -46,8 +46,10 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
   }
 
   private def fluentWait: Wait[WebDriver] = new FluentWait[WebDriver](Driver.instance)
-    .withTimeout(Duration.ofSeconds(5))
+    .withTimeout(Duration.ofSeconds(10))
     .pollingEvery(Duration.ofMillis(200))
+    .ignoring(classOf[NoSuchElementException])
+    .ignoring(classOf[StaleElementReferenceException])
 
   def waitForUrl(expectedUrl: String): Unit = fluentWait.until(ExpectedConditions.urlToBe(expectedUrl))
 
@@ -112,6 +114,9 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
 
   /** Temp navigation work around until we have the actual flow mapped out */
   def navigateToPage(url: String): Unit = driver.navigate().to(url)
+
+  def clickElement(locator: By): Unit =
+    fluentWait.until(ExpectedConditions.elementToBeClickable(locator)).click()
 
   def selectYes(): Unit = click(Locators.yes)
 

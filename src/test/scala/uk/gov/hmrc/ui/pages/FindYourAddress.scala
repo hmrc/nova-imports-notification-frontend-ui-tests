@@ -31,13 +31,13 @@ object FindYourAddress extends BasePage {
     verifyEndOfUrl(endOfUrl)
 
   def verifyPageDisplayed(): Unit =
-    verifyInputPageHeading(
+    verifyStandardPageHeading(
       expectedHeading = "Find your address"
     )
 
   def inputUserAddressForSearch(): Unit = {
     val postcode = waitForVisibilityOfElement(ALFPageLocators.postcode)
-    postcode.sendKeys("NW8 9AY")
+    postcode.sendKeys("FX1 7RR")
     clickContinue()
   }
 }
