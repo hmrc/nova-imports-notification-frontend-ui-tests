@@ -43,6 +43,6 @@ object AuthLoginPage extends BasePage {
   def login(affinityGroup: AffinityGroup): Unit = {
     AuthLoginPage.goToPage(pageUrl)
     fillAuthInputs(affinityGroup)
-    click(btnSubmit)
+    clickElement(btnSubmit)
   }
 }

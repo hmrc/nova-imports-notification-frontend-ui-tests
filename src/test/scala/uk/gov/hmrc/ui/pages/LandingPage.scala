@@ -33,17 +33,17 @@ object LandingPage extends BasePage {
     validateStandardPage(expectedHeading = "Notification of Vehicle Arrivals (NOVA)")
 
   def createANewNotification(): Unit =
-    click(PageLocators.createANewNotificationLink)
+    clickElement(PageLocators.createANewNotificationLink)
 
   def updateASubmittedNotification(): Unit =
-    click(PageLocators.updateASubmittedNotificationLink)
+    clickElement(PageLocators.updateASubmittedNotificationLink)
 
   def manageASavedNotificationForUserWithDraft(): Unit =
-    click(PageLocators.manageASavedNotificationLink)
+    clickElement(PageLocators.manageASavedNotificationLink)
 
   def verifyManageASavedNotificationDisabled(): Unit =
     verifyElementDisplayed(PageLocators.noSavedNotificationText)
 
   def manageYourClients(): Unit =
-    click(PageLocators.manageYourClients)
+    clickElement(PageLocators.manageYourClients)
 }
