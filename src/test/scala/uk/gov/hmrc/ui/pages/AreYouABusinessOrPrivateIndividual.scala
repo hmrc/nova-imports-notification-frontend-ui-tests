@@ -31,14 +31,4 @@ object AreYouABusinessOrPrivateIndividual extends BasePage {
     validateQuestionPage(
       expectedHeading = "Are you a business or private individual?"
     )
-
-  def selectBusinessAndContinue(): Unit = {
-    click(PageLocators.business)
-    click(Locators.continueButton)
-  }
-
-  def selectPrivateIndividualAndContinue(): Unit = {
-    click(PageLocators.privateIndividual)
-    click(Locators.continueButton)
-  }
 }

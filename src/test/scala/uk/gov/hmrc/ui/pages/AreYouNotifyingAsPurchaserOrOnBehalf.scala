@@ -31,14 +31,4 @@ object AreYouNotifyingAsPurchaserOrOnBehalf extends BasePage {
     validateQuestionPage(
       expectedHeading = "Are you notifying as the purchaser, or on behalf of a purchaser?"
     )
-
-  def selectPurchaserAndContinue(): Unit = {
-    click(PageLocators.purchaser)
-    click(Locators.continueButton)
-  }
-
-  def selectOnBehalfAndContinue(): Unit = {
-    click(PageLocators.onBehalf)
-    click(Locators.continueButton)
-  }
 }
