@@ -42,6 +42,7 @@ object VATAgentUserJourney {
     HasYourClientBroughtAVehicleIntoTheUkForBusinessUse.selectYesAndContinue()
     CheckYourAnswers(CYAPage.InitialQuestions).verifyPageUrl()
     CheckYourAnswers(CYAPage.InitialQuestions).checkContentIsCorrect(CYAPage.InitialQuestions, AffinityGroup.AgentVAT)
+    CheckYourAnswers(CYAPage.InitialQuestions).clickContinue()
     // TODO: TASK LIST
     // TODO: CONTACT DETAILS
     // TODO: REMOVE URL HOP ONCE NAVIGATION IS IN PLACE

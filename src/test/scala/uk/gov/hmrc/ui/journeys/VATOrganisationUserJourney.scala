@@ -16,6 +16,7 @@
 
 package uk.gov.hmrc.ui.journeys
 
+import uk.gov.hmrc.ui.helpers.CYAPage.InitialQuestions
 import uk.gov.hmrc.ui.helpers.{AffinityGroup, CYAPage}
 import uk.gov.hmrc.ui.pages.{AddYourDetailsEmail, AddYourDetailsGuidancePage, AddYourDetailsName, AddYourDetailsPhoneNumber, AuthLoginPage, BeforeYouContinue, CheckYourAnswers, HaveYouBroughtAVehicleIntoTheUKForBusinessUse, LandingPage, VehicleBroughtIntoNIFromEUPage}
 
@@ -34,6 +35,7 @@ object VATOrganisationUserJourney {
     CheckYourAnswers(CYAPage.InitialQuestions).verifyPageDisplayed()
     CheckYourAnswers(CYAPage.InitialQuestions)
       .checkContentIsCorrect(CYAPage.InitialQuestions, AffinityGroup.OrganisationVAT)
+    CheckYourAnswers(CYAPage.InitialQuestions).clickContinue()
     // TODO: TASK LIST
     // TODO: REMOVE URL NAVIGATION ONCE WE HAVE THE REAL FLOW
     AddYourDetailsGuidancePage.navigateToPage(AddYourDetailsGuidancePage.pageUrl)
@@ -84,6 +86,7 @@ object VATOrganisationUserJourney {
     CheckYourAnswers(CYAPage.InitialQuestions).verifyPageDisplayed()
     CheckYourAnswers(CYAPage.InitialQuestions)
       .checkContentIsCorrect(CYAPage.InitialQuestions, AffinityGroup.OrganisationVAT)
+    CheckYourAnswers(InitialQuestions).clickContinue()
     // TODO: TASK LIST
     // TODO: REMOVE URL NAVIGATION ONCE WE HAVE THE REAL FLOW
     AddYourDetailsGuidancePage.navigateToPage(AddYourDetailsGuidancePage.pageUrl)

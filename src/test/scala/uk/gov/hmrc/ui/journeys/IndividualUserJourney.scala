@@ -64,8 +64,7 @@ object IndividualUserJourney {
     PurchaserOnBehalfOfABusinessOrIndividual.selectOptionOneAndContinue()
     CheckYourAnswers(CYAPage.InitialQuestions).verifyPageDisplayed()
     CheckYourAnswers(CYAPage.InitialQuestions).checkContentIsCorrect(CYAPage.InitialQuestions, AffinityGroup.Individual)
-    // TODO: ONCE NAVIGATION IN PLACE UNCOMMENT
-    // CheckYourAnswers(CYAPage.InitialQuestions).clickContinue()
+    CheckYourAnswers(CYAPage.InitialQuestions).clickContinue()
     // TODO: TASK LIST
     // TODO: AYD1.4
     // TODO: ONCE NAVIGATION IN PLACE REMOVE
