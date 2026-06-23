@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.ui.pages
 
-import org.openqa.selenium.{By, WebDriver, WebElement}
+import org.openqa.selenium.{By, StaleElementReferenceException, WebDriver, WebElement}
 import org.openqa.selenium.support.ui.{ExpectedConditions, FluentWait, Wait}
 import org.scalatest.matchers.should.Matchers
 import uk.gov.hmrc.configuration.TestEnvironment
@@ -28,7 +28,8 @@ import java.time.Duration
 
 trait BasePage extends PageObject with Matchers with BrowserDriver {
   val pageUrl: String
-  val baseUrl: String = TestEnvironment.url("nova-imports-notification-frontend")
+  val baseUrl: String              = TestEnvironment.url("nova-imports-notification-frontend")
+  val addressLookupBaseUrl: String = TestEnvironment.url("address-lookup-frontend")
 
   object Locators {
     val questionPageHeading: By = By.className("govuk-fieldset__heading")
@@ -45,8 +46,10 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
   }
 
   private def fluentWait: Wait[WebDriver] = new FluentWait[WebDriver](Driver.instance)
-    .withTimeout(Duration.ofSeconds(5))
+    .withTimeout(Duration.ofSeconds(10))
     .pollingEvery(Duration.ofMillis(200))
+    .ignoring(classOf[NoSuchElementException])
+    .ignoring(classOf[StaleElementReferenceException])
 
   def waitForUrl(expectedUrl: String): Unit = fluentWait.until(ExpectedConditions.urlToBe(expectedUrl))
 
@@ -62,6 +65,12 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
       s"Page URL mismatch! Expected Url: $pageUrl, Actual Url: ${driver.getCurrentUrl}"
     )
   }
+
+  def verifyEndOfUrl(expectedEndOfUrl: String): Unit =
+    assert(
+      driver.getCurrentUrl.endsWith(expectedEndOfUrl),
+      s"End of URL mismatch! Expected Url: $expectedEndOfUrl, Actual Url: ${driver.getCurrentUrl}"
+    )
 
   /** Based on if the page had radio buttons or not dictates which page locator we need to use to grab the heading */
   def verifyQuestionPageHeading(expectedHeading: String): Unit = {
@@ -105,6 +114,9 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
 
   /** Temp navigation work around until we have the actual flow mapped out */
   def navigateToPage(url: String): Unit = driver.navigate().to(url)
+
+  def clickElement(locator: By): Unit =
+    fluentWait.until(ExpectedConditions.elementToBeClickable(locator)).click()
 
   def selectYes(): Unit = click(Locators.yes)
 
