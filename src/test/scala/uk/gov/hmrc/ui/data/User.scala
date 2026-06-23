@@ -20,8 +20,18 @@ final case class User(
   title: String,
   firstName: String,
   lastName: String,
-  address: Address,
   landline: Option[String],
   telephone: Option[String],
   email: String
 )
+
+object User {
+  val UkUser: User = User(
+    title = "Mr",
+    firstName = "John",
+    lastName = "Smith",
+    landline = None,
+    telephone = Some("07700 900999"),
+    email = "john.smith@example.com"
+  )
+}

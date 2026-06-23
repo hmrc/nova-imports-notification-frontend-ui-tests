@@ -24,3 +24,14 @@ final case class Address(
   postcode: Option[String],
   country: Option[String]
 )
+
+object Address {
+  val manualUkAddress: Address = Address(
+    line1 = "",
+    line2 = "",
+    line3 = None,
+    line4 = None,
+    postcode = None,
+    country = Some("GB")
+  )
+}
