@@ -37,10 +37,10 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
     val pageHeading: By         = By.className("govuk-heading-l")
     val continueButton: By      = By.className("govuk-button")
     val backButton: By          = By.className("govuk-back-link")
-    val yes: By                 = By.id("value")
-    val no: By                  = By.id("value-no")
-    val option1: By             = By.id("value")
-    val option2: By             = By.id("value-2")
+    val yes: By                 = By.cssSelector("label[for='value']")
+    val no: By                  = By.cssSelector("label[for='value-no']")
+    val option1: By             = By.cssSelector("label[for='value']")
+    val option2: By             = By.cssSelector("label[for='value-2']")
     val inputField: By          = By.className("govuk-input")
     val cyaPageTextContent: By  = By.xpath("/html/body/div/main/div/div/dl/div[2]/dt")
   }
@@ -118,13 +118,19 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
   def clickElement(locator: By): Unit =
     fluentWait.until(ExpectedConditions.elementToBeClickable(locator)).click()
 
-  def selectYes(): Unit = click(Locators.yes)
+  def typeInsideElement(locator: By, input: String): Unit = {
+    val element = fluentWait.until(ExpectedConditions.visibilityOfElementLocated(locator))
+    element.clear()
+    element.sendKeys(input)
+  }
 
-  def selectNo(): Unit = click(Locators.no)
+  def selectYes(): Unit = clickElement(Locators.yes)
 
-  def clickContinue(): Unit = click(Locators.continueButton)
+  def selectNo(): Unit = clickElement(Locators.no)
 
-  def clickBack(): Unit = click(Locators.backButton)
+  def clickContinue(): Unit = clickElement(Locators.continueButton)
+
+  def clickBack(): Unit = clickElement(Locators.backButton)
 
   def selectYesAndContinue(): Unit = {
     selectYes()
@@ -137,12 +143,12 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
   }
 
   def selectOptionOneAndContinue(): Unit = {
-    click(Locators.option1)
+    clickElement(Locators.option1)
     clickContinue()
   }
 
   def selectOptionTwoAndContinue(): Unit = {
-    click(Locators.option2)
+    clickElement(Locators.option2)
     clickContinue()
   }
 
