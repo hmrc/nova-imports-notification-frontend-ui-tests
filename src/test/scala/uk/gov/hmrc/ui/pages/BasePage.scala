@@ -118,6 +118,12 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
   def clickElement(locator: By): Unit =
     fluentWait.until(ExpectedConditions.elementToBeClickable(locator)).click()
 
+  def typeInsideElement(locator: By, input: String): Unit = {
+    val element = fluentWait.until(ExpectedConditions.visibilityOfElementLocated(locator))
+    element.clear()
+    element.sendKeys(input)
+  }
+
   def selectYes(): Unit = clickElement(Locators.yes)
 
   def selectNo(): Unit = clickElement(Locators.no)
