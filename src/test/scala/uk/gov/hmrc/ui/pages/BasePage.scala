@@ -118,13 +118,13 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
   def clickElement(locator: By): Unit =
     fluentWait.until(ExpectedConditions.elementToBeClickable(locator)).click()
 
-  def selectYes(): Unit = click(Locators.yes)
+  def selectYes(): Unit = clickElement(Locators.yes)
 
-  def selectNo(): Unit = click(Locators.no)
+  def selectNo(): Unit = clickElement(Locators.no)
 
-  def clickContinue(): Unit = click(Locators.continueButton)
+  def clickContinue(): Unit = clickElement(Locators.continueButton)
 
-  def clickBack(): Unit = click(Locators.backButton)
+  def clickBack(): Unit = clickElement(Locators.backButton)
 
   def selectYesAndContinue(): Unit = {
     selectYes()
@@ -137,12 +137,12 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
   }
 
   def selectOptionOneAndContinue(): Unit = {
-    click(Locators.option1)
+    clickElement(Locators.option1)
     clickContinue()
   }
 
   def selectOptionTwoAndContinue(): Unit = {
-    click(Locators.option2)
+    clickElement(Locators.option2)
     clickContinue()
   }
 
