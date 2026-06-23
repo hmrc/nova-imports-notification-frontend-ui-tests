@@ -16,6 +16,8 @@
 
 package uk.gov.hmrc.ui.pages
 
+import uk.gov.hmrc.ui.data.User
+
 object AddYourDetailsPhoneNumber extends BasePage {
   override val pageUrl: String = s"$baseUrl/phone-number"
 
@@ -25,6 +27,10 @@ object AddYourDetailsPhoneNumber extends BasePage {
     )
 
   def inputPhoneNumber(): Unit =
+    typeInsideElement(
+      locator = Locators.inputField,
+      input = User.UkUser.telephone.get
+    )
     val field = waitForVisibilityOfElement(Locators.inputField)
     field.sendKeys("123456789")
     clickContinue()
