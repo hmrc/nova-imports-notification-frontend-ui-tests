@@ -48,9 +48,9 @@ object Address {
   }
 
   final case class PostcodeEntryOfAddress(
-                                         postcode: String,
-                                         houseNameOrNumber: Option[String]
-                                         ) extends Address
+    postcode: String,
+    houseNameOrNumber: Option[String]
+  ) extends Address
 
   object PostcodeEntryOfAddress {
     val postcodeAddress: PostcodeEntryOfAddress = PostcodeEntryOfAddress(
@@ -60,8 +60,8 @@ object Address {
   }
 
   final case class CountryEntryOfAddress(
-                                        country: String
-                                        ) extends Address
+    country: String
+  ) extends Address
 
   object CountryEntryOfAddress {
     val countryAddress: CountryEntryOfAddress = CountryEntryOfAddress(

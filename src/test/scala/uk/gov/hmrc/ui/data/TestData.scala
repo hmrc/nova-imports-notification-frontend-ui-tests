@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.ui.data
 
-import uk.gov.hmrc.ui.data.Address.{Address, ManualEntryOfAddress}
+import uk.gov.hmrc.ui.data.Address.Address
 
 final case class TestData(
   user: User,
