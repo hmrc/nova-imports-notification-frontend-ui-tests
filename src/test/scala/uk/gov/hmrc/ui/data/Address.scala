@@ -49,13 +49,13 @@ object Address {
 
   final case class PostcodeEntryOfAddress(
                                          postcode: String,
-                                         filter: Option[String]
+                                         houseNameOrNumber: Option[String]
                                          ) extends Address
 
   object PostcodeEntryOfAddress {
     val postcodeAddress: PostcodeEntryOfAddress = PostcodeEntryOfAddress(
       postcode = "FX1 7RR",
-      filter = None
+      houseNameOrNumber = None
     )
   }
 

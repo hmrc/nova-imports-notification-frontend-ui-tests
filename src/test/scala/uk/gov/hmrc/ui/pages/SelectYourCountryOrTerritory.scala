@@ -16,11 +16,16 @@
 
 package uk.gov.hmrc.ui.pages
 
-import uk.gov.hmrc.ui.pages.IsYourAddressInTheUK.verifyInputPageHeading
+import org.openqa.selenium.By
+import uk.gov.hmrc.ui.data.Address
 
 object SelectYourCountryOrTerritory extends BasePage {
   override val pageUrl: String = s"$addressLookupBaseUrl/"
   val endOfUrl: String         = "/country-picker"
+
+  object ALFPageLocators {
+    val countryOrTerritory: By = By.id("countryCode")
+  }
 
   def verifyPartialUrl(): Unit =
     verifyEndOfUrl(endOfUrl)
@@ -29,4 +34,12 @@ object SelectYourCountryOrTerritory extends BasePage {
     verifyStandardPageHeading(
       expectedHeading = "Select your country or territory"
     )
+
+  def inputCountryOrTerritory(): Unit = {
+    typeInsideElement(
+      locator = ALFPageLocators.countryOrTerritory,
+      input = Address.CountryEntryOfAddress.countryAddress.country
+    )
+    clickContinue()
+  }
 }
