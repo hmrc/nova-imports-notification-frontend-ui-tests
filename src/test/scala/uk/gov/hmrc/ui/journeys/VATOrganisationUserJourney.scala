@@ -18,7 +18,7 @@ package uk.gov.hmrc.ui.journeys
 
 import uk.gov.hmrc.ui.helpers.CYAPage.InitialQuestions
 import uk.gov.hmrc.ui.helpers.{AffinityGroup, CYAPage}
-import uk.gov.hmrc.ui.pages.{AddYourDetailsEmail, AddYourDetailsGuidancePage, AddYourDetailsName, AddYourDetailsPhoneNumber, AuthLoginPage, BeforeYouContinue, CheckYourAnswers, HaveYouBroughtAVehicleIntoTheUKForBusinessUse, LandingPage, VehicleBroughtIntoNIFromEUPage}
+import uk.gov.hmrc.ui.pages.{AddYourDetailsEmail, AddYourDetailsGuidancePage, AddYourDetailsName, AddYourDetailsPhoneNumber, AuthLoginPage, BeforeYouContinue, CheckYourAnswers, ChooseYourAddress, FindYourAddress, HaveYouBroughtAVehicleIntoTheUKForBusinessUse, IsYourAddressInTheUK, LandingPage, ReviewAndConfirmAddress, VehicleBroughtIntoNIFromEUPage}
 
 object VATOrganisationUserJourney {
   // TODO: Finish this flow once we have more screens
@@ -45,6 +45,17 @@ object VATOrganisationUserJourney {
     AddYourDetailsPhoneNumber.inputPhoneNumber()
     AddYourDetailsEmail.verifyPageDisplayed()
     AddYourDetailsEmail.inputEmailAddress()
+    // TODO: UNCOMMENT ONCE NAVIGATION IS IN PLACE
+    IsYourAddressInTheUK.navigateToPage(IsYourAddressInTheUK.pageUrl)
+    IsYourAddressInTheUK.verifyPageDisplayed()
+    IsYourAddressInTheUK.selectOptionOneAndContinue()
+    FindYourAddress.verifyPageDisplayed()
+    FindYourAddress.inputUserAddressForSearch()
+    ChooseYourAddress.verifyPageDisplayed()
+    ChooseYourAddress.selectAnAddress()
+    ReviewAndConfirmAddress.verifyPageDisplayed()
+    ReviewAndConfirmAddress.clickContinue()
+    // TODO: SHOULD BE AT TASK LIST AGAIN
   }
 
   def acquisitionVehicleForPrivateUse(): Unit = {
@@ -60,17 +71,28 @@ object VATOrganisationUserJourney {
     CheckYourAnswers(CYAPage.InitialQuestions).verifyPageDisplayed()
     CheckYourAnswers(CYAPage.InitialQuestions)
       .checkContentIsCorrect(CYAPage.InitialQuestions, AffinityGroup.OrganisationVAT)
+    CheckYourAnswers(CYAPage.InitialQuestions).clickContinue()
     // TODO: REMOVE URL NAVIGATION ONCE WE HAVE THE REAL FLOW
     AddYourDetailsGuidancePage.navigateToPage(AddYourDetailsGuidancePage.pageUrl)
     AddYourDetailsGuidancePage.verifyPageDisplayed()
-    // TODO: UNCOMMENT ONCE FIXED BY DEVS
-//    AddYourDetailsGuidancePage.clickContinue()
-//    AddYourDetailsName.verifyPageDisplayed()
-//    AddYourDetailsName.inputUserDetails()
-//    AddYourDetailsPhoneNumber.verifyPageDisplayed()
-//    AddYourDetailsPhoneNumber.inputPhoneNumber()
-//    AddYourDetailsEmail.verifyPageDisplayed()
-//    AddYourDetailsEmail.inputEmailAddress()
+    AddYourDetailsGuidancePage.clickContinue()
+    AddYourDetailsName.verifyPageDisplayed()
+    AddYourDetailsName.inputUserDetails()
+    AddYourDetailsPhoneNumber.verifyPageDisplayed()
+    AddYourDetailsPhoneNumber.inputPhoneNumber()
+    AddYourDetailsEmail.verifyPageDisplayed()
+    AddYourDetailsEmail.inputEmailAddress()
+    // TODO: UNCOMMENT ONCE NAVIGATION IS IN PLACE
+    IsYourAddressInTheUK.navigateToPage(IsYourAddressInTheUK.pageUrl)
+    IsYourAddressInTheUK.verifyPageDisplayed()
+    IsYourAddressInTheUK.selectOptionOneAndContinue()
+    FindYourAddress.verifyPageDisplayed()
+    FindYourAddress.inputUserAddressForSearch()
+    ChooseYourAddress.verifyPageDisplayed()
+    ChooseYourAddress.selectAnAddress()
+    ReviewAndConfirmAddress.verifyPageDisplayed()
+    ReviewAndConfirmAddress.clickContinue()
+    // TODO: SHOULD BE AT TASK LIST AGAIN
   }
 
   def importBringingAVehicleInForBusinessUse(): Unit = {
@@ -96,6 +118,17 @@ object VATOrganisationUserJourney {
     AddYourDetailsPhoneNumber.inputPhoneNumber()
     AddYourDetailsEmail.verifyPageDisplayed()
     AddYourDetailsEmail.inputEmailAddress()
+    // TODO: UNCOMMENT ONCE NAVIGATION IS IN PLACE
+    IsYourAddressInTheUK.navigateToPage(IsYourAddressInTheUK.pageUrl)
+    IsYourAddressInTheUK.verifyPageDisplayed()
+    IsYourAddressInTheUK.selectOptionOneAndContinue()
+    FindYourAddress.verifyPageDisplayed()
+    FindYourAddress.inputUserAddressForSearch()
+    ChooseYourAddress.verifyPageDisplayed()
+    ChooseYourAddress.selectAnAddress()
+    ReviewAndConfirmAddress.verifyPageDisplayed()
+    ReviewAndConfirmAddress.clickContinue()
+    // TODO: SHOULD BE AT TASK LIST AGAIN
   }
 
   def importVehicleForPrivateUse(): Unit = {
@@ -111,17 +144,28 @@ object VATOrganisationUserJourney {
     CheckYourAnswers(CYAPage.InitialQuestions).verifyPageDisplayed()
     CheckYourAnswers(CYAPage.InitialQuestions)
       .checkContentIsCorrect(CYAPage.InitialQuestions, AffinityGroup.OrganisationVAT)
+    CheckYourAnswers(CYAPage.InitialQuestions).clickContinue()
     // TODO: TASK LIST PAGE
     // TODO: REMOVE URL NAVIGATION ONCE WE HAVE THE REAL FLOW
-    // TODO: UNCOMMENT WHEN DEVS FIX
-//    AddYourDetailsGuidancePage.navigateToPage(AddYourDetailsGuidancePage.pageUrl)
-//    AddYourDetailsGuidancePage.verifyPageDisplayed()
-//    AddYourDetailsGuidancePage.clickContinue()
-//    AddYourDetailsName.verifyPageDisplayed()
-//    AddYourDetailsName.inputUserDetails()
-//    AddYourDetailsPhoneNumber.verifyPageDisplayed()
-//    AddYourDetailsPhoneNumber.inputPhoneNumber()
-//    AddYourDetailsEmail.verifyPageDisplayed()
-//    AddYourDetailsEmail.inputEmailAddress()
+    AddYourDetailsGuidancePage.navigateToPage(AddYourDetailsGuidancePage.pageUrl)
+    AddYourDetailsGuidancePage.verifyPageDisplayed()
+    AddYourDetailsGuidancePage.clickContinue()
+    AddYourDetailsName.verifyPageDisplayed()
+    AddYourDetailsName.inputUserDetails()
+    AddYourDetailsPhoneNumber.verifyPageDisplayed()
+    AddYourDetailsPhoneNumber.inputPhoneNumber()
+    AddYourDetailsEmail.verifyPageDisplayed()
+    AddYourDetailsEmail.inputEmailAddress()
+    // TODO: UNCOMMENT ONCE NAVIGATION IS IN PLACE
+    IsYourAddressInTheUK.navigateToPage(IsYourAddressInTheUK.pageUrl)
+    IsYourAddressInTheUK.verifyPageDisplayed()
+    IsYourAddressInTheUK.selectOptionOneAndContinue()
+    FindYourAddress.verifyPageDisplayed()
+    FindYourAddress.inputUserAddressForSearch()
+    ChooseYourAddress.verifyPageDisplayed()
+    ChooseYourAddress.selectAnAddress()
+    ReviewAndConfirmAddress.verifyPageDisplayed()
+    ReviewAndConfirmAddress.clickContinue()
+    // TODO: SHOULD BE AT TASK LIST AGAIN
   }
 }

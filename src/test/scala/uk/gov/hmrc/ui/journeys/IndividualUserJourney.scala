@@ -16,6 +16,7 @@
 
 package uk.gov.hmrc.ui.journeys
 
+import uk.gov.hmrc.ui.helpers.CYAPage.InitialQuestions
 import uk.gov.hmrc.ui.helpers.{AffinityGroup, CYAPage}
 import uk.gov.hmrc.ui.pages.{AddYourDetailsEmail, AddYourDetailsName, AddYourDetailsPhoneNumber, AreYouABusinessOrPrivateIndividual, AreYouNotifyingAsPurchaserOrOnBehalf, AuthLoginPage, BeforeYouContinue, CheckYourAnswers, ChooseYourAddress, FindYourAddress, IsYourAddressInTheUK, LandingPage, PurchaserOnBehalfOfABusinessOrIndividual, ReviewAndConfirmAddress, VehicleBroughtIntoNIFromEUPage, VehicleBroughtIntoNIFromOutsideEUPage}
 
@@ -52,12 +53,11 @@ object IndividualUserJourney {
     IsYourAddressInTheUK.selectOptionOneAndContinue()
     FindYourAddress.verifyPageDisplayed()
     FindYourAddress.inputUserAddressForSearch()
-    // TODO: FIX CHOOSE YOUR ADDRESS RADIO BUTTON FAILING
     ChooseYourAddress.verifyPageDisplayed()
     ChooseYourAddress.selectAnAddress()
     ReviewAndConfirmAddress.verifyPageDisplayed()
     ReviewAndConfirmAddress.clickContinue()
-    // TODO: SHOULD NOT BE AT TASK LIST AGAIN
+    // TODO: SHOULD BE AT TASK LIST AGAIN
   }
 
   def privateIndividualOnBehalfOfBusiness(): Unit = {
@@ -85,6 +85,17 @@ object IndividualUserJourney {
     AddYourDetailsPhoneNumber.inputPhoneNumber()
     AddYourDetailsEmail.verifyPageDisplayed()
     AddYourDetailsEmail.inputEmailAddress()
+    // TODO: UNCOMMENT ONCE NAVIGATION IS IN PLACE
+    IsYourAddressInTheUK.navigateToPage(IsYourAddressInTheUK.pageUrl)
+    IsYourAddressInTheUK.verifyPageDisplayed()
+    IsYourAddressInTheUK.selectOptionOneAndContinue()
+    FindYourAddress.verifyPageDisplayed()
+    FindYourAddress.inputUserAddressForSearch()
+    ChooseYourAddress.verifyPageDisplayed()
+    ChooseYourAddress.selectAnAddress()
+    ReviewAndConfirmAddress.verifyPageDisplayed()
+    ReviewAndConfirmAddress.clickContinue()
+    // TODO: SHOULD BE AT TASK LIST AGAIN
   }
 
   def privateIndividualOnBehalfOfPrivateIndividual(): Unit = {
@@ -103,8 +114,26 @@ object IndividualUserJourney {
     PurchaserOnBehalfOfABusinessOrIndividual.selectOptionTwoAndContinue()
     CheckYourAnswers(CYAPage.InitialQuestions).verifyPageDisplayed()
     CheckYourAnswers(CYAPage.InitialQuestions).checkContentIsCorrect(CYAPage.InitialQuestions, AffinityGroup.Individual)
+    CheckYourAnswers(InitialQuestions).clickContinue()
     // TODO: TASK LIST
-    // TODO: SUPPLIER DETAILS?
+    AddYourDetailsName.navigateToPage(AddYourDetailsName.pageUrl)
+    AddYourDetailsName.verifyPageDisplayed()
+    AddYourDetailsName.inputUserDetails()
+    AddYourDetailsPhoneNumber.verifyPageDisplayed()
+    AddYourDetailsPhoneNumber.inputPhoneNumber()
+    AddYourDetailsEmail.verifyPageDisplayed()
+    AddYourDetailsEmail.inputEmailAddress()
+    // TODO: UNCOMMENT ONCE NAVIGATION IS IN PLACE
+    IsYourAddressInTheUK.navigateToPage(IsYourAddressInTheUK.pageUrl)
+    IsYourAddressInTheUK.verifyPageDisplayed()
+    IsYourAddressInTheUK.selectOptionOneAndContinue()
+    FindYourAddress.verifyPageDisplayed()
+    FindYourAddress.inputUserAddressForSearch()
+    ChooseYourAddress.verifyPageDisplayed()
+    ChooseYourAddress.selectAnAddress()
+    ReviewAndConfirmAddress.verifyPageDisplayed()
+    ReviewAndConfirmAddress.clickContinue()
+    // TODO: SHOULD BE AT TASK LIST AGAIN
   }
 
   def userNeedsToImportAVehicleFromOutsideEU(): Unit = {
