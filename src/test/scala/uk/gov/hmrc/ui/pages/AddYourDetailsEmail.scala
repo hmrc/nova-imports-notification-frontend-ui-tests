@@ -16,6 +16,8 @@
 
 package uk.gov.hmrc.ui.pages
 
+import uk.gov.hmrc.ui.data.User
+
 object AddYourDetailsEmail extends BasePage {
   override val pageUrl: String = s"$baseUrl/email-address"
 
@@ -25,7 +27,9 @@ object AddYourDetailsEmail extends BasePage {
     )
 
   def inputEmailAddress(): Unit =
-    val field = waitForVisibilityOfElement(Locators.inputField)
-    field.sendKeys("test@example.com")
+    typeInsideElement(
+      locator = Locators.inputField,
+      input = User.User1.email
+    )
     clickContinue()
 }

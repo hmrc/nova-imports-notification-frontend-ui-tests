@@ -14,22 +14,17 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.pages
+package uk.gov.hmrc.ui.data
 
-import uk.gov.hmrc.ui.data.User
+import uk.gov.hmrc.ui.data.Address.Address
 
-object AddYourDetailsPhoneNumber extends BasePage {
-  override val pageUrl: String = s"$baseUrl/phone-number"
-
-  def verifyPageDisplayed(): Unit =
-    verifyInputPageHeading(
-      expectedHeading = "What is your phone number?"
-    )
-
-  def inputPhoneNumber(): Unit =
-    typeInsideElement(
-      locator = Locators.inputField,
-      input = User.User1.telephone.get
-    )
-    clickContinue()
+final case class TestData(
+  user: User,
+  address: Address
+)
+object TestData {
+  val UkUser: TestData = TestData(
+    user = User.User1,
+    address = Address.ManualEntryOfAddress.manualUkAddress
+  )
 }

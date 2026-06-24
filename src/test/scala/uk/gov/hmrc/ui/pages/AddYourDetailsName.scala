@@ -17,6 +17,7 @@
 package uk.gov.hmrc.ui.pages
 
 import org.openqa.selenium.By
+import uk.gov.hmrc.ui.data.User
 
 object AddYourDetailsName extends BasePage {
   object PageLocators {
@@ -32,13 +33,9 @@ object AddYourDetailsName extends BasePage {
     )
 
   def inputUserDetails(): Unit = {
-    val title = waitForVisibilityOfElement(PageLocators.title)
-    val fName = waitForVisibilityOfElement(PageLocators.firstName)
-    val lName = waitForVisibilityOfElement(PageLocators.lastName)
-
-    title.sendKeys("Mr")
-    fName.sendKeys("Test")
-    lName.sendKeys("McTester")
+    typeInsideElement(PageLocators.title, User.User1.title)
+    typeInsideElement(PageLocators.firstName, User.User1.firstName)
+    typeInsideElement(PageLocators.lastName, User.User1.lastName)
     clickContinue()
   }
 }
