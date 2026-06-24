@@ -39,14 +39,13 @@ object IndividualUserJourney {
     CheckYourAnswers(CYAPage.InitialQuestions).clickContinue()
     // TODO: TASK LIST
     // TODO: REMOVE ONCE NAVIGATION IN PLACE
-    // UNCOMMENT ONCE DEVS FIX
-//    AddYourDetailsName.navigateToPage(AddYourDetailsName.pageUrl)
-//    AddYourDetailsName.verifyPageDisplayed()
-//    AddYourDetailsName.inputUserDetails()
-//    AddYourDetailsPhoneNumber.verifyPageDisplayed()
-//    AddYourDetailsPhoneNumber.inputPhoneNumber()
-//    AddYourDetailsEmail.verifyPageDisplayed()
-//    AddYourDetailsEmail.inputEmailAddress()
+    AddYourDetailsName.navigateToPage(AddYourDetailsName.pageUrl)
+    AddYourDetailsName.verifyPageDisplayed()
+    AddYourDetailsName.inputUserDetails()
+    AddYourDetailsPhoneNumber.verifyPageDisplayed()
+    AddYourDetailsPhoneNumber.inputPhoneNumber()
+    AddYourDetailsEmail.verifyPageDisplayed()
+    AddYourDetailsEmail.inputEmailAddress()
     // TODO: UNCOMMENT ONCE NAVIGATION IS IN PLACE
     IsYourAddressInTheUK.navigateToPage(IsYourAddressInTheUK.pageUrl)
     IsYourAddressInTheUK.verifyPageDisplayed()
@@ -54,10 +53,10 @@ object IndividualUserJourney {
     FindYourAddress.verifyPageDisplayed()
     FindYourAddress.inputUserAddressForSearch()
     // TODO: FIX CHOOSE YOUR ADDRESS RADIO BUTTON FAILING
-//    ChooseYourAddress.verifyPageDisplayed()
-//    ChooseYourAddress.selectAnAddress()
-//    ReviewAndConfirmAddress.verifyPageDisplayed()
-//    ReviewAndConfirmAddress.clickContinue()
+    ChooseYourAddress.verifyPageDisplayed()
+    ChooseYourAddress.selectAnAddress()
+    ReviewAndConfirmAddress.verifyPageDisplayed()
+    ReviewAndConfirmAddress.clickContinue()
     // TODO: SHOULD NOT BE AT TASK LIST AGAIN
   }
 
