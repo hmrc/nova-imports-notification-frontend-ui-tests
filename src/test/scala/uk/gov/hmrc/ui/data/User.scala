@@ -26,7 +26,7 @@ final case class User(
 )
 
 object User {
-  val UkUser: User = User(
+  val User1: User = User(
     title = "Mr",
     firstName = "John",
     lastName = "Smith",

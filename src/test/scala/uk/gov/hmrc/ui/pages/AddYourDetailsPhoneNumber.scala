@@ -29,9 +29,7 @@ object AddYourDetailsPhoneNumber extends BasePage {
   def inputPhoneNumber(): Unit =
     typeInsideElement(
       locator = Locators.inputField,
-      input = User.UkUser.telephone.get
+      input = User.User1.telephone.get
     )
-    val field = waitForVisibilityOfElement(Locators.inputField)
-    field.sendKeys("123456789")
     clickContinue()
 }

@@ -33,9 +33,9 @@ object AddYourDetailsName extends BasePage {
     )
 
   def inputUserDetails(): Unit = {
-    typeInsideElement(PageLocators.title, User.UkUser.title)
-    typeInsideElement(PageLocators.firstName, User.UkUser.firstName)
-    typeInsideElement(PageLocators.lastName, User.UkUser.lastName)
+    typeInsideElement(PageLocators.title, User.User1.title)
+    typeInsideElement(PageLocators.firstName, User.User1.firstName)
+    typeInsideElement(PageLocators.lastName, User.User1.lastName)
     clickContinue()
   }
 }

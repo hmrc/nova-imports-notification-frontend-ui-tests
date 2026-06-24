@@ -16,22 +16,56 @@
 
 package uk.gov.hmrc.ui.data
 
-final case class Address(
-  line1: String,
-  line2: String,
-  line3: Option[String],
-  line4: Option[String],
-  postcode: Option[String],
-  country: Option[String]
-)
-
 object Address {
-  val manualUkAddress: Address = Address(
-    line1 = "",
-    line2 = "",
-    line3 = None,
-    line4 = None,
-    postcode = None,
-    country = Some("GB")
-  )
+  sealed trait Address
+  final case class ManualEntryOfAddress(
+    line1: String,
+    line2: String,
+    line3: Option[String],
+    line4: Option[String],
+    postcode: Option[String],
+    country: Option[CountryEntryOfAddress]
+  ) extends Address
+
+  object ManualEntryOfAddress {
+    val manualUkAddress: ManualEntryOfAddress = ManualEntryOfAddress(
+      line1 = "10 House",
+      line2 = "Test Street",
+      line3 = Some("Test-Town-Upon-Tyne"),
+      line4 = None,
+      postcode = None,
+      country = None
+    )
+
+    val manualInternationalAddress: ManualEntryOfAddress = ManualEntryOfAddress(
+      line1 = "10 The Apartment",
+      line2 = "Berlin",
+      line3 = None,
+      line4 = None,
+      postcode = None,
+      country = Some(CountryEntryOfAddress.countryAddress)
+    )
+  }
+
+  final case class PostcodeEntryOfAddress(
+                                         postcode: String,
+                                         filter: Option[String]
+                                         ) extends Address
+
+  object PostcodeEntryOfAddress {
+    val postcodeAddress: PostcodeEntryOfAddress = PostcodeEntryOfAddress(
+      postcode = "FX1 7RR",
+      filter = None
+    )
+  }
+
+  final case class CountryEntryOfAddress(
+                                        country: String
+                                        ) extends Address
+
+  object CountryEntryOfAddress {
+    val countryAddress: CountryEntryOfAddress = CountryEntryOfAddress(
+      country = "Germany"
+    )
+  }
 }

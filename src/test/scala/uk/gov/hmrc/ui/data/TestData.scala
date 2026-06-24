@@ -16,13 +16,15 @@
 
 package uk.gov.hmrc.ui.data
 
+import uk.gov.hmrc.ui.data.Address.{Address, ManualEntryOfAddress}
+
 final case class TestData(
   user: User,
   address: Address
 )
 object TestData {
   val UkUser: TestData = TestData(
-    user = User.UkUser,
-    address = Address.manualUkAddress
+    user = User.User1,
+    address = Address.ManualEntryOfAddress.manualUkAddress
   )
 }
