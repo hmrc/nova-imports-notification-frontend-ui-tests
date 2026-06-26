@@ -34,5 +34,4 @@ class VATAgentUserSpec extends BaseSpec {
       VATAgentUserJourney.agentNotifyingOnBehalfOfThemself()
     }
   }
-
 }
