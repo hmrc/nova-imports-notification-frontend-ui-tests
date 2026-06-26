@@ -17,23 +17,29 @@
 package uk.gov.hmrc.ui.journeys
 
 import uk.gov.hmrc.ui.helpers.{AffinityGroup, CYAPage}
-import uk.gov.hmrc.ui.pages.{AddYourDetailsEmail, AddYourDetailsName, AddYourDetailsPhoneNumber, CheckYourAnswers, ChooseYourAddress, FindYourAddress, IsYourAddressInTheUK, ReviewAndConfirmAddress}
+import uk.gov.hmrc.ui.pages.{AddYourDetailsEmail, AddYourDetailsGuidancePage, AddYourDetailsName, AddYourDetailsPhoneNumber, CheckYourAnswers, ChooseYourAddress, FindYourAddress, IsYourAddressInTheUK, ReviewAndConfirmAddress}
 
 /** Base methods that are used to answer repetitive scenarios within journeys to make code more readable */
 object CommonJourney {
+  def validateAddYourDetailsGuidancePage(): Unit = {
+    AddYourDetailsGuidancePage.navigateToPage(AddYourDetailsGuidancePage.pageUrl)
+    AddYourDetailsGuidancePage.verifyPageDisplayed()
+    AddYourDetailsGuidancePage.clickContinue()
+  }
+
   def addUserDetailsNamePhoneNumberEmailAddress(): Unit = {
     // TODO: REMOVE ONCE NAVIGATION IN PLACE
     AddYourDetailsName.navigateToPage(AddYourDetailsName.pageUrl)
     AddYourDetailsName.verifyPageDisplayed()
     AddYourDetailsName.inputUserDetails()
-    phoneAndEmailDetails()
+    addPhoneAndEmailDetails()
   }
 
   def addUserDetailsBusinessNamePhoneNumberEmailAddress(): Unit =
     // TODO: AYD1.4
-    phoneAndEmailDetails()
+    addPhoneAndEmailDetails()
 
-  private def phoneAndEmailDetails(): Unit = {
+  def addPhoneAndEmailDetails(): Unit = {
     AddYourDetailsPhoneNumber.goToPage(AddYourDetailsPhoneNumber.pageUrl)
     AddYourDetailsPhoneNumber.verifyPageDisplayed()
     AddYourDetailsPhoneNumber.inputPhoneNumber()

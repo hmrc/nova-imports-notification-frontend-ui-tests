@@ -16,156 +16,78 @@
 
 package uk.gov.hmrc.ui.journeys
 
-import uk.gov.hmrc.ui.helpers.CYAPage.InitialQuestions
 import uk.gov.hmrc.ui.helpers.{AffinityGroup, CYAPage}
-import uk.gov.hmrc.ui.pages.{AddYourDetailsEmail, AddYourDetailsGuidancePage, AddYourDetailsName, AddYourDetailsPhoneNumber, AuthLoginPage, BeforeYouContinue, CheckYourAnswers, ChooseYourAddress, FindYourAddress, HaveYouBroughtAVehicleIntoTheUKForBusinessUse, IsYourAddressInTheUK, LandingPage, ReviewAndConfirmAddress, VehicleBroughtIntoNIFromEUPage}
+import uk.gov.hmrc.ui.pages.{AuthLoginPage, BeforeYouContinue, HaveYouBroughtAVehicleIntoTheUKForBusinessUse, LandingPage, VehicleBroughtIntoNIFromEUPage}
 
 object VATOrganisationUserJourney {
   // TODO: Finish this flow once we have more screens
   def acquisitionBringingAVehicleInForBusinessUse(): Unit = {
-    AuthLoginPage.login(AffinityGroup.OrganisationVAT)
-    LandingPage.verifyPageDisplayed()
-    LandingPage.createANewNotification()
-    BeforeYouContinue.verifyMultipleVehiclesSectionPresent()
-    BeforeYouContinue.clickContinue()
-    VehicleBroughtIntoNIFromEUPage.verifyPageDisplayed()
-    VehicleBroughtIntoNIFromEUPage.selectYesAndContinue()
+    acquisitionEntryFlow()
     HaveYouBroughtAVehicleIntoTheUKForBusinessUse.verifyPageDisplayed()
     HaveYouBroughtAVehicleIntoTheUKForBusinessUse.selectYesAndContinue()
-    CheckYourAnswers(CYAPage.InitialQuestions).verifyPageDisplayed()
-    CheckYourAnswers(CYAPage.InitialQuestions)
-      .checkContentIsCorrect(CYAPage.InitialQuestions, AffinityGroup.OrganisationVAT)
-    CheckYourAnswers(CYAPage.InitialQuestions).clickContinue()
+    CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.OrganisationVAT)
     // TODO: TASK LIST
-    // TODO: REMOVE URL NAVIGATION ONCE WE HAVE THE REAL FLOW
-    AddYourDetailsGuidancePage.navigateToPage(AddYourDetailsGuidancePage.pageUrl)
-    AddYourDetailsGuidancePage.verifyPageDisplayed()
-    AddYourDetailsGuidancePage.clickContinue()
-    AddYourDetailsPhoneNumber.verifyPageDisplayed()
-    AddYourDetailsPhoneNumber.inputPhoneNumber()
-    AddYourDetailsEmail.verifyPageDisplayed()
-    AddYourDetailsEmail.inputEmailAddress()
-    // TODO: UNCOMMENT ONCE NAVIGATION IS IN PLACE
-    IsYourAddressInTheUK.navigateToPage(IsYourAddressInTheUK.pageUrl)
-    IsYourAddressInTheUK.verifyPageDisplayed()
-    IsYourAddressInTheUK.selectOptionOneAndContinue()
-    FindYourAddress.verifyPageDisplayed()
-    FindYourAddress.inputUserAddressForSearch()
-    ChooseYourAddress.verifyPageDisplayed()
-    ChooseYourAddress.selectAnAddress()
-    ReviewAndConfirmAddress.verifyPageDisplayed()
-    ReviewAndConfirmAddress.clickContinue()
+    CommonJourney.validateAddYourDetailsGuidancePage()
+    CommonJourney.addPhoneAndEmailDetails()
+    // TODO: TASK LIST
+    CommonJourney.notifierHasUkDetails()
     // TODO: SHOULD BE AT TASK LIST AGAIN
   }
 
   def acquisitionVehicleForPrivateUse(): Unit = {
-    AuthLoginPage.login(AffinityGroup.OrganisationVAT)
-    LandingPage.verifyPageDisplayed()
-    LandingPage.createANewNotification()
-    BeforeYouContinue.verifyMultipleVehiclesSectionPresent()
-    BeforeYouContinue.clickContinue()
-    VehicleBroughtIntoNIFromEUPage.verifyPageDisplayed()
-    VehicleBroughtIntoNIFromEUPage.selectYesAndContinue()
+    acquisitionEntryFlow()
     HaveYouBroughtAVehicleIntoTheUKForBusinessUse.verifyPageDisplayed()
     HaveYouBroughtAVehicleIntoTheUKForBusinessUse.selectNoAndContinue()
-    CheckYourAnswers(CYAPage.InitialQuestions).verifyPageDisplayed()
-    CheckYourAnswers(CYAPage.InitialQuestions)
-      .checkContentIsCorrect(CYAPage.InitialQuestions, AffinityGroup.OrganisationVAT)
-    CheckYourAnswers(CYAPage.InitialQuestions).clickContinue()
-    // TODO: REMOVE URL NAVIGATION ONCE WE HAVE THE REAL FLOW
-    AddYourDetailsGuidancePage.navigateToPage(AddYourDetailsGuidancePage.pageUrl)
-    AddYourDetailsGuidancePage.verifyPageDisplayed()
-    AddYourDetailsGuidancePage.clickContinue()
-    AddYourDetailsName.verifyPageDisplayed()
-    AddYourDetailsName.inputUserDetails()
-    AddYourDetailsPhoneNumber.verifyPageDisplayed()
-    AddYourDetailsPhoneNumber.inputPhoneNumber()
-    AddYourDetailsEmail.verifyPageDisplayed()
-    AddYourDetailsEmail.inputEmailAddress()
-    // TODO: UNCOMMENT ONCE NAVIGATION IS IN PLACE
-    IsYourAddressInTheUK.navigateToPage(IsYourAddressInTheUK.pageUrl)
-    IsYourAddressInTheUK.verifyPageDisplayed()
-    IsYourAddressInTheUK.selectOptionOneAndContinue()
-    FindYourAddress.verifyPageDisplayed()
-    FindYourAddress.inputUserAddressForSearch()
-    ChooseYourAddress.verifyPageDisplayed()
-    ChooseYourAddress.selectAnAddress()
-    ReviewAndConfirmAddress.verifyPageDisplayed()
-    ReviewAndConfirmAddress.clickContinue()
+    CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.OrganisationVAT)
+    CommonJourney.validateAddYourDetailsGuidancePage()
+    CommonJourney.addUserDetailsNamePhoneNumberEmailAddress()
+    // TASK LIST
+    CommonJourney.notifierHasUkDetails()
     // TODO: SHOULD BE AT TASK LIST AGAIN
   }
 
   def importBringingAVehicleInForBusinessUse(): Unit = {
-    AuthLoginPage.login(AffinityGroup.OrganisationVAT)
-    LandingPage.verifyPageDisplayed()
-    LandingPage.createANewNotification()
-    BeforeYouContinue.verifyMultipleVehiclesSectionPresent()
-    BeforeYouContinue.clickContinue()
-    VehicleBroughtIntoNIFromEUPage.verifyPageDisplayed()
-    VehicleBroughtIntoNIFromEUPage.selectNoAndContinue()
+    importEntryFlow()
     HaveYouBroughtAVehicleIntoTheUKForBusinessUse.verifyPageDisplayed()
     HaveYouBroughtAVehicleIntoTheUKForBusinessUse.selectYesAndContinue()
-    CheckYourAnswers(CYAPage.InitialQuestions).verifyPageDisplayed()
-    CheckYourAnswers(CYAPage.InitialQuestions)
-      .checkContentIsCorrect(CYAPage.InitialQuestions, AffinityGroup.OrganisationVAT)
-    CheckYourAnswers(InitialQuestions).clickContinue()
+    CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.OrganisationVAT)
     // TODO: TASK LIST
-    // TODO: REMOVE URL NAVIGATION ONCE WE HAVE THE REAL FLOW
-    AddYourDetailsGuidancePage.navigateToPage(AddYourDetailsGuidancePage.pageUrl)
-    AddYourDetailsGuidancePage.verifyPageDisplayed()
-    AddYourDetailsGuidancePage.clickContinue()
-    AddYourDetailsPhoneNumber.verifyPageDisplayed()
-    AddYourDetailsPhoneNumber.inputPhoneNumber()
-    AddYourDetailsEmail.verifyPageDisplayed()
-    AddYourDetailsEmail.inputEmailAddress()
-    // TODO: UNCOMMENT ONCE NAVIGATION IS IN PLACE
-    IsYourAddressInTheUK.navigateToPage(IsYourAddressInTheUK.pageUrl)
-    IsYourAddressInTheUK.verifyPageDisplayed()
-    IsYourAddressInTheUK.selectOptionOneAndContinue()
-    FindYourAddress.verifyPageDisplayed()
-    FindYourAddress.inputUserAddressForSearch()
-    ChooseYourAddress.verifyPageDisplayed()
-    ChooseYourAddress.selectAnAddress()
-    ReviewAndConfirmAddress.verifyPageDisplayed()
-    ReviewAndConfirmAddress.clickContinue()
+    CommonJourney.validateAddYourDetailsGuidancePage()
+    // TODO: BUSINESS NAME?
+    CommonJourney.addPhoneAndEmailDetails()
+    // TODO: TASK LIST
+    CommonJourney.notifierHasUkDetails()
     // TODO: SHOULD BE AT TASK LIST AGAIN
   }
 
   def importVehicleForPrivateUse(): Unit = {
+    importEntryFlow()
+    HaveYouBroughtAVehicleIntoTheUKForBusinessUse.verifyPageDisplayed()
+    HaveYouBroughtAVehicleIntoTheUKForBusinessUse.selectNoAndContinue()
+    CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.OrganisationVAT)
+    // TODO: TASK LIST PAGE
+    CommonJourney.validateAddYourDetailsGuidancePage()
+    CommonJourney.addUserDetailsNamePhoneNumberEmailAddress()
+    // TODO: TASK LIST
+    CommonJourney.notifierHasUkDetails()
+    // TODO: SHOULD BE AT TASK LIST AGAIN
+  }
+
+  private def loginAndBeginANotification(): Unit = {
     AuthLoginPage.login(AffinityGroup.OrganisationVAT)
     LandingPage.verifyPageDisplayed()
     LandingPage.createANewNotification()
     BeforeYouContinue.verifyMultipleVehiclesSectionPresent()
     BeforeYouContinue.clickContinue()
     VehicleBroughtIntoNIFromEUPage.verifyPageDisplayed()
+  }
+  private def acquisitionEntryFlow(): Unit       = {
+    loginAndBeginANotification()
+    VehicleBroughtIntoNIFromEUPage.selectYesAndContinue()
+  }
+
+  private def importEntryFlow(): Unit = {
+    loginAndBeginANotification()
     VehicleBroughtIntoNIFromEUPage.selectNoAndContinue()
-    HaveYouBroughtAVehicleIntoTheUKForBusinessUse.verifyPageDisplayed()
-    HaveYouBroughtAVehicleIntoTheUKForBusinessUse.selectNoAndContinue()
-    CheckYourAnswers(CYAPage.InitialQuestions).verifyPageDisplayed()
-    CheckYourAnswers(CYAPage.InitialQuestions)
-      .checkContentIsCorrect(CYAPage.InitialQuestions, AffinityGroup.OrganisationVAT)
-    CheckYourAnswers(CYAPage.InitialQuestions).clickContinue()
-    // TODO: TASK LIST PAGE
-    // TODO: REMOVE URL NAVIGATION ONCE WE HAVE THE REAL FLOW
-    AddYourDetailsGuidancePage.navigateToPage(AddYourDetailsGuidancePage.pageUrl)
-    AddYourDetailsGuidancePage.verifyPageDisplayed()
-    AddYourDetailsGuidancePage.clickContinue()
-    AddYourDetailsName.verifyPageDisplayed()
-    AddYourDetailsName.inputUserDetails()
-    AddYourDetailsPhoneNumber.verifyPageDisplayed()
-    AddYourDetailsPhoneNumber.inputPhoneNumber()
-    AddYourDetailsEmail.verifyPageDisplayed()
-    AddYourDetailsEmail.inputEmailAddress()
-    // TODO: UNCOMMENT ONCE NAVIGATION IS IN PLACE
-    IsYourAddressInTheUK.navigateToPage(IsYourAddressInTheUK.pageUrl)
-    IsYourAddressInTheUK.verifyPageDisplayed()
-    IsYourAddressInTheUK.selectOptionOneAndContinue()
-    FindYourAddress.verifyPageDisplayed()
-    FindYourAddress.inputUserAddressForSearch()
-    ChooseYourAddress.verifyPageDisplayed()
-    ChooseYourAddress.selectAnAddress()
-    ReviewAndConfirmAddress.verifyPageDisplayed()
-    ReviewAndConfirmAddress.clickContinue()
-    // TODO: SHOULD BE AT TASK LIST AGAIN
   }
 }
