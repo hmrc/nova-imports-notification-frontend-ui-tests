@@ -17,56 +17,36 @@
 package uk.gov.hmrc.ui.journeys
 
 import uk.gov.hmrc.ui.helpers.{AffinityGroup, CYAPage}
-import uk.gov.hmrc.ui.pages.{AddYourDetailsEmail, AddYourDetailsName, AddYourDetailsPhoneNumber, AreYouABusinessOrPrivateIndividual, AreYouNotifyingAsPurchaserOrOnBehalf, AuthLoginPage, BeforeYouContinue, CheckYourAnswers, HasYourClientBroughtAVehicleIntoTheUkForBusinessUse, LandingPage, RetrievingYourClientList, TestOnlySessionPage, VehicleBroughtIntoNIFromEUPage, WeCouldNotRetrieveYourClientList, YouHaveNoAuthorisedClients}
+import uk.gov.hmrc.ui.pages.{AreYouABusinessOrPrivateIndividual, AreYouNotifyingAsPurchaserOrOnBehalf, AuthLoginPage, BeforeYouContinue, HasYourClientBroughtAVehicleIntoTheUkForBusinessUse, LandingPage, RetrievingYourClientList, TestOnlySessionPage, VehicleBroughtIntoNIFromEUPage}
 
 object VATAgentUserJourney {
-
-  /** The main user journey for an Agent, they will choose a client and submit a notification on their behalf */
+  // TODO: SHOULD HAVE A FLOW FOR ACQUISITION & IMPORT. DIFFERENT ROUTES AND JOURNEYS AS A CLIENT
   def agentNotifyingOnBehalfOfClient(): Unit = {
-    AuthLoginPage.login(AffinityGroup.AgentVAT)
-    LandingPage.verifyPageDisplayed()
-    LandingPage.manageYourClients()
-    RetrievingYourClientList.verifyPageDisplayed()
-    // TODO: Remove TestOnlySessionPage once flow is actually implemented
-    TestOnlySessionPage.setSelectedClientInSession()
-    LandingPage.navigateToPage(LandingPage.pageUrl)
-    LandingPage.waitForUrl(LandingPage.pageUrl)
-    // TODO: WOULD BE CLIENT SELECTION
-    LandingPage.verifyPageDisplayed()
-    LandingPage.createANewNotification()
-    BeforeYouContinue.verifyMultipleVehiclesSectionPresent()
-    BeforeYouContinue.clickContinue()
+    loginSelectClientAndBeginANotification()
     VehicleBroughtIntoNIFromEUPage.verifyPageDisplayed()
     VehicleBroughtIntoNIFromEUPage.selectYesAndContinue()
     HasYourClientBroughtAVehicleIntoTheUkForBusinessUse.verifyPageDisplayed()
     HasYourClientBroughtAVehicleIntoTheUkForBusinessUse.selectYesAndContinue()
-    CheckYourAnswers(CYAPage.InitialQuestions).verifyPageUrl()
-    CheckYourAnswers(CYAPage.InitialQuestions).checkContentIsCorrect(CYAPage.InitialQuestions, AffinityGroup.AgentVAT)
-    CheckYourAnswers(CYAPage.InitialQuestions).clickContinue()
+    CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.AgentVAT)
     // TODO: TASK LIST
-    // TODO: CONTACT DETAILS
-    // TODO: REMOVE URL HOP ONCE NAVIGATION IS IN PLACE
-    AddYourDetailsPhoneNumber.navigateToPage(AddYourDetailsPhoneNumber.pageUrl)
-    AddYourDetailsPhoneNumber.verifyPageDisplayed()
-    AddYourDetailsPhoneNumber.inputPhoneNumber()
-    AddYourDetailsEmail.verifyPageDisplayed()
-    AddYourDetailsEmail.inputEmailAddress()
+    CommonJourney.addPhoneAndEmailDetails()
   }
 
-  // NOTE: Not sure if CS2.0 will actually be reachable?
-  /** A short journey to reach an error page and then will end the journey */
-  def agentNotifyingOnBehalfOfClientClientListFailedToLoad(): Unit = {
-    AuthLoginPage.login(AffinityGroup.AgentVAT)
-    LandingPage.verifyPageDisplayed()
-    // TODO: Verify Landing Page LP3.0 for Agents with Clients.
-    // TODO: SELECT CLIENT AND CONTINUE
-    // TODO: Remove once flow is actually implemented
-    RetrievingYourClientList.navigateToPage(RetrievingYourClientList.pageUrl)
-    RetrievingYourClientList.verifyPageDisplayed()
-    // TODO: Remove once flow is actually implemented
-    WeCouldNotRetrieveYourClientList.navigateToPage(WeCouldNotRetrieveYourClientList.pageUrl)
-    WeCouldNotRetrieveYourClientList.verifyPageDisplayed()
-  }
+  // TODO: TO BE DONE IN THE FUTURE WHEN WE HAVE CLIENT LIST
+//  // NOTE: Not sure if CS2.0 will actually be reachable?
+//  /** A short journey to reach an error page and then will end the journey */
+//  def agentNotifyingOnBehalfOfClientClientListFailedToLoad(): Unit = {
+//    AuthLoginPage.login(AffinityGroup.AgentVAT)
+//    LandingPage.verifyPageDisplayed()
+//    // TODO: Verify Landing Page LP3.0 for Agents with Clients.
+//    // TODO: SELECT CLIENT AND CONTINUE
+//    // TODO: Remove once flow is actually implemented
+//    RetrievingYourClientList.navigateToPage(RetrievingYourClientList.pageUrl)
+//    RetrievingYourClientList.verifyPageDisplayed()
+//    // TODO: Remove once flow is actually implemented
+//    WeCouldNotRetrieveYourClientList.navigateToPage(WeCouldNotRetrieveYourClientList.pageUrl)
+//    WeCouldNotRetrieveYourClientList.verifyPageDisplayed()
+//  }
 
   /** This user will complete a notification acting as a private individual, i.e., completing a notification for
     * themselves and not on behalf of a Client
@@ -96,5 +76,21 @@ object VATAgentUserJourney {
 //    AddYourDetailsPhoneNumber.inputPhoneNumber()
 //    AddYourDetailsEmail.verifyPageDisplayed()
 //    AddYourDetailsEmail.inputEmailAddress()
+  }
+
+  private def loginSelectClientAndBeginANotification(): Unit = {
+    AuthLoginPage.login(AffinityGroup.AgentVAT)
+    LandingPage.verifyPageDisplayed()
+    LandingPage.manageYourClients()
+    RetrievingYourClientList.verifyPageDisplayed()
+    // TODO: Remove TestOnlySessionPage once flow is actually implemented
+    TestOnlySessionPage.setSelectedClientInSession()
+    LandingPage.navigateToPage(LandingPage.pageUrl)
+    LandingPage.waitForUrl(LandingPage.pageUrl)
+    // TODO: WOULD BE CLIENT SELECTION
+    LandingPage.verifyPageDisplayed()
+    LandingPage.createANewNotification()
+    BeforeYouContinue.verifyMultipleVehiclesSectionPresent()
+    BeforeYouContinue.clickContinue()
   }
 }

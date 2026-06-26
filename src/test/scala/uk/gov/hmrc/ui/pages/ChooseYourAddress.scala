@@ -23,8 +23,8 @@ object ChooseYourAddress extends BasePage {
   val endOfUrl: String         = "select?postcode="
 
   object ALFPageLocators {
-    val radioButton1: By = By.id("addressId")
-    val noneOfThese: By  = By.id("addressId-none")
+    val radioButton1: By = By.cssSelector("label[for='addressId']")
+    val noneOfThese: By  = By.cssSelector("label[for='addressId-none']")
   }
 
   def verifyPartialUrl(): Unit =
@@ -35,7 +35,9 @@ object ChooseYourAddress extends BasePage {
       expectedHeading = "Choose your address"
     )
 
-  def selectAnAddress(): Unit =
+  def selectAnAddress(): Unit = {
     // For now selecting the first address
     clickElement(ALFPageLocators.radioButton1)
+    clickContinue()
+  }
 }

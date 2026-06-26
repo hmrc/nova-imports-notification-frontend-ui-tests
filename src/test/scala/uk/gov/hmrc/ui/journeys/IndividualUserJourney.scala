@@ -17,105 +17,72 @@
 package uk.gov.hmrc.ui.journeys
 
 import uk.gov.hmrc.ui.helpers.{AffinityGroup, CYAPage}
-import uk.gov.hmrc.ui.pages.{AddYourDetailsEmail, AddYourDetailsName, AddYourDetailsPhoneNumber, AreYouABusinessOrPrivateIndividual, AreYouNotifyingAsPurchaserOrOnBehalf, AuthLoginPage, BeforeYouContinue, CheckYourAnswers, ChooseYourAddress, FindYourAddress, IsYourAddressInTheUK, LandingPage, PurchaserOnBehalfOfABusinessOrIndividual, ReviewAndConfirmAddress, VehicleBroughtIntoNIFromEUPage, VehicleBroughtIntoNIFromOutsideEUPage}
+import uk.gov.hmrc.ui.pages.{AreYouABusinessOrPrivateIndividual, AreYouNotifyingAsPurchaserOrOnBehalf, AuthLoginPage, BeforeYouContinue, LandingPage, PurchaserOnBehalfOfABusinessOrIndividual, VehicleBroughtIntoNIFromEUPage, VehicleBroughtIntoNIFromOutsideEUPage}
 
 object IndividualUserJourney {
   // TODO: Break these into sections that will allow for address for notifier / supplier to be
   // UK and International... for now just UK implemented...
   def privateIndividualAsPurchaser(): Unit = {
-    AuthLoginPage.login(AffinityGroup.Individual)
-    LandingPage.verifyPageDisplayed()
-    LandingPage.createANewNotification()
-    BeforeYouContinue.verifyMultipleVehiclesSectionNotPresent()
-    BeforeYouContinue.clickContinue()
-    VehicleBroughtIntoNIFromEUPage.verifyPageDisplayed()
-    VehicleBroughtIntoNIFromEUPage.selectYesAndContinue()
-    AreYouABusinessOrPrivateIndividual.verifyPageDisplayed()
-    AreYouABusinessOrPrivateIndividual.selectOptionTwoAndContinue()
+    privateIndividualAsANotifier()
     AreYouNotifyingAsPurchaserOrOnBehalf.verifyPageDisplayed()
     AreYouNotifyingAsPurchaserOrOnBehalf.selectOptionOneAndContinue()
-    CheckYourAnswers(CYAPage.InitialQuestions).verifyPageDisplayed()
-    CheckYourAnswers(CYAPage.InitialQuestions).checkContentIsCorrect(CYAPage.InitialQuestions, AffinityGroup.Individual)
-    CheckYourAnswers(CYAPage.InitialQuestions).clickContinue()
+    CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.Individual)
     // TODO: TASK LIST
-    // TODO: REMOVE ONCE NAVIGATION IN PLACE
-    // UNCOMMENT ONCE DEVS FIX
-//    AddYourDetailsName.navigateToPage(AddYourDetailsName.pageUrl)
-//    AddYourDetailsName.verifyPageDisplayed()
-//    AddYourDetailsName.inputUserDetails()
-//    AddYourDetailsPhoneNumber.verifyPageDisplayed()
-//    AddYourDetailsPhoneNumber.inputPhoneNumber()
-//    AddYourDetailsEmail.verifyPageDisplayed()
-//    AddYourDetailsEmail.inputEmailAddress()
-    // TODO: UNCOMMENT ONCE NAVIGATION IS IN PLACE
-    IsYourAddressInTheUK.navigateToPage(IsYourAddressInTheUK.pageUrl)
-    IsYourAddressInTheUK.verifyPageDisplayed()
-    IsYourAddressInTheUK.selectOptionOneAndContinue()
-    FindYourAddress.verifyPageDisplayed()
-    FindYourAddress.inputUserAddressForSearch()
-    // TODO: FIX CHOOSE YOUR ADDRESS RADIO BUTTON FAILING
-//    ChooseYourAddress.verifyPageDisplayed()
-//    ChooseYourAddress.selectAnAddress()
-//    ReviewAndConfirmAddress.verifyPageDisplayed()
-//    ReviewAndConfirmAddress.clickContinue()
-    // TODO: SHOULD NOT BE AT TASK LIST AGAIN
+    CommonJourney.addUserDetailsNamePhoneNumberEmailAddress()
+    // TODO: SHOULD BE AT TASK LIST AGAIN
+    CommonJourney.notifierHasUkDetails()
+    // TODO: SHOULD BE AT TASK LIST AGAIN
   }
 
   def privateIndividualOnBehalfOfBusiness(): Unit = {
-    AuthLoginPage.login(AffinityGroup.Individual)
-    LandingPage.verifyPageDisplayed()
-    LandingPage.createANewNotification()
-    BeforeYouContinue.verifyMultipleVehiclesSectionNotPresent()
-    BeforeYouContinue.clickContinue()
-    VehicleBroughtIntoNIFromEUPage.verifyPageDisplayed()
-    VehicleBroughtIntoNIFromEUPage.selectYesAndContinue()
-    AreYouABusinessOrPrivateIndividual.verifyPageDisplayed()
-    AreYouABusinessOrPrivateIndividual.selectOptionTwoAndContinue()
+    privateIndividualAsANotifier()
     AreYouNotifyingAsPurchaserOrOnBehalf.verifyPageDisplayed()
     AreYouNotifyingAsPurchaserOrOnBehalf.selectOptionTwoAndContinue()
     PurchaserOnBehalfOfABusinessOrIndividual.verifyPageDisplayed()
     PurchaserOnBehalfOfABusinessOrIndividual.selectOptionOneAndContinue()
-    CheckYourAnswers(CYAPage.InitialQuestions).verifyPageDisplayed()
-    CheckYourAnswers(CYAPage.InitialQuestions).checkContentIsCorrect(CYAPage.InitialQuestions, AffinityGroup.Individual)
-    CheckYourAnswers(CYAPage.InitialQuestions).clickContinue()
+    CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.Individual)
     // TODO: TASK LIST
-    // TODO: AYD1.4
-    // TODO: ONCE NAVIGATION IN PLACE REMOVE
-    AddYourDetailsPhoneNumber.goToPage(AddYourDetailsPhoneNumber.pageUrl)
-    AddYourDetailsPhoneNumber.verifyPageDisplayed()
-    AddYourDetailsPhoneNumber.inputPhoneNumber()
-    AddYourDetailsEmail.verifyPageDisplayed()
-    AddYourDetailsEmail.inputEmailAddress()
+    CommonJourney.addUserDetailsBusinessNamePhoneNumberEmailAddress()
+    // TODO: SHOULD BE AT TASK LIST AGAIN
+    CommonJourney.notifierHasUkDetails()
+    // TODO: SHOULD BE AT TASK LIST AGAIN
   }
 
   def privateIndividualOnBehalfOfPrivateIndividual(): Unit = {
+    privateIndividualAsANotifier()
+    AreYouNotifyingAsPurchaserOrOnBehalf.verifyPageDisplayed()
+    AreYouNotifyingAsPurchaserOrOnBehalf.selectOptionTwoAndContinue()
+    PurchaserOnBehalfOfABusinessOrIndividual.verifyPageDisplayed()
+    PurchaserOnBehalfOfABusinessOrIndividual.selectOptionTwoAndContinue()
+    CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.Individual)
+    // TODO: TASK LIST
+    CommonJourney.addUserDetailsNamePhoneNumberEmailAddress()
+    // TODO: TASK LIST
+    CommonJourney.notifierHasUkDetails()
+    // TODO: SHOULD BE AT TASK LIST AGAIN
+  }
+
+  def userNeedsToImportAVehicleFromOutsideEU(): Unit = {
+    loginAndStartANotification()
+    VehicleBroughtIntoNIFromEUPage.verifyPageDisplayed()
+    VehicleBroughtIntoNIFromEUPage.selectNoAndContinue()
+    VehicleBroughtIntoNIFromOutsideEUPage.verifyPageDisplayed()
+  }
+
+  /** Common repeated flows reducing them into one method to cut down on code duplication */
+  private def loginAndStartANotification(): Unit   = {
     AuthLoginPage.login(AffinityGroup.Individual)
     LandingPage.verifyPageDisplayed()
     LandingPage.createANewNotification()
     BeforeYouContinue.verifyMultipleVehiclesSectionNotPresent()
     BeforeYouContinue.clickContinue()
+  }
+  private def privateIndividualAsANotifier(): Unit = {
+    loginAndStartANotification()
     VehicleBroughtIntoNIFromEUPage.verifyPageDisplayed()
     VehicleBroughtIntoNIFromEUPage.selectYesAndContinue()
     AreYouABusinessOrPrivateIndividual.verifyPageDisplayed()
     AreYouABusinessOrPrivateIndividual.selectOptionTwoAndContinue()
     AreYouNotifyingAsPurchaserOrOnBehalf.verifyPageDisplayed()
-    AreYouNotifyingAsPurchaserOrOnBehalf.selectOptionTwoAndContinue()
-    PurchaserOnBehalfOfABusinessOrIndividual.verifyPageDisplayed()
-    PurchaserOnBehalfOfABusinessOrIndividual.selectOptionTwoAndContinue()
-    CheckYourAnswers(CYAPage.InitialQuestions).verifyPageDisplayed()
-    CheckYourAnswers(CYAPage.InitialQuestions).checkContentIsCorrect(CYAPage.InitialQuestions, AffinityGroup.Individual)
-    // TODO: TASK LIST
-    // TODO: SUPPLIER DETAILS?
-  }
-
-  def userNeedsToImportAVehicleFromOutsideEU(): Unit = {
-    AuthLoginPage.login(AffinityGroup.Individual)
-    LandingPage.verifyPageDisplayed()
-    LandingPage.createANewNotification()
-    BeforeYouContinue.verifyMultipleVehiclesSectionNotPresent()
-    BeforeYouContinue.clickContinue()
-    VehicleBroughtIntoNIFromEUPage.verifyPageDisplayed()
-    VehicleBroughtIntoNIFromEUPage.selectNoAndContinue()
-    VehicleBroughtIntoNIFromOutsideEUPage.verifyPageDisplayed()
   }
 }
