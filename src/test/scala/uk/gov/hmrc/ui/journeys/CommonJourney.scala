@@ -40,7 +40,6 @@ object CommonJourney {
     addPhoneAndEmailDetails()
 
   def addPhoneAndEmailDetails(): Unit = {
-    AddYourDetailsPhoneNumber.goToPage(AddYourDetailsPhoneNumber.pageUrl)
     AddYourDetailsPhoneNumber.verifyPageDisplayed()
     AddYourDetailsPhoneNumber.inputPhoneNumber()
     AddYourDetailsEmail.verifyPageDisplayed()

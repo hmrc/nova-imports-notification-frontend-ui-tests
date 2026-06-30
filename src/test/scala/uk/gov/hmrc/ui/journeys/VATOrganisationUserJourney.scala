@@ -17,7 +17,7 @@
 package uk.gov.hmrc.ui.journeys
 
 import uk.gov.hmrc.ui.helpers.{AffinityGroup, CYAPage}
-import uk.gov.hmrc.ui.pages.{AuthLoginPage, BeforeYouContinue, HaveYouBroughtAVehicleIntoTheUKForBusinessUse, LandingPage, VehicleBroughtIntoNIFromEUPage}
+import uk.gov.hmrc.ui.pages.{AuthLoginPage, BeforeYouContinue, CheckYourAnswers, HaveYouBroughtAVehicleIntoTheUKForBusinessUse, LandingPage, VehicleBroughtIntoNIFromEUPage}
 
 object VATOrganisationUserJourney {
   // TODO: Finish this flow once we have more screens
@@ -29,9 +29,8 @@ object VATOrganisationUserJourney {
     // TODO: TASK LIST
     CommonJourney.validateAddYourDetailsGuidancePage()
     CommonJourney.addPhoneAndEmailDetails()
+    CheckYourAnswers(CYAPage.YourDetails).clickContinue()
     // TODO: TASK LIST
-    CommonJourney.notifierHasUkDetails()
-    // TODO: SHOULD BE AT TASK LIST AGAIN
   }
 
   def acquisitionVehicleForPrivateUse(): Unit = {
@@ -41,6 +40,7 @@ object VATOrganisationUserJourney {
     CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.OrganisationVAT)
     CommonJourney.validateAddYourDetailsGuidancePage()
     CommonJourney.addUserDetailsNamePhoneNumberEmailAddress()
+    CheckYourAnswers(CYAPage.YourDetails).clickContinue()
     // TASK LIST
     CommonJourney.notifierHasUkDetails()
     // TODO: SHOULD BE AT TASK LIST AGAIN
@@ -55,9 +55,8 @@ object VATOrganisationUserJourney {
     CommonJourney.validateAddYourDetailsGuidancePage()
     // TODO: BUSINESS NAME?
     CommonJourney.addPhoneAndEmailDetails()
+    CheckYourAnswers(CYAPage.YourDetails).clickContinue()
     // TODO: TASK LIST
-    CommonJourney.notifierHasUkDetails()
-    // TODO: SHOULD BE AT TASK LIST AGAIN
   }
 
   def importVehicleForPrivateUse(): Unit = {
@@ -68,6 +67,7 @@ object VATOrganisationUserJourney {
     // TODO: TASK LIST PAGE
     CommonJourney.validateAddYourDetailsGuidancePage()
     CommonJourney.addUserDetailsNamePhoneNumberEmailAddress()
+    CheckYourAnswers(CYAPage.YourDetails).clickContinue()
     // TODO: TASK LIST
     CommonJourney.notifierHasUkDetails()
     // TODO: SHOULD BE AT TASK LIST AGAIN

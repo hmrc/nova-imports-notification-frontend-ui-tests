@@ -22,13 +22,15 @@ package uk.gov.hmrc.ui.helpers
   *     this given journey
   */
 enum CYAPage:
-  case InitialQuestions
+  case InitialQuestions, YourDetails
 
   def getCYAPageUrl: String = this match {
     case InitialQuestions => "initial-questions"
+    case YourDetails      => "your-details"
   }
 
 object CYAPage {
+  // Used to check CYA's that vary based on User Types
   def getContent(page: CYAPage, group: AffinityGroup): String =
     (page, group) match {
       case (CYAPage.InitialQuestions, AffinityGroup.Individual)      =>
