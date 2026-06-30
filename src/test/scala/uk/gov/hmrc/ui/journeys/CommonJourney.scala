@@ -41,7 +41,7 @@ object CommonJourney {
 
   def addPhoneAndEmailDetails(): Unit = {
     AddYourDetailsPhoneNumber.verifyPageDisplayed()
-    AddYourDetailsPhoneNumber.inputPhoneNumber()
+    AddYourDetailsPhoneNumber.inputMobileNumber()
     AddYourDetailsEmail.verifyPageDisplayed()
     AddYourDetailsEmail.inputEmailAddress()
   }

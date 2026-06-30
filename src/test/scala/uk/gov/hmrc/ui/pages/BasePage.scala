@@ -42,6 +42,8 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
     val option1: By             = By.cssSelector("label[for='value']")
     val option2: By             = By.cssSelector("label[for='value-2']")
     val inputField: By          = By.className("govuk-input")
+    val phoneNumber: By         = By.id("phoneNumber")
+    val mobileNumber: By        = By.id("mobileNumber")
     val cyaPageTextContent: By  = By.xpath("/html/body/div/main/div/div/dl/div[2]/dt")
   }
 
