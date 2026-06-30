@@ -20,8 +20,8 @@ final case class User(
   title: String,
   firstName: String,
   lastName: String,
-  landline: Option[String],
-  telephone: Option[String],
+  phoneNumber: Option[String],
+  mobileNumber: Option[String],
   email: String
 )
 
@@ -30,8 +30,17 @@ object User {
     title = "Mr",
     firstName = "John",
     lastName = "Smith",
-    landline = None,
-    telephone = Some("07700 900999"),
+    phoneNumber = None,
+    mobileNumber = Some("07700 900999"),
     email = "john.smith@example.com"
+  )
+
+  val User2: User = User(
+    title = "Mrs",
+    firstName = "Jane",
+    lastName = "Smith",
+    phoneNumber = Some("0191 498 0000"),
+    mobileNumber = None,
+    email = "jane.smith1988@example.co.uk"
   )
 }
