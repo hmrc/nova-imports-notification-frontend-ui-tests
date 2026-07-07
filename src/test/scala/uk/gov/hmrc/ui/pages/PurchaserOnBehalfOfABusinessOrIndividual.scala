@@ -21,6 +21,6 @@ object PurchaserOnBehalfOfABusinessOrIndividual extends BasePage {
 
   def verifyPageDisplayed(): Unit =
     validateQuestionPage(
-      expectedHeading = "Is the purchaser you are notifying on behalf of a business or private individual?"
+      expectedHeading = "Is the purchaser you’re notifying on behalf of a business or private individual?"
     )
 }
