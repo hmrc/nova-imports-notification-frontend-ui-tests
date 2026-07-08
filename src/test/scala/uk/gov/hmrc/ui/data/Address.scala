@@ -16,6 +16,7 @@
 
 package uk.gov.hmrc.ui.data
 
+// TODO: BREAK THIS DOWN INTO A MODEL AND DATA
 object Address {
   sealed trait Address
   final case class ManualEntryOfAddress(

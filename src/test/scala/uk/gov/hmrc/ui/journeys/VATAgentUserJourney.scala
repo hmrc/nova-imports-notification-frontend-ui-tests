@@ -71,7 +71,7 @@ object VATAgentUserJourney {
     AddYourDetailsName.verifyPageDisplayed()
     AddYourDetailsName.inputUserDetails()
     AddYourDetailsPhoneNumber.verifyPageDisplayed()
-    AddYourDetailsPhoneNumber.inputPhoneNumber()
+    AddYourDetailsPhoneNumber.inputMobileNumber()
     AddYourDetailsEmail.verifyPageDisplayed()
     AddYourDetailsEmail.inputEmailAddress()
   }
