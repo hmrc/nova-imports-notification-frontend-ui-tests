@@ -62,7 +62,7 @@ object TestData {
       postcode = None,
       country = None
     )
-    
+
     val manualInternationalAddress = FullAddressDetails(
       line1 = "10 The Apartment",
       line2 = "Berlin",
@@ -72,7 +72,7 @@ object TestData {
       country = Some("Germany")
     )
   }
-  
+
   object PostcodeEntryOfAddress {
     val postcodeAddress = PostcodeAddressDetails(
       postcode = "FX1 7RR",

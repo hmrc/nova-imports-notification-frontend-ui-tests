@@ -17,7 +17,7 @@
 package uk.gov.hmrc.ui.pages
 
 import org.openqa.selenium.By
-import uk.gov.hmrc.ui.data.Address
+import uk.gov.hmrc.ui.data.TestData
 
 object ManualEntryOfAddress extends BasePage {
   override val pageUrl: String      = s"$addressLookupBaseUrl"
@@ -47,12 +47,12 @@ object ManualEntryOfAddress extends BasePage {
   def inputUserUkAddress(): Unit = {
     typeInsideElement(
       locator = ALFPageLocators.line1,
-      input = Address.ManualEntryOfAddress.manualUkAddress.line1
+      input = TestData.ManualEntryOfAddress.manualUkAddress.line1
     )
 
     typeInsideElement(
       locator = ALFPageLocators.line2,
-      input = Address.ManualEntryOfAddress.manualUkAddress.line2
+      input = TestData.ManualEntryOfAddress.manualUkAddress.line2
     )
     clickContinue()
   }
@@ -60,12 +60,12 @@ object ManualEntryOfAddress extends BasePage {
   def inputUserInternationalAddress(): Unit = {
     typeInsideElement(
       locator = ALFPageLocators.line1,
-      input = Address.ManualEntryOfAddress.manualInternationalAddress.line1
+      input = TestData.ManualEntryOfAddress.manualInternationalAddress.line1
     )
 
     typeInsideElement(
       locator = ALFPageLocators.line2,
-      input = Address.ManualEntryOfAddress.manualInternationalAddress.line2
+      input = TestData.ManualEntryOfAddress.manualInternationalAddress.line2
     )
     clickContinue()
   }
