@@ -25,8 +25,8 @@ class CheckYourAnswers(whichCYAPage: CYAPage) extends BasePage {
       expectedHeading = "Check your answers"
     )
 
-  def checkContentIsCorrect(page: CYAPage, group: AffinityGroup): Unit = {
-    val expectedContent = CYAPage.getContent(page, group)
+  def checkContentIsCorrect(page: CYAPage, group: AffinityGroup, clientSelected: Boolean = false): Unit = {
+    val expectedContent = CYAPage.getContent(page, group, clientSelected)
     val actualContent   = waitForVisibilityOfElement(Locators.cyaPageTextContent).getText
     assert(
       actualContent == expectedContent,

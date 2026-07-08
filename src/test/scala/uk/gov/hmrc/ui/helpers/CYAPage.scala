@@ -31,7 +31,7 @@ enum CYAPage:
 
 object CYAPage {
   // Used to check CYA's that vary based on User Types
-  def getContent(page: CYAPage, group: AffinityGroup, clientSelected: Boolean = false): String =
+  def getContent(page: CYAPage, group: AffinityGroup, clientSelected: Boolean): String =
     (page, group, clientSelected) match {
       case (CYAPage.InitialQuestions, AffinityGroup.Individual, false)      =>
         "Are you a business or private individual?"
