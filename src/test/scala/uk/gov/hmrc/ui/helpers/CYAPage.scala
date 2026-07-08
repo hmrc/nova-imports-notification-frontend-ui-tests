@@ -31,14 +31,16 @@ enum CYAPage:
 
 object CYAPage {
   // Used to check CYA's that vary based on User Types
-  def getContent(page: CYAPage, group: AffinityGroup): String =
-    (page, group) match {
-      case (CYAPage.InitialQuestions, AffinityGroup.Individual)      =>
+  def getContent(page: CYAPage, group: AffinityGroup, clientSelected: Boolean = false): String =
+    (page, group, clientSelected) match {
+      case (CYAPage.InitialQuestions, AffinityGroup.Individual, false)      =>
         "Are you a business or private individual?"
-      case (CYAPage.InitialQuestions, AffinityGroup.OrganisationVAT) =>
+      case (CYAPage.InitialQuestions, AffinityGroup.OrganisationVAT, false) =>
         "Have you brought a vehicle into the UK for business use?"
-      case (CYAPage.InitialQuestions, AffinityGroup.AgentVAT)        =>
+      case (CYAPage.InitialQuestions, AffinityGroup.AgentVAT, false)        =>
+        "Are you a business or private individual?"
+      case (CYAPage.InitialQuestions, AffinityGroup.AgentVAT, true)         =>
         "Has your client brought a vehicle into the UK for business use?"
-      case (_, _)                                                    => "No content matches"
+      case (_, _, _)                                                        => "No content matches"
     }
 }

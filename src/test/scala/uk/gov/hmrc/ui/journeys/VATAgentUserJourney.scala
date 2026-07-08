@@ -17,7 +17,7 @@
 package uk.gov.hmrc.ui.journeys
 
 import uk.gov.hmrc.ui.helpers.{AffinityGroup, CYAPage}
-import uk.gov.hmrc.ui.pages.{AreYouABusinessOrPrivateIndividual, AreYouNotifyingAsPurchaserOrOnBehalf, AuthLoginPage, BeforeYouContinue, HasYourClientBroughtAVehicleIntoTheUkForBusinessUse, LandingPage, RetrievingYourClientList, TestOnlySessionPage, VehicleBroughtIntoNIFromEUPage}
+import uk.gov.hmrc.ui.pages.{AddYourDetailsEmail, AddYourDetailsName, AddYourDetailsPhoneNumber, AreYouABusinessOrPrivateIndividual, AreYouNotifyingAsPurchaserOrOnBehalf, AuthLoginPage, BeforeYouContinue, CheckYourAnswers, HasYourClientBroughtAVehicleIntoTheUkForBusinessUse, LandingPage, RetrievingYourClientList, TestOnlySessionPage, VehicleBroughtIntoNIFromEUPage}
 
 object VATAgentUserJourney {
   // TODO: SHOULD HAVE A FLOW FOR ACQUISITION & IMPORT. DIFFERENT ROUTES AND JOURNEYS AS A CLIENT
@@ -63,19 +63,17 @@ object VATAgentUserJourney {
     AreYouABusinessOrPrivateIndividual.selectOptionTwoAndContinue()
     AreYouNotifyingAsPurchaserOrOnBehalf.verifyPageDisplayed()
     AreYouNotifyingAsPurchaserOrOnBehalf.selectOptionOneAndContinue()
-    // TODO: I NEED TO FIX THE CYA IT THINKS IT NEEDS AGENT ONE BUT WE ACTUALLY WENT PRIVATE ROUTE!!!
-//    CheckYourAnswers(CYAPage.InitialQuestions).verifyPageUrl()
-//    CheckYourAnswers(CYAPage.InitialQuestions).checkContentIsCorrect(CYAPage.InitialQuestions, AffinityGroup.AgentVAT)
+    CheckYourAnswers(CYAPage.InitialQuestions).verifyPageUrl()
+    CheckYourAnswers(CYAPage.InitialQuestions).checkContentIsCorrect(CYAPage.InitialQuestions, AffinityGroup.AgentVAT)
+    CheckYourAnswers(CYAPage.InitialQuestions).clickContinue()
     // TODO: ONCE NAVIGATION IS IN PLACE REMOVE THIS
-    // TODO: ADD YOUR DETAILS PAGE + NAME ETC SHOULD BE VALID
-    // COMMENTING OUT FOR NOW AS TESTS FAIL
-//    AddYourDetailsName.navigateToPage(AddYourDetailsName.pageUrl)
-//    AddYourDetailsName.verifyPageDisplayed()
-//    AddYourDetailsName.inputUserDetails()
-//    AddYourDetailsPhoneNumber.verifyPageDisplayed()
-//    AddYourDetailsPhoneNumber.inputPhoneNumber()
-//    AddYourDetailsEmail.verifyPageDisplayed()
-//    AddYourDetailsEmail.inputEmailAddress()
+    AddYourDetailsName.navigateToPage(AddYourDetailsName.pageUrl)
+    AddYourDetailsName.verifyPageDisplayed()
+    AddYourDetailsName.inputUserDetails()
+    AddYourDetailsPhoneNumber.verifyPageDisplayed()
+    AddYourDetailsPhoneNumber.inputPhoneNumber()
+    AddYourDetailsEmail.verifyPageDisplayed()
+    AddYourDetailsEmail.inputEmailAddress()
   }
 
   private def loginSelectClientAndBeginANotification(): Unit = {
