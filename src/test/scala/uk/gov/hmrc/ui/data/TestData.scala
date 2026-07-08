@@ -16,10 +16,13 @@
 
 package uk.gov.hmrc.ui.data
 
+import uk.gov.hmrc.ui.models.FullAddress.FullAddressDetails
+import uk.gov.hmrc.ui.models.PostcodeAddress.PostcodeAddressDetails
 import uk.gov.hmrc.ui.models.UserDetails.{BusinessDetails, IndividualUserDetails}
 import uk.gov.hmrc.ui.models.{Notifier, Supplier}
 
 object TestData {
+  // User Details
   object NotifierDetails {
     val notifier = Notifier.NotifierDetails(
       userDetails = IndividualUserDetails(
@@ -46,6 +49,34 @@ object TestData {
         firstName = "Jane",
         lastName = "Smith"
       )
+    )
+  }
+
+  // Address Details
+  object ManualEntryOfAddress {
+    val manualUkAddress = FullAddressDetails(
+      line1 = "10 House",
+      line2 = "Test Street",
+      line3 = Some("Test-Town-Upon-Tyne"),
+      line4 = None,
+      postcode = None,
+      country = None
+    )
+    
+    val manualInternationalAddress = FullAddressDetails(
+      line1 = "10 The Apartment",
+      line2 = "Berlin",
+      line3 = None,
+      line4 = None,
+      postcode = None,
+      country = Some("Germany")
+    )
+  }
+  
+  object PostcodeEntryOfAddress {
+    val postcodeAddress = PostcodeAddressDetails(
+      postcode = "FX1 7RR",
+      houseNameOrNumber = None
     )
   }
 }
