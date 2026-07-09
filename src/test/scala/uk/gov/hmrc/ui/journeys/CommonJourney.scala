@@ -17,7 +17,7 @@
 package uk.gov.hmrc.ui.journeys
 
 import uk.gov.hmrc.ui.helpers.{AffinityGroup, CYAPage}
-import uk.gov.hmrc.ui.pages.{AddYourDetailsEmail, AddYourDetailsGuidancePage, AddYourDetailsName, AddYourDetailsPhoneNumber, CheckYourAnswers, ChooseYourAddress, FindYourAddress, IsYourAddressInTheUK, ReviewAndConfirmAddress}
+import uk.gov.hmrc.ui.pages.{AddPurchaserDetailsBusinessName, AddPurchaserDetailsName, AddYourDetailsEmail, AddYourDetailsGuidancePage, AddYourDetailsName, AddYourDetailsPhoneNumber, CheckYourAnswers, ChooseYourAddress, FindYourAddress, IsYourAddressInTheUK, ReviewAndConfirmAddress}
 
 /** Base methods that are used to answer repetitive scenarios within journeys to make code more readable */
 object CommonJourney {
@@ -45,6 +45,21 @@ object CommonJourney {
     AddYourDetailsEmail.verifyPageDisplayed()
     AddYourDetailsEmail.inputEmailAddress()
   }
+
+  def addPurchaserName(): Unit = {
+    // TODO: REMOVE ONCE NAVIGATION IN PLACE
+    AddPurchaserDetailsName.navigateToPage(AddPurchaserDetailsName.pageUrl)
+    AddPurchaserDetailsName.verifyPageDisplayed()
+    AddPurchaserDetailsName.inputUserDetails()
+  }
+
+  def addPurchaserBusinessName(): Unit = {
+    // TODO: REMOVE ONCE NAVIGATION IN PLACE
+    AddPurchaserDetailsBusinessName.navigateToPage(AddPurchaserDetailsBusinessName.pageUrl)
+    AddPurchaserDetailsBusinessName.verifyPageDisplayed()
+    AddPurchaserDetailsBusinessName.inputBusinessName()
+  }
+
   // TODO: More details that vary based on user answers
 
   /** Helper method that will allow us to confirm which CYA page we are on and verify it's correct etc., */
