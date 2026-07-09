@@ -16,8 +16,7 @@
 
 package uk.gov.hmrc.ui.pages
 
-import org.openqa.selenium.By
-import uk.gov.hmrc.ui.data.User
+import uk.gov.hmrc.ui.data.TestData
 
 object AddYourDetailsPhoneNumber extends BasePage {
   override val pageUrl: String = s"$baseUrl/contact-numbers"
@@ -28,18 +27,19 @@ object AddYourDetailsPhoneNumber extends BasePage {
     )
 
   // TODO: add specific phone number / mobile numbers for different devices and area codes etc.,
-  def inputPhoneNumber(): Unit = {
-    typeInsideElement(
-      locator = Locators.phoneNumber,
-      input = User.User2.phoneNumber.get
-    )
-    clickContinue()
-  }
+  // MAYBE BUSINESS DO PHONE NUMBERS AND PI DO MOBILE
+//  def inputPhoneNumber(): Unit = {
+//    typeInsideElement(
+//      locator = Locators.phoneNumber,
+//      input = TestData.NotifierDetails.notifier.phoneNumber.get
+//    )
+//    clickContinue()
+//  }
 
   def inputMobileNumber(): Unit = {
     typeInsideElement(
       locator = Locators.mobileNumber,
-      input = User.User1.mobileNumber.get
+      input = TestData.UserDetails.NotifierDetails.notifier.mobileNumber.get
     )
     clickContinue()
   }

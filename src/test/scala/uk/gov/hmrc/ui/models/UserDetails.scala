@@ -14,22 +14,18 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.pages
+package uk.gov.hmrc.ui.models
 
-import uk.gov.hmrc.ui.data.TestData
+object UserDetails {
+  sealed trait Details
 
-object AddYourDetailsEmail extends BasePage {
-  override val pageUrl: String = s"$baseUrl/email-address"
+  case class BusinessDetails(
+    businessName: String
+  ) extends Details
 
-  def verifyPageDisplayed(): Unit =
-    verifyInputPageHeading(
-      expectedHeading = "What is your email address?"
-    )
-
-  def inputEmailAddress(): Unit =
-    typeInsideElement(
-      locator = Locators.inputField,
-      input = TestData.UserDetails.NotifierDetails.notifier.email
-    )
-    clickContinue()
+  case class IndividualUserDetails(
+    title: String,
+    firstName: String,
+    lastName: String
+  ) extends Details
 }

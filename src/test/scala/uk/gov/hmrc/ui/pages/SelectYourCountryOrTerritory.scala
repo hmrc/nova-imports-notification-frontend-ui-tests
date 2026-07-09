@@ -17,7 +17,7 @@
 package uk.gov.hmrc.ui.pages
 
 import org.openqa.selenium.By
-import uk.gov.hmrc.ui.data.Address
+import uk.gov.hmrc.ui.data.TestData
 
 object SelectYourCountryOrTerritory extends BasePage {
   override val pageUrl: String = s"$addressLookupBaseUrl/"
@@ -38,7 +38,7 @@ object SelectYourCountryOrTerritory extends BasePage {
   def inputCountryOrTerritory(): Unit = {
     typeInsideElement(
       locator = ALFPageLocators.countryOrTerritory,
-      input = Address.CountryEntryOfAddress.countryAddress.country
+      input = TestData.AddressDetails.ManualEntryOfAddress.manualInternationalAddress.country.get
     )
     clickContinue()
   }

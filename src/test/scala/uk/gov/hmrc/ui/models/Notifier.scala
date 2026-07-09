@@ -14,33 +14,13 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.data
+package uk.gov.hmrc.ui.models
 
-final case class User(
-  title: String,
-  firstName: String,
-  lastName: String,
-  phoneNumber: Option[String],
-  mobileNumber: Option[String],
-  email: String
-)
-
-object User {
-  val User1: User = User(
-    title = "Mr",
-    firstName = "John",
-    lastName = "Smith",
-    phoneNumber = None,
-    mobileNumber = Some("07700 900999"),
-    email = "john.smith@example.com"
-  )
-
-  val User2: User = User(
-    title = "Mrs",
-    firstName = "Jane",
-    lastName = "Smith",
-    phoneNumber = Some("0191 498 0000"),
-    mobileNumber = None,
-    email = "jane.smith1988@example.co.uk"
+object Notifier {
+  case class NotifierDetails(
+    userDetails: UserDetails.IndividualUserDetails,
+    phoneNumber: Option[String],
+    mobileNumber: Option[String],
+    email: String
   )
 }

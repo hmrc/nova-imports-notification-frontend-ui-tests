@@ -17,7 +17,7 @@
 package uk.gov.hmrc.ui.pages
 
 import org.openqa.selenium.By
-import uk.gov.hmrc.ui.data.Address
+import uk.gov.hmrc.ui.data.TestData
 
 object FindYourAddress extends BasePage {
   override val pageUrl: String = s"$addressLookupBaseUrl/"
@@ -39,7 +39,7 @@ object FindYourAddress extends BasePage {
   def inputUserAddressForSearch(): Unit = {
     typeInsideElement(
       locator = ALFPageLocators.postcode,
-      input = Address.PostcodeEntryOfAddress.postcodeAddress.postcode
+      input = TestData.AddressDetails.PostcodeEntryOfAddress.postcodeAddress.postcode
     )
     clickContinue()
   }
