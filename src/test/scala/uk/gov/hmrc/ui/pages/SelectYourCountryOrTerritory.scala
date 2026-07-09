@@ -38,7 +38,7 @@ object SelectYourCountryOrTerritory extends BasePage {
   def inputCountryOrTerritory(): Unit = {
     typeInsideElement(
       locator = ALFPageLocators.countryOrTerritory,
-      input = TestData.ManualEntryOfAddress.manualInternationalAddress.country.get
+      input = TestData.AddressDetails.ManualEntryOfAddress.manualInternationalAddress.country.get
     )
     clickContinue()
   }

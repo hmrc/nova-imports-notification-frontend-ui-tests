@@ -29,7 +29,7 @@ object AddYourDetailsEmail extends BasePage {
   def inputEmailAddress(): Unit =
     typeInsideElement(
       locator = Locators.inputField,
-      input = TestData.NotifierDetails.notifier.email
+      input = TestData.UserDetails.NotifierDetails.notifier.email
     )
     clickContinue()
 }

@@ -47,12 +47,12 @@ object ManualEntryOfAddress extends BasePage {
   def inputUserUkAddress(): Unit = {
     typeInsideElement(
       locator = ALFPageLocators.line1,
-      input = TestData.ManualEntryOfAddress.manualUkAddress.line1
+      input = TestData.AddressDetails.ManualEntryOfAddress.manualUkAddress.line1
     )
 
     typeInsideElement(
       locator = ALFPageLocators.line2,
-      input = TestData.ManualEntryOfAddress.manualUkAddress.line2
+      input = TestData.AddressDetails.ManualEntryOfAddress.manualUkAddress.line2
     )
     clickContinue()
   }
@@ -60,12 +60,12 @@ object ManualEntryOfAddress extends BasePage {
   def inputUserInternationalAddress(): Unit = {
     typeInsideElement(
       locator = ALFPageLocators.line1,
-      input = TestData.ManualEntryOfAddress.manualInternationalAddress.line1
+      input = TestData.AddressDetails.ManualEntryOfAddress.manualInternationalAddress.line1
     )
 
     typeInsideElement(
       locator = ALFPageLocators.line2,
-      input = TestData.ManualEntryOfAddress.manualInternationalAddress.line2
+      input = TestData.AddressDetails.ManualEntryOfAddress.manualInternationalAddress.line2
     )
     clickContinue()
   }

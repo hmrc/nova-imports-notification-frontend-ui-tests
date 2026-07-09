@@ -23,60 +23,64 @@ import uk.gov.hmrc.ui.models.{Notifier, Supplier}
 
 object TestData {
   // User Details
-  object NotifierDetails {
-    val notifier = Notifier.NotifierDetails(
-      userDetails = IndividualUserDetails(
-        title = "Mr",
-        firstName = "John",
-        lastName = "Smith"
-      ),
-      phoneNumber = None,
-      mobileNumber = Some("07700 900999"),
-      email = "john.smith@example.com"
-    )
-  }
-
-  object SupplierDetails {
-    val businessSupplier = Supplier.BusinessSupplier(
-      userDetails = BusinessDetails(
-        businessName = "Test Company Ltd"
+  object UserDetails {
+    object NotifierDetails {
+      val notifier = Notifier.NotifierDetails(
+        userDetails = IndividualUserDetails(
+          title = "Mr",
+          firstName = "John",
+          lastName = "Smith"
+        ),
+        phoneNumber = None,
+        mobileNumber = Some("07700 900999"),
+        email = "john.smith@example.com"
       )
-    )
+    }
 
-    val individualSupplier = Supplier.IndividualSupplier(
-      userDetails = IndividualUserDetails(
-        title = "Mrs",
-        firstName = "Jane",
-        lastName = "Smith"
+    object SupplierDetails {
+      val businessSupplier = Supplier.BusinessSupplier(
+        userDetails = BusinessDetails(
+          businessName = "Test Company Ltd"
+        )
       )
-    )
+
+      val individualSupplier = Supplier.IndividualSupplier(
+        userDetails = IndividualUserDetails(
+          title = "Mrs",
+          firstName = "Jane",
+          lastName = "Smith"
+        )
+      )
+    }
   }
 
   // Address Details
-  object ManualEntryOfAddress {
-    val manualUkAddress = FullAddressDetails(
-      line1 = "10 House",
-      line2 = "Test Street",
-      line3 = Some("Test-Town-Upon-Tyne"),
-      line4 = None,
-      postcode = None,
-      country = None
-    )
+  object AddressDetails {
+    object ManualEntryOfAddress {
+      val manualUkAddress = FullAddressDetails(
+        line1 = "10 House",
+        line2 = "Test Street",
+        line3 = Some("Test-Town-Upon-Tyne"),
+        line4 = None,
+        postcode = None,
+        country = None
+      )
 
-    val manualInternationalAddress = FullAddressDetails(
-      line1 = "10 The Apartment",
-      line2 = "Berlin",
-      line3 = None,
-      line4 = None,
-      postcode = None,
-      country = Some("Germany")
-    )
-  }
+      val manualInternationalAddress = FullAddressDetails(
+        line1 = "10 The Apartment",
+        line2 = "Berlin",
+        line3 = None,
+        line4 = None,
+        postcode = None,
+        country = Some("Germany")
+      )
+    }
 
-  object PostcodeEntryOfAddress {
-    val postcodeAddress = PostcodeAddressDetails(
-      postcode = "FX1 7RR",
-      houseNameOrNumber = None
-    )
+    object PostcodeEntryOfAddress {
+      val postcodeAddress = PostcodeAddressDetails(
+        postcode = "FX1 7RR",
+        houseNameOrNumber = None
+      )
+    }
   }
 }

@@ -16,7 +16,6 @@
 
 package uk.gov.hmrc.ui.pages
 
-import org.openqa.selenium.By
 import uk.gov.hmrc.ui.data.TestData
 
 object AddYourDetailsPhoneNumber extends BasePage {
@@ -40,7 +39,7 @@ object AddYourDetailsPhoneNumber extends BasePage {
   def inputMobileNumber(): Unit = {
     typeInsideElement(
       locator = Locators.mobileNumber,
-      input = TestData.NotifierDetails.notifier.mobileNumber.get
+      input = TestData.UserDetails.NotifierDetails.notifier.mobileNumber.get
     )
     clickContinue()
   }

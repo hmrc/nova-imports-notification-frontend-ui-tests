@@ -39,7 +39,7 @@ object FindYourAddress extends BasePage {
   def inputUserAddressForSearch(): Unit = {
     typeInsideElement(
       locator = ALFPageLocators.postcode,
-      input = TestData.PostcodeEntryOfAddress.postcodeAddress.postcode
+      input = TestData.AddressDetails.PostcodeEntryOfAddress.postcodeAddress.postcode
     )
     clickContinue()
   }
