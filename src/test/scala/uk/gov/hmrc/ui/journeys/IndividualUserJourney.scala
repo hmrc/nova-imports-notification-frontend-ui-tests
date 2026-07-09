@@ -17,75 +17,120 @@
 package uk.gov.hmrc.ui.journeys
 
 import uk.gov.hmrc.ui.helpers.{AffinityGroup, CYAPage}
-import uk.gov.hmrc.ui.pages.{AreYouABusinessOrPrivateIndividual, AreYouNotifyingAsPurchaserOrOnBehalf, AuthLoginPage, BeforeYouContinue, CheckYourAnswers, LandingPage, PurchaserOnBehalfOfABusinessOrIndividual, VehicleBroughtIntoNIFromEUPage, VehicleBroughtIntoNIFromOutsideEUPage}
+import uk.gov.hmrc.ui.pages.{AreYouABusinessOrPrivateIndividual, AreYouNotifyingAsPurchaserOrOnBehalf, CheckYourAnswers, PurchaserOnBehalfOfABusinessOrIndividual, VehicleBroughtIntoNIFromOutsideEUPage}
 
 object IndividualUserJourney {
   // TODO: Break these into sections that will allow for address for notifier / supplier to be
   // UK and International... for now just UK implemented...
-  def privateIndividualAsPurchaser(): Unit = {
-    privateIndividualAsANotifier()
-    AreYouNotifyingAsPurchaserOrOnBehalf.verifyPageDisplayed()
-    AreYouNotifyingAsPurchaserOrOnBehalf.selectOptionOneAndContinue()
-    CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.Individual)
-    // TODO: TASK LIST
-    CommonJourney.addUserDetailsNamePhoneNumberEmailAddress()
-    CheckYourAnswers(CYAPage.YourDetails).clickContinue()
-    // TODO: SHOULD BE AT TASK LIST AGAIN
-    CommonJourney.notifierHasUkDetails()
-    // TODO: SHOULD BE AT TASK LIST AGAIN
+  object Acquisition {
+    def notifyingAsAPrivateIndividualAsANotifier(): Unit = {
+      CommonJourney.loginAndStartANotification(AffinityGroup.Individual)
+      CommonJourney.beginAnAcquisition()
+      notifierIsAPrivateIndividual()
+      selfNotifying()
+      CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.Individual)
+      // TODO: TASK LIST
+      CommonJourney.addUserDetailsNamePhoneNumberEmailAddress()
+      CheckYourAnswers(CYAPage.YourDetails).clickContinue()
+      // TODO: SHOULD BE AT TASK LIST AGAIN
+      CommonJourney.notifierHasUkDetails()
+      // TODO: SHOULD BE AT TASK LIST AGAIN
+    }
+
+    def notifyingAsABusinessAsANotifier(): Unit = {
+      CommonJourney.loginAndStartANotification(AffinityGroup.Individual)
+      CommonJourney.beginAnAcquisition()
+      notifierIsABusiness()
+      selfNotifying()
+      CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.Individual)
+      // TODO: TASK LIST
+      // TODO: BUSINESS NAME PAGE
+      // TODO: CYA2.0 AND ADDRESS STUFF
+    }
+
+    def notifyingAsAIndividualOnBehalfOfBusiness(): Unit = {
+      CommonJourney.loginAndStartANotification(AffinityGroup.Individual)
+      CommonJourney.beginAnAcquisition()
+      notifierIsAPrivateIndividual()
+      notifyingForABusiness()
+      CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.Individual)
+      // TODO: TASK LIST
+      CommonJourney.addUserDetailsNamePhoneNumberEmailAddress()
+      CheckYourAnswers(CYAPage.YourDetails).clickContinue()
+      // TODO: SHOULD BE AT TASK LIST AGAIN
+      CommonJourney.notifierHasUkDetails()
+      // TODO: SHOULD BE AT TASK LIST AGAIN
+    }
+
+    def notifyingAsAIndividualOnBehalfOfIndividual(): Unit = {
+      CommonJourney.loginAndStartANotification(AffinityGroup.Individual)
+      CommonJourney.beginAnAcquisition()
+      notifierIsAPrivateIndividual()
+      notifyingForAnIndividual()
+      CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.Individual)
+      // TODO: TASK LIST
+      CommonJourney.addUserDetailsNamePhoneNumberEmailAddress()
+      CheckYourAnswers(CYAPage.YourDetails).clickContinue()
+      // TODO: TASK LIST
+      CommonJourney.notifierHasUkDetails()
+      // TODO: SHOULD BE AT TASK LIST AGAIN
+    }
+
+    def notifyingAsABusinessOnBehalfOfABusiness(): Unit = {
+      CommonJourney.loginAndStartANotification(AffinityGroup.Individual)
+      CommonJourney.beginAnAcquisition()
+      notifierIsABusiness()
+      notifyingForABusiness()
+      CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.Individual)
+      // TODO: TASK LIST
+      // TODO: BUSINESS NAME FOR NOTIFIER + SUPPLIER DETAILS + ADDRESS
+    }
+
+    def notifyingAsABusinessOnBehalfOfIndividual(): Unit = {
+      CommonJourney.loginAndStartANotification(AffinityGroup.Individual)
+      CommonJourney.beginAnAcquisition()
+      notifierIsABusiness()
+      notifyingForAnIndividual()
+      CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.Individual)
+      // TODO: TASK LIST
+      // TODO: BUSINESS NAME FOR NOTIFIER + SUPPLIER NAME DETAILS + ADDRESS
+    }
   }
 
-  def privateIndividualOnBehalfOfBusiness(): Unit = {
-    privateIndividualAsANotifier()
+  object Import {
+    def userNeedsToImportAVehicleFromOutsideEU(): Unit = {
+      CommonJourney.loginAndStartANotification(AffinityGroup.Individual)
+      CommonJourney.beginAnImport()
+      VehicleBroughtIntoNIFromOutsideEUPage.verifyPageDisplayed()
+    }
+  }
+
+  private def selfNotifying(): Unit = {
+    AreYouNotifyingAsPurchaserOrOnBehalf.verifyPageDisplayed()
+    AreYouNotifyingAsPurchaserOrOnBehalf.selectOptionOneAndContinue()
+  }
+
+  private def notifierIsABusiness(): Unit = {
+    AreYouABusinessOrPrivateIndividual.verifyPageDisplayed()
+    AreYouABusinessOrPrivateIndividual.selectOptionOneAndContinue()
+  }
+
+  private def notifierIsAPrivateIndividual(): Unit = {
+    AreYouABusinessOrPrivateIndividual.verifyPageDisplayed()
+    AreYouABusinessOrPrivateIndividual.selectOptionTwoAndContinue()
+  }
+
+  private def notifyingForABusiness(): Unit = {
     AreYouNotifyingAsPurchaserOrOnBehalf.verifyPageDisplayed()
     AreYouNotifyingAsPurchaserOrOnBehalf.selectOptionTwoAndContinue()
     PurchaserOnBehalfOfABusinessOrIndividual.verifyPageDisplayed()
     PurchaserOnBehalfOfABusinessOrIndividual.selectOptionOneAndContinue()
-    CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.Individual)
-    // TODO: TASK LIST
-    CommonJourney.addUserDetailsNamePhoneNumberEmailAddress()
-    CheckYourAnswers(CYAPage.YourDetails).clickContinue()
-    // TODO: SHOULD BE AT TASK LIST AGAIN
-    CommonJourney.notifierHasUkDetails()
-    // TODO: SHOULD BE AT TASK LIST AGAIN
   }
 
-  def privateIndividualOnBehalfOfPrivateIndividual(): Unit = {
-    privateIndividualAsANotifier()
+  private def notifyingForAnIndividual(): Unit = {
     AreYouNotifyingAsPurchaserOrOnBehalf.verifyPageDisplayed()
     AreYouNotifyingAsPurchaserOrOnBehalf.selectOptionTwoAndContinue()
     PurchaserOnBehalfOfABusinessOrIndividual.verifyPageDisplayed()
     PurchaserOnBehalfOfABusinessOrIndividual.selectOptionTwoAndContinue()
-    CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.Individual)
-    // TODO: TASK LIST
-    CommonJourney.addUserDetailsNamePhoneNumberEmailAddress()
-    CheckYourAnswers(CYAPage.YourDetails).clickContinue()
-    // TODO: TASK LIST
-    CommonJourney.notifierHasUkDetails()
-    // TODO: SHOULD BE AT TASK LIST AGAIN
-  }
-
-  def userNeedsToImportAVehicleFromOutsideEU(): Unit = {
-    loginAndStartANotification()
-    VehicleBroughtIntoNIFromEUPage.verifyPageDisplayed()
-    VehicleBroughtIntoNIFromEUPage.selectNoAndContinue()
-    VehicleBroughtIntoNIFromOutsideEUPage.verifyPageDisplayed()
-  }
-
-  /** Common repeated flows reducing them into one method to cut down on code duplication */
-  private def loginAndStartANotification(): Unit   = {
-    AuthLoginPage.login(AffinityGroup.Individual)
-    LandingPage.verifyPageDisplayed()
-    LandingPage.createANewNotification()
-    BeforeYouContinue.verifyMultipleVehiclesSectionNotPresent()
-    BeforeYouContinue.clickContinue()
-  }
-  private def privateIndividualAsANotifier(): Unit = {
-    loginAndStartANotification()
-    VehicleBroughtIntoNIFromEUPage.verifyPageDisplayed()
-    VehicleBroughtIntoNIFromEUPage.selectYesAndContinue()
-    AreYouABusinessOrPrivateIndividual.verifyPageDisplayed()
-    AreYouABusinessOrPrivateIndividual.selectOptionTwoAndContinue()
-    AreYouNotifyingAsPurchaserOrOnBehalf.verifyPageDisplayed()
   }
 }

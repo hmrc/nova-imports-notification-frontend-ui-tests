@@ -16,15 +16,9 @@
 
 package uk.gov.hmrc.ui.pages
 
-import org.openqa.selenium.By
 import uk.gov.hmrc.ui.data.TestData
 
 object AddYourDetailsName extends BasePage {
-  object PageLocators {
-    val title: By     = By.xpath("/html/body/div/main/div/div/form/div[1]/input")
-    val firstName: By = By.xpath("/html/body/div/main/div/div/form/div[2]/input")
-    val lastName: By  = By.xpath("/html/body/div/main/div/div/form/div[3]/input")
-  }
   override val pageUrl: String = s"$baseUrl/name"
 
   def verifyPageDisplayed(): Unit =
@@ -33,9 +27,9 @@ object AddYourDetailsName extends BasePage {
     )
 
   def inputUserDetails(): Unit = {
-    typeInsideElement(PageLocators.title, TestData.UserDetails.NotifierDetails.notifier.userDetails.title)
-    typeInsideElement(PageLocators.firstName, TestData.UserDetails.NotifierDetails.notifier.userDetails.firstName)
-    typeInsideElement(PageLocators.lastName, TestData.UserDetails.NotifierDetails.notifier.userDetails.lastName)
+    typeInsideElement(Locators.title, TestData.UserDetails.NotifierDetails.notifier.userDetails.title)
+    typeInsideElement(Locators.firstName, TestData.UserDetails.NotifierDetails.notifier.userDetails.firstName)
+    typeInsideElement(Locators.lastName, TestData.UserDetails.NotifierDetails.notifier.userDetails.lastName)
     clickContinue()
   }
 }
