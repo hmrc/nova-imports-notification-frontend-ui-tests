@@ -59,7 +59,7 @@ object CommonJourney {
     AddPurchaserDetailsBusinessName.verifyPageDisplayed()
     AddPurchaserDetailsBusinessName.inputBusinessName()
   }
-    
+
   // TODO: More details that vary based on user answers
 
   /** Helper method that will allow us to confirm which CYA page we are on and verify it's correct etc., */
