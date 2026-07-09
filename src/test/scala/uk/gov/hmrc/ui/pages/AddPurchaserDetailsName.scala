@@ -34,7 +34,10 @@ object AddPurchaserDetailsName extends BasePage {
     )
 
   def inputUserDetails(): Unit = {
-    typeInsideElement(PageLocators.title, TestData.UserDetails.SupplierDetails.individualSupplier.userDetails.title)
+    typeInsideElement(
+      PageLocators.title,
+      TestData.UserDetails.SupplierDetails.individualSupplier.userDetails.title
+    )
     typeInsideElement(
       PageLocators.firstName,
       TestData.UserDetails.SupplierDetails.individualSupplier.userDetails.firstName
