@@ -17,7 +17,7 @@
 package uk.gov.hmrc.ui.journeys
 
 import uk.gov.hmrc.ui.helpers.{AffinityGroup, CYAPage}
-import uk.gov.hmrc.ui.pages.{AddPurchaserDetailsBusinessName, AddPurchaserDetailsName, AddYourDetailsEmail, AddYourDetailsGuidancePage, AddYourDetailsName, AddYourDetailsPhoneNumber, AuthLoginPage, BeforeYouContinue, CheckYourAnswers, ChooseYourAddress, FindYourAddress, HasYourClientBroughtAVehicleIntoTheUkForBusinessUse, HaveYouBroughtAVehicleIntoTheUKForBusinessUse, IsYourAddressInTheUK, LandingPage, ReviewAndConfirmAddress, VehicleBroughtIntoNIFromEUPage}
+import uk.gov.hmrc.ui.pages.{AddPurchaserDetailsBusinessName, AddPurchaserDetailsName, AddYourDetailsEmail, AddYourDetailsGuidancePage, AddYourDetailsName, AddYourDetailsPhoneNumber, AreYouABusinessOrPrivateIndividual, AreYouNotifyingAsPurchaserOrOnBehalf, AuthLoginPage, BeforeYouContinue, CheckYourAnswers, ChooseYourAddress, FindYourAddress, HasYourClientBroughtAVehicleIntoTheUkForBusinessUse, HaveYouBroughtAVehicleIntoTheUKForBusinessUse, IsYourAddressInTheUK, LandingPage, PurchaserOnBehalfOfABusinessOrIndividual, ReviewAndConfirmAddress, VehicleBroughtIntoNIFromEUPage}
 
 /** Base methods that are used to answer repetitive scenarios within journeys to make code more readable */
 object CommonJourney {
@@ -49,6 +49,35 @@ object CommonJourney {
   def beginAnImport(): Unit = {
     VehicleBroughtIntoNIFromEUPage.verifyPageDisplayed()
     VehicleBroughtIntoNIFromEUPage.selectNoAndContinue()
+  }
+
+  def selfNotifying(): Unit = {
+    AreYouNotifyingAsPurchaserOrOnBehalf.verifyPageDisplayed()
+    AreYouNotifyingAsPurchaserOrOnBehalf.selectOptionOneAndContinue()
+  }
+
+  def notifierIsABusiness(): Unit = {
+    AreYouABusinessOrPrivateIndividual.verifyPageDisplayed()
+    AreYouABusinessOrPrivateIndividual.selectOptionOneAndContinue()
+  }
+
+  def notifierIsAPrivateIndividual(): Unit = {
+    AreYouABusinessOrPrivateIndividual.verifyPageDisplayed()
+    AreYouABusinessOrPrivateIndividual.selectOptionTwoAndContinue()
+  }
+
+  def notifyingForABusiness(): Unit = {
+    AreYouNotifyingAsPurchaserOrOnBehalf.verifyPageDisplayed()
+    AreYouNotifyingAsPurchaserOrOnBehalf.selectOptionTwoAndContinue()
+    PurchaserOnBehalfOfABusinessOrIndividual.verifyPageDisplayed()
+    PurchaserOnBehalfOfABusinessOrIndividual.selectOptionOneAndContinue()
+  }
+
+  def notifyingForAnIndividual(): Unit = {
+    AreYouNotifyingAsPurchaserOrOnBehalf.verifyPageDisplayed()
+    AreYouNotifyingAsPurchaserOrOnBehalf.selectOptionTwoAndContinue()
+    PurchaserOnBehalfOfABusinessOrIndividual.verifyPageDisplayed()
+    PurchaserOnBehalfOfABusinessOrIndividual.selectOptionTwoAndContinue()
   }
 
   def vehicleBroughtInForBusinessUse(affinityGroup: AffinityGroup): Unit =

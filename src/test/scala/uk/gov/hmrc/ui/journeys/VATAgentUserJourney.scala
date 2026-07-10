@@ -17,7 +17,7 @@
 package uk.gov.hmrc.ui.journeys
 
 import uk.gov.hmrc.ui.helpers.{AffinityGroup, CYAPage}
-import uk.gov.hmrc.ui.pages.{AddYourDetailsEmail, AddYourDetailsName, AddYourDetailsPhoneNumber, AreYouABusinessOrPrivateIndividual, AreYouNotifyingAsPurchaserOrOnBehalf, AuthLoginPage, BeforeYouContinue, CheckYourAnswers, LandingPage, VehicleBroughtIntoNIFromEUPage}
+import uk.gov.hmrc.ui.pages.{AreYouABusinessOrPrivateIndividual, AreYouNotifyingAsPurchaserOrOnBehalf, AuthLoginPage, BeforeYouContinue, CheckYourAnswers, LandingPage}
 
 object VATAgentUserJourney {
 //  private def loginSelectClientAndBeginANotification(): Unit = {
@@ -65,7 +65,26 @@ object VATAgentUserJourney {
 
   object SelfNotifying {
     object Acquisition {
-      def agentNotifyingOnBehalfOfThemself(): Unit = {
+      def notifyingAsABusinessAsANotifier(): Unit = {
+        // TEMP
+        AuthLoginPage.login(AffinityGroup.AgentVAT)
+        LandingPage.verifyPageDisplayed()
+        LandingPage.createANewNotification()
+        BeforeYouContinue.verifyMultipleVehiclesSectionNotPresent()
+        BeforeYouContinue.clickContinue()
+
+        // TODO: UNCOMMENT ONCE BUG IS FIXED
+        // CommonJourney.loginAndStartANotification(AffinityGroup.AgentVAT)
+        CommonJourney.beginAnAcquisition()
+        CommonJourney.notifierIsABusiness()
+        CommonJourney.selfNotifying()
+        CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.Individual)
+        // TODO: TASK LIST
+        // TODO: BUSINESS NAME PAGE
+        // TODO: CYA2.0 AND ADDRESS STUFF
+      }
+
+      def notifyingAsAPrivateIndividualAsANotifier(): Unit = {
         // TEMP
         AuthLoginPage.login(AffinityGroup.AgentVAT)
         LandingPage.verifyPageDisplayed()
@@ -86,6 +105,58 @@ object VATAgentUserJourney {
           .checkContentIsCorrect(CYAPage.InitialQuestions, AffinityGroup.AgentVAT)
         CheckYourAnswers(CYAPage.InitialQuestions).clickContinue()
         CommonJourney.addUserDetailsNamePhoneNumberEmailAddress()
+      }
+
+      def notifyingAsABusinessOnBehalfOfABusiness(): Unit = {
+        // TEMP
+        AuthLoginPage.login(AffinityGroup.AgentVAT)
+        LandingPage.verifyPageDisplayed()
+        LandingPage.createANewNotification()
+        BeforeYouContinue.verifyMultipleVehiclesSectionNotPresent()
+        BeforeYouContinue.clickContinue()
+
+        // TODO: UNCOMMENT ONCE BUG IS FIXED
+        // CommonJourney.loginAndStartANotification(AffinityGroup.AgentVAT)
+        // TODO
+      }
+
+      def notifyingAsABusinessOnBehalfOfAIndividual(): Unit = {
+        // TEMP
+        AuthLoginPage.login(AffinityGroup.AgentVAT)
+        LandingPage.verifyPageDisplayed()
+        LandingPage.createANewNotification()
+        BeforeYouContinue.verifyMultipleVehiclesSectionNotPresent()
+        BeforeYouContinue.clickContinue()
+
+        // TODO: UNCOMMENT ONCE BUG IS FIXED
+        // CommonJourney.loginAndStartANotification(AffinityGroup.AgentVAT)
+        // TODO
+      }
+
+      def notifyingAsAIndividualOnBehalfOfABusiness(): Unit = {
+        // TEMP
+        AuthLoginPage.login(AffinityGroup.AgentVAT)
+        LandingPage.verifyPageDisplayed()
+        LandingPage.createANewNotification()
+        BeforeYouContinue.verifyMultipleVehiclesSectionNotPresent()
+        BeforeYouContinue.clickContinue()
+
+        // TODO: UNCOMMENT ONCE BUG IS FIXED
+        // CommonJourney.loginAndStartANotification(AffinityGroup.AgentVAT)
+        // TODO
+      }
+
+      def notifyingAsAIndividualOnBehalfOfAIndividual(): Unit = {
+        // TEMP
+        AuthLoginPage.login(AffinityGroup.AgentVAT)
+        LandingPage.verifyPageDisplayed()
+        LandingPage.createANewNotification()
+        BeforeYouContinue.verifyMultipleVehiclesSectionNotPresent()
+        BeforeYouContinue.clickContinue()
+
+        // TODO: UNCOMMENT ONCE BUG IS FIXED
+        // CommonJourney.loginAndStartANotification(AffinityGroup.AgentVAT)
+        // TODO
       }
     }
 
