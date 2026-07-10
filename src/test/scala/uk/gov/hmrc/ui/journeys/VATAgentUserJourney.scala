@@ -66,7 +66,15 @@ object VATAgentUserJourney {
   object SelfNotifying {
     object Acquisition {
       def agentNotifyingOnBehalfOfThemself(): Unit = {
-        CommonJourney.loginAndStartANotification(AffinityGroup.AgentVAT)
+        // TEMP
+        AuthLoginPage.login(AffinityGroup.AgentVAT)
+        LandingPage.verifyPageDisplayed()
+        LandingPage.createANewNotification()
+        BeforeYouContinue.verifyMultipleVehiclesSectionNotPresent()
+        BeforeYouContinue.clickContinue()
+
+        // TODO: UNCOMMENT ONCE BUG IS FIXED
+        // CommonJourney.loginAndStartANotification(AffinityGroup.AgentVAT)
         CommonJourney.beginAnAcquisition()
         // TODO: REFACTOR BELOW
         AreYouABusinessOrPrivateIndividual.verifyPageDisplayed()
@@ -77,14 +85,7 @@ object VATAgentUserJourney {
         CheckYourAnswers(CYAPage.InitialQuestions)
           .checkContentIsCorrect(CYAPage.InitialQuestions, AffinityGroup.AgentVAT)
         CheckYourAnswers(CYAPage.InitialQuestions).clickContinue()
-        // TODO: ONCE NAVIGATION IS IN PLACE REMOVE THIS
-        AddYourDetailsName.navigateToPage(AddYourDetailsName.pageUrl)
-        AddYourDetailsName.verifyPageDisplayed()
-        AddYourDetailsName.inputUserDetails()
-        AddYourDetailsPhoneNumber.verifyPageDisplayed()
-        AddYourDetailsPhoneNumber.inputMobileNumber()
-        AddYourDetailsEmail.verifyPageDisplayed()
-        AddYourDetailsEmail.inputEmailAddress()
+        CommonJourney.addUserDetailsNamePhoneNumberEmailAddress()
       }
     }
 

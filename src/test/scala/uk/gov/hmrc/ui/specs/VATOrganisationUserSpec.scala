@@ -25,7 +25,7 @@ class VATOrganisationUserSpec extends BaseSpec {
     ) {
       When("the user selects yes on IQ1.0 and yes on OQ1.0")
       Then("the user has successfully submitted a notification")
-      VATOrganisationUserJourney.Acquisition.acquisitionBringingAVehicleInForBusinessUse()
+      VATOrganisationUserJourney.Acquisition.bringingAVehicleInForBusinessUse()
     }
   }
 
@@ -35,7 +35,7 @@ class VATOrganisationUserSpec extends BaseSpec {
     ) {
       When("the user selects yes on IQ1.0 and no on OQ1.0")
       Then("the user has successfully submitted a notification")
-      VATOrganisationUserJourney.Acquisition.acquisitionVehicleForPrivateUse()
+      VATOrganisationUserJourney.Acquisition.bringingAVehicleInForPrivateUse()
     }
   }
 
@@ -43,7 +43,7 @@ class VATOrganisationUserSpec extends BaseSpec {
     Scenario("A user completing a notification for an import where they're bringing a vehicle in for business use") {
       When("the user selects no on IQ1.0 and yes on OQ1.0")
       Then("the user has successfully submitted a notification")
-      VATOrganisationUserJourney.Import.importBringingAVehicleInForBusinessUse()
+      VATOrganisationUserJourney.Import.importAVehicleForBusinessUse()
     }
   }
 
@@ -51,7 +51,7 @@ class VATOrganisationUserSpec extends BaseSpec {
     Scenario("A user completing a notification for an import where they're bringing a vehicle in for private use") {
       When("the user selects no on IQ1.0 and no on OQ1.0")
       Then("the user has successfully submitted a notification")
-      VATOrganisationUserJourney.Import.importVehicleForPrivateUse()
+      VATOrganisationUserJourney.Import.importAVehicleForPrivateUse()
     }
   }
 }

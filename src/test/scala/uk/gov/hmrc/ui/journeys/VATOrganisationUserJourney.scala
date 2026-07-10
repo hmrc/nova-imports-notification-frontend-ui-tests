@@ -21,7 +21,7 @@ import uk.gov.hmrc.ui.pages.CheckYourAnswers
 
 object VATOrganisationUserJourney {
   object Acquisition {
-    def acquisitionBringingAVehicleInForBusinessUse(): Unit = {
+    def bringingAVehicleInForBusinessUse(): Unit = {
       CommonJourney.loginAndStartANotification(AffinityGroup.OrganisationVAT)
       CommonJourney.beginAnAcquisition()
       CommonJourney.vehicleBroughtInForBusinessUse(AffinityGroup.OrganisationVAT)
@@ -33,7 +33,7 @@ object VATOrganisationUserJourney {
       // TODO: TASK LIST
     }
 
-    def acquisitionVehicleForPrivateUse(): Unit = {
+    def bringingAVehicleInForPrivateUse(): Unit = {
       CommonJourney.loginAndStartANotification(AffinityGroup.OrganisationVAT)
       CommonJourney.beginAnAcquisition()
       CommonJourney.vehicleBroughtInForPersonalUse(AffinityGroup.OrganisationVAT)
@@ -48,7 +48,7 @@ object VATOrganisationUserJourney {
   }
 
   object Import {
-    def importBringingAVehicleInForBusinessUse(): Unit = {
+    def importAVehicleForBusinessUse(): Unit = {
       CommonJourney.loginAndStartANotification(AffinityGroup.OrganisationVAT)
       CommonJourney.beginAnImport()
       CommonJourney.vehicleBroughtInForBusinessUse(AffinityGroup.OrganisationVAT)
@@ -61,7 +61,7 @@ object VATOrganisationUserJourney {
       // TODO: TASK LIST
     }
 
-    def importVehicleForPrivateUse(): Unit = {
+    def importAVehicleForPrivateUse(): Unit = {
       CommonJourney.loginAndStartANotification(AffinityGroup.OrganisationVAT)
       CommonJourney.beginAnImport()
       CommonJourney.vehicleBroughtInForPersonalUse(AffinityGroup.OrganisationVAT)
