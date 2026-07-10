@@ -28,11 +28,20 @@ class VATAgentUserSpec extends BaseSpec {
 //    }
 //  }
 
-  Feature("VAT Agent User who is completing a notification on their own behalf") {
+  Feature("VAT Agent User who is completing an acquisition on their own behalf") {
     Scenario("An agent is completing a notification for themselves") {
       When("the agent selects on create a new notification from the landing page")
       Then("the agent successfully submits a notification")
-      VATAgentUserJourney.agentNotifyingOnBehalfOfThemself()
+      VATAgentUserJourney.SelfNotifying.Acquisition.agentNotifyingOnBehalfOfThemself()
     }
   }
+
+  // TODO: TO BE IMPLEMENTED
+//  Feature("VAT Agent User who is completing an import on their own behalf") {
+//    Scenario("An agent is completing a notification for themselves") {
+//      When("the agent selects on create a new notification from the landing page")
+//      Then("the agent successfully submits a notification")
+//      VATAgentUserJourney.SelfNotifying.Import.agentNotifyingOnBehalfOfThemself()
+//    }
+//  }
 }

@@ -17,15 +17,27 @@
 package uk.gov.hmrc.ui.journeys
 
 import uk.gov.hmrc.ui.helpers.{AffinityGroup, CYAPage}
-import uk.gov.hmrc.ui.pages.{AddPurchaserDetailsBusinessName, AddPurchaserDetailsName, AddYourDetailsEmail, AddYourDetailsGuidancePage, AddYourDetailsName, AddYourDetailsPhoneNumber, AuthLoginPage, BeforeYouContinue, CheckYourAnswers, ChooseYourAddress, FindYourAddress, IsYourAddressInTheUK, LandingPage, ReviewAndConfirmAddress, VehicleBroughtIntoNIFromEUPage}
+import uk.gov.hmrc.ui.pages.{AddPurchaserDetailsBusinessName, AddPurchaserDetailsName, AddYourDetailsEmail, AddYourDetailsGuidancePage, AddYourDetailsName, AddYourDetailsPhoneNumber, AuthLoginPage, BeforeYouContinue, CheckYourAnswers, ChooseYourAddress, FindYourAddress, HasYourClientBroughtAVehicleIntoTheUkForBusinessUse, HaveYouBroughtAVehicleIntoTheUKForBusinessUse, IsYourAddressInTheUK, LandingPage, ReviewAndConfirmAddress, VehicleBroughtIntoNIFromEUPage}
 
 /** Base methods that are used to answer repetitive scenarios within journeys to make code more readable */
 object CommonJourney {
+  // TODO: EVENTUALLY BREAK THESE UP INTO, IND -> ORG -> AGENT SPECIFIC METHODS
+  // ACQUISITION SPECIFIC
+  // IMPORT SPECIFIC
   def loginAndStartANotification(affinityGroup: AffinityGroup): Unit = {
     AuthLoginPage.login(affinityGroup)
     LandingPage.verifyPageDisplayed()
     LandingPage.createANewNotification()
-    BeforeYouContinue.verifyMultipleVehiclesSectionNotPresent()
+
+    if (
+      affinityGroup == AffinityGroup.OrganisationVAT ||
+      affinityGroup == AffinityGroup.OrganisationVRN ||
+      affinityGroup == AffinityGroup.AgentVAT
+    ) {
+      BeforeYouContinue.verifyMultipleVehiclesSectionPresent()
+    } else {
+      BeforeYouContinue.verifyMultipleVehiclesSectionNotPresent()
+    }
     BeforeYouContinue.clickContinue()
   }
 
@@ -38,6 +50,24 @@ object CommonJourney {
     VehicleBroughtIntoNIFromEUPage.verifyPageDisplayed()
     VehicleBroughtIntoNIFromEUPage.selectNoAndContinue()
   }
+
+  def vehicleBroughtInForBusinessUse(affinityGroup: AffinityGroup): Unit =
+    if (affinityGroup == AffinityGroup.OrganisationVAT || affinityGroup == AffinityGroup.OrganisationVRN) {
+      HaveYouBroughtAVehicleIntoTheUKForBusinessUse.verifyPageDisplayed()
+      HaveYouBroughtAVehicleIntoTheUKForBusinessUse.selectYesAndContinue()
+    } else if (affinityGroup == AffinityGroup.AgentVAT) {
+      HasYourClientBroughtAVehicleIntoTheUkForBusinessUse.verifyPageDisplayed()
+      HasYourClientBroughtAVehicleIntoTheUkForBusinessUse.selectYesAndContinue()
+    }
+
+  def vehicleBroughtInForPersonalUse(affinityGroup: AffinityGroup): Unit =
+    if (affinityGroup == AffinityGroup.OrganisationVAT || affinityGroup == AffinityGroup.OrganisationVRN) {
+      HaveYouBroughtAVehicleIntoTheUKForBusinessUse.verifyPageDisplayed()
+      HaveYouBroughtAVehicleIntoTheUKForBusinessUse.selectNoAndContinue()
+    } else if (affinityGroup == AffinityGroup.AgentVAT) {
+      HasYourClientBroughtAVehicleIntoTheUkForBusinessUse.verifyPageDisplayed()
+      HasYourClientBroughtAVehicleIntoTheUkForBusinessUse.selectNoAndContinue()
+    }
 
   def validateAddYourDetailsGuidancePage(): Unit = {
     AddYourDetailsGuidancePage.navigateToPage(AddYourDetailsGuidancePage.pageUrl)
