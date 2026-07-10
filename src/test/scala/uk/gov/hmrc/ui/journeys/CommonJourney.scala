@@ -17,10 +17,28 @@
 package uk.gov.hmrc.ui.journeys
 
 import uk.gov.hmrc.ui.helpers.{AffinityGroup, CYAPage}
-import uk.gov.hmrc.ui.pages.{AddPurchaserDetailsBusinessName, AddPurchaserDetailsName, AddYourDetailsEmail, AddYourDetailsGuidancePage, AddYourDetailsName, AddYourDetailsPhoneNumber, CheckYourAnswers, ChooseYourAddress, FindYourAddress, IsYourAddressInTheUK, ReviewAndConfirmAddress}
+import uk.gov.hmrc.ui.pages.{AddPurchaserDetailsBusinessName, AddPurchaserDetailsName, AddYourDetailsEmail, AddYourDetailsGuidancePage, AddYourDetailsName, AddYourDetailsPhoneNumber, AuthLoginPage, BeforeYouContinue, CheckYourAnswers, ChooseYourAddress, FindYourAddress, IsYourAddressInTheUK, LandingPage, ReviewAndConfirmAddress, VehicleBroughtIntoNIFromEUPage}
 
 /** Base methods that are used to answer repetitive scenarios within journeys to make code more readable */
 object CommonJourney {
+  def loginAndStartANotification(affinityGroup: AffinityGroup): Unit = {
+    AuthLoginPage.login(affinityGroup)
+    LandingPage.verifyPageDisplayed()
+    LandingPage.createANewNotification()
+    BeforeYouContinue.verifyMultipleVehiclesSectionNotPresent()
+    BeforeYouContinue.clickContinue()
+  }
+
+  def beginAnAcquisition(): Unit = {
+    VehicleBroughtIntoNIFromEUPage.verifyPageDisplayed()
+    VehicleBroughtIntoNIFromEUPage.selectYesAndContinue()
+  }
+
+  def beginAnImport(): Unit = {
+    VehicleBroughtIntoNIFromEUPage.verifyPageDisplayed()
+    VehicleBroughtIntoNIFromEUPage.selectNoAndContinue()
+  }
+
   def validateAddYourDetailsGuidancePage(): Unit = {
     AddYourDetailsGuidancePage.navigateToPage(AddYourDetailsGuidancePage.pageUrl)
     AddYourDetailsGuidancePage.verifyPageDisplayed()
