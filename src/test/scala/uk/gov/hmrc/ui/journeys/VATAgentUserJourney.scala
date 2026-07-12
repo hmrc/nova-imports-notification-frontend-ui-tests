@@ -78,7 +78,7 @@ object VATAgentUserJourney {
         CommonJourney.beginAnAcquisition()
         CommonJourney.notifierIsABusiness()
         CommonJourney.selfNotifying()
-        CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.Individual)
+        CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.AgentVAT)
         // TODO: TASK LIST
         // TODO: BUSINESS NAME PAGE
         // TODO: CYA2.0 AND ADDRESS STUFF
@@ -95,15 +95,9 @@ object VATAgentUserJourney {
         // TODO: UNCOMMENT ONCE BUG IS FIXED
         // CommonJourney.loginAndStartANotification(AffinityGroup.AgentVAT)
         CommonJourney.beginAnAcquisition()
-        // TODO: REFACTOR BELOW
-        AreYouABusinessOrPrivateIndividual.verifyPageDisplayed()
-        AreYouABusinessOrPrivateIndividual.selectOptionTwoAndContinue()
-        AreYouNotifyingAsPurchaserOrOnBehalf.verifyPageDisplayed()
-        AreYouNotifyingAsPurchaserOrOnBehalf.selectOptionOneAndContinue()
-        CheckYourAnswers(CYAPage.InitialQuestions).verifyPageUrl()
-        CheckYourAnswers(CYAPage.InitialQuestions)
-          .checkContentIsCorrect(CYAPage.InitialQuestions, AffinityGroup.AgentVAT)
-        CheckYourAnswers(CYAPage.InitialQuestions).clickContinue()
+        CommonJourney.notifierIsAPrivateIndividual()
+        CommonJourney.selfNotifying()
+        CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.AgentVAT)
         CommonJourney.addUserDetailsNamePhoneNumberEmailAddress()
       }
 
@@ -117,7 +111,11 @@ object VATAgentUserJourney {
 
         // TODO: UNCOMMENT ONCE BUG IS FIXED
         // CommonJourney.loginAndStartANotification(AffinityGroup.AgentVAT)
-        // TODO
+        CommonJourney.beginAnAcquisition()
+        CommonJourney.notifierIsABusiness()
+        CommonJourney.notifyingForABusiness()
+        CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.AgentVAT)
+        // TODO: Add business(s) name pages
       }
 
       def notifyingAsABusinessOnBehalfOfAIndividual(): Unit = {
@@ -130,7 +128,11 @@ object VATAgentUserJourney {
 
         // TODO: UNCOMMENT ONCE BUG IS FIXED
         // CommonJourney.loginAndStartANotification(AffinityGroup.AgentVAT)
-        // TODO
+        CommonJourney.beginAnAcquisition()
+        CommonJourney.notifierIsABusiness()
+        CommonJourney.notifyingForAnIndividual()
+        CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.AgentVAT)
+        // TODO:
       }
 
       def notifyingAsAIndividualOnBehalfOfABusiness(): Unit = {
@@ -143,6 +145,10 @@ object VATAgentUserJourney {
 
         // TODO: UNCOMMENT ONCE BUG IS FIXED
         // CommonJourney.loginAndStartANotification(AffinityGroup.AgentVAT)
+        CommonJourney.beginAnAcquisition()
+        CommonJourney.notifierIsAPrivateIndividual()
+        CommonJourney.notifyingForABusiness()
+        CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.AgentVAT)
         // TODO
       }
 
@@ -156,6 +162,10 @@ object VATAgentUserJourney {
 
         // TODO: UNCOMMENT ONCE BUG IS FIXED
         // CommonJourney.loginAndStartANotification(AffinityGroup.AgentVAT)
+        CommonJourney.beginAnAcquisition()
+        CommonJourney.notifierIsAPrivateIndividual()
+        CommonJourney.notifyingForAnIndividual()
+        CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.AgentVAT)
         // TODO
       }
     }
