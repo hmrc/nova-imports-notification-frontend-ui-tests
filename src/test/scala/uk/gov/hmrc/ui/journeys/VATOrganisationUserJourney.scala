@@ -17,7 +17,7 @@
 package uk.gov.hmrc.ui.journeys
 
 import uk.gov.hmrc.ui.helpers.{AffinityGroup, CYAPage}
-import uk.gov.hmrc.ui.pages.CheckYourAnswers
+import uk.gov.hmrc.ui.pages.{CheckYourAnswers, NotificationTaskList}
 
 object VATOrganisationUserJourney {
   object Acquisition {
@@ -26,11 +26,13 @@ object VATOrganisationUserJourney {
       CommonJourney.beginAnAcquisition()
       CommonJourney.vehicleBroughtInForBusinessUse(AffinityGroup.OrganisationVAT)
       CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.OrganisationVAT)
-      // TODO: TASK LIST
+      NotificationTaskList.verifyTaskListWithoutAddress()
+      NotificationTaskList.verifyAddYourDetailsStatus("Incomplete")
+      NotificationTaskList.clickAddYourDetails()
       CommonJourney.validateAddYourDetailsGuidancePage()
       CommonJourney.addPhoneAndEmailDetails()
       CheckYourAnswers(CYAPage.YourDetails).clickContinue()
-      // TODO: TASK LIST
+      NotificationTaskList.verifyAddYourDetailsStatus("Completed")
     }
 
     def bringingAVehicleInForPrivateUse(): Unit = {
@@ -38,10 +40,13 @@ object VATOrganisationUserJourney {
       CommonJourney.beginAnAcquisition()
       CommonJourney.vehicleBroughtInForPersonalUse(AffinityGroup.OrganisationVAT)
       CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.OrganisationVAT)
+      NotificationTaskList.verifyTaskListWithAddress()
+      NotificationTaskList.verifyAddYourDetailsStatus("Incomplete")
+      NotificationTaskList.clickAddYourDetails()
       CommonJourney.validateAddYourDetailsGuidancePage()
       CommonJourney.addUserDetailsNamePhoneNumberEmailAddress()
       CheckYourAnswers(CYAPage.YourDetails).clickContinue()
-      // TASK LIST
+      NotificationTaskList.verifyAddYourDetailsStatus("Completed")
       CommonJourney.notifierHasUkDetails()
       // TODO: SHOULD BE AT TASK LIST AGAIN
     }
@@ -53,12 +58,14 @@ object VATOrganisationUserJourney {
       CommonJourney.beginAnImport()
       CommonJourney.vehicleBroughtInForBusinessUse(AffinityGroup.OrganisationVAT)
       CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.OrganisationVAT)
-      // TODO: TASK LIST
+      NotificationTaskList.verifyTaskListWithoutAddress()
+      NotificationTaskList.verifyAddYourDetailsStatus("Incomplete")
+      NotificationTaskList.clickAddYourDetails()
       CommonJourney.validateAddYourDetailsGuidancePage()
       // TODO: BUSINESS NAME?
       CommonJourney.addPhoneAndEmailDetails()
       CheckYourAnswers(CYAPage.YourDetails).clickContinue()
-      // TODO: TASK LIST
+      NotificationTaskList.verifyAddYourDetailsStatus("Completed")
     }
 
     def importAVehicleForPrivateUse(): Unit = {
@@ -66,11 +73,13 @@ object VATOrganisationUserJourney {
       CommonJourney.beginAnImport()
       CommonJourney.vehicleBroughtInForPersonalUse(AffinityGroup.OrganisationVAT)
       CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.OrganisationVAT)
-      // TODO: TASK LIST PAGE
+      NotificationTaskList.verifyTaskListWithAddress()
+      NotificationTaskList.verifyAddYourDetailsStatus("Incomplete")
+      NotificationTaskList.clickAddYourDetails()
       CommonJourney.validateAddYourDetailsGuidancePage()
       CommonJourney.addUserDetailsNamePhoneNumberEmailAddress()
       CheckYourAnswers(CYAPage.YourDetails).clickContinue()
-      // TODO: TASK LIST
+      NotificationTaskList.verifyAddYourDetailsStatus("Completed")
       CommonJourney.notifierHasUkDetails()
       // TODO: SHOULD BE AT TASK LIST AGAIN
     }
