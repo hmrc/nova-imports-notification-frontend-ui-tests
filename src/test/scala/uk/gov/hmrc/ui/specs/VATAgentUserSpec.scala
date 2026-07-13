@@ -28,11 +28,60 @@ class VATAgentUserSpec extends BaseSpec {
 //    }
 //  }
 
-  Feature("VAT Agent User who is completing a notification on their own behalf") {
-    Scenario("An agent is completing a notification for themselves") {
+  Feature("VAT Agent User who is a 'Private Individual' and the 'Notifier'") {
+    Scenario("An agent is completing a notification as a private individual and as the purchaser") {
       When("the agent selects on create a new notification from the landing page")
       Then("the agent successfully submits a notification")
-      VATAgentUserJourney.agentNotifyingOnBehalfOfThemself()
+      VATAgentUserJourney.SelfNotifying.Acquisition.notifyingAsAPrivateIndividualAsANotifier()
     }
   }
+
+  Feature("VAT Agent User who is a 'Business' and the 'Notifier'") {
+    Scenario("An agent is completing a notification as a business and as the purchaser") {
+      When("the agent selects on create a new notification from the landing page")
+      Then("the agent successfully submits a notification")
+      VATAgentUserJourney.SelfNotifying.Acquisition.notifyingAsABusinessAsANotifier()
+    }
+  }
+
+  Feature("VAT Agent User who is a 'Private Individual' and importing on behalf of a 'Registered Business'") {
+    Scenario("A user completing an import as a private individual on behalf of a business") {
+      When("the user sets out to import a vehicle as a private individual on behalf of a business")
+      Then("the user successfully imports a vehicle into NI")
+      VATAgentUserJourney.SelfNotifying.Acquisition.notifyingAsAIndividualOnBehalfOfABusiness()
+    }
+  }
+
+  Feature("VAT Agent User who is a 'Private Individual' on behalf of a 'Private Individual'") {
+    Scenario("A user completing an import as a private individual on behalf of a private individual") {
+      When("the user sets out to import a vehicle on the behalf of a private individual")
+      Then("the user successfully imports a vehicle into NI")
+      VATAgentUserJourney.SelfNotifying.Acquisition.notifyingAsAIndividualOnBehalfOfAIndividual()
+    }
+  }
+
+  Feature("VAT Agent User who is a 'Business' on behalf of a 'Business'") {
+    Scenario("A user completing an acquisition as a business on behalf of a business") {
+      When("the user sets out to import a vehicle on the behalf of a business")
+      Then("the user successfully imports a vehicle into NI")
+      VATAgentUserJourney.SelfNotifying.Acquisition.notifyingAsABusinessOnBehalfOfABusiness()
+    }
+  }
+
+  Feature("VAT Agent User who is a 'Business' on behalf of a 'Private Individual'") {
+    Scenario("A user completing an acquisition as a business on behalf of a private individual") {
+      When("the user sets out to import a vehicle on the behalf of a individual")
+      Then("the user successfully imports a vehicle into NI")
+      VATAgentUserJourney.SelfNotifying.Acquisition.notifyingAsABusinessOnBehalfOfAIndividual()
+    }
+  }
+
+  // TODO: TO BE IMPLEMENTED
+//  Feature("VAT Agent User who is completing an import on their own behalf") {
+//    Scenario("An agent is completing a notification for themselves") {
+//      When("the agent selects on create a new notification from the landing page")
+//      Then("the agent successfully submits a notification")
+//      VATAgentUserJourney.SelfNotifying.Import.agentNotifyingOnBehalfOfThemself()
+//    }
+//  }
 }

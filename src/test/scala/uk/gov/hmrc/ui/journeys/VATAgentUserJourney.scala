@@ -17,78 +17,161 @@
 package uk.gov.hmrc.ui.journeys
 
 import uk.gov.hmrc.ui.helpers.{AffinityGroup, CYAPage}
-import uk.gov.hmrc.ui.pages.{AddYourDetailsEmail, AddYourDetailsName, AddYourDetailsPhoneNumber, AreYouABusinessOrPrivateIndividual, AreYouNotifyingAsPurchaserOrOnBehalf, AuthLoginPage, BeforeYouContinue, CheckYourAnswers, HasYourClientBroughtAVehicleIntoTheUkForBusinessUse, LandingPage, RetrievingYourClientList, TestOnlySessionPage, VehicleBroughtIntoNIFromEUPage}
+import uk.gov.hmrc.ui.pages.{AreYouABusinessOrPrivateIndividual, AreYouNotifyingAsPurchaserOrOnBehalf, AuthLoginPage, BeforeYouContinue, CheckYourAnswers, LandingPage}
 
 object VATAgentUserJourney {
-  // TODO: SHOULD HAVE A FLOW FOR ACQUISITION & IMPORT. DIFFERENT ROUTES AND JOURNEYS AS A CLIENT
-  def agentNotifyingOnBehalfOfClient(): Unit = {
-    loginSelectClientAndBeginANotification()
-    VehicleBroughtIntoNIFromEUPage.verifyPageDisplayed()
-    VehicleBroughtIntoNIFromEUPage.selectYesAndContinue()
-    HasYourClientBroughtAVehicleIntoTheUkForBusinessUse.verifyPageDisplayed()
-    HasYourClientBroughtAVehicleIntoTheUkForBusinessUse.selectYesAndContinue()
-    CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.AgentVAT)
-    // TODO: TASK LIST
-    CommonJourney.addPhoneAndEmailDetails()
-  }
-
-  // TODO: TO BE DONE IN THE FUTURE WHEN WE HAVE CLIENT LIST
-//  // NOTE: Not sure if CS2.0 will actually be reachable?
-//  /** A short journey to reach an error page and then will end the journey */
-//  def agentNotifyingOnBehalfOfClientClientListFailedToLoad(): Unit = {
+//  private def loginSelectClientAndBeginANotification(): Unit = {
 //    AuthLoginPage.login(AffinityGroup.AgentVAT)
 //    LandingPage.verifyPageDisplayed()
-//    // TODO: Verify Landing Page LP3.0 for Agents with Clients.
-//    // TODO: SELECT CLIENT AND CONTINUE
-//    // TODO: Remove once flow is actually implemented
-//    RetrievingYourClientList.navigateToPage(RetrievingYourClientList.pageUrl)
+//    LandingPage.manageYourClients()
 //    RetrievingYourClientList.verifyPageDisplayed()
-//    // TODO: Remove once flow is actually implemented
-//    WeCouldNotRetrieveYourClientList.navigateToPage(WeCouldNotRetrieveYourClientList.pageUrl)
-//    WeCouldNotRetrieveYourClientList.verifyPageDisplayed()
+//    // TODO: Remove TestOnlySessionPage once flow is actually implemented
+//    TestOnlySessionPage.setSelectedClientInSession()
+//    LandingPage.navigateToPage(LandingPage.pageUrl)
+//    LandingPage.waitForUrl(LandingPage.pageUrl)
+//    // TODO: WOULD BE CLIENT SELECTION
+//    LandingPage.verifyPageDisplayed()
+//    LandingPage.createANewNotification()
+//    BeforeYouContinue.verifyMultipleVehiclesSectionPresent()
+//    BeforeYouContinue.clickContinue()
 //  }
 
-  /** This user will complete a notification acting as a private individual, i.e., completing a notification for
-    * themselves and not on behalf of a Client
-    */
-  def agentNotifyingOnBehalfOfThemself(): Unit = {
-    AuthLoginPage.login(AffinityGroup.AgentVAT)
-    LandingPage.verifyPageDisplayed()
-    LandingPage.createANewNotification()
-    BeforeYouContinue.verifyMultipleVehiclesSectionNotPresent()
-    BeforeYouContinue.clickContinue()
-    VehicleBroughtIntoNIFromEUPage.verifyPageDisplayed()
-    VehicleBroughtIntoNIFromEUPage.selectYesAndContinue()
-    AreYouABusinessOrPrivateIndividual.verifyPageDisplayed()
-    AreYouABusinessOrPrivateIndividual.selectOptionTwoAndContinue()
-    AreYouNotifyingAsPurchaserOrOnBehalf.verifyPageDisplayed()
-    AreYouNotifyingAsPurchaserOrOnBehalf.selectOptionOneAndContinue()
-    CheckYourAnswers(CYAPage.InitialQuestions).verifyPageUrl()
-    CheckYourAnswers(CYAPage.InitialQuestions).checkContentIsCorrect(CYAPage.InitialQuestions, AffinityGroup.AgentVAT)
-    CheckYourAnswers(CYAPage.InitialQuestions).clickContinue()
-    // TODO: ONCE NAVIGATION IS IN PLACE REMOVE THIS
-    AddYourDetailsName.navigateToPage(AddYourDetailsName.pageUrl)
-    AddYourDetailsName.verifyPageDisplayed()
-    AddYourDetailsName.inputUserDetails()
-    AddYourDetailsPhoneNumber.verifyPageDisplayed()
-    AddYourDetailsPhoneNumber.inputMobileNumber()
-    AddYourDetailsEmail.verifyPageDisplayed()
-    AddYourDetailsEmail.inputEmailAddress()
-  }
+  // TODO: RE-IMPLEMENT THESE TESTS ONCE WE CAN ACTUALLY SELECT A CLIENT
+//  object ActingOnBehalfOfClient {
+//    object Acquisition {
+//      def clientNotifyingForBusinessUse(): Unit = {
+//        loginSelectClientAndBeginANotification()
+//        CommonJourney.beginAnAcquisition()
+//        CommonJourney.vehicleBroughtInForBusinessUse(AffinityGroup.AgentVAT)
+//        CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.AgentVAT)
+//        // TODO: TASK LIST
+//        CommonJourney.addPhoneAndEmailDetails()
+//      }
+//
+//      def clientNotifyingForPersonalUse(): Unit = {
+//        loginSelectClientAndBeginANotification()
+//        CommonJourney.beginAnAcquisition()
+//        CommonJourney.vehicleBroughtInForPersonalUse(AffinityGroup.AgentVAT)
+//        CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.AgentVAT)
+//        // TODO: TASK LIST
+//        CommonJourney.addPhoneAndEmailDetails()
+//      }
+//    }
+//
+//    object Import {
+//      // TODO:
+//    }
+//  }
 
-  private def loginSelectClientAndBeginANotification(): Unit = {
-    AuthLoginPage.login(AffinityGroup.AgentVAT)
-    LandingPage.verifyPageDisplayed()
-    LandingPage.manageYourClients()
-    RetrievingYourClientList.verifyPageDisplayed()
-    // TODO: Remove TestOnlySessionPage once flow is actually implemented
-    TestOnlySessionPage.setSelectedClientInSession()
-    LandingPage.navigateToPage(LandingPage.pageUrl)
-    LandingPage.waitForUrl(LandingPage.pageUrl)
-    // TODO: WOULD BE CLIENT SELECTION
-    LandingPage.verifyPageDisplayed()
-    LandingPage.createANewNotification()
-    BeforeYouContinue.verifyMultipleVehiclesSectionPresent()
-    BeforeYouContinue.clickContinue()
+  object SelfNotifying {
+    object Acquisition {
+      def notifyingAsABusinessAsANotifier(): Unit = {
+        // TEMP
+        AuthLoginPage.login(AffinityGroup.AgentVAT)
+        LandingPage.verifyPageDisplayed()
+        LandingPage.createANewNotification()
+        BeforeYouContinue.verifyMultipleVehiclesSectionNotPresent()
+        BeforeYouContinue.clickContinue()
+
+        // TODO: UNCOMMENT ONCE BUG IS FIXED
+        // CommonJourney.loginAndStartANotification(AffinityGroup.AgentVAT)
+        CommonJourney.beginAnAcquisition()
+        CommonJourney.notifierIsABusiness()
+        CommonJourney.selfNotifying()
+        CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.AgentVAT)
+        // TODO: TASK LIST
+        // TODO: BUSINESS NAME PAGE
+        // TODO: CYA2.0 AND ADDRESS STUFF
+      }
+
+      def notifyingAsAPrivateIndividualAsANotifier(): Unit = {
+        // TEMP
+        AuthLoginPage.login(AffinityGroup.AgentVAT)
+        LandingPage.verifyPageDisplayed()
+        LandingPage.createANewNotification()
+        BeforeYouContinue.verifyMultipleVehiclesSectionNotPresent()
+        BeforeYouContinue.clickContinue()
+
+        // TODO: UNCOMMENT ONCE BUG IS FIXED
+        // CommonJourney.loginAndStartANotification(AffinityGroup.AgentVAT)
+        CommonJourney.beginAnAcquisition()
+        CommonJourney.notifierIsAPrivateIndividual()
+        CommonJourney.selfNotifying()
+        CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.AgentVAT)
+        CommonJourney.addUserDetailsNamePhoneNumberEmailAddress()
+      }
+
+      def notifyingAsABusinessOnBehalfOfABusiness(): Unit = {
+        // TEMP
+        AuthLoginPage.login(AffinityGroup.AgentVAT)
+        LandingPage.verifyPageDisplayed()
+        LandingPage.createANewNotification()
+        BeforeYouContinue.verifyMultipleVehiclesSectionNotPresent()
+        BeforeYouContinue.clickContinue()
+
+        // TODO: UNCOMMENT ONCE BUG IS FIXED
+        // CommonJourney.loginAndStartANotification(AffinityGroup.AgentVAT)
+        CommonJourney.beginAnAcquisition()
+        CommonJourney.notifierIsABusiness()
+        CommonJourney.notifyingForABusiness()
+        CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.AgentVAT)
+        // TODO: Add business(s) name pages
+      }
+
+      def notifyingAsABusinessOnBehalfOfAIndividual(): Unit = {
+        // TEMP
+        AuthLoginPage.login(AffinityGroup.AgentVAT)
+        LandingPage.verifyPageDisplayed()
+        LandingPage.createANewNotification()
+        BeforeYouContinue.verifyMultipleVehiclesSectionNotPresent()
+        BeforeYouContinue.clickContinue()
+
+        // TODO: UNCOMMENT ONCE BUG IS FIXED
+        // CommonJourney.loginAndStartANotification(AffinityGroup.AgentVAT)
+        CommonJourney.beginAnAcquisition()
+        CommonJourney.notifierIsABusiness()
+        CommonJourney.notifyingForAnIndividual()
+        CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.AgentVAT)
+        // TODO:
+      }
+
+      def notifyingAsAIndividualOnBehalfOfABusiness(): Unit = {
+        // TEMP
+        AuthLoginPage.login(AffinityGroup.AgentVAT)
+        LandingPage.verifyPageDisplayed()
+        LandingPage.createANewNotification()
+        BeforeYouContinue.verifyMultipleVehiclesSectionNotPresent()
+        BeforeYouContinue.clickContinue()
+
+        // TODO: UNCOMMENT ONCE BUG IS FIXED
+        // CommonJourney.loginAndStartANotification(AffinityGroup.AgentVAT)
+        CommonJourney.beginAnAcquisition()
+        CommonJourney.notifierIsAPrivateIndividual()
+        CommonJourney.notifyingForABusiness()
+        CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.AgentVAT)
+        // TODO
+      }
+
+      def notifyingAsAIndividualOnBehalfOfAIndividual(): Unit = {
+        // TEMP
+        AuthLoginPage.login(AffinityGroup.AgentVAT)
+        LandingPage.verifyPageDisplayed()
+        LandingPage.createANewNotification()
+        BeforeYouContinue.verifyMultipleVehiclesSectionNotPresent()
+        BeforeYouContinue.clickContinue()
+
+        // TODO: UNCOMMENT ONCE BUG IS FIXED
+        // CommonJourney.loginAndStartANotification(AffinityGroup.AgentVAT)
+        CommonJourney.beginAnAcquisition()
+        CommonJourney.notifierIsAPrivateIndividual()
+        CommonJourney.notifyingForAnIndividual()
+        CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.AgentVAT)
+        // TODO
+      }
+    }
+
+    object Import {
+      // TODO: BUG CURRENTLY DOESN'T ALLOW THIS FLOW
+    }
   }
 }

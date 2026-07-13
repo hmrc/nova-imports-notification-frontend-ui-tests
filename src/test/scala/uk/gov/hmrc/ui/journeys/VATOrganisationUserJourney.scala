@@ -17,77 +17,62 @@
 package uk.gov.hmrc.ui.journeys
 
 import uk.gov.hmrc.ui.helpers.{AffinityGroup, CYAPage}
-import uk.gov.hmrc.ui.pages.{AuthLoginPage, BeforeYouContinue, CheckYourAnswers, HaveYouBroughtAVehicleIntoTheUKForBusinessUse, LandingPage, VehicleBroughtIntoNIFromEUPage}
+import uk.gov.hmrc.ui.pages.CheckYourAnswers
 
 object VATOrganisationUserJourney {
-  // TODO: Finish this flow once we have more screens
-  def acquisitionBringingAVehicleInForBusinessUse(): Unit = {
-    acquisitionEntryFlow()
-    HaveYouBroughtAVehicleIntoTheUKForBusinessUse.verifyPageDisplayed()
-    HaveYouBroughtAVehicleIntoTheUKForBusinessUse.selectYesAndContinue()
-    CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.OrganisationVAT)
-    // TODO: TASK LIST
-    CommonJourney.validateAddYourDetailsGuidancePage()
-    CommonJourney.addPhoneAndEmailDetails()
-    CheckYourAnswers(CYAPage.YourDetails).clickContinue()
-    // TODO: TASK LIST
+  object Acquisition {
+    def bringingAVehicleInForBusinessUse(): Unit = {
+      CommonJourney.loginAndStartANotification(AffinityGroup.OrganisationVAT)
+      CommonJourney.beginAnAcquisition()
+      CommonJourney.vehicleBroughtInForBusinessUse(AffinityGroup.OrganisationVAT)
+      CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.OrganisationVAT)
+      // TODO: TASK LIST
+      CommonJourney.validateAddYourDetailsGuidancePage()
+      CommonJourney.addPhoneAndEmailDetails()
+      CheckYourAnswers(CYAPage.YourDetails).clickContinue()
+      // TODO: TASK LIST
+    }
+
+    def bringingAVehicleInForPrivateUse(): Unit = {
+      CommonJourney.loginAndStartANotification(AffinityGroup.OrganisationVAT)
+      CommonJourney.beginAnAcquisition()
+      CommonJourney.vehicleBroughtInForPersonalUse(AffinityGroup.OrganisationVAT)
+      CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.OrganisationVAT)
+      CommonJourney.validateAddYourDetailsGuidancePage()
+      CommonJourney.addUserDetailsNamePhoneNumberEmailAddress()
+      CheckYourAnswers(CYAPage.YourDetails).clickContinue()
+      // TASK LIST
+      CommonJourney.notifierHasUkDetails()
+      // TODO: SHOULD BE AT TASK LIST AGAIN
+    }
   }
 
-  def acquisitionVehicleForPrivateUse(): Unit = {
-    acquisitionEntryFlow()
-    HaveYouBroughtAVehicleIntoTheUKForBusinessUse.verifyPageDisplayed()
-    HaveYouBroughtAVehicleIntoTheUKForBusinessUse.selectNoAndContinue()
-    CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.OrganisationVAT)
-    CommonJourney.validateAddYourDetailsGuidancePage()
-    CommonJourney.addUserDetailsNamePhoneNumberEmailAddress()
-    CheckYourAnswers(CYAPage.YourDetails).clickContinue()
-    // TASK LIST
-    CommonJourney.notifierHasUkDetails()
-    // TODO: SHOULD BE AT TASK LIST AGAIN
-  }
+  object Import {
+    def importAVehicleForBusinessUse(): Unit = {
+      CommonJourney.loginAndStartANotification(AffinityGroup.OrganisationVAT)
+      CommonJourney.beginAnImport()
+      CommonJourney.vehicleBroughtInForBusinessUse(AffinityGroup.OrganisationVAT)
+      CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.OrganisationVAT)
+      // TODO: TASK LIST
+      CommonJourney.validateAddYourDetailsGuidancePage()
+      // TODO: BUSINESS NAME?
+      CommonJourney.addPhoneAndEmailDetails()
+      CheckYourAnswers(CYAPage.YourDetails).clickContinue()
+      // TODO: TASK LIST
+    }
 
-  def importBringingAVehicleInForBusinessUse(): Unit = {
-    importEntryFlow()
-    HaveYouBroughtAVehicleIntoTheUKForBusinessUse.verifyPageDisplayed()
-    HaveYouBroughtAVehicleIntoTheUKForBusinessUse.selectYesAndContinue()
-    CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.OrganisationVAT)
-    // TODO: TASK LIST
-    CommonJourney.validateAddYourDetailsGuidancePage()
-    // TODO: BUSINESS NAME?
-    CommonJourney.addPhoneAndEmailDetails()
-    CheckYourAnswers(CYAPage.YourDetails).clickContinue()
-    // TODO: TASK LIST
-  }
-
-  def importVehicleForPrivateUse(): Unit = {
-    importEntryFlow()
-    HaveYouBroughtAVehicleIntoTheUKForBusinessUse.verifyPageDisplayed()
-    HaveYouBroughtAVehicleIntoTheUKForBusinessUse.selectNoAndContinue()
-    CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.OrganisationVAT)
-    // TODO: TASK LIST PAGE
-    CommonJourney.validateAddYourDetailsGuidancePage()
-    CommonJourney.addUserDetailsNamePhoneNumberEmailAddress()
-    CheckYourAnswers(CYAPage.YourDetails).clickContinue()
-    // TODO: TASK LIST
-    CommonJourney.notifierHasUkDetails()
-    // TODO: SHOULD BE AT TASK LIST AGAIN
-  }
-
-  private def loginAndBeginANotification(): Unit = {
-    AuthLoginPage.login(AffinityGroup.OrganisationVAT)
-    LandingPage.verifyPageDisplayed()
-    LandingPage.createANewNotification()
-    BeforeYouContinue.verifyMultipleVehiclesSectionPresent()
-    BeforeYouContinue.clickContinue()
-    VehicleBroughtIntoNIFromEUPage.verifyPageDisplayed()
-  }
-  private def acquisitionEntryFlow(): Unit       = {
-    loginAndBeginANotification()
-    VehicleBroughtIntoNIFromEUPage.selectYesAndContinue()
-  }
-
-  private def importEntryFlow(): Unit = {
-    loginAndBeginANotification()
-    VehicleBroughtIntoNIFromEUPage.selectNoAndContinue()
+    def importAVehicleForPrivateUse(): Unit = {
+      CommonJourney.loginAndStartANotification(AffinityGroup.OrganisationVAT)
+      CommonJourney.beginAnImport()
+      CommonJourney.vehicleBroughtInForPersonalUse(AffinityGroup.OrganisationVAT)
+      CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.OrganisationVAT)
+      // TODO: TASK LIST PAGE
+      CommonJourney.validateAddYourDetailsGuidancePage()
+      CommonJourney.addUserDetailsNamePhoneNumberEmailAddress()
+      CheckYourAnswers(CYAPage.YourDetails).clickContinue()
+      // TODO: TASK LIST
+      CommonJourney.notifierHasUkDetails()
+      // TODO: SHOULD BE AT TASK LIST AGAIN
+    }
   }
 }
