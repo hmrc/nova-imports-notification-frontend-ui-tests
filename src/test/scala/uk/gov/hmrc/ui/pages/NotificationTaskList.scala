@@ -22,14 +22,14 @@ object NotificationTaskList extends BasePage {
   override val pageUrl: String = s"$baseUrl/create-vehicle-notification"
 
   object PageLocators {
-    val addYourDetails: By       = By.cssSelector("a[aria-describedby='add-your-details-status']")
-    val addYourDetailsStatus: By = By.id("add-your-details-status")
+    val addYourDetails: By       = By.cssSelector("a[aria-describedby='about-you-1-status']")
+    val addYourDetailsStatus: By = By.id("about-you-1-status")
 
-    val addYourAddress: By       = By.cssSelector("a[aria-describedby='add-your-address-status']")
-    val addYourAddressStatus: By = By.id("add-your-address-status")
+    val addYourAddress: By       = By.cssSelector("a[aria-describedby='about-you-2-status']")
+    val addYourAddressStatus: By = By.id("about-you-2-status")
 
-    val addVehicleDetails: By       = By.cssSelector("a[aria-describedby='add-vehicle-details-status']")
-    val addVehicleDetailsStatus: By = By.id("add-vehicle-details-status")
+    val addVehicleDetails: By       = By.cssSelector("a[aria-describedby='about-the-vehicles-1-status']")
+    val addVehicleDetailsStatus: By = By.id("about-the-vehicles-1-status")
 
     val readDeclaration: By = By.id("read-declaration-hint") // to-be completed
   }
