@@ -17,7 +17,7 @@
 package uk.gov.hmrc.ui.journeys
 
 import uk.gov.hmrc.ui.helpers.{AffinityGroup, CYAPage}
-import uk.gov.hmrc.ui.pages.{AddPurchaserDetailsBusinessName, AddPurchaserDetailsName, AddYourDetailsEmail, AddYourDetailsGuidancePage, AddYourDetailsName, AddYourDetailsPhoneNumber, AreYouABusinessOrPrivateIndividual, AreYouNotifyingAsPurchaserOrOnBehalf, AuthLoginPage, BeforeYouContinue, CheckYourAnswers, ChooseYourAddress, FindYourAddress, HasYourClientBroughtAVehicleIntoTheUkForBusinessUse, HaveYouBroughtAVehicleIntoTheUKForBusinessUse, IsYourAddressInTheUK, LandingPage, PurchaserOnBehalfOfABusinessOrIndividual, ReviewAndConfirmAddress, VehicleBroughtIntoNIFromEUPage}
+import uk.gov.hmrc.ui.pages.{AddPurchaserDetailsBusinessName, AddPurchaserDetailsName, AddYourDetailsEmail, AddYourDetailsGuidancePage, AddYourDetailsName, AddYourDetailsPhoneNumber, AreYouABusinessOrPrivateIndividual, AreYouNotifyingAsPurchaserOrOnBehalf, AuthLoginPage, BeforeYouContinue, CheckYourAnswers, ChooseYourAddress, FindYourAddress, HasYourClientBroughtAVehicleIntoTheUkForBusinessUse, HaveYouBroughtAVehicleIntoTheUKForBusinessUse, IsPurchaserAddressInTheUK, IsYourAddressInTheUK, LandingPage, NotificationTaskList, PurchaserOnBehalfOfABusinessOrIndividual, ReviewAndConfirmAddress, VehicleBroughtIntoNIFromEUPage}
 
 /** Base methods that are used to answer repetitive scenarios within journeys to make code more readable */
 object CommonJourney {
@@ -98,8 +98,40 @@ object CommonJourney {
       HasYourClientBroughtAVehicleIntoTheUkForBusinessUse.selectNoAndContinue()
     }
 
+  // TODO: More details that vary based on user answers
+
+  /** Helper method that will allow us to confirm which CYA page we are on and verify it's correct etc., */
+  def validateCheckYourAnswers(page: CYAPage, userType: AffinityGroup): Unit = {
+    CheckYourAnswers(page).verifyPageDisplayed()
+    CheckYourAnswers(page).checkContentIsCorrect(page, userType)
+    CheckYourAnswers(page).clickContinue()
+  }
+
+  def addYourDetails(): Unit = {
+    NotificationTaskList.verifyPageDisplayed()
+    NotificationTaskList.verifyAddYourDetailsStatus("Incomplete")
+    NotificationTaskList.clickAddYourDetails()
+  }
+
+  def addYourAddress(): Unit = {
+    NotificationTaskList.verifyPageDisplayed()
+    NotificationTaskList.verifyAddYourAddressStatus("Incomplete")
+    NotificationTaskList.clickAddYourAddress()
+  }
+
+  def addPurchaserDetails(): Unit = {
+    NotificationTaskList.verifyPageDisplayed()
+    NotificationTaskList.verifyAddPurchaserDetailsStatus("Incomplete")
+    NotificationTaskList.clickAddPurchaserDetails()
+  }
+
+  def addPurchaserAddress(): Unit = {
+    NotificationTaskList.verifyPageDisplayed()
+    NotificationTaskList.verifyAddPurchaserAddressStatus("Incomplete")
+    NotificationTaskList.clickAddPurchaserAddress()
+  }
+
   def validateAddYourDetailsGuidancePage(): Unit = {
-    AddYourDetailsGuidancePage.navigateToPage(AddYourDetailsGuidancePage.pageUrl)
     AddYourDetailsGuidancePage.verifyPageDisplayed()
     AddYourDetailsGuidancePage.clickContinue()
   }
@@ -125,7 +157,9 @@ object CommonJourney {
 
   def addPurchaserName(): Unit = {
     // TODO: REMOVE ONCE NAVIGATION IN PLACE
-    AddPurchaserDetailsName.navigateToPage(AddPurchaserDetailsName.pageUrl)
+    NotificationTaskList.verifyTaskListWithPurchaserDetails()
+    NotificationTaskList.verifyAddPurchaserDetailsStatus("Incomplete")
+    NotificationTaskList.clickAddPurchaserDetails()
     AddPurchaserDetailsName.verifyPageDisplayed()
     AddPurchaserDetailsName.inputUserDetails()
   }
@@ -135,15 +169,6 @@ object CommonJourney {
     AddPurchaserDetailsBusinessName.navigateToPage(AddPurchaserDetailsBusinessName.pageUrl)
     AddPurchaserDetailsBusinessName.verifyPageDisplayed()
     AddPurchaserDetailsBusinessName.inputBusinessName()
-  }
-
-  // TODO: More details that vary based on user answers
-
-  /** Helper method that will allow us to confirm which CYA page we are on and verify it's correct etc., */
-  def validateCheckYourAnswers(page: CYAPage, userType: AffinityGroup): Unit = {
-    CheckYourAnswers(page).verifyPageDisplayed()
-    CheckYourAnswers(page).checkContentIsCorrect(page, userType)
-    CheckYourAnswers(page).clickContinue()
   }
 
   /** Helper methods that will be used by journeys to supply different types of addresses i.e., a UK specific flow or
@@ -165,7 +190,10 @@ object CommonJourney {
 
   def notifierHasInternationalDetails(): Unit = {}
 
-  def purchaserHasUkDetails(): Unit = {}
+  def purchaserHasUkDetails(): Unit = {
+    IsPurchaserAddressInTheUK.verifyPageDisplayed()
+    IsPurchaserAddressInTheUK.selectOptionOneAndContinue()
+  }
 
   def purchaserHasInternationalDetails(): Unit = {}
 

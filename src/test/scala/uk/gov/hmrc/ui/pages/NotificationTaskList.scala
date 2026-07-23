@@ -28,6 +28,12 @@ object NotificationTaskList extends BasePage {
     val addYourAddress: By       = By.cssSelector("a[aria-describedby='about-you-2-status']")
     val addYourAddressStatus: By = By.id("about-you-2-status")
 
+    val addPurchaserDetails: By       = By.cssSelector("a[aria-describedby='about-the-purchaser-1-status']")
+    val addPurchaserDetailsStatus: By = By.id("about-the-purchaser-1-status")
+
+    val addPurchaserAddress: By       = By.cssSelector("a[aria-describedby='about-the-purchaser-2-status']")
+    val addPurchaserAddressStatus: By = By.id("about-the-purchaser-2-status")
+
     val addVehicleDetails: By       = By.cssSelector("a[aria-describedby='about-the-vehicles-1-status']")
     val addVehicleDetailsStatus: By = By.id("about-the-vehicles-1-status")
 
@@ -47,6 +53,16 @@ object NotificationTaskList extends BasePage {
     verifyElementNotPresent(PageLocators.addYourAddress)
   }
 
+  def verifyTaskListWithPurchaserDetails(): Unit = {
+    verifyPageDisplayed()
+    verifyElementDisplayed(PageLocators.addPurchaserDetails)
+  }
+
+  def verifyTaskListWithoutPurchaserDetails(): Unit = {
+    verifyPageDisplayed()
+    verifyElementNotPresent(PageLocators.addPurchaserDetails)
+  }
+
   def verifyTaskStatus(status: By, expectedStatus: String): Unit = {
     val actualStatus = waitForVisibilityOfElement(status).getText
 
@@ -62,11 +78,23 @@ object NotificationTaskList extends BasePage {
   def verifyAddVehicleDetailsStatus(expectedStatus: String): Unit =
     verifyTaskStatus(PageLocators.addVehicleDetailsStatus, expectedStatus)
 
+  def verifyAddPurchaserDetailsStatus(expectedStatus: String): Unit =
+    verifyTaskStatus(PageLocators.addPurchaserDetailsStatus, expectedStatus)
+
+  def verifyAddPurchaserAddressStatus(expectedStatus: String): Unit =
+    verifyTaskStatus(PageLocators.addPurchaserAddressStatus, expectedStatus)
+
   def clickAddYourDetails(): Unit =
     clickElement(PageLocators.addYourDetails)
 
   def clickAddYourAddress(): Unit =
     clickElement(PageLocators.addYourAddress)
+
+  def clickAddPurchaserDetails(): Unit =
+    clickElement(PageLocators.addPurchaserDetails)
+
+  def clickAddPurchaserAddress(): Unit =
+    clickElement(PageLocators.addPurchaserAddress)
 
   def clickAddVehicleDetails(): Unit =
     clickElement(PageLocators.addVehicleDetails)
