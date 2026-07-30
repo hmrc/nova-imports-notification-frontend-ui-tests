@@ -17,7 +17,7 @@
 package uk.gov.hmrc.ui.pages
 
 object YouHaveNoAuthorisedClients extends BasePage {
-  override val pageUrl: String = s"$baseUrl/view-clients/no-authorised-clients"
+  override val pageUrl: String = s"$baseUrl/view-clients/no-clients"
 
   def verifyPageDisplayed(): Unit =
     validateStandardPage(
