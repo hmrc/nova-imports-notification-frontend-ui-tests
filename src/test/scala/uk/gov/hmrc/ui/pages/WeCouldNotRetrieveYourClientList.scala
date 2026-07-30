@@ -17,7 +17,7 @@
 package uk.gov.hmrc.ui.pages
 
 object WeCouldNotRetrieveYourClientList extends BasePage {
-  override val pageUrl: String = s"$baseUrl/view-clients/failed"
+  override val pageUrl: String = s"$baseUrl/client-list-problem"
 
   def verifyPageDisplayed(): Unit =
     validateStandardPage(
