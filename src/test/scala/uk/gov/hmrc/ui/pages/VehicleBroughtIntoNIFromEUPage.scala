@@ -21,7 +21,7 @@ object VehicleBroughtIntoNIFromEUPage extends BasePage {
   override val pageUrl: String = s"$baseUrl/vehicle-from-eu-to-northern-ireland"
 
   def verifyPageDisplayed(): Unit =
-    validateQuestionPage(
+    validateStandardPage(
       expectedHeading = "Notifying for a vehicle brought into Northern Ireland"
     )
 }
