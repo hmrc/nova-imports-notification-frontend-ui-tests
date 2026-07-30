@@ -18,7 +18,7 @@ package uk.gov.hmrc.ui.pages
 
 object RetrievingYourClientList extends BasePage {
 
-  override val pageUrl: String = s"$baseUrl/view-clients/loading"
+  override val pageUrl: String = s"$baseUrl/load-client-list"
 
   def verifyPageDisplayed(): Unit =
     validateStandardPage(
