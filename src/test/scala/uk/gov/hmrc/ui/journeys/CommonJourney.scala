@@ -17,7 +17,7 @@
 package uk.gov.hmrc.ui.journeys
 
 import uk.gov.hmrc.ui.helpers.{AffinityGroup, CYAPage}
-import uk.gov.hmrc.ui.pages.{AddPurchaserDetailsBusinessName, AddPurchaserDetailsName, AddYourDetailsEmail, AddYourDetailsGuidancePage, AddYourDetailsName, AddYourDetailsPhoneNumber, AreYouABusinessOrPrivateIndividual, AreYouNotifyingAsPurchaserOrOnBehalf, AuthLoginPage, BeforeYouContinue, CheckYourAnswers, ChooseYourAddress, FindYourAddress, HasYourClientBroughtAVehicleIntoTheUkForBusinessUse, HaveYouBroughtAVehicleIntoTheUKForBusinessUse, IsPurchaserAddressInTheUK, IsYourAddressInTheUK, LandingPage, NotificationTaskList, PurchaserOnBehalfOfABusinessOrIndividual, ReviewAndConfirmAddress, VehicleBroughtIntoNIFromEUPage}
+import uk.gov.hmrc.ui.pages.{AddPurchaserDetailsBusinessName, AddPurchaserDetailsName, AddVehicleDetails, AddYourDetailsEmail, AddYourDetailsGuidancePage, AddYourDetailsName, AddYourDetailsPhoneNumber, AreYouABusinessOrPrivateIndividual, AreYouNotifyingAsPurchaserOrOnBehalf, AuthLoginPage, BeforeYouContinue, CheckYourAnswers, ChooseYourAddress, FindYourAddress, HasYourClientBroughtAVehicleIntoTheUkForBusinessUse, HaveYouBroughtAVehicleIntoTheUKForBusinessUse, IsPurchaserAddressInTheUK, IsYourAddressInTheUK, LandingPage, NotificationTaskList, PurchaserOnBehalfOfABusinessOrIndividual, ReviewAndConfirmAddress, VehicleBroughtIntoNIFromEUPage}
 
 /** Base methods that are used to answer repetitive scenarios within journeys to make code more readable */
 object CommonJourney {
@@ -131,6 +131,12 @@ object CommonJourney {
     NotificationTaskList.clickAddPurchaserAddress()
   }
 
+  def addVehicleDetails(): Unit = {
+    NotificationTaskList.verifyPageDisplayed()
+    NotificationTaskList.verifyAddVehicleDetailsStatus("Incomplete")
+    NotificationTaskList.clickAddVehicleDetails()
+  }
+
   def validateAddYourDetailsGuidancePage(): Unit = {
     AddYourDetailsGuidancePage.verifyPageDisplayed()
     AddYourDetailsGuidancePage.clickContinue()
@@ -203,4 +209,13 @@ object CommonJourney {
 
   // TODO:
   /** Helper methods for adding vehicles */
+  def addVehicleDetailsAddBySupplier(): Unit = {
+    AddVehicleDetails.verifyPageDisplayed()
+    AddVehicleDetails.selectOptionOneAndContinue()
+  }
+
+  def addVehicleDetailsUploadAVehicleSpreadsheet(): Unit = {
+    AddVehicleDetails.verifyPageDisplayed()
+    AddVehicleDetails.selectOptionTwoAndContinue()
+  }
 }
