@@ -98,7 +98,7 @@ object VATAgentUserJourney {
         CommonJourney.notifierIsAPrivateIndividual()
         CommonJourney.selfNotifying()
         CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.AgentVAT)
-        CommonJourney.addUserDetailsNamePhoneNumberEmailAddress()
+        CommonJourney.addPhoneAndEmailDetails()
       }
 
       def notifyingAsABusinessOnBehalfOfABusiness(): Unit = {
