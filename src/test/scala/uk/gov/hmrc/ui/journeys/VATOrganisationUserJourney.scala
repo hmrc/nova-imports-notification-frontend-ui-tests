@@ -32,6 +32,8 @@ object VATOrganisationUserJourney {
       CommonJourney.addPhoneAndEmailDetails()
       CheckYourAnswers(CYAPage.YourDetails).clickContinue()
       NotificationTaskList.verifyAddYourDetailsStatus("Completed")
+      CommonJourney.addVehicleDetails()
+      CommonJourney.addVehicleDetailsAddBySupplier()
     }
 
     def bringingAVehicleInForPrivateUse(): Unit = {
@@ -47,6 +49,8 @@ object VATOrganisationUserJourney {
       NotificationTaskList.verifyAddYourDetailsStatus("Completed")
       CommonJourney.notifierHasUkDetails()
       // TODO: SHOULD BE AT TASK LIST AGAIN
+      CommonJourney.addVehicleDetails()
+      CommonJourney.addVehicleDetailsAddBySupplier()
     }
   }
 
