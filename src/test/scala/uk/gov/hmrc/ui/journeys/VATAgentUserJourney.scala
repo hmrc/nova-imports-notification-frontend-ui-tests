@@ -98,6 +98,7 @@ object VATAgentUserJourney {
         CommonJourney.notifierIsAPrivateIndividual()
         CommonJourney.selfNotifying()
         CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.AgentVAT)
+        CommonJourney.addYourDetails()
         CommonJourney.addPhoneAndEmailDetails()
       }
 
