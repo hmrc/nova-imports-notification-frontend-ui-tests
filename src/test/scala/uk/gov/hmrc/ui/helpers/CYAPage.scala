@@ -22,7 +22,7 @@ package uk.gov.hmrc.ui.helpers
   *     this given journey
   */
 enum CYAPage:
-  case InitialQuestions, YourDetails,YourAddress
+  case InitialQuestions, YourDetails, YourAddress
 
   def getCYAPageUrl: String = this match {
     case InitialQuestions => "initial-questions"
