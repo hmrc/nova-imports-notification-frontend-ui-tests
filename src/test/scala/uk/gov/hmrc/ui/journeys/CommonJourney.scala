@@ -218,4 +218,8 @@ object CommonJourney {
     AddVehicleDetails.verifyPageDisplayed()
     AddVehicleDetails.selectOptionTwoAndContinue()
   }
+  def validateCheckYourAnswersForAddress(page: CYAPage): Unit = {
+    CheckYourAnswers(page).verifyPageDisplayed()
+    CheckYourAnswers(page).clickContinue()
+  }
 }
