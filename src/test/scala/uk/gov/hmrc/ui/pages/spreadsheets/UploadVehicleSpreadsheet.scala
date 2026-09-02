@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.pages.imports
+package uk.gov.hmrc.ui.pages.spreadsheets
 
 import uk.gov.hmrc.ui.pages.BasePage
 
-object VehicleBroughtFromOutsideBothTheUkAndEu extends BasePage {
-  override val pageUrl: String = s"$baseUrl/vehicles-brought-from-outside-uk-or-eu"
+object UploadVehicleSpreadsheet extends BasePage {
+  override val pageUrl: String = s"$baseUrl/upload-vehicle-spreadsheet"
 
   def verifyPageDisplayed(): Unit =
     verifyStandardPageHeading(
-      expectedHeading = "Vehicles brought from outside both the UK and the EU"
+      expectedHeading = "Upload vehicle spreadsheet"
     )
 
-  // TODO: ADD SELECT IMPORT / SPREADSHEET RADIO BUTTON
+  // TODO: SPREADSHEET UPLOAD
 }

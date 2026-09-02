@@ -14,17 +14,16 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.pages.imports
+package uk.gov.hmrc.ui.pages.aquisition
 
 import uk.gov.hmrc.ui.pages.BasePage
 
-object VehicleBroughtFromOutsideBothTheUkAndEu extends BasePage {
-  override val pageUrl: String = s"$baseUrl/vehicles-brought-from-outside-uk-or-eu"
+// TODO: COME BACK AND ADD CHECKBOX SELECTION, CURRENTLY CAN'T GET TO THIS PAGE
+object WhichDatesDoYouHaveForTheVehicle extends BasePage {
+  override val pageUrl: String = s"$baseUrl/supplier/1/vehicle/1/vehicle-dates"
 
   def verifyPageDisplayed(): Unit =
     verifyStandardPageHeading(
-      expectedHeading = "Vehicles brought from outside both the UK and the EU"
+      expectedHeading = "Which dates do you have for the vehicle?"
     )
-
-  // TODO: ADD SELECT IMPORT / SPREADSHEET RADIO BUTTON
 }
