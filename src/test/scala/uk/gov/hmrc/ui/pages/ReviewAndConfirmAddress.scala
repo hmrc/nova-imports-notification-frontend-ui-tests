@@ -16,6 +16,8 @@
 
 package uk.gov.hmrc.ui.pages
 
+import uk.gov.hmrc.ui.helpers.AddressPages
+
 object ReviewAndConfirmAddress extends BasePage {
   override val pageUrl: String      = s"$addressLookupBaseUrl"
   val endOfUkUrl: String            = "/confirm"
@@ -27,8 +29,8 @@ object ReviewAndConfirmAddress extends BasePage {
   def verifyPartialInternationalUrl(): Unit =
     verifyEndOfUrl(endOfInternationalUrl)
 
-  def verifyPageDisplayed(): Unit =
+  def verifyPageDisplayed(addressPageType: AddressPages): Unit =
     verifyStandardPageHeading(
-      expectedHeading = "Review and confirm your address"
+      expectedHeading = addressPageType.getReviewAndConfirmAddressPageTitle
     )
 }

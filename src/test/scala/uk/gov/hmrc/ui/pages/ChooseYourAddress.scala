@@ -17,6 +17,7 @@
 package uk.gov.hmrc.ui.pages
 
 import org.openqa.selenium.By
+import uk.gov.hmrc.ui.helpers.AddressPages
 
 object ChooseYourAddress extends BasePage {
   override val pageUrl: String = s"$addressLookupBaseUrl"
@@ -30,9 +31,9 @@ object ChooseYourAddress extends BasePage {
   def verifyPartialUrl(): Unit =
     verifyEndOfUrl(endOfUrl)
 
-  def verifyPageDisplayed(): Unit =
+  def verifyPageDisplayed(addressPageType: AddressPages): Unit =
     verifyStandardPageHeading(
-      expectedHeading = "Choose your address"
+      expectedHeading = addressPageType.getChooseYourAddressPageTitle
     )
 
   def selectAnAddress(): Unit = {
