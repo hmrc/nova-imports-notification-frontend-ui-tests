@@ -17,7 +17,8 @@
 package uk.gov.hmrc.ui.journeys
 
 import uk.gov.hmrc.ui.helpers.{AffinityGroup, CYAPage}
-import uk.gov.hmrc.ui.pages.{AreYouABusinessOrPrivateIndividual, AreYouNotifyingAsPurchaserOrOnBehalf, AuthLoginPage, BeforeYouContinue, CheckYourAnswers, LandingPage}
+import uk.gov.hmrc.ui.pages.common.{AreYouABusinessOrPrivateIndividual, AreYouNotifyingAsPurchaserOrOnBehalf, BeforeYouContinue, CheckYourAnswers, LandingPage}
+import uk.gov.hmrc.ui.pages.AuthLoginPage
 
 object VATAgentUserJourney {
 //  private def loginSelectClientAndBeginANotification(): Unit = {

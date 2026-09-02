@@ -17,7 +17,7 @@
 package uk.gov.hmrc.ui.journeys
 
 import uk.gov.hmrc.ui.helpers.{AffinityGroup, CYAPage}
-import uk.gov.hmrc.ui.pages.{CheckYourAnswers, NotificationTaskList}
+import uk.gov.hmrc.ui.pages.common.{CheckYourAnswers, NotificationTaskList}
 
 object VATOrganisationUserJourney {
   object Acquisition {

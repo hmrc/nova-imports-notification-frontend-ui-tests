@@ -51,10 +51,13 @@ enum AddressPages:
   }
 
   // NOVA's address screens
-  def getWeHaveChangedYourAddressUrl: String = this match {
+  /** As we can have many supplier's we need to decide what number we want returned in the URL for supplier this is
+    * decided in "WeHaveChangedYourAddress" page and is defaulted to 1 unless overridden
+    */
+  def getWeHaveChangedYourAddressUrl(supplierNumber: Int): String = this match {
     case AddressPages.Notifier  => "address-changed"
     case AddressPages.Purchaser => "purchaser-address-changed"
-    case AddressPages.Supplier  => "supplier/1/supplier-address-changed"
+    case AddressPages.Supplier  => s"supplier/$supplierNumber/supplier-address-changed"
   }
 
   def getWeHaveChangedYourAddressTitle: String = this match {

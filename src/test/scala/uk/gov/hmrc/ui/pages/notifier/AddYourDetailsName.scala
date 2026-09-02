@@ -14,22 +14,23 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.pages.aquisition
+package uk.gov.hmrc.ui.pages.notifier
 
-import org.openqa.selenium.By
+import uk.gov.hmrc.ui.data.TestData
 import uk.gov.hmrc.ui.pages.BasePage
 
-class WhichDatesDoYouHaveForTheVehicle(supplierNumber: Int, vehicleNumber: Int) extends BasePage {
-  override val pageUrl: String = s"$baseUrl/supplier/$supplierNumber/vehicle/$vehicleNumber/vehicle-dates"
-
-  object PageLocators {
-    val vehicleAvailabilityDateFirstRegistration: By = By.id("value_0")
-    val purchaseInvoiceDate: By                      = By.id("value_1")
-    val noIDontHaveAnyDates: By                      = By.id("value_2")
-  }
+object AddYourDetailsName extends BasePage {
+  override val pageUrl: String = s"$baseUrl/name"
 
   def verifyPageDisplayed(): Unit =
-    verifyQuestionPageHeading(
-      expectedHeading = "Which dates do you have for the vehicle?"
+    verifyStandardPageHeading(
+      expectedHeading = "What is your name?"
     )
+
+  def inputUserDetails(): Unit = {
+    typeInsideElement(Locators.title, TestData.UserDetails.NotifierDetails.notifier.userDetails.title)
+    typeInsideElement(Locators.firstName, TestData.UserDetails.NotifierDetails.notifier.userDetails.firstName)
+    typeInsideElement(Locators.lastName, TestData.UserDetails.NotifierDetails.notifier.userDetails.lastName)
+    clickContinue()
+  }
 }

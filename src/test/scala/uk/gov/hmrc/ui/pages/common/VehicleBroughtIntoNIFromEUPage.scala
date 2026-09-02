@@ -14,22 +14,16 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.pages.aquisition
+package uk.gov.hmrc.ui.pages.common
 
-import org.openqa.selenium.By
 import uk.gov.hmrc.ui.pages.BasePage
 
-class WhichDatesDoYouHaveForTheVehicle(supplierNumber: Int, vehicleNumber: Int) extends BasePage {
-  override val pageUrl: String = s"$baseUrl/supplier/$supplierNumber/vehicle/$vehicleNumber/vehicle-dates"
+object VehicleBroughtIntoNIFromEUPage extends BasePage {
 
-  object PageLocators {
-    val vehicleAvailabilityDateFirstRegistration: By = By.id("value_0")
-    val purchaseInvoiceDate: By                      = By.id("value_1")
-    val noIDontHaveAnyDates: By                      = By.id("value_2")
-  }
+  override val pageUrl: String = s"$baseUrl/vehicle-from-eu-to-northern-ireland"
 
   def verifyPageDisplayed(): Unit =
-    verifyQuestionPageHeading(
-      expectedHeading = "Which dates do you have for the vehicle?"
+    validateStandardPage(
+      expectedHeading = "Notifying for a vehicle brought into Northern Ireland"
     )
 }
