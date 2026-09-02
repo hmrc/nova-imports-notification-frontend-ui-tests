@@ -14,15 +14,17 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.pages
+package uk.gov.hmrc.ui.pages.spreadsheets
 
-import uk.gov.hmrc.ui.helpers.AddressPages
+import uk.gov.hmrc.ui.pages.BasePage
 
-class WeHaveChangedYourAddress(addressJourney: AddressPages) extends BasePage {
-  override val pageUrl: String = s"$baseUrl/${addressJourney.getWeHaveChangedYourAddressUrl}"
+object UploadVehicleSpreadsheet extends BasePage {
+  override val pageUrl: String = s"$baseUrl/upload-vehicle-spreadsheet"
 
   def verifyPageDisplayed(): Unit =
-    validateStandardPage(
-      expectedHeading = addressJourney.getWeHaveChangedYourAddressTitle
+    verifyStandardPageHeading(
+      expectedHeading = "Upload vehicle spreadsheet"
     )
+
+  // TODO: SPREADSHEET UPLOAD
 }

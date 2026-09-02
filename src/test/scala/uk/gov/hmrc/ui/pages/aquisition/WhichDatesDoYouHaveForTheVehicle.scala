@@ -14,15 +14,16 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.pages
+package uk.gov.hmrc.ui.pages.aquisition
 
-import uk.gov.hmrc.ui.helpers.AddressPages
+import uk.gov.hmrc.ui.pages.BasePage
 
-class WeHaveChangedYourAddress(addressJourney: AddressPages) extends BasePage {
-  override val pageUrl: String = s"$baseUrl/${addressJourney.getWeHaveChangedYourAddressUrl}"
+// TODO: COME BACK AND ADD CHECKBOX SELECTION, CURRENTLY CAN'T GET TO THIS PAGE
+object WhichDatesDoYouHaveForTheVehicle extends BasePage {
+  override val pageUrl: String = s"$baseUrl/supplier/1/vehicle/1/vehicle-dates"
 
   def verifyPageDisplayed(): Unit =
-    validateStandardPage(
-      expectedHeading = addressJourney.getWeHaveChangedYourAddressTitle
+    verifyStandardPageHeading(
+      expectedHeading = "Which dates do you have for the vehicle?"
     )
 }

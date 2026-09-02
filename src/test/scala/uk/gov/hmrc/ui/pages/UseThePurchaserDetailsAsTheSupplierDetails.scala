@@ -16,13 +16,11 @@
 
 package uk.gov.hmrc.ui.pages
 
-import uk.gov.hmrc.ui.helpers.AddressPages
-
-class WeHaveChangedYourAddress(addressJourney: AddressPages) extends BasePage {
-  override val pageUrl: String = s"$baseUrl/${addressJourney.getWeHaveChangedYourAddressUrl}"
+object UseThePurchaserDetailsAsTheSupplierDetails extends BasePage {
+  override val pageUrl: String = s"$baseUrl/use-purchaser-details-as-supplier"
 
   def verifyPageDisplayed(): Unit =
-    validateStandardPage(
-      expectedHeading = addressJourney.getWeHaveChangedYourAddressTitle
+    verifyStandardPageHeading(
+      expectedHeading = "Use the purchaser details as the supplier details"
     )
 }

@@ -104,6 +104,16 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
     )
   }
 
+  // Some titles will be based on information provided in previous screens, for now we will partially check
+  // the known information and ignore the supplier name for example
+  def verifyPartialHeading(expectedStartOfHeading: String): Unit = {
+    val actualHeading = waitForVisibilityOfElement(Locators.pageHeading).getText
+    assert(
+      actualHeading.contains(expectedStartOfHeading),
+      s"Page Heading mismatch! Expected Heading: $expectedStartOfHeading, Actual Heading: $actualHeading"
+    )
+  }
+
   /** Two methods to dictate if we need to verify a question page heading or a standard page. So far in our service if
     * we have radio buttons the heading will be different CSS class as its inside a fieldset
     */

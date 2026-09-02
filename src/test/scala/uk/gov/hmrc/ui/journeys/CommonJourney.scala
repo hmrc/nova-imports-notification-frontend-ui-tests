@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.ui.journeys
 
-import uk.gov.hmrc.ui.helpers.{AffinityGroup, CYAPage}
+import uk.gov.hmrc.ui.helpers.{AddressPages, AffinityGroup, CYAPage}
 import uk.gov.hmrc.ui.pages.{AddPurchaserDetailsBusinessName, AddPurchaserDetailsName, AddVehicleDetails, AddYourDetailsEmail, AddYourDetailsGuidancePage, AddYourDetailsName, AddYourDetailsPhoneNumber, AreYouABusinessOrPrivateIndividual, AreYouNotifyingAsPurchaserOrOnBehalf, AuthLoginPage, BeforeYouContinue, CheckYourAnswers, ChooseYourAddress, FindYourAddress, HasYourClientBroughtAVehicleIntoTheUkForBusinessUse, HaveYouBroughtAVehicleIntoTheUKForBusinessUse, IsPurchaserAddressInTheUK, IsYourAddressInTheUK, LandingPage, NotificationTaskList, PurchaserOnBehalfOfABusinessOrIndividual, ReviewAndConfirmAddress, VehicleBroughtIntoNIFromEUPage}
 
 /** Base methods that are used to answer repetitive scenarios within journeys to make code more readable */
@@ -181,16 +181,17 @@ object CommonJourney {
     * details from an International Flow etc., Notifier -> self submission Purchaser -> notifying on behalf of someone
     * else Supplier -> who we are purchasing the vehicle from
     */
+  // TODO: this can become generic and then used for supplier + purchaser
   def notifierHasUkDetails(): Unit = {
     // TODO: UNCOMMENT ONCE NAVIGATION IS IN PLACE
     IsYourAddressInTheUK.navigateToPage(IsYourAddressInTheUK.pageUrl)
     IsYourAddressInTheUK.verifyPageDisplayed()
     IsYourAddressInTheUK.selectOptionOneAndContinue()
-    FindYourAddress.verifyPageDisplayed()
+    FindYourAddress.verifyPageDisplayed(AddressPages.Notifier)
     FindYourAddress.inputUserAddressForSearch()
-    ChooseYourAddress.verifyPageDisplayed()
+    ChooseYourAddress.verifyPageDisplayed(AddressPages.Notifier)
     ChooseYourAddress.selectAnAddress()
-    ReviewAndConfirmAddress.verifyPageDisplayed()
+    ReviewAndConfirmAddress.verifyPageDisplayed(AddressPages.Notifier)
     ReviewAndConfirmAddress.clickContinue()
   }
 

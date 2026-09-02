@@ -14,15 +14,17 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.pages
+package uk.gov.hmrc.ui.pages.imports
 
-import uk.gov.hmrc.ui.helpers.AddressPages
+import uk.gov.hmrc.ui.pages.BasePage
 
-class WeHaveChangedYourAddress(addressJourney: AddressPages) extends BasePage {
-  override val pageUrl: String = s"$baseUrl/${addressJourney.getWeHaveChangedYourAddressUrl}"
+object VehicleBroughtFromOutsideBothTheUkAndEu extends BasePage {
+  override val pageUrl: String = s"$baseUrl/vehicles-brought-from-outside-uk-or-eu"
 
   def verifyPageDisplayed(): Unit =
-    validateStandardPage(
-      expectedHeading = addressJourney.getWeHaveChangedYourAddressTitle
+    verifyStandardPageHeading(
+      expectedHeading = "Vehicles brought from outside both the UK and the EU"
     )
+
+  // TODO: ADD SELECT IMPORT / SPREADSHEET RADIO BUTTON
 }

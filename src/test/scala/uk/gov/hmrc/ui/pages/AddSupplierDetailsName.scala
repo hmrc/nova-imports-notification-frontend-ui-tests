@@ -16,30 +16,29 @@
 
 package uk.gov.hmrc.ui.pages
 
-import org.openqa.selenium.By
 import uk.gov.hmrc.ui.data.TestData
-import uk.gov.hmrc.ui.helpers.AddressPages
 
-object SelectYourCountryOrTerritory extends BasePage {
-  override val pageUrl: String = s"$addressLookupBaseUrl/"
-  val endOfUrl: String         = "/country-picker"
+object AddSupplierDetailsName extends BasePage {
+  override val pageUrl: String = s"$baseUrl/supplier/1/supplier-name"
 
-  object ALFPageLocators {
-    val countryOrTerritory: By = By.id("countryCode")
-  }
-
-  def verifyPartialUrl(): Unit =
-    verifyEndOfUrl(endOfUrl)
-
-  def verifyPageDisplayed(addressPageType: AddressPages): Unit =
+  def verifyPageDisplayed(): Unit =
     verifyStandardPageHeading(
-      expectedHeading = addressPageType.getSelectYourCountryOrTerritoryPageTitle
+      expectedHeading = "What is the supplier’s name?"
     )
 
-  def inputCountryOrTerritory(): Unit = {
+  // TODO: Again code not DRY and also could use different data
+  def inputUserDetails(): Unit = {
     typeInsideElement(
-      locator = ALFPageLocators.countryOrTerritory,
-      input = TestData.AddressDetails.ManualEntryOfAddress.manualInternationalAddress.country.get
+      Locators.title,
+      TestData.UserDetails.SupplierDetails.individualSupplier.userDetails.title
+    )
+    typeInsideElement(
+      Locators.firstName,
+      TestData.UserDetails.SupplierDetails.individualSupplier.userDetails.firstName
+    )
+    typeInsideElement(
+      Locators.lastName,
+      TestData.UserDetails.SupplierDetails.individualSupplier.userDetails.lastName
     )
     clickContinue()
   }

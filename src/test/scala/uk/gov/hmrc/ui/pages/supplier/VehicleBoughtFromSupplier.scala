@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.pages
+package uk.gov.hmrc.ui.pages.supplier
 
-import uk.gov.hmrc.ui.helpers.AddressPages
+import uk.gov.hmrc.ui.pages.BasePage
 
-class WeHaveChangedYourAddress(addressJourney: AddressPages) extends BasePage {
-  override val pageUrl: String = s"$baseUrl/${addressJourney.getWeHaveChangedYourAddressUrl}"
+object VehicleBoughtFromSupplier extends BasePage {
+  override val pageUrl: String = s"$baseUrl/supplier/1/vehicles-bought-from-supplier"
 
   def verifyPageDisplayed(): Unit =
-    validateStandardPage(
-      expectedHeading = addressJourney.getWeHaveChangedYourAddressTitle
+    verifyPartialHeading(
+      expectedStartOfHeading = "Vehicles brought from"
     )
 }
