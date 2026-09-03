@@ -23,7 +23,7 @@ object VATOrganisationUserJourney {
   object Acquisition {
     def bringingAVehicleInForBusinessUse(): Unit = {
       CommonJourney.loginAndStartANotification(AffinityGroup.OrganisationVAT)
-      CommonJourney.beginAnAcquisition()
+      CommonJourney.beginAnAcquisition(vatUser = true)
       CommonJourney.vehicleBroughtInForBusinessUse(AffinityGroup.OrganisationVAT)
       CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.OrganisationVAT)
       NotificationTaskList.verifyTaskListWithoutAddress()
@@ -38,7 +38,7 @@ object VATOrganisationUserJourney {
 
     def bringingAVehicleInForPrivateUse(): Unit = {
       CommonJourney.loginAndStartANotification(AffinityGroup.OrganisationVAT)
-      CommonJourney.beginAnAcquisition()
+      CommonJourney.beginAnAcquisition(vatUser = true)
       CommonJourney.vehicleBroughtInForPersonalUse(AffinityGroup.OrganisationVAT)
       CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.OrganisationVAT)
       NotificationTaskList.verifyTaskListWithAddress()
@@ -57,7 +57,7 @@ object VATOrganisationUserJourney {
   object Import {
     def importAVehicleForBusinessUse(): Unit = {
       CommonJourney.loginAndStartANotification(AffinityGroup.OrganisationVAT)
-      CommonJourney.beginAnImport()
+      CommonJourney.beginAnImport(vatUser = true)
       CommonJourney.vehicleBroughtInForBusinessUse(AffinityGroup.OrganisationVAT)
       CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.OrganisationVAT)
       NotificationTaskList.verifyTaskListWithoutAddress()
@@ -71,7 +71,7 @@ object VATOrganisationUserJourney {
 
     def importAVehicleForPrivateUse(): Unit = {
       CommonJourney.loginAndStartANotification(AffinityGroup.OrganisationVAT)
-      CommonJourney.beginAnImport()
+      CommonJourney.beginAnImport(vatUser = true)
       CommonJourney.vehicleBroughtInForPersonalUse(AffinityGroup.OrganisationVAT)
       CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.OrganisationVAT)
       NotificationTaskList.verifyTaskListWithAddress()

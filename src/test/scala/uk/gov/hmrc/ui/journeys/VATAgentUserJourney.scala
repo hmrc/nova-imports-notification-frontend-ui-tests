@@ -42,7 +42,7 @@ object VATAgentUserJourney {
 //    object Acquisition {
 //      def clientNotifyingForBusinessUse(): Unit = {
 //        loginSelectClientAndBeginANotification()
-//        CommonJourney.beginAnAcquisition()
+//        CommonJourney.beginAnAcquisition(vatUser = true)
 //        CommonJourney.vehicleBroughtInForBusinessUse(AffinityGroup.AgentVAT)
 //        CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.AgentVAT)
 //        // TODO: TASK LIST
@@ -51,7 +51,7 @@ object VATAgentUserJourney {
 //
 //      def clientNotifyingForPersonalUse(): Unit = {
 //        loginSelectClientAndBeginANotification()
-//        CommonJourney.beginAnAcquisition()
+//        CommonJourney.beginAnAcquisition(vatUser = true)
 //        CommonJourney.vehicleBroughtInForPersonalUse(AffinityGroup.AgentVAT)
 //        CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.AgentVAT)
 //        // TODO: TASK LIST
@@ -76,7 +76,7 @@ object VATAgentUserJourney {
 
         // TODO: UNCOMMENT ONCE BUG IS FIXED
         // CommonJourney.loginAndStartANotification(AffinityGroup.AgentVAT)
-        CommonJourney.beginAnAcquisition()
+        CommonJourney.beginAnAcquisition(vatUser = true)
         CommonJourney.notifierIsABusiness()
         CommonJourney.selfNotifying()
         CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.AgentVAT)
@@ -95,7 +95,7 @@ object VATAgentUserJourney {
 
         // TODO: UNCOMMENT ONCE BUG IS FIXED
         // CommonJourney.loginAndStartANotification(AffinityGroup.AgentVAT)
-        CommonJourney.beginAnAcquisition()
+        CommonJourney.beginAnAcquisition(vatUser = true)
         CommonJourney.notifierIsAPrivateIndividual()
         CommonJourney.selfNotifying()
         CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.AgentVAT)
@@ -113,7 +113,7 @@ object VATAgentUserJourney {
 
         // TODO: UNCOMMENT ONCE BUG IS FIXED
         // CommonJourney.loginAndStartANotification(AffinityGroup.AgentVAT)
-        CommonJourney.beginAnAcquisition()
+        CommonJourney.beginAnAcquisition(vatUser = true)
         CommonJourney.notifierIsABusiness()
         CommonJourney.notifyingForABusiness()
         CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.AgentVAT)
@@ -130,7 +130,7 @@ object VATAgentUserJourney {
 
         // TODO: UNCOMMENT ONCE BUG IS FIXED
         // CommonJourney.loginAndStartANotification(AffinityGroup.AgentVAT)
-        CommonJourney.beginAnAcquisition()
+        CommonJourney.beginAnAcquisition(vatUser = true)
         CommonJourney.notifierIsABusiness()
         CommonJourney.notifyingForAnIndividual()
         CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.AgentVAT)
@@ -147,7 +147,7 @@ object VATAgentUserJourney {
 
         // TODO: UNCOMMENT ONCE BUG IS FIXED
         // CommonJourney.loginAndStartANotification(AffinityGroup.AgentVAT)
-        CommonJourney.beginAnAcquisition()
+        CommonJourney.beginAnAcquisition(vatUser = true)
         CommonJourney.notifierIsAPrivateIndividual()
         CommonJourney.notifyingForABusiness()
         CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.AgentVAT)
@@ -164,7 +164,7 @@ object VATAgentUserJourney {
 
         // TODO: UNCOMMENT ONCE BUG IS FIXED
         // CommonJourney.loginAndStartANotification(AffinityGroup.AgentVAT)
-        CommonJourney.beginAnAcquisition()
+        CommonJourney.beginAnAcquisition(vatUser = true)
         CommonJourney.notifierIsAPrivateIndividual()
         CommonJourney.notifyingForAnIndividual()
         CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.AgentVAT)
