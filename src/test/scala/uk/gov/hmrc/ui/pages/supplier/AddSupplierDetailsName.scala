@@ -16,27 +16,31 @@
 
 package uk.gov.hmrc.ui.pages.supplier
 
-import org.openqa.selenium.By
+import uk.gov.hmrc.ui.data.TestData
 import uk.gov.hmrc.ui.pages.BasePage
 
-class EnterTheSuppliersVatRegistrationDetails(supplierNumber: Int = 1) extends BasePage {
-  override val pageUrl: String = s"$baseUrl/supplier/$supplierNumber/supplier-vat-registration-details"
+class AddSupplierDetailsName(supplierNumber: Int = 1) extends BasePage {
+  override val pageUrl: String = s"$baseUrl/supplier/$supplierNumber/supplier-name"
 
-  object PageLocators {
-    val country: By = By.id("countryCode")
-    val vatNum: By  = By.id("vatNumber")
-  }
-
-  // TODO: should this actually not be a input heading type, see if prototype + service need changing?
   def verifyPageDisplayed(): Unit =
     verifyStandardPageHeading(
-      expectedHeading = "Enter the supplier’s VAT registration details"
+      expectedHeading = "What is the supplier’s name?"
     )
 
-  // TODO: Need test data for this! Come back and refactor
-  def inputCountryAndVatNumber(): Unit = {
-    typeInsideElement(PageLocators.country, "Croatia")
-    typeInsideElement(PageLocators.vatNum, "00000000000")
+  // TODO: Again code not DRY and also could use different data
+  def inputUserDetails(): Unit = {
+    typeInsideElement(
+      Locators.title,
+      TestData.UserDetails.SupplierDetails.individualSupplier.userDetails.title
+    )
+    typeInsideElement(
+      Locators.firstName,
+      TestData.UserDetails.SupplierDetails.individualSupplier.userDetails.firstName
+    )
+    typeInsideElement(
+      Locators.lastName,
+      TestData.UserDetails.SupplierDetails.individualSupplier.userDetails.lastName
+    )
     clickContinue()
   }
 }

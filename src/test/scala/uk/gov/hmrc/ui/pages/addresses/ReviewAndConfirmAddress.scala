@@ -14,15 +14,24 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.pages.supplier
+package uk.gov.hmrc.ui.pages.addresses
 
+import uk.gov.hmrc.ui.helpers.AddressPages
 import uk.gov.hmrc.ui.pages.BasePage
 
-class VehicleBoughtFromSupplier(supplierNumber: Int = 1) extends BasePage {
-  override val pageUrl: String = s"$baseUrl/supplier/$supplierNumber/vehicles-bought-from-supplier"
+object ReviewAndConfirmAddress extends BasePage {
+  override val pageUrl: String      = s"$addressLookupBaseUrl"
+  val endOfUkUrl: String            = "/confirm"
+  val endOfInternationalUrl: String = "/international/confirm"
 
-  def verifyPageDisplayed(): Unit =
-    verifyPartialHeading(
-      expectedStartOfHeading = "Vehicles brought from"
+  def verifyPartialUkUrl(): Unit =
+    verifyEndOfUrl(endOfUkUrl)
+
+  def verifyPartialInternationalUrl(): Unit =
+    verifyEndOfUrl(endOfInternationalUrl)
+
+  def verifyPageDisplayed(addressPageType: AddressPages): Unit =
+    verifyStandardPageHeading(
+      expectedHeading = addressPageType.getReviewAndConfirmAddressPageTitle
     )
 }

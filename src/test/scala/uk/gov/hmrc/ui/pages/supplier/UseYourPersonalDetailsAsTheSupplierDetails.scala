@@ -16,27 +16,14 @@
 
 package uk.gov.hmrc.ui.pages.supplier
 
-import org.openqa.selenium.By
 import uk.gov.hmrc.ui.pages.BasePage
 
-class EnterTheSuppliersVatRegistrationDetails(supplierNumber: Int = 1) extends BasePage {
-  override val pageUrl: String = s"$baseUrl/supplier/$supplierNumber/supplier-vat-registration-details"
+// TODO: I don't think the AS-IS actually allows you to use the supplier details for personal details more than once!
+class UseYourPersonalDetailsAsTheSupplierDetails(supplierNumber: Int = 1) extends BasePage {
+  override val pageUrl: String = s"$baseUrl/supplier/$supplierNumber/use-personal-details-as-supplier"
 
-  object PageLocators {
-    val country: By = By.id("countryCode")
-    val vatNum: By  = By.id("vatNumber")
-  }
-
-  // TODO: should this actually not be a input heading type, see if prototype + service need changing?
   def verifyPageDisplayed(): Unit =
     verifyStandardPageHeading(
-      expectedHeading = "Enter the supplier’s VAT registration details"
+      expectedHeading = "Use your personal details as the supplier details"
     )
-
-  // TODO: Need test data for this! Come back and refactor
-  def inputCountryAndVatNumber(): Unit = {
-    typeInsideElement(PageLocators.country, "Croatia")
-    typeInsideElement(PageLocators.vatNum, "00000000000")
-    clickContinue()
-  }
 }

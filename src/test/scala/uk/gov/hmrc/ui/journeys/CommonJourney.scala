@@ -17,7 +17,12 @@
 package uk.gov.hmrc.ui.journeys
 
 import uk.gov.hmrc.ui.helpers.{AddressPages, AffinityGroup, CYAPage}
-import uk.gov.hmrc.ui.pages.{AddPurchaserDetailsBusinessName, AddPurchaserDetailsName, AddVehicleDetails, AddYourDetailsEmail, AddYourDetailsGuidancePage, AddYourDetailsName, AddYourDetailsPhoneNumber, AreYouABusinessOrPrivateIndividual, AreYouNotifyingAsPurchaserOrOnBehalf, AuthLoginPage, BeforeYouContinue, CheckYourAnswers, ChooseYourAddress, FindYourAddress, HasYourClientBroughtAVehicleIntoTheUkForBusinessUse, HaveYouBroughtAVehicleIntoTheUKForBusinessUse, IsPurchaserAddressInTheUK, IsYourAddressInTheUK, LandingPage, NotificationTaskList, PurchaserOnBehalfOfABusinessOrIndividual, ReviewAndConfirmAddress, VehicleBroughtIntoNIFromEUPage}
+import uk.gov.hmrc.ui.pages.addresses.{ChooseYourAddress, FindYourAddress, ReviewAndConfirmAddress}
+import uk.gov.hmrc.ui.pages.common.{AreYouABusinessOrPrivateIndividual, AreYouNotifyingAsPurchaserOrOnBehalf, BeforeYouContinue, CheckYourAnswers, HasYourClientBroughtAVehicleIntoTheUkForBusinessUse, HaveYouBroughtAVehicleIntoTheUKForBusinessUse, LandingPage, NotificationTaskList, PurchaserOnBehalfOfABusinessOrIndividual, VehicleBroughtIntoNIFromEUPage}
+import uk.gov.hmrc.ui.pages.notifier.{AddYourDetailsEmail, AddYourDetailsGuidancePage, AddYourDetailsName, AddYourDetailsPhoneNumber, IsYourAddressInTheUK}
+import uk.gov.hmrc.ui.pages.purchaser.{AddPurchaserDetailsBusinessName, AddPurchaserDetailsName, IsPurchaserAddressInTheUK}
+import uk.gov.hmrc.ui.pages.supplier.AddVehicleDetails
+import uk.gov.hmrc.ui.pages.AuthLoginPage
 
 /** Base methods that are used to answer repetitive scenarios within journeys to make code more readable */
 object CommonJourney {

@@ -17,7 +17,7 @@
 package uk.gov.hmrc.ui.journeys
 
 import uk.gov.hmrc.ui.helpers.{AffinityGroup, CYAPage}
-import uk.gov.hmrc.ui.pages.{AreYouABusinessOrPrivateIndividual, AreYouNotifyingAsPurchaserOrOnBehalf, CheckYourAnswers, PurchaserOnBehalfOfABusinessOrIndividual, VehicleBroughtIntoNIFromOutsideEUPage}
+import uk.gov.hmrc.ui.pages.common.{AreYouABusinessOrPrivateIndividual, AreYouNotifyingAsPurchaserOrOnBehalf, CheckYourAnswers, PurchaserOnBehalfOfABusinessOrIndividual, VehicleBroughtIntoNIFromOutsideEUPage}
 
 object IndividualUserJourney {
   // Acquisition flow

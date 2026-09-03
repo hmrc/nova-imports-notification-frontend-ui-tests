@@ -16,13 +16,24 @@
 
 package uk.gov.hmrc.ui.pages.supplier
 
+import uk.gov.hmrc.ui.data.TestData
 import uk.gov.hmrc.ui.pages.BasePage
+import uk.gov.hmrc.ui.pages.purchaser.AddPurchaserDetailsBusinessName.{clickContinue, typeInsideElement}
 
-class VehicleBoughtFromSupplier(supplierNumber: Int = 1) extends BasePage {
-  override val pageUrl: String = s"$baseUrl/supplier/$supplierNumber/vehicles-bought-from-supplier"
+class AddSupplierDetailsBusinessName(supplierNumber: Int = 1) extends BasePage {
+  override val pageUrl: String = s"$baseUrl/supplier/$supplierNumber/supplier-business-name"
 
   def verifyPageDisplayed(): Unit =
-    verifyPartialHeading(
-      expectedStartOfHeading = "Vehicles brought from"
+    verifyInputPageHeading(
+      expectedHeading = "What is the supplier’s business name?"
     )
+
+  // TODO: this code isn't DRY and is already repeated in purchaser business name etc.,
+  def inputBusinessName(): Unit = {
+    typeInsideElement(
+      Locators.inputField,
+      TestData.UserDetails.SupplierDetails.businessSupplier.userDetails.businessName
+    )
+    clickContinue()
+  }
 }

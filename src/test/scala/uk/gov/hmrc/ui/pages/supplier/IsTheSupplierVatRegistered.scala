@@ -18,8 +18,8 @@ package uk.gov.hmrc.ui.pages.supplier
 
 import uk.gov.hmrc.ui.pages.BasePage
 
-object IsTheSupplierVatRegistered extends BasePage {
-  override val pageUrl: String = s"$baseUrl/supplier/1/is-supplier-vat-registered"
+class IsTheSupplierVatRegistered(supplierNumber: Int = 1) extends BasePage {
+  override val pageUrl: String = s"$baseUrl/supplier/$supplierNumber/is-supplier-vat-registered"
 
   def verifyPageDisplayed(): Unit =
     verifyQuestionPageHeading(
