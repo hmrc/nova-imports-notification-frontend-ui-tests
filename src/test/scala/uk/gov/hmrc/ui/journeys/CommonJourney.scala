@@ -46,14 +46,14 @@ object CommonJourney {
     BeforeYouContinue.clickContinue()
   }
 
-  def beginAnAcquisition(): Unit = {
-    VehicleBroughtIntoNIFromEUPage.verifyPageDisplayed()
-    VehicleBroughtIntoNIFromEUPage.selectYesAndContinue()
+  def beginAnAcquisition(vatUser: Boolean = false): Unit = {
+    VehicleBroughtIntoNIFromEUPage(vatUser).verifyPageDisplayed()
+    VehicleBroughtIntoNIFromEUPage(vatUser).selectYesAndContinue()
   }
 
-  def beginAnImport(): Unit = {
-    VehicleBroughtIntoNIFromEUPage.verifyPageDisplayed()
-    VehicleBroughtIntoNIFromEUPage.selectNoAndContinue()
+  def beginAnImport(vatUser: Boolean = false): Unit = {
+    VehicleBroughtIntoNIFromEUPage(vatUser).verifyPageDisplayed()
+    VehicleBroughtIntoNIFromEUPage(vatUser).selectNoAndContinue()
   }
 
   def selfNotifying(): Unit = {

@@ -18,12 +18,13 @@ package uk.gov.hmrc.ui.pages.common
 
 import uk.gov.hmrc.ui.pages.BasePage
 
-object VehicleBroughtIntoNIFromEUPage extends BasePage {
-
+class VehicleBroughtIntoNIFromEUPage(isVatUser: Boolean) extends BasePage {
   override val pageUrl: String = s"$baseUrl/vehicle-from-eu-to-northern-ireland"
+  val heading: String          =
+    if (isVatUser) "Is this notification for a vehicle brought into Northern Ireland from an EU country?"
+    else "Notifying for a vehicle brought into Northern Ireland"
 
   def verifyPageDisplayed(): Unit =
-    validateStandardPage(
-      expectedHeading = "Notifying for a vehicle brought into Northern Ireland"
-    )
+    if (isVatUser) validateQuestionPage(expectedHeading = heading)
+    else validateStandardPage(expectedHeading = heading)
 }
