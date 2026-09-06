@@ -47,8 +47,8 @@ object VATOrganisationUserJourney {
       CommonJourney.addUserDetailsNamePhoneNumberEmailAddress()
       CheckYourAnswers(CYAPage.YourDetails).clickContinue()
       NotificationTaskList.verifyAddYourDetailsStatus("Completed")
+      CommonJourney.addYourAddress()
       CommonJourney.notifierHasUkDetails()
-      // TODO: SHOULD BE AT TASK LIST AGAIN
       CommonJourney.addVehicleDetails()
       CommonJourney.addVehicleDetailsAddBySupplier()
     }
@@ -80,8 +80,8 @@ object VATOrganisationUserJourney {
       CommonJourney.addUserDetailsNamePhoneNumberEmailAddress()
       CheckYourAnswers(CYAPage.YourDetails).clickContinue()
       NotificationTaskList.verifyAddYourDetailsStatus("Completed")
+      CommonJourney.addYourAddress()
       CommonJourney.notifierHasUkDetails()
-      // TODO: SHOULD BE AT TASK LIST AGAIN
     }
   }
 }
