@@ -33,7 +33,6 @@ object VATOrganisationUserJourney {
       CheckYourAnswers(CYAPage.YourDetails).clickContinue()
       NotificationTaskList.verifyAddYourDetailsStatus("Completed")
       CommonJourney.addVehicleDetails()
-      CommonJourney.addVehicleDetailsAddBySupplier()
     }
 
     def bringingAVehicleInForPrivateUse(): Unit = {
@@ -49,8 +48,8 @@ object VATOrganisationUserJourney {
       NotificationTaskList.verifyAddYourDetailsStatus("Completed")
       CommonJourney.addYourAddress()
       CommonJourney.notifierHasUkDetails()
+      NotificationTaskList.verifyAddYourAddressStatus("Completed")
       CommonJourney.addVehicleDetails()
-      CommonJourney.addVehicleDetailsAddBySupplier()
     }
   }
 
@@ -63,7 +62,6 @@ object VATOrganisationUserJourney {
       NotificationTaskList.verifyTaskListWithoutAddress()
       CommonJourney.addYourDetails()
       CommonJourney.validateAddYourDetailsGuidancePage()
-      // TODO: BUSINESS NAME?
       CommonJourney.addPhoneAndEmailDetails()
       CheckYourAnswers(CYAPage.YourDetails).clickContinue()
       NotificationTaskList.verifyAddYourDetailsStatus("Completed")
@@ -82,6 +80,7 @@ object VATOrganisationUserJourney {
       NotificationTaskList.verifyAddYourDetailsStatus("Completed")
       CommonJourney.addYourAddress()
       CommonJourney.notifierHasUkDetails()
+      NotificationTaskList.verifyAddYourAddressStatus("Completed")
     }
   }
 }

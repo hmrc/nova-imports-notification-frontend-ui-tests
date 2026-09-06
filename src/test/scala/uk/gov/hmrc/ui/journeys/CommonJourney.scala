@@ -213,11 +213,6 @@ object CommonJourney {
 
   // TODO:
   /** Helper methods for adding vehicles */
-  def addVehicleDetailsAddBySupplier(): Unit = {
-    AddVehicleDetails.verifyPageDisplayed()
-    AddVehicleDetails.selectOptionOneAndContinue()
-  }
-
   def addVehicleDetailsUploadAVehicleSpreadsheet(): Unit = {
     AddVehicleDetails.verifyPageDisplayed()
     AddVehicleDetails.selectOptionTwoAndContinue()
