@@ -22,26 +22,27 @@ package uk.gov.hmrc.ui.helpers
   *     this given journey
   */
 enum CYAPage:
-  case InitialQuestions, YourDetails, YourAddress
+  case InitialQuestions, YourDetails, YourAddress, PurchaserDetails
 
   def getCYAPageUrl: String = this match {
     case InitialQuestions => "initial-questions"
     case YourDetails      => "your-details"
     case YourAddress      => "your-address"
+    case PurchaserDetails => "purchaser-details"
   }
 
+// Used to check CYA's that vary based on User Types
 object CYAPage {
-  // Used to check CYA's that vary based on User Types
-  def getContent(page: CYAPage, group: AffinityGroup, clientSelected: Boolean): String =
-    (page, group, clientSelected) match {
-      case (CYAPage.InitialQuestions, AffinityGroup.Individual, false)      =>
+  def getInitialQuestionsContent(group: AffinityGroup, clientSelected: Boolean): String =
+    (group, clientSelected) match {
+      case (AffinityGroup.Individual, false)      =>
         "Are you a business or private individual?"
-      case (CYAPage.InitialQuestions, AffinityGroup.OrganisationVAT, false) =>
+      case (AffinityGroup.OrganisationVAT, false) =>
         "Have you brought a vehicle into the UK for business use?"
-      case (CYAPage.InitialQuestions, AffinityGroup.AgentVAT, false)        =>
+      case (AffinityGroup.AgentVAT, false)        =>
         "Are you a business or private individual?"
-      case (CYAPage.InitialQuestions, AffinityGroup.AgentVAT, true)         =>
+      case (AffinityGroup.AgentVAT, true)         =>
         "Has your client brought a vehicle into the UK for business use?"
-      case (_, _, _)                                                        => "No content matches"
+      case (_, _)                                 => "No content matches"
     }
 }

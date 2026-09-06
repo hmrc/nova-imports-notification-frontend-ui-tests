@@ -33,10 +33,12 @@ object FindYourAddress extends BasePage {
   def verifyPartialUrl(): Unit =
     verifyEndOfUrl(endOfUrl)
 
-  def verifyPageDisplayed(addressPageType: AddressPages): Unit =
+  def verifyPageDisplayed(addressPageType: AddressPages): Unit = {
+    println(s"About to be: ${addressPageType.getFindYourAddressPageTitle}")
     verifyStandardPageHeading(
       expectedHeading = addressPageType.getFindYourAddressPageTitle
     )
+  }
 
   def inputUserAddressForSearch(): Unit = {
     typeInsideElement(

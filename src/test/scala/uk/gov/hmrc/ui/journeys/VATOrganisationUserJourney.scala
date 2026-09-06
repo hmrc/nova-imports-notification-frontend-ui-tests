@@ -16,14 +16,13 @@
 
 package uk.gov.hmrc.ui.journeys
 
-import uk.gov.hmrc.ui.helpers.{AffinityGroup, CYAPage}
+import uk.gov.hmrc.ui.helpers.{AffinityGroup, CYAPage, NotificationType}
 import uk.gov.hmrc.ui.pages.common.{CheckYourAnswers, NotificationTaskList}
 
 object VATOrganisationUserJourney {
   object Acquisition {
     def bringingAVehicleInForBusinessUse(): Unit = {
-      CommonJourney.loginAndStartANotification(AffinityGroup.OrganisationVAT)
-      CommonJourney.beginAnAcquisition(vatUser = true)
+      CommonJourney.loginAndStartANotification(AffinityGroup.OrganisationVAT, NotificationType.Acquisition)
       CommonJourney.vehicleBroughtInForBusinessUse(AffinityGroup.OrganisationVAT)
       CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.OrganisationVAT)
       NotificationTaskList.verifyTaskListWithoutAddress()
@@ -33,12 +32,10 @@ object VATOrganisationUserJourney {
       CheckYourAnswers(CYAPage.YourDetails).clickContinue()
       NotificationTaskList.verifyAddYourDetailsStatus("Completed")
       CommonJourney.addVehicleDetails()
-      CommonJourney.addVehicleDetailsAddBySupplier()
     }
 
     def bringingAVehicleInForPrivateUse(): Unit = {
-      CommonJourney.loginAndStartANotification(AffinityGroup.OrganisationVAT)
-      CommonJourney.beginAnAcquisition(vatUser = true)
+      CommonJourney.loginAndStartANotification(AffinityGroup.OrganisationVAT, NotificationType.Acquisition)
       CommonJourney.vehicleBroughtInForPersonalUse(AffinityGroup.OrganisationVAT)
       CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.OrganisationVAT)
       NotificationTaskList.verifyTaskListWithAddress()
@@ -47,31 +44,28 @@ object VATOrganisationUserJourney {
       CommonJourney.addUserDetailsNamePhoneNumberEmailAddress()
       CheckYourAnswers(CYAPage.YourDetails).clickContinue()
       NotificationTaskList.verifyAddYourDetailsStatus("Completed")
+      CommonJourney.addYourAddress()
       CommonJourney.notifierHasUkDetails()
-      // TODO: SHOULD BE AT TASK LIST AGAIN
+      NotificationTaskList.verifyAddYourAddressStatus("Completed")
       CommonJourney.addVehicleDetails()
-      CommonJourney.addVehicleDetailsAddBySupplier()
     }
   }
 
   object Import {
     def importAVehicleForBusinessUse(): Unit = {
-      CommonJourney.loginAndStartANotification(AffinityGroup.OrganisationVAT)
-      CommonJourney.beginAnImport(vatUser = true)
+      CommonJourney.loginAndStartANotification(AffinityGroup.OrganisationVAT, NotificationType.Acquisition)
       CommonJourney.vehicleBroughtInForBusinessUse(AffinityGroup.OrganisationVAT)
       CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.OrganisationVAT)
       NotificationTaskList.verifyTaskListWithoutAddress()
       CommonJourney.addYourDetails()
       CommonJourney.validateAddYourDetailsGuidancePage()
-      // TODO: BUSINESS NAME?
       CommonJourney.addPhoneAndEmailDetails()
       CheckYourAnswers(CYAPage.YourDetails).clickContinue()
       NotificationTaskList.verifyAddYourDetailsStatus("Completed")
     }
 
     def importAVehicleForPrivateUse(): Unit = {
-      CommonJourney.loginAndStartANotification(AffinityGroup.OrganisationVAT)
-      CommonJourney.beginAnImport(vatUser = true)
+      CommonJourney.loginAndStartANotification(AffinityGroup.OrganisationVAT, NotificationType.Acquisition)
       CommonJourney.vehicleBroughtInForPersonalUse(AffinityGroup.OrganisationVAT)
       CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.OrganisationVAT)
       NotificationTaskList.verifyTaskListWithAddress()
@@ -80,8 +74,9 @@ object VATOrganisationUserJourney {
       CommonJourney.addUserDetailsNamePhoneNumberEmailAddress()
       CheckYourAnswers(CYAPage.YourDetails).clickContinue()
       NotificationTaskList.verifyAddYourDetailsStatus("Completed")
+      CommonJourney.addYourAddress()
       CommonJourney.notifierHasUkDetails()
-      // TODO: SHOULD BE AT TASK LIST AGAIN
+      NotificationTaskList.verifyAddYourAddressStatus("Completed")
     }
   }
 }
