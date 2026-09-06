@@ -28,12 +28,13 @@ object IndividualUserJourney {
       CommonJourney.notifierIsAPrivateIndividual()
       CommonJourney.selfNotifying()
       CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.Individual)
-      // TODO: TASK LIST
+      CommonJourney.addYourDetails()
       CommonJourney.addUserDetailsNamePhoneNumberEmailAddress()
       CheckYourAnswers(CYAPage.YourDetails).clickContinue()
-      // TODO: SHOULD BE AT TASK LIST AGAIN
+      CommonJourney.addYourAddress()
       CommonJourney.notifierHasUkDetails()
-      // TODO: SHOULD BE AT TASK LIST AGAIN
+      CommonJourney.addVehicleDetails()
+      // TODO: Vehicle stuff
     }
 
     def notifyingAsABusinessAsANotifier(): Unit = {
@@ -42,9 +43,12 @@ object IndividualUserJourney {
       CommonJourney.notifierIsABusiness()
       CommonJourney.selfNotifying()
       CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.Individual)
-      // TODO: TASK LIST
-      // TODO: BUSINESS NAME PAGE
-      // TODO: CYA2.0 AND ADDRESS STUFF
+      CommonJourney.addYourDetails()
+      CommonJourney.addUserDetailsBusinessNamePhoneNumberEmailAddress()
+      CheckYourAnswers(CYAPage.YourDetails).clickContinue()
+      CommonJourney.addYourAddress()
+      CommonJourney.notifierHasUkDetails()
+      CommonJourney.addVehicleDetails()
     }
 
     def notifyingAsAIndividualOnBehalfOfBusiness(): Unit = {
@@ -53,12 +57,17 @@ object IndividualUserJourney {
       CommonJourney.notifierIsAPrivateIndividual()
       CommonJourney.notifyingForABusiness()
       CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.Individual)
-      // TODO: TASK LIST
+      CommonJourney.addYourDetails()
       CommonJourney.addUserDetailsNamePhoneNumberEmailAddress()
       CheckYourAnswers(CYAPage.YourDetails).clickContinue()
-      // TODO: SHOULD BE AT TASK LIST AGAIN
+      CommonJourney.addYourAddress()
       CommonJourney.notifierHasUkDetails()
-      // TODO: SHOULD BE AT TASK LIST AGAIN
+      CommonJourney.addPurchaserDetails()
+      CommonJourney.addPurchaserBusinessName()
+      CheckYourAnswers(CYAPage.PurchaserDetails).clickContinue()
+      CommonJourney.addPurchaserAddress()
+      CommonJourney.purchaserHasUkDetails()
+      CommonJourney.addVehicleDetails()
     }
 
     def notifyingAsAIndividualOnBehalfOfIndividual(): Unit = {
@@ -67,12 +76,17 @@ object IndividualUserJourney {
       CommonJourney.notifierIsAPrivateIndividual()
       CommonJourney.notifyingForAnIndividual()
       CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.Individual)
-      // TODO: TASK LIST
+      CommonJourney.addYourDetails()
       CommonJourney.addUserDetailsNamePhoneNumberEmailAddress()
       CheckYourAnswers(CYAPage.YourDetails).clickContinue()
-      // TODO: TASK LIST
+      CommonJourney.addYourAddress()
       CommonJourney.notifierHasUkDetails()
-      // TODO: SHOULD BE AT TASK LIST AGAIN
+      CommonJourney.addPurchaserDetails()
+      CommonJourney.addPurchaserName()
+      CheckYourAnswers(CYAPage.PurchaserDetails).clickContinue()
+      CommonJourney.addPurchaserAddress()
+      CommonJourney.purchaserHasUkDetails()
+      CommonJourney.addVehicleDetails()
     }
 
     def notifyingAsABusinessOnBehalfOfABusiness(): Unit = {
@@ -81,8 +95,17 @@ object IndividualUserJourney {
       CommonJourney.notifierIsABusiness()
       CommonJourney.notifyingForABusiness()
       CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.Individual)
-      // TODO: TASK LIST
-      // TODO: BUSINESS NAME FOR NOTIFIER + SUPPLIER DETAILS + ADDRESS
+      CommonJourney.addYourDetails()
+      CommonJourney.addUserDetailsBusinessNamePhoneNumberEmailAddress()
+      CheckYourAnswers(CYAPage.YourDetails).clickContinue()
+      CommonJourney.addYourAddress()
+      CommonJourney.notifierHasUkDetails()
+      CommonJourney.addPurchaserDetails()
+      CommonJourney.addPurchaserBusinessName()
+      CheckYourAnswers(CYAPage.PurchaserDetails).clickContinue()
+      CommonJourney.addPurchaserAddress()
+      CommonJourney.purchaserHasUkDetails()
+      CommonJourney.addVehicleDetails()
     }
 
     def notifyingAsABusinessOnBehalfOfIndividual(): Unit = {
@@ -91,8 +114,17 @@ object IndividualUserJourney {
       CommonJourney.notifierIsABusiness()
       CommonJourney.notifyingForAnIndividual()
       CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.Individual)
-      // TODO: TASK LIST
-      // TODO: BUSINESS NAME FOR NOTIFIER + SUPPLIER NAME DETAILS + ADDRESS
+      CommonJourney.addYourDetails()
+      CommonJourney.addUserDetailsBusinessNamePhoneNumberEmailAddress()
+      CheckYourAnswers(CYAPage.YourDetails).clickContinue()
+      CommonJourney.addYourAddress()
+      CommonJourney.notifierHasUkDetails()
+      CommonJourney.addPurchaserDetails()
+      CommonJourney.addPurchaserName()
+      CheckYourAnswers(CYAPage.PurchaserDetails).clickContinue()
+      CommonJourney.addPurchaserAddress()
+      CommonJourney.purchaserHasUkDetails()
+      CommonJourney.addVehicleDetails()
     }
   }
 

@@ -19,7 +19,7 @@ package uk.gov.hmrc.ui.journeys
 import uk.gov.hmrc.ui.helpers.{AddressPages, AffinityGroup, CYAPage}
 import uk.gov.hmrc.ui.pages.addresses.{ChooseYourAddress, FindYourAddress, ReviewAndConfirmAddress}
 import uk.gov.hmrc.ui.pages.common.{AreYouABusinessOrPrivateIndividual, AreYouNotifyingAsPurchaserOrOnBehalf, BeforeYouContinue, CheckYourAnswers, HasYourClientBroughtAVehicleIntoTheUkForBusinessUse, HaveYouBroughtAVehicleIntoTheUKForBusinessUse, LandingPage, NotificationTaskList, PurchaserOnBehalfOfABusinessOrIndividual, VehicleBroughtIntoNIFromEUPage}
-import uk.gov.hmrc.ui.pages.notifier.{AddYourDetailsEmail, AddYourDetailsGuidancePage, AddYourDetailsName, AddYourDetailsPhoneNumber, IsYourAddressInTheUK}
+import uk.gov.hmrc.ui.pages.notifier.{AddYourDetailsBusinessName, AddYourDetailsEmail, AddYourDetailsGuidancePage, AddYourDetailsName, AddYourDetailsPhoneNumber, IsYourAddressInTheUK}
 import uk.gov.hmrc.ui.pages.purchaser.{AddPurchaserDetailsBusinessName, AddPurchaserDetailsName, IsPurchaserAddressInTheUK}
 import uk.gov.hmrc.ui.pages.supplier.AddVehicleDetails
 import uk.gov.hmrc.ui.pages.AuthLoginPage
@@ -148,16 +148,16 @@ object CommonJourney {
   }
 
   def addUserDetailsNamePhoneNumberEmailAddress(): Unit = {
-    // TODO: REMOVE ONCE NAVIGATION IN PLACE
-    AddYourDetailsName.navigateToPage(AddYourDetailsName.pageUrl)
     AddYourDetailsName.verifyPageDisplayed()
     AddYourDetailsName.inputUserDetails()
     addPhoneAndEmailDetails()
   }
 
-  def addUserDetailsBusinessNamePhoneNumberEmailAddress(): Unit =
-    // TODO: AYD1.4
+  def addUserDetailsBusinessNamePhoneNumberEmailAddress(): Unit = {
+    AddYourDetailsBusinessName.verifyPageDisplayed()
+    AddYourDetailsBusinessName.inputBusinessName()
     addPhoneAndEmailDetails()
+  }
 
   def addPhoneAndEmailDetails(): Unit = {
     AddYourDetailsPhoneNumber.verifyPageDisplayed()
@@ -167,17 +167,11 @@ object CommonJourney {
   }
 
   def addPurchaserName(): Unit = {
-    // TODO: REMOVE ONCE NAVIGATION IN PLACE
-    NotificationTaskList.verifyTaskListWithPurchaserDetails()
-    NotificationTaskList.verifyAddPurchaserDetailsStatus("Incomplete")
-    NotificationTaskList.clickAddPurchaserDetails()
     AddPurchaserDetailsName.verifyPageDisplayed()
     AddPurchaserDetailsName.inputUserDetails()
   }
 
   def addPurchaserBusinessName(): Unit = {
-    // TODO: REMOVE ONCE NAVIGATION IN PLACE
-    AddPurchaserDetailsBusinessName.navigateToPage(AddPurchaserDetailsBusinessName.pageUrl)
     AddPurchaserDetailsBusinessName.verifyPageDisplayed()
     AddPurchaserDetailsBusinessName.inputBusinessName()
   }
@@ -188,10 +182,8 @@ object CommonJourney {
     */
   // TODO: this can become generic and then used for supplier + purchaser
   def notifierHasUkDetails(): Unit = {
-    // TODO: UNCOMMENT ONCE NAVIGATION IS IN PLACE
-    IsYourAddressInTheUK.navigateToPage(IsYourAddressInTheUK.pageUrl)
     IsYourAddressInTheUK.verifyPageDisplayed()
-    IsYourAddressInTheUK.selectOptionOneAndContinue()
+    IsYourAddressInTheUK.selectYesAndContinue()
     FindYourAddress.verifyPageDisplayed(AddressPages.Notifier)
     FindYourAddress.inputUserAddressForSearch()
     ChooseYourAddress.verifyPageDisplayed(AddressPages.Notifier)
@@ -205,6 +197,12 @@ object CommonJourney {
   def purchaserHasUkDetails(): Unit = {
     IsPurchaserAddressInTheUK.verifyPageDisplayed()
     IsPurchaserAddressInTheUK.selectOptionOneAndContinue()
+    FindYourAddress.verifyPageDisplayed(AddressPages.Purchaser)
+    FindYourAddress.inputUserAddressForSearch()
+    ChooseYourAddress.verifyPageDisplayed(AddressPages.Purchaser)
+    ChooseYourAddress.selectAnAddress()
+    ReviewAndConfirmAddress.verifyPageDisplayed(AddressPages.Purchaser)
+    ReviewAndConfirmAddress.clickContinue()
   }
 
   def purchaserHasInternationalDetails(): Unit = {}
