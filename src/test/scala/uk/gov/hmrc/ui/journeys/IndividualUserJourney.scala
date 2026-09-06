@@ -17,7 +17,7 @@
 package uk.gov.hmrc.ui.journeys
 
 import uk.gov.hmrc.ui.helpers.{AffinityGroup, CYAPage}
-import uk.gov.hmrc.ui.pages.common.{AreYouABusinessOrPrivateIndividual, AreYouNotifyingAsPurchaserOrOnBehalf, CheckYourAnswers, PurchaserOnBehalfOfABusinessOrIndividual, VehicleBroughtIntoNIFromOutsideEUPage}
+import uk.gov.hmrc.ui.pages.common.{AreYouABusinessOrPrivateIndividual, AreYouNotifyingAsPurchaserOrOnBehalf, CheckYourAnswers, NotificationTaskList, PurchaserOnBehalfOfABusinessOrIndividual, VehicleBroughtIntoNIFromOutsideEUPage}
 
 object IndividualUserJourney {
   // Acquisition flow
@@ -31,8 +31,10 @@ object IndividualUserJourney {
       CommonJourney.addYourDetails()
       CommonJourney.addUserDetailsNamePhoneNumberEmailAddress()
       CheckYourAnswers(CYAPage.YourDetails).clickContinue()
+      NotificationTaskList.verifyAddYourDetailsStatus("Completed")
       CommonJourney.addYourAddress()
       CommonJourney.notifierHasUkDetails()
+      NotificationTaskList.verifyAddYourAddressStatus("Completed")
       CommonJourney.addVehicleDetails()
       // TODO: Vehicle stuff
     }
@@ -46,8 +48,10 @@ object IndividualUserJourney {
       CommonJourney.addYourDetails()
       CommonJourney.addUserDetailsBusinessNamePhoneNumberEmailAddress()
       CheckYourAnswers(CYAPage.YourDetails).clickContinue()
+      NotificationTaskList.verifyAddYourDetailsStatus("Completed")
       CommonJourney.addYourAddress()
       CommonJourney.notifierHasUkDetails()
+      NotificationTaskList.verifyAddYourAddressStatus("Completed")
       CommonJourney.addVehicleDetails()
     }
 
@@ -60,13 +64,17 @@ object IndividualUserJourney {
       CommonJourney.addYourDetails()
       CommonJourney.addUserDetailsNamePhoneNumberEmailAddress()
       CheckYourAnswers(CYAPage.YourDetails).clickContinue()
+      NotificationTaskList.verifyAddYourDetailsStatus("Completed")
       CommonJourney.addYourAddress()
       CommonJourney.notifierHasUkDetails()
+      NotificationTaskList.verifyAddYourAddressStatus("Completed")
       CommonJourney.addPurchaserDetails()
       CommonJourney.addPurchaserBusinessName()
       CheckYourAnswers(CYAPage.PurchaserDetails).clickContinue()
+      NotificationTaskList.verifyAddPurchaserDetailsStatus("Completed")
       CommonJourney.addPurchaserAddress()
       CommonJourney.purchaserHasUkDetails()
+      NotificationTaskList.verifyAddPurchaserAddressStatus("Completed")
       CommonJourney.addVehicleDetails()
     }
 
@@ -79,13 +87,17 @@ object IndividualUserJourney {
       CommonJourney.addYourDetails()
       CommonJourney.addUserDetailsNamePhoneNumberEmailAddress()
       CheckYourAnswers(CYAPage.YourDetails).clickContinue()
+      NotificationTaskList.verifyAddYourDetailsStatus("Completed")
       CommonJourney.addYourAddress()
       CommonJourney.notifierHasUkDetails()
+      NotificationTaskList.verifyAddYourAddressStatus("Completed")
       CommonJourney.addPurchaserDetails()
       CommonJourney.addPurchaserName()
       CheckYourAnswers(CYAPage.PurchaserDetails).clickContinue()
+      NotificationTaskList.verifyAddPurchaserDetailsStatus("Completed")
       CommonJourney.addPurchaserAddress()
       CommonJourney.purchaserHasUkDetails()
+      NotificationTaskList.verifyAddPurchaserAddressStatus("Completed")
       CommonJourney.addVehicleDetails()
     }
 
@@ -98,13 +110,17 @@ object IndividualUserJourney {
       CommonJourney.addYourDetails()
       CommonJourney.addUserDetailsBusinessNamePhoneNumberEmailAddress()
       CheckYourAnswers(CYAPage.YourDetails).clickContinue()
+      NotificationTaskList.verifyAddYourDetailsStatus("Completed")
       CommonJourney.addYourAddress()
       CommonJourney.notifierHasUkDetails()
+      NotificationTaskList.verifyAddYourAddressStatus("Completed")
       CommonJourney.addPurchaserDetails()
       CommonJourney.addPurchaserBusinessName()
       CheckYourAnswers(CYAPage.PurchaserDetails).clickContinue()
+      NotificationTaskList.verifyAddPurchaserDetailsStatus("Completed")
       CommonJourney.addPurchaserAddress()
       CommonJourney.purchaserHasUkDetails()
+      NotificationTaskList.verifyAddPurchaserAddressStatus("Completed")
       CommonJourney.addVehicleDetails()
     }
 
@@ -117,13 +133,17 @@ object IndividualUserJourney {
       CommonJourney.addYourDetails()
       CommonJourney.addUserDetailsBusinessNamePhoneNumberEmailAddress()
       CheckYourAnswers(CYAPage.YourDetails).clickContinue()
+      NotificationTaskList.verifyAddYourDetailsStatus("Completed")
       CommonJourney.addYourAddress()
       CommonJourney.notifierHasUkDetails()
+      NotificationTaskList.verifyAddYourAddressStatus("Completed")
       CommonJourney.addPurchaserDetails()
       CommonJourney.addPurchaserName()
       CheckYourAnswers(CYAPage.PurchaserDetails).clickContinue()
+      NotificationTaskList.verifyAddPurchaserDetailsStatus("Completed")
       CommonJourney.addPurchaserAddress()
       CommonJourney.purchaserHasUkDetails()
+      NotificationTaskList.verifyAddPurchaserAddressStatus("Completed")
       CommonJourney.addVehicleDetails()
     }
   }
