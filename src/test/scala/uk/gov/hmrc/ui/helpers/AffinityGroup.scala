@@ -62,3 +62,12 @@ enum AffinityGroup:
     case AgentVRN1       => "DVA0001"
     case AgentVRN2       => "DVLA002"
   }
+
+  // Used to see if the user should see IQ1.0 or IQ1.0a screen variation
+  def userIsVATUser: Boolean = this match {
+    case AffinityGroup.Agent           => true
+    case AffinityGroup.OrganisationVRN => true
+    case AffinityGroup.OrganisationVAT => true
+    case AffinityGroup.AgentVAT        => true
+    case _                             => false
+  }

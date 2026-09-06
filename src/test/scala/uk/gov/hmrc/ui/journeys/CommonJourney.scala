@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.ui.journeys
 
-import uk.gov.hmrc.ui.helpers.{AddressPages, AffinityGroup, CYAPage}
+import uk.gov.hmrc.ui.helpers.{AddressPages, AffinityGroup, CYAPage, NotificationType}
 import uk.gov.hmrc.ui.pages.addresses.{ChooseYourAddress, FindYourAddress, ReviewAndConfirmAddress}
 import uk.gov.hmrc.ui.pages.common.{AreYouABusinessOrPrivateIndividual, AreYouNotifyingAsPurchaserOrOnBehalf, BeforeYouContinue, CheckYourAnswers, HasYourClientBroughtAVehicleIntoTheUkForBusinessUse, HaveYouBroughtAVehicleIntoTheUKForBusinessUse, LandingPage, NotificationTaskList, PurchaserOnBehalfOfABusinessOrIndividual, VehicleBroughtIntoNIFromEUPage}
 import uk.gov.hmrc.ui.pages.notifier.{AddYourDetailsBusinessName, AddYourDetailsEmail, AddYourDetailsGuidancePage, AddYourDetailsName, AddYourDetailsPhoneNumber, IsYourAddressInTheUK}
@@ -29,31 +29,33 @@ object CommonJourney {
   // TODO: EVENTUALLY BREAK THESE UP INTO, IND -> ORG -> AGENT SPECIFIC METHODS
   // ACQUISITION SPECIFIC
   // IMPORT SPECIFIC
-  def loginAndStartANotification(affinityGroup: AffinityGroup): Unit = {
+  def loginAndStartANotification(
+    affinityGroup: AffinityGroup,
+    notificationType: NotificationType,
+    clientSelected: Boolean = false
+  ): Unit = {
     AuthLoginPage.login(affinityGroup)
     LandingPage.verifyPageDisplayed()
     LandingPage.createANewNotification()
 
+    val vatUser = affinityGroup.userIsVATUser
+
     if (
       affinityGroup == AffinityGroup.OrganisationVAT ||
       affinityGroup == AffinityGroup.OrganisationVRN ||
-      affinityGroup == AffinityGroup.AgentVAT
+      (affinityGroup == AffinityGroup.AgentVAT && clientSelected)
     ) {
       BeforeYouContinue.verifyMultipleVehiclesSectionPresent()
     } else {
       BeforeYouContinue.verifyMultipleVehiclesSectionNotPresent()
     }
     BeforeYouContinue.clickContinue()
-  }
 
-  def beginAnAcquisition(vatUser: Boolean = false): Unit = {
     VehicleBroughtIntoNIFromEUPage(vatUser).verifyPageDisplayed()
-    VehicleBroughtIntoNIFromEUPage(vatUser).selectYesAndContinue()
-  }
-
-  def beginAnImport(vatUser: Boolean = false): Unit = {
-    VehicleBroughtIntoNIFromEUPage(vatUser).verifyPageDisplayed()
-    VehicleBroughtIntoNIFromEUPage(vatUser).selectNoAndContinue()
+    notificationType match {
+      case NotificationType.Acquisition => VehicleBroughtIntoNIFromEUPage(vatUser).selectYesAndContinue()
+      case NotificationType.Import      => VehicleBroughtIntoNIFromEUPage(vatUser).selectNoAndContinue()
+    }
   }
 
   def selfNotifying(): Unit = {

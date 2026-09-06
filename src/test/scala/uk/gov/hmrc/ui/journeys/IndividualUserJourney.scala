@@ -16,15 +16,14 @@
 
 package uk.gov.hmrc.ui.journeys
 
-import uk.gov.hmrc.ui.helpers.{AffinityGroup, CYAPage}
+import uk.gov.hmrc.ui.helpers.{AffinityGroup, CYAPage, NotificationType}
 import uk.gov.hmrc.ui.pages.common.{AreYouABusinessOrPrivateIndividual, AreYouNotifyingAsPurchaserOrOnBehalf, CheckYourAnswers, NotificationTaskList, PurchaserOnBehalfOfABusinessOrIndividual, VehicleBroughtIntoNIFromOutsideEUPage}
 
 object IndividualUserJourney {
   // Acquisition flow
   object Acquisition {
     def notifyingAsAPrivateIndividualAsANotifier(): Unit = {
-      CommonJourney.loginAndStartANotification(AffinityGroup.Individual)
-      CommonJourney.beginAnAcquisition()
+      CommonJourney.loginAndStartANotification(AffinityGroup.Individual, NotificationType.Acquisition)
       CommonJourney.notifierIsAPrivateIndividual()
       CommonJourney.selfNotifying()
       CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.Individual)
@@ -40,8 +39,7 @@ object IndividualUserJourney {
     }
 
     def notifyingAsABusinessAsANotifier(): Unit = {
-      CommonJourney.loginAndStartANotification(AffinityGroup.Individual)
-      CommonJourney.beginAnAcquisition()
+      CommonJourney.loginAndStartANotification(AffinityGroup.Individual, NotificationType.Acquisition)
       CommonJourney.notifierIsABusiness()
       CommonJourney.selfNotifying()
       CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.Individual)
@@ -56,8 +54,7 @@ object IndividualUserJourney {
     }
 
     def notifyingAsAIndividualOnBehalfOfBusiness(): Unit = {
-      CommonJourney.loginAndStartANotification(AffinityGroup.Individual)
-      CommonJourney.beginAnAcquisition()
+      CommonJourney.loginAndStartANotification(AffinityGroup.Individual, NotificationType.Acquisition)
       CommonJourney.notifierIsAPrivateIndividual()
       CommonJourney.notifyingForABusiness()
       CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.Individual)
@@ -79,8 +76,7 @@ object IndividualUserJourney {
     }
 
     def notifyingAsAIndividualOnBehalfOfIndividual(): Unit = {
-      CommonJourney.loginAndStartANotification(AffinityGroup.Individual)
-      CommonJourney.beginAnAcquisition()
+      CommonJourney.loginAndStartANotification(AffinityGroup.Individual, NotificationType.Acquisition)
       CommonJourney.notifierIsAPrivateIndividual()
       CommonJourney.notifyingForAnIndividual()
       CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.Individual)
@@ -102,8 +98,7 @@ object IndividualUserJourney {
     }
 
     def notifyingAsABusinessOnBehalfOfABusiness(): Unit = {
-      CommonJourney.loginAndStartANotification(AffinityGroup.Individual)
-      CommonJourney.beginAnAcquisition()
+      CommonJourney.loginAndStartANotification(AffinityGroup.Individual, NotificationType.Acquisition)
       CommonJourney.notifierIsABusiness()
       CommonJourney.notifyingForABusiness()
       CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.Individual)
@@ -125,8 +120,7 @@ object IndividualUserJourney {
     }
 
     def notifyingAsABusinessOnBehalfOfIndividual(): Unit = {
-      CommonJourney.loginAndStartANotification(AffinityGroup.Individual)
-      CommonJourney.beginAnAcquisition()
+      CommonJourney.loginAndStartANotification(AffinityGroup.Individual, NotificationType.Acquisition)
       CommonJourney.notifierIsABusiness()
       CommonJourney.notifyingForAnIndividual()
       CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.Individual)
@@ -151,8 +145,7 @@ object IndividualUserJourney {
   // Import flow
   object Import {
     def userNeedsToImportAVehicleFromOutsideEU(): Unit = {
-      CommonJourney.loginAndStartANotification(AffinityGroup.Individual)
-      CommonJourney.beginAnImport()
+      CommonJourney.loginAndStartANotification(AffinityGroup.Individual, NotificationType.Import)
       VehicleBroughtIntoNIFromOutsideEUPage.verifyPageDisplayed()
     }
   }
