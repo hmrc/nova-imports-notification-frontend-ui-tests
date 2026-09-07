@@ -16,9 +16,8 @@
 
 package uk.gov.hmrc.ui.journeys
 
-import uk.gov.hmrc.ui.helpers.{AffinityGroup, CYAPage}
-import uk.gov.hmrc.ui.pages.common.{AreYouABusinessOrPrivateIndividual, AreYouNotifyingAsPurchaserOrOnBehalf, BeforeYouContinue, CheckYourAnswers, LandingPage}
-import uk.gov.hmrc.ui.pages.AuthLoginPage
+import uk.gov.hmrc.ui.helpers.{AffinityGroup, CYAPage, NotificationType}
+import uk.gov.hmrc.ui.pages.common.{CheckYourAnswers, NotificationTaskList}
 
 object VATAgentUserJourney {
 //  private def loginSelectClientAndBeginANotification(): Unit = {
@@ -67,113 +66,122 @@ object VATAgentUserJourney {
   object SelfNotifying {
     object Acquisition {
       def notifyingAsABusinessAsANotifier(): Unit = {
-        // TEMP
-        AuthLoginPage.login(AffinityGroup.AgentVAT)
-        LandingPage.verifyPageDisplayed()
-        LandingPage.createANewNotification()
-        BeforeYouContinue.verifyMultipleVehiclesSectionNotPresent()
-        BeforeYouContinue.clickContinue()
-
-        // TODO: UNCOMMENT ONCE BUG IS FIXED
-        // CommonJourney.loginAndStartANotification(AffinityGroup.AgentVAT)
-        CommonJourney.beginAnAcquisition(vatUser = true)
+        CommonJourney.loginAndStartANotification(AffinityGroup.AgentVAT, NotificationType.Acquisition)
         CommonJourney.notifierIsABusiness()
         CommonJourney.selfNotifying()
         CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.AgentVAT)
-        // TODO: TASK LIST
-        // TODO: BUSINESS NAME PAGE
-        // TODO: CYA2.0 AND ADDRESS STUFF
+        CommonJourney.addYourDetails()
+        CommonJourney.addPhoneAndEmailDetails()
+        CheckYourAnswers(CYAPage.YourDetails).clickContinue()
+        NotificationTaskList.verifyAddYourDetailsStatus("Completed")
+        CommonJourney.addPurchaserDetails()
+        CommonJourney.addPurchaserName()
+        CheckYourAnswers(CYAPage.PurchaserDetails).clickContinue()
+        NotificationTaskList.verifyAddPurchaserDetailsStatus("Completed")
+        CommonJourney.addPurchaserAddress()
+        CommonJourney.purchaserHasUkDetails()
+        NotificationTaskList.verifyAddPurchaserAddressStatus("Completed")
+        CommonJourney.addVehicleDetails()
       }
 
       def notifyingAsAPrivateIndividualAsANotifier(): Unit = {
-        // TEMP
-        AuthLoginPage.login(AffinityGroup.AgentVAT)
-        LandingPage.verifyPageDisplayed()
-        LandingPage.createANewNotification()
-        BeforeYouContinue.verifyMultipleVehiclesSectionNotPresent()
-        BeforeYouContinue.clickContinue()
-
-        // TODO: UNCOMMENT ONCE BUG IS FIXED
-        // CommonJourney.loginAndStartANotification(AffinityGroup.AgentVAT)
-        CommonJourney.beginAnAcquisition(vatUser = true)
+        CommonJourney.loginAndStartANotification(AffinityGroup.AgentVAT, NotificationType.Acquisition)
         CommonJourney.notifierIsAPrivateIndividual()
         CommonJourney.selfNotifying()
         CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.AgentVAT)
         CommonJourney.addYourDetails()
         CommonJourney.addPhoneAndEmailDetails()
+        CheckYourAnswers(CYAPage.YourDetails).clickContinue()
+        NotificationTaskList.verifyAddYourDetailsStatus("Completed")
+        CommonJourney.addPurchaserDetails()
+        CommonJourney.addPurchaserName()
+        CheckYourAnswers(CYAPage.PurchaserDetails).clickContinue()
+        NotificationTaskList.verifyAddPurchaserDetailsStatus("Completed")
+        CommonJourney.addPurchaserAddress()
+        CommonJourney.purchaserHasUkDetails()
+        NotificationTaskList.verifyAddPurchaserAddressStatus("Completed")
+        CommonJourney.addVehicleDetails()
       }
 
       def notifyingAsABusinessOnBehalfOfABusiness(): Unit = {
-        // TEMP
-        AuthLoginPage.login(AffinityGroup.AgentVAT)
-        LandingPage.verifyPageDisplayed()
-        LandingPage.createANewNotification()
-        BeforeYouContinue.verifyMultipleVehiclesSectionNotPresent()
-        BeforeYouContinue.clickContinue()
-
-        // TODO: UNCOMMENT ONCE BUG IS FIXED
-        // CommonJourney.loginAndStartANotification(AffinityGroup.AgentVAT)
-        CommonJourney.beginAnAcquisition(vatUser = true)
+        CommonJourney.loginAndStartANotification(AffinityGroup.AgentVAT, NotificationType.Acquisition)
         CommonJourney.notifierIsABusiness()
         CommonJourney.notifyingForABusiness()
         CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.AgentVAT)
-        // TODO: Add business(s) name pages
+        CommonJourney.addYourDetails()
+        CommonJourney.addPhoneAndEmailDetails()
+        CheckYourAnswers(CYAPage.YourDetails).clickContinue()
+        NotificationTaskList.verifyAddYourDetailsStatus("Completed")
+        CommonJourney.addPurchaserDetails()
+        CommonJourney.addPurchaserBusinessName()
+        CheckYourAnswers(CYAPage.PurchaserDetails).clickContinue()
+        NotificationTaskList.verifyAddPurchaserDetailsStatus("Completed")
+        CommonJourney.addPurchaserAddress()
+        CommonJourney.purchaserHasUkDetails()
+        NotificationTaskList.verifyAddPurchaserAddressStatus("Completed")
+        CommonJourney.addVehicleDetails()
       }
 
       def notifyingAsABusinessOnBehalfOfAIndividual(): Unit = {
-        // TEMP
-        AuthLoginPage.login(AffinityGroup.AgentVAT)
-        LandingPage.verifyPageDisplayed()
-        LandingPage.createANewNotification()
-        BeforeYouContinue.verifyMultipleVehiclesSectionNotPresent()
-        BeforeYouContinue.clickContinue()
-
-        // TODO: UNCOMMENT ONCE BUG IS FIXED
-        // CommonJourney.loginAndStartANotification(AffinityGroup.AgentVAT)
-        CommonJourney.beginAnAcquisition(vatUser = true)
+        CommonJourney.loginAndStartANotification(AffinityGroup.AgentVAT, NotificationType.Acquisition)
         CommonJourney.notifierIsABusiness()
         CommonJourney.notifyingForAnIndividual()
         CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.AgentVAT)
-        // TODO:
+        CommonJourney.addYourDetails()
+        CommonJourney.addPhoneAndEmailDetails()
+        CheckYourAnswers(CYAPage.YourDetails).clickContinue()
+        NotificationTaskList.verifyAddYourDetailsStatus("Completed")
+        CommonJourney.addPurchaserDetails()
+        CommonJourney.addPurchaserName()
+        CheckYourAnswers(CYAPage.PurchaserDetails).clickContinue()
+        NotificationTaskList.verifyAddPurchaserDetailsStatus("Completed")
+        CommonJourney.addPurchaserAddress()
+        CommonJourney.purchaserHasUkDetails()
+        NotificationTaskList.verifyAddPurchaserAddressStatus("Completed")
+        CommonJourney.addVehicleDetails()
       }
 
       def notifyingAsAIndividualOnBehalfOfABusiness(): Unit = {
-        // TEMP
-        AuthLoginPage.login(AffinityGroup.AgentVAT)
-        LandingPage.verifyPageDisplayed()
-        LandingPage.createANewNotification()
-        BeforeYouContinue.verifyMultipleVehiclesSectionNotPresent()
-        BeforeYouContinue.clickContinue()
-
-        // TODO: UNCOMMENT ONCE BUG IS FIXED
-        // CommonJourney.loginAndStartANotification(AffinityGroup.AgentVAT)
-        CommonJourney.beginAnAcquisition(vatUser = true)
+        CommonJourney.loginAndStartANotification(AffinityGroup.AgentVAT, NotificationType.Acquisition)
         CommonJourney.notifierIsAPrivateIndividual()
         CommonJourney.notifyingForABusiness()
         CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.AgentVAT)
-        // TODO
+        CommonJourney.addYourDetails()
+        CommonJourney.addPhoneAndEmailDetails()
+        CheckYourAnswers(CYAPage.YourDetails).clickContinue()
+        NotificationTaskList.verifyAddYourDetailsStatus("Completed")
+        CommonJourney.addPurchaserDetails()
+        CommonJourney.addPurchaserBusinessName()
+        CheckYourAnswers(CYAPage.PurchaserDetails).clickContinue()
+        NotificationTaskList.verifyAddPurchaserDetailsStatus("Completed")
+        CommonJourney.addPurchaserAddress()
+        CommonJourney.purchaserHasUkDetails()
+        NotificationTaskList.verifyAddPurchaserAddressStatus("Completed")
+        CommonJourney.addVehicleDetails()
       }
 
       def notifyingAsAIndividualOnBehalfOfAIndividual(): Unit = {
-        // TEMP
-        AuthLoginPage.login(AffinityGroup.AgentVAT)
-        LandingPage.verifyPageDisplayed()
-        LandingPage.createANewNotification()
-        BeforeYouContinue.verifyMultipleVehiclesSectionNotPresent()
-        BeforeYouContinue.clickContinue()
-
-        // TODO: UNCOMMENT ONCE BUG IS FIXED
-        // CommonJourney.loginAndStartANotification(AffinityGroup.AgentVAT)
-        CommonJourney.beginAnAcquisition(vatUser = true)
+        CommonJourney.loginAndStartANotification(AffinityGroup.AgentVAT, NotificationType.Acquisition)
         CommonJourney.notifierIsAPrivateIndividual()
         CommonJourney.notifyingForAnIndividual()
         CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.AgentVAT)
-        // TODO
+        CommonJourney.addYourDetails()
+        CommonJourney.addPhoneAndEmailDetails()
+        CheckYourAnswers(CYAPage.YourDetails).clickContinue()
+        NotificationTaskList.verifyAddYourDetailsStatus("Completed")
+        CommonJourney.addPurchaserDetails()
+        CommonJourney.addPurchaserName()
+        CheckYourAnswers(CYAPage.PurchaserDetails).clickContinue()
+        NotificationTaskList.verifyAddPurchaserDetailsStatus("Completed")
+        CommonJourney.addPurchaserAddress()
+        CommonJourney.purchaserHasUkDetails()
+        NotificationTaskList.verifyAddPurchaserAddressStatus("Completed")
+        CommonJourney.addVehicleDetails()
       }
     }
 
     object Import {
-      // TODO: BUG CURRENTLY DOESN'T ALLOW THIS FLOW
+      // TODO:
     }
   }
 }

@@ -16,10 +16,10 @@
 
 package uk.gov.hmrc.ui.journeys
 
-import uk.gov.hmrc.ui.helpers.{AddressPages, AffinityGroup, CYAPage}
+import uk.gov.hmrc.ui.helpers.{AddressPages, AffinityGroup, CYAPage, NotificationType}
 import uk.gov.hmrc.ui.pages.addresses.{ChooseYourAddress, FindYourAddress, ReviewAndConfirmAddress}
 import uk.gov.hmrc.ui.pages.common.{AreYouABusinessOrPrivateIndividual, AreYouNotifyingAsPurchaserOrOnBehalf, BeforeYouContinue, CheckYourAnswers, HasYourClientBroughtAVehicleIntoTheUkForBusinessUse, HaveYouBroughtAVehicleIntoTheUKForBusinessUse, LandingPage, NotificationTaskList, PurchaserOnBehalfOfABusinessOrIndividual, VehicleBroughtIntoNIFromEUPage}
-import uk.gov.hmrc.ui.pages.notifier.{AddYourDetailsEmail, AddYourDetailsGuidancePage, AddYourDetailsName, AddYourDetailsPhoneNumber, IsYourAddressInTheUK}
+import uk.gov.hmrc.ui.pages.notifier.{AddYourDetailsBusinessName, AddYourDetailsEmail, AddYourDetailsGuidancePage, AddYourDetailsName, AddYourDetailsPhoneNumber, IsYourAddressInTheUK}
 import uk.gov.hmrc.ui.pages.purchaser.{AddPurchaserDetailsBusinessName, AddPurchaserDetailsName, IsPurchaserAddressInTheUK}
 import uk.gov.hmrc.ui.pages.supplier.AddVehicleDetails
 import uk.gov.hmrc.ui.pages.AuthLoginPage
@@ -29,31 +29,33 @@ object CommonJourney {
   // TODO: EVENTUALLY BREAK THESE UP INTO, IND -> ORG -> AGENT SPECIFIC METHODS
   // ACQUISITION SPECIFIC
   // IMPORT SPECIFIC
-  def loginAndStartANotification(affinityGroup: AffinityGroup): Unit = {
+  def loginAndStartANotification(
+    affinityGroup: AffinityGroup,
+    notificationType: NotificationType,
+    clientSelected: Boolean = false
+  ): Unit = {
     AuthLoginPage.login(affinityGroup)
     LandingPage.verifyPageDisplayed()
     LandingPage.createANewNotification()
 
+    val vatUser = affinityGroup.userIsVATUser
+
     if (
       affinityGroup == AffinityGroup.OrganisationVAT ||
       affinityGroup == AffinityGroup.OrganisationVRN ||
-      affinityGroup == AffinityGroup.AgentVAT
+      (affinityGroup == AffinityGroup.AgentVAT && clientSelected)
     ) {
       BeforeYouContinue.verifyMultipleVehiclesSectionPresent()
     } else {
       BeforeYouContinue.verifyMultipleVehiclesSectionNotPresent()
     }
     BeforeYouContinue.clickContinue()
-  }
 
-  def beginAnAcquisition(vatUser: Boolean = false): Unit = {
     VehicleBroughtIntoNIFromEUPage(vatUser).verifyPageDisplayed()
-    VehicleBroughtIntoNIFromEUPage(vatUser).selectYesAndContinue()
-  }
-
-  def beginAnImport(vatUser: Boolean = false): Unit = {
-    VehicleBroughtIntoNIFromEUPage(vatUser).verifyPageDisplayed()
-    VehicleBroughtIntoNIFromEUPage(vatUser).selectNoAndContinue()
+    notificationType match {
+      case NotificationType.Acquisition => VehicleBroughtIntoNIFromEUPage(vatUser).selectYesAndContinue()
+      case NotificationType.Import      => VehicleBroughtIntoNIFromEUPage(vatUser).selectNoAndContinue()
+    }
   }
 
   def selfNotifying(): Unit = {
@@ -148,16 +150,16 @@ object CommonJourney {
   }
 
   def addUserDetailsNamePhoneNumberEmailAddress(): Unit = {
-    // TODO: REMOVE ONCE NAVIGATION IN PLACE
-    AddYourDetailsName.navigateToPage(AddYourDetailsName.pageUrl)
     AddYourDetailsName.verifyPageDisplayed()
     AddYourDetailsName.inputUserDetails()
     addPhoneAndEmailDetails()
   }
 
-  def addUserDetailsBusinessNamePhoneNumberEmailAddress(): Unit =
-    // TODO: AYD1.4
+  def addUserDetailsBusinessNamePhoneNumberEmailAddress(): Unit = {
+    AddYourDetailsBusinessName.verifyPageDisplayed()
+    AddYourDetailsBusinessName.inputBusinessName()
     addPhoneAndEmailDetails()
+  }
 
   def addPhoneAndEmailDetails(): Unit = {
     AddYourDetailsPhoneNumber.verifyPageDisplayed()
@@ -167,17 +169,11 @@ object CommonJourney {
   }
 
   def addPurchaserName(): Unit = {
-    // TODO: REMOVE ONCE NAVIGATION IN PLACE
-    NotificationTaskList.verifyTaskListWithPurchaserDetails()
-    NotificationTaskList.verifyAddPurchaserDetailsStatus("Incomplete")
-    NotificationTaskList.clickAddPurchaserDetails()
     AddPurchaserDetailsName.verifyPageDisplayed()
     AddPurchaserDetailsName.inputUserDetails()
   }
 
   def addPurchaserBusinessName(): Unit = {
-    // TODO: REMOVE ONCE NAVIGATION IN PLACE
-    AddPurchaserDetailsBusinessName.navigateToPage(AddPurchaserDetailsBusinessName.pageUrl)
     AddPurchaserDetailsBusinessName.verifyPageDisplayed()
     AddPurchaserDetailsBusinessName.inputBusinessName()
   }
@@ -188,10 +184,8 @@ object CommonJourney {
     */
   // TODO: this can become generic and then used for supplier + purchaser
   def notifierHasUkDetails(): Unit = {
-    // TODO: UNCOMMENT ONCE NAVIGATION IS IN PLACE
-    IsYourAddressInTheUK.navigateToPage(IsYourAddressInTheUK.pageUrl)
     IsYourAddressInTheUK.verifyPageDisplayed()
-    IsYourAddressInTheUK.selectOptionOneAndContinue()
+    IsYourAddressInTheUK.selectYesAndContinue()
     FindYourAddress.verifyPageDisplayed(AddressPages.Notifier)
     FindYourAddress.inputUserAddressForSearch()
     ChooseYourAddress.verifyPageDisplayed(AddressPages.Notifier)
@@ -205,6 +199,12 @@ object CommonJourney {
   def purchaserHasUkDetails(): Unit = {
     IsPurchaserAddressInTheUK.verifyPageDisplayed()
     IsPurchaserAddressInTheUK.selectOptionOneAndContinue()
+    FindYourAddress.verifyPageDisplayed(AddressPages.Purchaser)
+    FindYourAddress.inputUserAddressForSearch()
+    ChooseYourAddress.verifyPageDisplayed(AddressPages.Purchaser)
+    ChooseYourAddress.selectAnAddress()
+    ReviewAndConfirmAddress.verifyPageDisplayed(AddressPages.Purchaser)
+    ReviewAndConfirmAddress.clickContinue()
   }
 
   def purchaserHasInternationalDetails(): Unit = {}
@@ -215,11 +215,6 @@ object CommonJourney {
 
   // TODO:
   /** Helper methods for adding vehicles */
-  def addVehicleDetailsAddBySupplier(): Unit = {
-    AddVehicleDetails.verifyPageDisplayed()
-    AddVehicleDetails.selectOptionOneAndContinue()
-  }
-
   def addVehicleDetailsUploadAVehicleSpreadsheet(): Unit = {
     AddVehicleDetails.verifyPageDisplayed()
     AddVehicleDetails.selectOptionTwoAndContinue()
