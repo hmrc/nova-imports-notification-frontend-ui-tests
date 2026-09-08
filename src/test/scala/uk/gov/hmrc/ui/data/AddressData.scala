@@ -16,11 +16,52 @@
 
 package uk.gov.hmrc.ui.data
 
+import uk.gov.hmrc.ui.helpers.CountryList
+import uk.gov.hmrc.ui.models.CountryOrTerritoryAddress.CountryOrTerritoryAddressDetails
+import uk.gov.hmrc.ui.models.FullAddress.FullAddressDetails
+import uk.gov.hmrc.ui.models.PostcodeAddress.PostcodeAddressDetails
+
+import scala.util.Random
+
+// The following data will be used for manual entry of address information (ALF screens)
+// To hit all variations of screens Notifier Address will use the postcode search page
+// Purchaser Address will use the manual entry of address page
+// Supplier Address will use the Non-UK flow and use the Country Or Territory search page
 object AddressData {
-  // The following data will be used for manual entry of address information (ALF screens)
-  object ManualEntryOfAddress {}
+  object ManualEntryOfAddress {
+    val purchaserUkAddress = FullAddressDetails(
+      line1 = "The Warehouse",
+      line2 = "Industrial Park",
+      line3 = Some("Test Street"),
+      line4 = Some("Test Town"),
+      postcode = None,
+      country = None
+    )
 
-  object PostcodeEntryOfAddress {}
+    // We use countryOrTerritory and on the CountryOrTerritory search pages this will populate the country field for us
+    // but the next screen we need to manually enter the rest of the address information
+    val supplierInternationalAddress = FullAddressDetails(
+      line1 = "Car Factory",
+      line2 = "Industrial Park",
+      line3 = None,
+      line4 = None,
+      postcode = None,
+      country = None
+    )
+  }
 
-  object CountryOrTerritoryEntryOfAddress {}
+  // Postcode details are from the address-lookup API documentation, there are a bunch of fake addresses to use
+  object PostcodeEntryOfAddress {
+    val notifierAddress = PostcodeAddressDetails(
+      postcode = "FX1 7RR",
+      houseNameOrNumber = None
+    )
+  }
+
+  object CountryOrTerritoryEntryOfAddress {
+    val supplierCountry = CountryOrTerritoryAddressDetails(
+      countryOrTerritory =
+        CountryList.EuCountries.values(Random.nextInt(CountryList.EuCountries.values.length)).toString
+    )
+  }
 }

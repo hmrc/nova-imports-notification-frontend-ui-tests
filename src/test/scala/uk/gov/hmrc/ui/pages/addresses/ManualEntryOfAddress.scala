@@ -17,7 +17,7 @@
 package uk.gov.hmrc.ui.pages.addresses
 
 import org.openqa.selenium.By
-import uk.gov.hmrc.ui.data.TestData
+import uk.gov.hmrc.ui.data.AddressData
 import uk.gov.hmrc.ui.helpers.AddressPages
 import uk.gov.hmrc.ui.pages.BasePage
 
@@ -49,12 +49,22 @@ object ManualEntryOfAddress extends BasePage {
   def inputUserUkAddress(): Unit = {
     typeInsideElement(
       locator = ALFPageLocators.line1,
-      input = TestData.AddressDetails.ManualEntryOfAddress.manualUkAddress.line1
+      input = AddressData.ManualEntryOfAddress.purchaserUkAddress.line1
     )
 
     typeInsideElement(
       locator = ALFPageLocators.line2,
-      input = TestData.AddressDetails.ManualEntryOfAddress.manualUkAddress.line2
+      input = AddressData.ManualEntryOfAddress.purchaserUkAddress.line2
+    )
+
+    typeInsideElement(
+      locator = ALFPageLocators.line3,
+      input = AddressData.ManualEntryOfAddress.purchaserUkAddress.line3.get
+    )
+
+    typeInsideElement(
+      locator = ALFPageLocators.line4,
+      input = AddressData.ManualEntryOfAddress.purchaserUkAddress.line4.get
     )
     clickContinue()
   }
@@ -62,12 +72,12 @@ object ManualEntryOfAddress extends BasePage {
   def inputUserInternationalAddress(): Unit = {
     typeInsideElement(
       locator = ALFPageLocators.line1,
-      input = TestData.AddressDetails.ManualEntryOfAddress.manualInternationalAddress.line1
+      input = AddressData.ManualEntryOfAddress.supplierInternationalAddress.line1
     )
 
     typeInsideElement(
       locator = ALFPageLocators.line2,
-      input = TestData.AddressDetails.ManualEntryOfAddress.manualInternationalAddress.line2
+      input = AddressData.ManualEntryOfAddress.supplierInternationalAddress.line2
     )
     clickContinue()
   }

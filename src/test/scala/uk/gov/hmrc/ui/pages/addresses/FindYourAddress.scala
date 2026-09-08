@@ -17,7 +17,7 @@
 package uk.gov.hmrc.ui.pages.addresses
 
 import org.openqa.selenium.By
-import uk.gov.hmrc.ui.data.TestData
+import uk.gov.hmrc.ui.data.AddressData
 import uk.gov.hmrc.ui.helpers.AddressPages
 import uk.gov.hmrc.ui.pages.BasePage
 
@@ -33,17 +33,15 @@ object FindYourAddress extends BasePage {
   def verifyPartialUrl(): Unit =
     verifyEndOfUrl(endOfUrl)
 
-  def verifyPageDisplayed(addressPageType: AddressPages): Unit = {
-    println(s"About to be: ${addressPageType.getFindYourAddressPageTitle}")
+  def verifyPageDisplayed(addressPageType: AddressPages): Unit =
     verifyStandardPageHeading(
       expectedHeading = addressPageType.getFindYourAddressPageTitle
     )
-  }
 
   def inputUserAddressForSearch(): Unit = {
     typeInsideElement(
       locator = ALFPageLocators.postcode,
-      input = TestData.AddressDetails.PostcodeEntryOfAddress.postcodeAddress.postcode
+      input = AddressData.PostcodeEntryOfAddress.notifierAddress.postcode
     )
     clickContinue()
   }
