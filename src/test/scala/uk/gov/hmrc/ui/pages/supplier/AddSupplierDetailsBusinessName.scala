@@ -16,24 +16,11 @@
 
 package uk.gov.hmrc.ui.pages.supplier
 
-import uk.gov.hmrc.ui.helpers.RandomValueGenerator
 import uk.gov.hmrc.ui.pages.BasePage
-import uk.gov.hmrc.ui.pages.purchaser.AddPurchaserDetailsBusinessName.{clickContinue, typeInsideElement}
 
 class AddSupplierDetailsBusinessName(supplierNumber: Int = 1) extends BasePage {
   override val pageUrl: String = s"$baseUrl/supplier/$supplierNumber/supplier-business-name"
 
   def verifyPageDisplayed(): Unit =
-    verifyInputPageHeading(
-      expectedHeading = "What is the supplier’s business name?"
-    )
-
-  // TODO: this code isn't DRY and is already repeated in purchaser business name etc.,
-  def inputBusinessName(): Unit = {
-    typeInsideElement(
-      Locators.inputField,
-      RandomValueGenerator.generateBusinessName
-    )
-    clickContinue()
-  }
+    verifyInputPageHeading(expectedHeading = "What is the supplier’s business name?")
 }

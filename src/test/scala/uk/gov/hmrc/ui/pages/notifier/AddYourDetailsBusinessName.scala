@@ -16,22 +16,11 @@
 
 package uk.gov.hmrc.ui.pages.notifier
 
-import uk.gov.hmrc.ui.helpers.RandomValueGenerator
 import uk.gov.hmrc.ui.pages.BasePage
 
 object AddYourDetailsBusinessName extends BasePage {
   override val pageUrl: String = s"$baseUrl/business-name"
 
   def verifyPageDisplayed(): Unit =
-    verifyInputPageHeading(
-      expectedHeading = "What is your business name?"
-    )
-
-  def inputBusinessName(): Unit = {
-    typeInsideElement(
-      Locators.inputField,
-      RandomValueGenerator.generateBusinessName
-    )
-    clickContinue()
-  }
+    verifyInputPageHeading(expectedHeading = "What is your business name?")
 }

@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.helpers
+package uk.gov.hmrc.ui.data
 
 import uk.gov.hmrc.ui.helpers.CountryList.EuCountries
+import uk.gov.hmrc.ui.helpers.CountryList
 
 import scala.util.Random
 
@@ -26,13 +27,13 @@ object RandomValueGenerator {
   def generateRandomVIN: String             = Random.alphanumeric.take(17).mkString
 
   // Used for personal details
-  def getRandomTitle:String = RandomData.title
+  def getRandomTitle: String          = RandomData.title
   def generateRandomFirstName: String = RandomData.characters(Random.between(4, 8))
   def generateRandomLastName: String  = RandomData.characters(Random.between(8, 15))
   def generateBusinessName: String    = RandomData.characters(Random.between(10, 20))
 
   // Used for contact details
-  def generateRandomEmail: String        = s"${RandomData.characters(Random.between(5, 20))}@example.co.uk"
+  def generateRandomEmail: String          = s"${RandomData.characters(Random.between(5, 20))}@example.co.uk"
   def generateRandomMobileNumber: String   = s"07${RandomData.numbers(9)}"
   def generateRandomLandlineNumber: String = s"0191${RandomData.numbers(7)}"
 

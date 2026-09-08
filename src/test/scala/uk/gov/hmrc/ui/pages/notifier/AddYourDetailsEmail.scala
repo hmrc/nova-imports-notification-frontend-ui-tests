@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.ui.pages.notifier
 
-import uk.gov.hmrc.ui.helpers.RandomValueGenerator
+import uk.gov.hmrc.ui.data.RandomValueGenerator
 import uk.gov.hmrc.ui.pages.BasePage
 
 object AddYourDetailsEmail extends BasePage {

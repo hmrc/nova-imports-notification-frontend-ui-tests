@@ -16,30 +16,11 @@
 
 package uk.gov.hmrc.ui.pages.purchaser
 
-import uk.gov.hmrc.ui.helpers.RandomValueGenerator
 import uk.gov.hmrc.ui.pages.BasePage
 
 object AddPurchaserDetailsName extends BasePage {
   override val pageUrl: String = s"$baseUrl/purchaser-name"
 
   def verifyPageDisplayed(): Unit =
-    verifyStandardPageHeading(
-      expectedHeading = "What is the purchaser’s name?"
-    )
-
-  def inputUserDetails(): Unit = {
-    typeInsideElement(
-      Locators.title,
-      RandomValueGenerator.getRandomTitle
-    )
-    typeInsideElement(
-      Locators.firstName,
-      RandomValueGenerator.generateRandomFirstName
-    )
-    typeInsideElement(
-      Locators.lastName,
-      RandomValueGenerator.generateRandomLastName
-    )
-    clickContinue()
-  }
+    verifyStandardPageHeading(expectedHeading = "What is the purchaser’s name?")
 }
