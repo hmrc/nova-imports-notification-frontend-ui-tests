@@ -18,7 +18,7 @@ package uk.gov.hmrc.ui.models
 
 object Notifier {
   case class NotifierDetails(
-    userDetails: UserDetails.IndividualUserDetails,
+    userDetails: UserDetails.Details,
     phoneNumber: Option[String],
     mobileNumber: Option[String],
     email: String

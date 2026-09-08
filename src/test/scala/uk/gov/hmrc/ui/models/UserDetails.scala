@@ -23,7 +23,7 @@ object UserDetails {
     businessName: String
   ) extends Details
 
-  case class IndividualUserDetails(
+  case class IndividualDetails(
     title: String,
     firstName: String,
     lastName: String

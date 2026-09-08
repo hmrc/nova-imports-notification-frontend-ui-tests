@@ -22,6 +22,6 @@ object Supplier {
   )
 
   case class IndividualSupplier(
-    userDetails: UserDetails.IndividualUserDetails
+    userDetails: UserDetails.IndividualDetails
   )
 }

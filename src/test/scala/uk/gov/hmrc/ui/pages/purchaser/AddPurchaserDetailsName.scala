@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.ui.pages.purchaser
 
-import uk.gov.hmrc.ui.data.TestData
+import uk.gov.hmrc.ui.helpers.RandomValueGenerator
 import uk.gov.hmrc.ui.pages.BasePage
 
 object AddPurchaserDetailsName extends BasePage {
@@ -30,15 +30,15 @@ object AddPurchaserDetailsName extends BasePage {
   def inputUserDetails(): Unit = {
     typeInsideElement(
       Locators.title,
-      TestData.UserDetails.SupplierDetails.individualSupplier.userDetails.title
+      RandomValueGenerator.getRandomTitle
     )
     typeInsideElement(
       Locators.firstName,
-      TestData.UserDetails.SupplierDetails.individualSupplier.userDetails.firstName
+      RandomValueGenerator.generateRandomFirstName
     )
     typeInsideElement(
       Locators.lastName,
-      TestData.UserDetails.SupplierDetails.individualSupplier.userDetails.lastName
+      RandomValueGenerator.generateRandomLastName
     )
     clickContinue()
   }

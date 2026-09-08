@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.ui.pages.notifier
 
-import uk.gov.hmrc.ui.data.TestData
+import uk.gov.hmrc.ui.helpers.RandomValueGenerator
 import uk.gov.hmrc.ui.pages.BasePage
 
 object AddYourDetailsName extends BasePage {
@@ -28,9 +28,9 @@ object AddYourDetailsName extends BasePage {
     )
 
   def inputUserDetails(): Unit = {
-    typeInsideElement(Locators.title, TestData.UserDetails.NotifierDetails.notifier.userDetails.title)
-    typeInsideElement(Locators.firstName, TestData.UserDetails.NotifierDetails.notifier.userDetails.firstName)
-    typeInsideElement(Locators.lastName, TestData.UserDetails.NotifierDetails.notifier.userDetails.lastName)
+    typeInsideElement(Locators.title, RandomValueGenerator.getRandomTitle)
+    typeInsideElement(Locators.firstName, RandomValueGenerator.generateRandomFirstName)
+    typeInsideElement(Locators.lastName, RandomValueGenerator.generateRandomLastName)
     clickContinue()
   }
 }

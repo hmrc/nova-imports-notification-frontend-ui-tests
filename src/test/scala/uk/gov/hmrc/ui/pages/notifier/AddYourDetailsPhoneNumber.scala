@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.ui.pages.notifier
 
-import uk.gov.hmrc.ui.data.TestData
+import uk.gov.hmrc.ui.helpers.RandomValueGenerator
 import uk.gov.hmrc.ui.pages.BasePage
 
 object AddYourDetailsPhoneNumber extends BasePage {
@@ -26,21 +26,19 @@ object AddYourDetailsPhoneNumber extends BasePage {
     verifyStandardPageHeading(
       expectedHeading = "What are your contact numbers?"
     )
-
-  // TODO: add specific phone number / mobile numbers for different devices and area codes etc.,
-  // MAYBE BUSINESS DO PHONE NUMBERS AND PI DO MOBILE
-//  def inputPhoneNumber(): Unit = {
-//    typeInsideElement(
-//      locator = Locators.phoneNumber,
-//      input = TestData.NotifierDetails.notifier.phoneNumber.get
-//    )
-//    clickContinue()
-//  }
+  
+  def inputPhoneNumber(): Unit = {
+    typeInsideElement(
+      locator = Locators.phoneNumber,
+      input = RandomValueGenerator.generateRandomLandlineNumber
+    )
+    clickContinue()
+  }
 
   def inputMobileNumber(): Unit = {
     typeInsideElement(
       locator = Locators.mobileNumber,
-      input = TestData.UserDetails.NotifierDetails.notifier.mobileNumber.get
+      input = RandomValueGenerator.generateRandomMobileNumber
     )
     clickContinue()
   }

@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.ui.pages.supplier
 
-import uk.gov.hmrc.ui.data.TestData
+import uk.gov.hmrc.ui.helpers.RandomValueGenerator
 import uk.gov.hmrc.ui.pages.BasePage
 import uk.gov.hmrc.ui.pages.purchaser.AddPurchaserDetailsBusinessName.{clickContinue, typeInsideElement}
 
@@ -32,7 +32,7 @@ class AddSupplierDetailsBusinessName(supplierNumber: Int = 1) extends BasePage {
   def inputBusinessName(): Unit = {
     typeInsideElement(
       Locators.inputField,
-      TestData.UserDetails.SupplierDetails.businessSupplier.userDetails.businessName
+      RandomValueGenerator.generateBusinessName
     )
     clickContinue()
   }

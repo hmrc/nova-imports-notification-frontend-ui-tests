@@ -22,21 +22,19 @@ import scala.util.Random
 
 object RandomValueGenerator {
   // Used for Authentication
-  def generateRandomIdentifierValue(): String = Random.alphanumeric.take(6).mkString
-  def generateRandomVIN(): String             = Random.alphanumeric.take(17).mkString
+  def generateRandomIdentifierValue: String = Random.alphanumeric.take(6).mkString
+  def generateRandomVIN: String             = Random.alphanumeric.take(17).mkString
 
   // Used for personal details
-  def generateRandomFirstName(): String = RandomData.characters(Random.between(4, 8))
-  def generateRandomLastName(): String  = RandomData.characters(Random.between(8, 15))
-  def generateBusinessName(): String    = RandomData.characters(Random.between(10, 20))
+  def getRandomTitle:String = RandomData.title
+  def generateRandomFirstName: String = RandomData.characters(Random.between(4, 8))
+  def generateRandomLastName: String  = RandomData.characters(Random.between(8, 15))
+  def generateBusinessName: String    = RandomData.characters(Random.between(10, 20))
 
   // Used for contact details
-  def generateRandomUserEmail(): String        = s"${RandomData.characters(Random.between(5, 20))}@example.co.uk"
-  def generateRandomBusinessEmail(): String    = s"${RandomData.characters(Random.between(5, 20))}@business.com"
-  def generateRandomUkMobileNumber(): String   = s"07${RandomData.numbers(9)}"
-  def generateRandomUkBusinessNumber(): String = s"08${RandomData.numbers(9)}"
-  def generateRandomUkLandlineNumber(): String = s"0191${RandomData.numbers(7)}"
-  def generateRandomContactNumber(): String    = RandomData.numbers(11)
+  def generateRandomEmail: String        = s"${RandomData.characters(Random.between(5, 20))}@example.co.uk"
+  def generateRandomMobileNumber: String   = s"07${RandomData.numbers(9)}"
+  def generateRandomLandlineNumber: String = s"0191${RandomData.numbers(7)}"
 
   // Used for EU-VAT details
   def generateRandomEuVatNumber(euState: CountryList.EuCountries): String =
@@ -47,6 +45,12 @@ object RandomValueGenerator {
 object RandomData {
   def numbers(lengthOfString: Int): String    = List.fill(lengthOfString)(Random.nextInt(10)).mkString
   def characters(lengthOfString: Int): String = List.fill(lengthOfString)(('a' + Random.nextInt(26)).toChar).mkString
+
+  // Used to randomly choose a title
+  def title: String = {
+    val titles = Seq("Mr", "Mrs", "Miss", "Master", "Ms", "Dr")
+    titles(Random.nextInt(titles.length))
+  }
 
   def alphaNumericNoIO(length: Int): String = {
     val chars = "ABCDEFGHJKLMNPQRSTUVWXYZ0123456789"
