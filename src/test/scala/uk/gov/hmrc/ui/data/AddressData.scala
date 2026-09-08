@@ -14,11 +14,13 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.helpers
+package uk.gov.hmrc.ui.data
 
-import scala.util.Random
+object AddressData {
+  // The following data will be used for manual entry of address information (ALF screens)
+  object ManualEntryOfAddress {}
 
-object RandomIdGenerator {
-  def generateRandomIdentifierValue(): String = Random.alphanumeric.take(6).mkString
-  def generateRandomVIN(): String             = Random.alphanumeric.take(17).mkString
+  object PostcodeEntryOfAddress {}
+
+  object CountryOrTerritoryEntryOfAddress {}
 }
