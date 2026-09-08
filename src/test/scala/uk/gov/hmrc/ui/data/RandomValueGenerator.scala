@@ -36,6 +36,12 @@ object RandomValueGenerator {
   def generateRandomEmail: String          = s"${RandomData.characters(Random.between(5, 20))}@example.co.uk"
   def generateRandomMobileNumber: String   = s"07${RandomData.numbers(9)}"
   def generateRandomLandlineNumber: String = s"0191${RandomData.numbers(7)}"
+  def generateRandomAddressLine: String    = RandomData.characters(Random.between(1, 35))
+  def getRandomPostcode: String            = RandomData.postcodes
+  def getRandomEuCountry: String           =
+    CountryList.EuCountries.values(Random.nextInt(CountryList.EuCountries.values.length)).toString
+  def getRandomNonEuCountry: String        =
+    CountryList.NonEuCountries.values(Random.nextInt(CountryList.NonEuCountries.values.length)).toString
 
   // Used for EU-VAT details
   def generateRandomEuVatNumber(euState: CountryList.EuCountries): String =
@@ -53,10 +59,14 @@ object RandomData {
     titles(Random.nextInt(titles.length))
   }
 
-  def alphaNumericNoIO(length: Int): String = {
-    val chars = "ABCDEFGHJKLMNPQRSTUVWXYZ0123456789"
-    List.fill(length)(chars(Random.nextInt(chars.length))).mkString
-  }
+  // Postcode works locally using test data within address-lookup so going to use a few random ones from there
+  def postcodes: String =
+    Random.nextInt(4) match {
+      case 0 => "FX1 7RR"
+      case 1 => "ZZ01 1ZZ"
+      case 2 => "FX97 4TU"
+      case 3 => "FX0R 3TQ"
+    }
 
   // Used to return valid VAT-registration numbers for the EU member states that fit the regex pattern we use for validation each country uses the validation documented in F22 business function documentation
   def getEuMemberStateVatRegNum(euMemberState: CountryList.EuCountries): String =
@@ -100,4 +110,9 @@ object RandomData {
           case 2 => s"${numbers(7)}${characters(2).toUpperCase}"
         }
     }
+
+  def alphaNumericNoIO(length: Int): String = {
+    val chars = "ABCDEFGHJKLMNPQRSTUVWXYZ0123456789"
+    List.fill(length)(chars(Random.nextInt(chars.length))).mkString
+  }
 }

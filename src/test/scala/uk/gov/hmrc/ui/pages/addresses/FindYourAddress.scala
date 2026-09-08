@@ -17,7 +17,7 @@
 package uk.gov.hmrc.ui.pages.addresses
 
 import org.openqa.selenium.By
-import uk.gov.hmrc.ui.data.AddressData
+import uk.gov.hmrc.ui.data.RandomValueGenerator
 import uk.gov.hmrc.ui.helpers.AddressPages
 import uk.gov.hmrc.ui.pages.BasePage
 
@@ -41,7 +41,7 @@ object FindYourAddress extends BasePage {
   def inputUserAddressForSearch(): Unit = {
     typeInsideElement(
       locator = ALFPageLocators.postcode,
-      input = AddressData.PostcodeEntryOfAddress.notifierAddress.postcode
+      input = RandomValueGenerator.getRandomPostcode
     )
     clickContinue()
   }

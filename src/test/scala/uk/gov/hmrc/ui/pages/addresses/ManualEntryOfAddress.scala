@@ -17,7 +17,7 @@
 package uk.gov.hmrc.ui.pages.addresses
 
 import org.openqa.selenium.By
-import uk.gov.hmrc.ui.data.AddressData
+import uk.gov.hmrc.ui.data.RandomValueGenerator
 import uk.gov.hmrc.ui.helpers.AddressPages
 import uk.gov.hmrc.ui.pages.BasePage
 
@@ -49,22 +49,22 @@ object ManualEntryOfAddress extends BasePage {
   def inputUserUkAddress(): Unit = {
     typeInsideElement(
       locator = ALFPageLocators.line1,
-      input = AddressData.ManualEntryOfAddress.purchaserUkAddress.line1
+      input = RandomValueGenerator.generateRandomAddressLine
     )
 
     typeInsideElement(
       locator = ALFPageLocators.line2,
-      input = AddressData.ManualEntryOfAddress.purchaserUkAddress.line2
+      input = RandomValueGenerator.generateRandomAddressLine
     )
 
     typeInsideElement(
       locator = ALFPageLocators.line3,
-      input = AddressData.ManualEntryOfAddress.purchaserUkAddress.line3.get
+      input = RandomValueGenerator.generateRandomAddressLine
     )
 
     typeInsideElement(
       locator = ALFPageLocators.line4,
-      input = AddressData.ManualEntryOfAddress.purchaserUkAddress.line4.get
+      input = RandomValueGenerator.generateRandomAddressLine
     )
     clickContinue()
   }
@@ -72,12 +72,12 @@ object ManualEntryOfAddress extends BasePage {
   def inputUserInternationalAddress(): Unit = {
     typeInsideElement(
       locator = ALFPageLocators.line1,
-      input = AddressData.ManualEntryOfAddress.supplierInternationalAddress.line1
+      input = RandomValueGenerator.generateRandomAddressLine
     )
 
     typeInsideElement(
       locator = ALFPageLocators.line2,
-      input = AddressData.ManualEntryOfAddress.supplierInternationalAddress.line2
+      input = RandomValueGenerator.generateRandomAddressLine
     )
     clickContinue()
   }
