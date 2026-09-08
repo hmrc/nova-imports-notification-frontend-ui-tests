@@ -28,7 +28,6 @@ object UploadVehicleSpreadsheet extends BasePage {
     )
 
   // TODO: come back and do this
-  def uploadSpreadsheet(): Unit = {
+  def uploadSpreadsheet(): Unit =
     click(By.ById("file"))
-  }
 }

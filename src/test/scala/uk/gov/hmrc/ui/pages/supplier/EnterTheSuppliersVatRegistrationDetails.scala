@@ -30,7 +30,7 @@ class EnterTheSuppliersVatRegistrationDetails(supplierNumber: Int = 1) extends B
     )
 
   def inputCountryAndVatNumber(): Unit = {
-    val country = RandomValueGenerator.getRandomEuCountry
+    val country   = RandomValueGenerator.getRandomEuCountry
     val vatNumber = RandomValueGenerator.generateRandomEuVatNumber(CountryList.EuCountries.valueOf(country))
 
     typeInsideElement(By.id("countryCode"), country)
