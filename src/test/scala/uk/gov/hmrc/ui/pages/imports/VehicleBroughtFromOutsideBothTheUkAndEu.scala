@@ -25,6 +25,4 @@ object VehicleBroughtFromOutsideBothTheUkAndEu extends BasePage {
     verifyStandardPageHeading(
       expectedHeading = "Vehicles brought from outside both the UK and the EU"
     )
-
-  // TODO: ADD SELECT IMPORT / SPREADSHEET RADIO BUTTON
 }

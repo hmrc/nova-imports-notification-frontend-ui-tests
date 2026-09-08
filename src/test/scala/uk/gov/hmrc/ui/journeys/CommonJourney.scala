@@ -26,9 +26,6 @@ import uk.gov.hmrc.ui.pages.AuthLoginPage
 
 /** Base methods that are used to answer repetitive scenarios within journeys to make code more readable */
 object CommonJourney {
-  // TODO: EVENTUALLY BREAK THESE UP INTO, IND -> ORG -> AGENT SPECIFIC METHODS
-  // ACQUISITION SPECIFIC
-  // IMPORT SPECIFIC
   def loginAndStartANotification(
     affinityGroup: AffinityGroup,
     notificationType: NotificationType,
