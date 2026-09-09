@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.ui.pages.notifier
 
-import uk.gov.hmrc.ui.data.TestData
+import uk.gov.hmrc.ui.data.RandomValueGenerator
 import uk.gov.hmrc.ui.pages.BasePage
 
 object AddYourDetailsEmail extends BasePage {
@@ -30,7 +30,7 @@ object AddYourDetailsEmail extends BasePage {
   def inputEmailAddress(): Unit =
     typeInsideElement(
       locator = Locators.inputField,
-      input = TestData.UserDetails.NotifierDetails.notifier.email
+      input = RandomValueGenerator.generateRandomEmail
     )
     clickContinue()
 }

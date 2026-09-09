@@ -16,6 +16,8 @@
 
 package uk.gov.hmrc.ui.helpers
 
+import uk.gov.hmrc.ui.data.RandomValueGenerator
+
 enum AffinityGroup:
   case Individual, Organisation, Agent, OrganisationVRN, OrganisationVAT, AgentVAT, AgentVRN1, AgentVRN2
 
@@ -56,9 +58,9 @@ enum AffinityGroup:
     case Organisation    => ""
     case Individual      => ""
     case Agent           => ""
-    case OrganisationVRN => RandomIdGenerator.generateRandomIdentifierValue()
-    case OrganisationVAT => RandomIdGenerator.generateRandomIdentifierValue()
-    case AgentVAT        => RandomIdGenerator.generateRandomIdentifierValue()
+    case OrganisationVRN => RandomValueGenerator.generateRandomIdentifierValue
+    case OrganisationVAT => RandomValueGenerator.generateRandomIdentifierValue
+    case AgentVAT        => RandomValueGenerator.generateRandomIdentifierValue
     case AgentVRN1       => "DVA0001"
     case AgentVRN2       => "DVLA002"
   }

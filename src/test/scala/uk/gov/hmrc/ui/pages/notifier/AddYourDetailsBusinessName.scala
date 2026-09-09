@@ -16,23 +16,11 @@
 
 package uk.gov.hmrc.ui.pages.notifier
 
-import uk.gov.hmrc.ui.data.TestData
 import uk.gov.hmrc.ui.pages.BasePage
 
 object AddYourDetailsBusinessName extends BasePage {
   override val pageUrl: String = s"$baseUrl/business-name"
 
   def verifyPageDisplayed(): Unit =
-    verifyInputPageHeading(
-      expectedHeading = "What is your business name?"
-    )
-
-  // TODO: Change this data
-  def inputBusinessName(): Unit = {
-    typeInsideElement(
-      Locators.inputField,
-      TestData.UserDetails.SupplierDetails.businessSupplier.userDetails.businessName
-    )
-    clickContinue()
-  }
+    verifyInputPageHeading(expectedHeading = "What is your business name?")
 }

@@ -16,31 +16,11 @@
 
 package uk.gov.hmrc.ui.pages.supplier
 
-import uk.gov.hmrc.ui.data.TestData
 import uk.gov.hmrc.ui.pages.BasePage
 
 class AddSupplierDetailsName(supplierNumber: Int = 1) extends BasePage {
   override val pageUrl: String = s"$baseUrl/supplier/$supplierNumber/supplier-name"
 
   def verifyPageDisplayed(): Unit =
-    verifyStandardPageHeading(
-      expectedHeading = "What is the supplier’s name?"
-    )
-
-  // TODO: Again code not DRY and also could use different data
-  def inputUserDetails(): Unit = {
-    typeInsideElement(
-      Locators.title,
-      TestData.UserDetails.SupplierDetails.individualSupplier.userDetails.title
-    )
-    typeInsideElement(
-      Locators.firstName,
-      TestData.UserDetails.SupplierDetails.individualSupplier.userDetails.firstName
-    )
-    typeInsideElement(
-      Locators.lastName,
-      TestData.UserDetails.SupplierDetails.individualSupplier.userDetails.lastName
-    )
-    clickContinue()
-  }
+    verifyStandardPageHeading(expectedHeading = "What is the supplier’s name?")
 }

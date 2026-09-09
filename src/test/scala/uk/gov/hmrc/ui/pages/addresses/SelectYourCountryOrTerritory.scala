@@ -17,11 +17,11 @@
 package uk.gov.hmrc.ui.pages.addresses
 
 import org.openqa.selenium.By
-import uk.gov.hmrc.ui.data.TestData
+import uk.gov.hmrc.ui.data.RandomValueGenerator
 import uk.gov.hmrc.ui.helpers.AddressPages
 import uk.gov.hmrc.ui.pages.BasePage
 
-object SelectYourCountryOrTerritory extends BasePage {
+class SelectYourCountryOrTerritory(addressPageType: AddressPages) extends BasePage {
   override val pageUrl: String = s"$addressLookupBaseUrl/"
   val endOfUrl: String         = "/country-picker"
 
@@ -32,7 +32,7 @@ object SelectYourCountryOrTerritory extends BasePage {
   def verifyPartialUrl(): Unit =
     verifyEndOfUrl(endOfUrl)
 
-  def verifyPageDisplayed(addressPageType: AddressPages): Unit =
+  def verifyPageDisplayed(): Unit =
     verifyStandardPageHeading(
       expectedHeading = addressPageType.getSelectYourCountryOrTerritoryPageTitle
     )
@@ -40,7 +40,9 @@ object SelectYourCountryOrTerritory extends BasePage {
   def inputCountryOrTerritory(): Unit = {
     typeInsideElement(
       locator = ALFPageLocators.countryOrTerritory,
-      input = TestData.AddressDetails.ManualEntryOfAddress.manualInternationalAddress.country.get
+      input =
+        if (addressPageType == AddressPages.Supplier) RandomValueGenerator.getRandomEuCountry
+        else RandomValueGenerator.getRandomNonEuCountry
     )
     clickContinue()
   }

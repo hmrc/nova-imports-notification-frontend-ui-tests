@@ -17,26 +17,24 @@
 package uk.gov.hmrc.ui.pages.supplier
 
 import org.openqa.selenium.By
+import uk.gov.hmrc.ui.data.RandomValueGenerator
+import uk.gov.hmrc.ui.helpers.CountryList
 import uk.gov.hmrc.ui.pages.BasePage
 
 class EnterTheSuppliersVatRegistrationDetails(supplierNumber: Int = 1) extends BasePage {
   override val pageUrl: String = s"$baseUrl/supplier/$supplierNumber/supplier-vat-registration-details"
 
-  object PageLocators {
-    val country: By = By.id("countryCode")
-    val vatNum: By  = By.id("vatNumber")
-  }
-
-  // TODO: should this actually not be a input heading type, see if prototype + service need changing?
   def verifyPageDisplayed(): Unit =
     verifyStandardPageHeading(
       expectedHeading = "Enter the supplier’s VAT registration details"
     )
 
-  // TODO: Need test data for this! Come back and refactor
   def inputCountryAndVatNumber(): Unit = {
-    typeInsideElement(PageLocators.country, "Croatia")
-    typeInsideElement(PageLocators.vatNum, "00000000000")
+    val country   = RandomValueGenerator.getRandomEuCountry
+    val vatNumber = RandomValueGenerator.generateRandomEuVatNumber(CountryList.EuCountries.valueOf(country))
+
+    typeInsideElement(By.id("countryCode"), country)
+    typeInsideElement(By.id("vatNumber"), vatNumber)
     clickContinue()
   }
 }

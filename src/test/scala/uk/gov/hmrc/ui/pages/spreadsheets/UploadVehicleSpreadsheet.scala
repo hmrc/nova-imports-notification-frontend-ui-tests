@@ -16,6 +16,7 @@
 
 package uk.gov.hmrc.ui.pages.spreadsheets
 
+import org.openqa.selenium.By
 import uk.gov.hmrc.ui.pages.BasePage
 
 object UploadVehicleSpreadsheet extends BasePage {
@@ -26,5 +27,7 @@ object UploadVehicleSpreadsheet extends BasePage {
       expectedHeading = "Upload vehicle spreadsheet"
     )
 
-  // TODO: SPREADSHEET UPLOAD
+  // TODO: come back and do this
+  def uploadSpreadsheet(): Unit =
+    click(By.ById("file"))
 }

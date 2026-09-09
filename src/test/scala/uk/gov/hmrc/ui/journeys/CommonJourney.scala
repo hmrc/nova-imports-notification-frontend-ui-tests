@@ -26,9 +26,6 @@ import uk.gov.hmrc.ui.pages.AuthLoginPage
 
 /** Base methods that are used to answer repetitive scenarios within journeys to make code more readable */
 object CommonJourney {
-  // TODO: EVENTUALLY BREAK THESE UP INTO, IND -> ORG -> AGENT SPECIFIC METHODS
-  // ACQUISITION SPECIFIC
-  // IMPORT SPECIFIC
   def loginAndStartANotification(
     affinityGroup: AffinityGroup,
     notificationType: NotificationType,
@@ -151,13 +148,13 @@ object CommonJourney {
 
   def addUserDetailsNamePhoneNumberEmailAddress(): Unit = {
     AddYourDetailsName.verifyPageDisplayed()
-    AddYourDetailsName.inputUserDetails()
+    AddYourDetailsName.inputIndividualDetails()
     addPhoneAndEmailDetails()
   }
 
   def addUserDetailsBusinessNamePhoneNumberEmailAddress(): Unit = {
     AddYourDetailsBusinessName.verifyPageDisplayed()
-    AddYourDetailsBusinessName.inputBusinessName()
+    AddYourDetailsBusinessName.inputBusinessDetails()
     addPhoneAndEmailDetails()
   }
 
@@ -170,12 +167,12 @@ object CommonJourney {
 
   def addPurchaserName(): Unit = {
     AddPurchaserDetailsName.verifyPageDisplayed()
-    AddPurchaserDetailsName.inputUserDetails()
+    AddPurchaserDetailsName.inputIndividualDetails()
   }
 
   def addPurchaserBusinessName(): Unit = {
     AddPurchaserDetailsBusinessName.verifyPageDisplayed()
-    AddPurchaserDetailsBusinessName.inputBusinessName()
+    AddPurchaserDetailsBusinessName.inputBusinessDetails()
   }
 
   /** Helper methods that will be used by journeys to supply different types of addresses i.e., a UK specific flow or

@@ -22,6 +22,7 @@ import org.scalatest.matchers.should.Matchers
 import uk.gov.hmrc.configuration.TestEnvironment
 import uk.gov.hmrc.selenium.component.PageObject
 import uk.gov.hmrc.selenium.webdriver.Driver
+import uk.gov.hmrc.ui.data.RandomValueGenerator
 import uk.gov.hmrc.ui.driver.BrowserDriver
 
 import java.time.Duration
@@ -164,6 +165,18 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
 
   def selectOptionTwoAndContinue(): Unit = {
     clickElement(Locators.option2)
+    clickContinue()
+  }
+
+  def inputIndividualDetails(): Unit = {
+    typeInsideElement(Locators.title, RandomValueGenerator.getRandomTitle)
+    typeInsideElement(Locators.firstName, RandomValueGenerator.generateRandomFirstName)
+    typeInsideElement(Locators.lastName, RandomValueGenerator.generateRandomLastName)
+    clickContinue()
+  }
+
+  def inputBusinessDetails(): Unit = {
+    typeInsideElement(Locators.inputField, RandomValueGenerator.generateBusinessName)
     clickContinue()
   }
 
