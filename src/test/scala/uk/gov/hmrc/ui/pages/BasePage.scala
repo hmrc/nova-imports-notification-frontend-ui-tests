@@ -60,7 +60,7 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
   def waitForUrl(expectedUrl: String): Unit = fluentWait.until(ExpectedConditions.urlToBe(expectedUrl))
 
   def waitForVisibilityOfElement(locator: By): WebElement =
-    fluentWait.until(ExpectedConditions.visibilityOfElementLocated(locator))
+    fluentWait.until(ExpectedConditions.presenceOfElementLocated(locator))
 
   def goToPage(url: String): Unit = driver.navigate().to(url)
 
@@ -80,7 +80,7 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
 
   /** Based on if the page had radio buttons or not dictates which page locator we need to use to grab the heading */
   def verifyQuestionPageHeading(expectedHeading: String): Unit = {
-    val actualHeading = waitForVisibilityOfElement(Locators.questionPageHeading).getText
+    val actualHeading = getText(Locators.questionPageHeading)
     assert(
       actualHeading == expectedHeading,
       s"Page Heading mismatch! Expected Heading: $expectedHeading, Actual Heading: $actualHeading"
@@ -89,7 +89,7 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
 
   /** Based on if the page has input field, i.e. text box which dictates which page locator we need to use */
   def verifyInputPageHeading(expectedHeading: String): Unit = {
-    val actualHeading = waitForVisibilityOfElement(Locators.inputPageHeading).getText
+    val actualHeading = getText(Locators.inputPageHeading)
     assert(
       actualHeading == expectedHeading,
       s"Page Heading mismatch! Expected Heading: $expectedHeading, Actual Heading: $actualHeading"
@@ -98,7 +98,7 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
 
   /** Finally non-interactive pages have a different heading class */
   def verifyStandardPageHeading(expectedHeading: String): Unit = {
-    val actualHeading = waitForVisibilityOfElement(Locators.pageHeading).getText
+    val actualHeading = getText(Locators.pageHeading)
     assert(
       actualHeading == expectedHeading,
       s"Page Heading mismatch! Expected Heading: $expectedHeading, Actual Heading: $actualHeading"
@@ -108,7 +108,7 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
   // Some titles will be based on information provided in previous screens, for now we will partially check
   // the known information and ignore the supplier name for example
   def verifyPartialHeading(expectedStartOfHeading: String): Unit = {
-    val actualHeading = waitForVisibilityOfElement(Locators.pageHeading).getText
+    val actualHeading = getText(Locators.pageHeading)
     assert(
       actualHeading.contains(expectedStartOfHeading),
       s"Page Heading mismatch! Expected Heading: $expectedStartOfHeading, Actual Heading: $actualHeading"
@@ -131,14 +131,9 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
   /** Temp navigation work around until we have the actual flow mapped out */
   def navigateToPage(url: String): Unit = driver.navigate().to(url)
 
-  def clickElement(locator: By): Unit =
-    fluentWait.until(ExpectedConditions.elementToBeClickable(locator)).click()
+  def clickElement(locator: By): Unit = click(locator)
 
-  def typeInsideElement(locator: By, input: String): Unit = {
-    val element = fluentWait.until(ExpectedConditions.visibilityOfElementLocated(locator))
-    element.clear()
-    element.sendKeys(input)
-  }
+  def typeInsideElement(locator: By, input: String): Unit = sendKeys(locator, input)
 
   def selectYes(): Unit = clickElement(Locators.yes)
 
