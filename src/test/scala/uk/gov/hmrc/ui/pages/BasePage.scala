@@ -52,8 +52,8 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
   }
 
   private def fluentWait: Wait[WebDriver] = new FluentWait[WebDriver](Driver.instance)
-    .withTimeout(Duration.ofSeconds(30))
-    .pollingEvery(Duration.ofMillis(500))
+    .withTimeout(Duration.ofSeconds(10))
+    .pollingEvery(Duration.ofMillis(250))
     .ignoring(classOf[NoSuchElementException])
     .ignoring(classOf[StaleElementReferenceException])
 
