@@ -22,6 +22,7 @@ object UseThePurchaserDetailsAsTheSupplierDetails extends BasePage {
   override val pageUrl: String = s"$baseUrl/use-purchaser-details-as-supplier"
 
   def verifyPageDisplayed(): Unit =
+    logger.info(s"Verifying page: ${this.getClass.getSimpleName}")
     verifyStandardPageHeading(
       expectedHeading = "Use the purchaser details as the supplier details"
     )

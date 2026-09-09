@@ -28,8 +28,10 @@ class WhichDatesDoYouHaveForTheVehicle(supplierNumber: Int, vehicleNumber: Int) 
     val noIDontHaveAnyDates: By                      = By.id("value_2")
   }
 
-  def verifyPageDisplayed(): Unit =
+  def verifyPageDisplayed(): Unit = {
+    logger.info(s"Verifying page: ${this.getClass.getSimpleName}")
     verifyQuestionPageHeading(
       expectedHeading = "Which dates do you have for the vehicle?"
     )
+  }
 }

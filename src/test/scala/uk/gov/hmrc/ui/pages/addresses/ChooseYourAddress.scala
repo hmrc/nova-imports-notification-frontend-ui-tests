@@ -32,13 +32,14 @@ object ChooseYourAddress extends BasePage {
   def verifyPartialUrl(): Unit =
     verifyEndOfUrl(endOfUrl)
 
-  def verifyPageDisplayed(addressPageType: AddressPages): Unit =
-    verifyStandardPageHeading(
-      expectedHeading = addressPageType.getChooseYourAddressPageTitle
-    )
+  def verifyPageDisplayed(addressPageType: AddressPages): Unit = {
+    val heading = addressPageType.getChooseYourAddressPageTitle
+    logger.info(s"Verifying page: $heading")
+    verifyStandardPageHeading(expectedHeading = heading)
+  }
 
   def selectAnAddress(): Unit = {
-    // For now selecting the first address
+    logger.info(s"Selecting an address on ${this.getClass.getSimpleName}")
     clickElement(ALFPageLocators.radioButton1)
     clickContinue()
   }

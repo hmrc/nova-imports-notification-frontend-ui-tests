@@ -22,6 +22,7 @@ class IsTheSupplierVatRegistered(supplierNumber: Int = 1) extends BasePage {
   override val pageUrl: String = s"$baseUrl/supplier/$supplierNumber/is-supplier-vat-registered"
 
   def verifyPageDisplayed(): Unit =
+    logger.info(s"Verifying page: ${this.getClass.getSimpleName}")
     verifyQuestionPageHeading(
       expectedHeading = "Is the supplier VAT registered?"
     )

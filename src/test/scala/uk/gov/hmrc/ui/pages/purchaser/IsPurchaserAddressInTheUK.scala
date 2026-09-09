@@ -22,6 +22,7 @@ object IsPurchaserAddressInTheUK extends BasePage {
   override val pageUrl: String = s"$baseUrl/is-the-purchaser-address-in-uk"
 
   def verifyPageDisplayed(): Unit =
+    logger.info(s"Verifying page: ${this.getClass.getSimpleName}")
     verifyQuestionPageHeading(
       expectedHeading = "Is the purchaser’s address in the UK?"
     )

@@ -21,8 +21,10 @@ import uk.gov.hmrc.ui.pages.BasePage
 object HasYourClientBroughtAVehicleIntoTheUkForBusinessUse extends BasePage {
   override val pageUrl: String = s"$baseUrl/client-vehicle-business-use"
 
-  def verifyPageDisplayed(): Unit =
+  def verifyPageDisplayed(): Unit = {
+    logger.info(s"Verifying page: ${this.getClass.getSimpleName}")
     validateQuestionPage(
       expectedHeading = "Has your client brought a vehicle into the UK for business use?"
     )
+  }
 }

@@ -19,6 +19,7 @@ package uk.gov.hmrc.ui.pages
 import org.openqa.selenium.{By, StaleElementReferenceException, WebDriver, WebElement}
 import org.openqa.selenium.support.ui.{ExpectedConditions, FluentWait, Wait}
 import org.scalatest.matchers.should.Matchers
+import org.slf4j.{Logger, LoggerFactory}
 import uk.gov.hmrc.configuration.TestEnvironment
 import uk.gov.hmrc.selenium.component.PageObject
 import uk.gov.hmrc.selenium.webdriver.Driver
@@ -31,6 +32,7 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
   val pageUrl: String
   val baseUrl: String              = TestEnvironment.url("nova-imports-notification-frontend")
   val addressLookupBaseUrl: String = TestEnvironment.url("address-lookup-frontend")
+  protected val logger: Logger     = LoggerFactory.getLogger(getClass)
 
   object Locators {
     val questionPageHeading: By = By.className("govuk-fieldset__heading")
@@ -52,8 +54,8 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
   }
 
   private def fluentWait: Wait[WebDriver] = new FluentWait[WebDriver](Driver.instance)
-    .withTimeout(Duration.ofSeconds(30))
-    .pollingEvery(Duration.ofMillis(500))
+    .withTimeout(Duration.ofSeconds(10))
+    .pollingEvery(Duration.ofMillis(250))
     .ignoring(classOf[NoSuchElementException])
     .ignoring(classOf[StaleElementReferenceException])
 
@@ -164,14 +166,24 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
   }
 
   def inputIndividualDetails(): Unit = {
-    typeInsideElement(Locators.title, RandomValueGenerator.getRandomTitle)
-    typeInsideElement(Locators.firstName, RandomValueGenerator.generateRandomFirstName)
-    typeInsideElement(Locators.lastName, RandomValueGenerator.generateRandomLastName)
+    val title: String = RandomValueGenerator.getRandomTitle
+    val fName: String = RandomValueGenerator.generateRandomFirstName
+    val lName: String = RandomValueGenerator.generateRandomLastName
+
+    logger.info(s"About to enter individual details with the following random values: $title $fName $lName")
+
+    typeInsideElement(Locators.title, title)
+    typeInsideElement(Locators.firstName, fName)
+    typeInsideElement(Locators.lastName, lName)
     clickContinue()
   }
 
   def inputBusinessDetails(): Unit = {
-    typeInsideElement(Locators.inputField, RandomValueGenerator.generateBusinessName)
+    val businessName: String = RandomValueGenerator.generateBusinessName
+
+    logger.info(s"About to enter a random business name with the value: $businessName")
+
+    typeInsideElement(Locators.inputField, businessName)
     clickContinue()
   }
 

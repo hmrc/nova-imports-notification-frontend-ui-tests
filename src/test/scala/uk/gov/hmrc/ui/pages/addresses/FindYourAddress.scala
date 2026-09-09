@@ -33,12 +33,14 @@ object FindYourAddress extends BasePage {
   def verifyPartialUrl(): Unit =
     verifyEndOfUrl(endOfUrl)
 
-  def verifyPageDisplayed(addressPageType: AddressPages): Unit =
-    verifyStandardPageHeading(
-      expectedHeading = addressPageType.getFindYourAddressPageTitle
-    )
+  def verifyPageDisplayed(addressPageType: AddressPages): Unit = {
+    val heading = addressPageType.getFindYourAddressPageTitle
+    logger.info(s"Verifying page: $heading")
+    verifyStandardPageHeading(expectedHeading = heading)
+  }
 
   def inputUserAddressForSearch(): Unit = {
+    logger.info(s"About to input a random postcode on ${this.getClass.getSimpleName}")
     typeInsideElement(
       locator = ALFPageLocators.postcode,
       input = RandomValueGenerator.getRandomPostcode

@@ -21,8 +21,8 @@ import uk.gov.hmrc.ui.journeys.IndividualUserJourney
 //TODO: ADD MISSING JOURNEY'S
 class IndividualUserSpec extends BaseSpec {
   Feature("Individual User who is a 'Private Individual' and the 'Notifier'") {
-    Scenario("A user completing an import as a private individual and as the purchaser") {
-      When("the user sets out to import a vehicle as the buyer and as a private individual")
+    Scenario("A user completing an notification as a private individual and as the purchaser") {
+      When("the user sets out to bring a vehicle into NI from the EU as the buyer and as a private individual")
       Then("the user successfully imports a vehicle into NI")
       IndividualUserJourney.Acquisition.notifyingAsAPrivateIndividualAsANotifier()
     }
@@ -30,23 +30,23 @@ class IndividualUserSpec extends BaseSpec {
 
   Feature("Individual user who is a 'Business' and the 'Notifier'") {
     Scenario("A business user completing an acquisition as a business and as the purchaser") {
-      When("the user sets out to import a vehicle as the buyer and as a business")
+      When("the user sets out to bring a vehicle into NI from the EU as the buyer and as a business")
       Then("the user successfully imports a vehicle into NI")
       IndividualUserJourney.Acquisition.notifyingAsABusinessAsANotifier()
     }
   }
 
   Feature("Individual User who is a 'Private Individual' and importing on behalf of a 'Registered Business'") {
-    Scenario("A user completing an import as a private individual on behalf of a business") {
-      When("the user sets out to import a vehicle as a private individual on behalf of a business")
+    Scenario("A user completing a notification as a private individual on behalf of a business") {
+      When("the user sets out to bring a vehicle into NI from the EU as a private individual on behalf of a business")
       Then("the user successfully imports a vehicle into NI")
       IndividualUserJourney.Acquisition.notifyingAsAIndividualOnBehalfOfBusiness()
     }
   }
 
   Feature("Individual User who is a 'Private Individual' on behalf of a 'Private Individual'") {
-    Scenario("A user completing an import as a private individual on behalf of a private individual") {
-      When("the user sets out to import a vehicle on the behalf of a private individual")
+    Scenario("A user completing a notification as a private individual on behalf of a private individual") {
+      When("the user sets out to bring a vehicle into NI from the EU on the behalf of a private individual")
       Then("the user successfully imports a vehicle into NI")
       IndividualUserJourney.Acquisition.notifyingAsAIndividualOnBehalfOfIndividual()
     }
@@ -54,7 +54,7 @@ class IndividualUserSpec extends BaseSpec {
 
   Feature("Individual User who is a 'Business' on behalf of a 'Business'") {
     Scenario("A user completing an acquisition as a business on behalf of a business") {
-      When("the user sets out to import a vehicle on the behalf of a business")
+      When("the user sets out to bring a vehicle into NI from the EU on behalf of a business")
       Then("the user successfully imports a vehicle into NI")
       IndividualUserJourney.Acquisition.notifyingAsABusinessOnBehalfOfABusiness()
     }
@@ -62,7 +62,7 @@ class IndividualUserSpec extends BaseSpec {
 
   Feature("Individual User who is a 'Business' on behalf of a 'Private Individual'") {
     Scenario("A user completing an acquisition as a business on behalf of a private individual") {
-      When("the user sets out to import a vehicle on the behalf of a individual")
+      When("the user sets out to bring a vehicle into NI from the EU on behalf of a individual")
       Then("the user successfully imports a vehicle into NI")
       IndividualUserJourney.Acquisition.notifyingAsABusinessOnBehalfOfIndividual()
     }

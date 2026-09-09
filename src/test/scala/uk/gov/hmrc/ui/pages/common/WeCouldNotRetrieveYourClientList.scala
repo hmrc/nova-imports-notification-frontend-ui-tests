@@ -22,6 +22,7 @@ object WeCouldNotRetrieveYourClientList extends BasePage {
   override val pageUrl: String = s"$baseUrl/client-list-problem"
 
   def verifyPageDisplayed(): Unit =
+    logger.info(s"Verifying page: ${this.getClass.getSimpleName}")
     validateStandardPage(
       expectedHeading = "We could not retrieve your client list"
     )

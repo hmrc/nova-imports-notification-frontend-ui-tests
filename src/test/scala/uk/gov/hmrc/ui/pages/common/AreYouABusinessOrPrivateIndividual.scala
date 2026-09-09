@@ -16,20 +16,16 @@
 
 package uk.gov.hmrc.ui.pages.common
 
-import org.openqa.selenium.By
 import uk.gov.hmrc.ui.pages.BasePage
 
 object AreYouABusinessOrPrivateIndividual extends BasePage {
 
   override val pageUrl: String = s"$baseUrl/business-or-private-individual"
 
-  object PageLocators {
-    val business: By          = By.id("businessType")
-    val privateIndividual: By = By.id("businessType-2")
-  }
-
-  def verifyPageDisplayed(): Unit =
+  def verifyPageDisplayed(): Unit = {
+    logger.info(s"Verifying page: ${this.getClass.getSimpleName}")
     validateQuestionPage(
       expectedHeading = "Are you a business or private individual?"
     )
+  }
 }

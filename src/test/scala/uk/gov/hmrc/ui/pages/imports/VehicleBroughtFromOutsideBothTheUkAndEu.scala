@@ -22,6 +22,7 @@ object VehicleBroughtFromOutsideBothTheUkAndEu extends BasePage {
   override val pageUrl: String = s"$baseUrl/vehicles-brought-from-outside-uk-or-eu"
 
   def verifyPageDisplayed(): Unit =
+    logger.info(s"Verifying page: ${this.getClass.getSimpleName}")
     verifyStandardPageHeading(
       expectedHeading = "Vehicles brought from outside both the UK and the EU"
     )

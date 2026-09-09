@@ -22,6 +22,7 @@ class VehicleBoughtFromSupplier(supplierNumber: Int = 1) extends BasePage {
   override val pageUrl: String = s"$baseUrl/supplier/$supplierNumber/vehicles-bought-from-supplier"
 
   def verifyPageDisplayed(): Unit =
+    logger.info(s"Verifying page: ${this.getClass.getSimpleName}")
     verifyPartialHeading(
       expectedStartOfHeading = "Vehicles brought from"
     )

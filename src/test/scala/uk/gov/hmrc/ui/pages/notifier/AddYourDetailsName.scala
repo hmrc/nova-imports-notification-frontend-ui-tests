@@ -22,5 +22,6 @@ object AddYourDetailsName extends BasePage {
   override val pageUrl: String = s"$baseUrl/name"
 
   def verifyPageDisplayed(): Unit =
+    logger.info(s"Verifying page: ${this.getClass.getSimpleName}")
     verifyStandardPageHeading(expectedHeading = "What is your name?")
 }

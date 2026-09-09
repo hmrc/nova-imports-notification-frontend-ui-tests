@@ -23,14 +23,18 @@ object AddYourDetailsEmail extends BasePage {
   override val pageUrl: String = s"$baseUrl/email-address"
 
   def verifyPageDisplayed(): Unit =
+    logger.info(s"Verifying page: ${this.getClass.getSimpleName}")
     verifyInputPageHeading(
       expectedHeading = "What is your email address?"
     )
 
   def inputEmailAddress(): Unit =
+    val email: String = RandomValueGenerator.generateRandomEmail
+    logger.info(s"About to input a random email: $email")
+
     typeInsideElement(
       locator = Locators.inputField,
-      input = RandomValueGenerator.generateRandomEmail
+      input = email
     )
     clickContinue()
 }

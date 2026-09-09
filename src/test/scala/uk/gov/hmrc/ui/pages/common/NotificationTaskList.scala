@@ -42,6 +42,7 @@ object NotificationTaskList extends BasePage {
   }
 
   def verifyPageDisplayed(): Unit =
+    logger.info(s"Verifying page: ${this.getClass.getSimpleName}")
     validateStandardPage(expectedHeading = "Create a vehicle notification")
 
   def verifyTaskListWithAddress(): Unit = {

@@ -23,11 +23,10 @@ object UploadVehicleSpreadsheet extends BasePage {
   override val pageUrl: String = s"$baseUrl/upload-vehicle-spreadsheet"
 
   def verifyPageDisplayed(): Unit =
+    logger.info(s"Verifying page: ${this.getClass.getSimpleName}")
     verifyStandardPageHeading(
       expectedHeading = "Upload vehicle spreadsheet"
     )
 
   // TODO: come back and do this
-  def uploadSpreadsheet(): Unit =
-    click(By.ById("file"))
 }

@@ -23,6 +23,7 @@ object RetrievingYourClientList extends BasePage {
   override val pageUrl: String = s"$baseUrl/load-client-list"
 
   def verifyPageDisplayed(): Unit =
+    logger.info(s"Verifying page: ${this.getClass.getSimpleName}")
     validateStandardPage(
       expectedHeading = "Retrieving your client list"
     )

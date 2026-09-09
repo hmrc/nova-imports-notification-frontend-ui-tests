@@ -32,17 +32,22 @@ class SelectYourCountryOrTerritory(addressPageType: AddressPages) extends BasePa
   def verifyPartialUrl(): Unit =
     verifyEndOfUrl(endOfUrl)
 
-  def verifyPageDisplayed(): Unit =
-    verifyStandardPageHeading(
-      expectedHeading = addressPageType.getSelectYourCountryOrTerritoryPageTitle
-    )
+  def verifyPageDisplayed(): Unit = {
+    val heading = addressPageType.getSelectYourCountryOrTerritoryPageTitle
+    logger.info(s"Verifying page: $heading")
+    verifyStandardPageHeading(expectedHeading = heading)
+  }
 
   def inputCountryOrTerritory(): Unit = {
+    logger.info(s"Inputting a Country or Territory ${this.getClass.getSimpleName}")
+
+    var randomCountry: String = ""
+    if (addressPageType == AddressPages.Supplier) randomCountry = RandomValueGenerator.getRandomEuCountry
+    else randomCountry = RandomValueGenerator.getRandomNonEuCountry
+
     typeInsideElement(
       locator = ALFPageLocators.countryOrTerritory,
-      input =
-        if (addressPageType == AddressPages.Supplier) RandomValueGenerator.getRandomEuCountry
-        else RandomValueGenerator.getRandomNonEuCountry
+      input = randomCountry
     )
     clickContinue()
   }

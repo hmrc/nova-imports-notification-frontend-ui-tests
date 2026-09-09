@@ -16,20 +16,15 @@
 
 package uk.gov.hmrc.ui.pages.common
 
-import org.openqa.selenium.By
 import uk.gov.hmrc.ui.pages.BasePage
 
 object AreYouNotifyingAsPurchaserOrOnBehalf extends BasePage {
-
   override val pageUrl: String = s"$baseUrl/purchaser-or-on-behalf"
 
-  object PageLocators {
-    val purchaser: By = By.id("notifierType")
-    val onBehalf: By  = By.id("notifierType-2")
-  }
-
-  def verifyPageDisplayed(): Unit =
+  def verifyPageDisplayed(): Unit = {
+    logger.info(s"Verifying page: ${this.getClass.getSimpleName}")
     validateQuestionPage(
       expectedHeading = "Are you notifying as the purchaser, or on behalf of a purchaser?"
     )
+  }
 }
