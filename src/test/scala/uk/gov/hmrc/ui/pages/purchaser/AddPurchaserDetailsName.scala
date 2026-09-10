@@ -22,5 +22,6 @@ object AddPurchaserDetailsName extends BasePage {
   override val pageUrl: String = s"$baseUrl/purchaser-name"
 
   def verifyPageDisplayed(): Unit =
+    logger.info(s"Verifying page: ${this.getClass.getSimpleName}")
     verifyStandardPageHeading(expectedHeading = "What is the purchaser’s name?")
 }

@@ -22,6 +22,7 @@ object PurchaserOnBehalfOfABusinessOrIndividual extends BasePage {
   override val pageUrl: String = s"$baseUrl/purchaser-business-or-private-individual"
 
   def verifyPageDisplayed(): Unit =
+    logger.info(s"Verifying page: ${this.getClass.getSimpleName}")
     validateQuestionPage(
       expectedHeading = "Is the purchaser you’re notifying on behalf of a business or private individual?"
     )

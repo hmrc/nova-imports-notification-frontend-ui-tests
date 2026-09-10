@@ -25,6 +25,7 @@ class EnterTheSuppliersVatRegistrationDetails(supplierNumber: Int = 1) extends B
   override val pageUrl: String = s"$baseUrl/supplier/$supplierNumber/supplier-vat-registration-details"
 
   def verifyPageDisplayed(): Unit =
+    logger.info(s"Verifying page: ${this.getClass.getSimpleName}")
     verifyStandardPageHeading(
       expectedHeading = "Enter the supplier’s VAT registration details"
     )
@@ -33,6 +34,7 @@ class EnterTheSuppliersVatRegistrationDetails(supplierNumber: Int = 1) extends B
     val country   = RandomValueGenerator.getRandomEuCountry
     val vatNumber = RandomValueGenerator.generateRandomEuVatNumber(CountryList.EuCountries.valueOf(country))
 
+    logger.info(s"About to enter a random country: $country and it's random VAT number: $vatNumber")
     typeInsideElement(By.id("countryCode"), country)
     typeInsideElement(By.id("vatNumber"), vatNumber)
     clickContinue()

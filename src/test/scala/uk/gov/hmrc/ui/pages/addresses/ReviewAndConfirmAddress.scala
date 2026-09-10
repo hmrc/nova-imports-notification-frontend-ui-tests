@@ -30,8 +30,9 @@ object ReviewAndConfirmAddress extends BasePage {
   def verifyPartialInternationalUrl(): Unit =
     verifyEndOfUrl(endOfInternationalUrl)
 
-  def verifyPageDisplayed(addressPageType: AddressPages): Unit =
-    verifyStandardPageHeading(
-      expectedHeading = addressPageType.getReviewAndConfirmAddressPageTitle
-    )
+  def verifyPageDisplayed(addressPageType: AddressPages): Unit = {
+    val heading = addressPageType.getReviewAndConfirmAddressPageTitle
+    logger.info(s"Verifying page: $heading")
+    verifyStandardPageHeading(expectedHeading = heading)
+  }
 }

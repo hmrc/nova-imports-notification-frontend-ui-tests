@@ -23,22 +23,29 @@ object AddYourDetailsPhoneNumber extends BasePage {
   override val pageUrl: String = s"$baseUrl/contact-numbers"
 
   def verifyPageDisplayed(): Unit =
+    logger.info(s"Verifying page: ${this.getClass.getSimpleName}")
     verifyStandardPageHeading(
       expectedHeading = "What are your contact numbers?"
     )
 
   def inputPhoneNumber(): Unit = {
+    val number: String = RandomValueGenerator.generateRandomLandlineNumber
+    logger.info(s"About to input a random phone number: $number")
+
     typeInsideElement(
       locator = Locators.phoneNumber,
-      input = RandomValueGenerator.generateRandomLandlineNumber
+      input = number
     )
     clickContinue()
   }
 
   def inputMobileNumber(): Unit = {
+    val number: String = RandomValueGenerator.generateRandomLandlineNumber
+    logger.info(s"About to input a random mobile number: $number")
+
     typeInsideElement(
       locator = Locators.mobileNumber,
-      input = RandomValueGenerator.generateRandomMobileNumber
+      input = number
     )
     clickContinue()
   }

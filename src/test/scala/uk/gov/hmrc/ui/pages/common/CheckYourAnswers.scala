@@ -22,10 +22,12 @@ import uk.gov.hmrc.ui.pages.BasePage
 class CheckYourAnswers(whichCYAPage: CYAPage) extends BasePage {
   override val pageUrl: String = s"$baseUrl/check-answers/${whichCYAPage.getCYAPageUrl}"
 
-  def verifyPageDisplayed(): Unit =
+  def verifyPageDisplayed(): Unit = {
+    logger.info(s"Verifying CYA page: ${whichCYAPage.getCYAPageUrl}")
     verifyStandardPageHeading(
       expectedHeading = "Check your answers"
     )
+  }
 
   def checkContentIsCorrect(page: CYAPage, group: AffinityGroup, clientSelected: Boolean = false): Unit = {
     val expectedContent = CYAPage.getInitialQuestionsContent(group, clientSelected)

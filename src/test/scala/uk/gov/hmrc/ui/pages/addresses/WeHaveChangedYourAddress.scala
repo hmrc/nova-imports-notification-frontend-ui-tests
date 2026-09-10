@@ -26,8 +26,9 @@ import uk.gov.hmrc.ui.pages.BasePage
 class WeHaveChangedYourAddress(addressJourney: AddressPages, supplierNumber: Int = 1) extends BasePage {
   override val pageUrl: String = s"$baseUrl/${addressJourney.getWeHaveChangedYourAddressUrl(supplierNumber)}"
 
-  def verifyPageDisplayed(): Unit =
-    validateStandardPage(
-      expectedHeading = addressJourney.getWeHaveChangedYourAddressTitle
-    )
+  def verifyPageDisplayed(): Unit = {
+    val heading = addressJourney.getWeHaveChangedYourAddressTitle
+    logger.info(s"Verifying page: $heading")
+    validateStandardPage(expectedHeading = heading)
+  }
 }

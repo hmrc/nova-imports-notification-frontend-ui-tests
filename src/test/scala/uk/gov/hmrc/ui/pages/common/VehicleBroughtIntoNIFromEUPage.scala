@@ -25,6 +25,7 @@ class VehicleBroughtIntoNIFromEUPage(isVatUser: Boolean) extends BasePage {
     else "Notifying for a vehicle brought into Northern Ireland"
 
   def verifyPageDisplayed(): Unit =
+    logger.info(s"Verifying page: ${this.getClass.getSimpleName}")
     if (isVatUser) validateQuestionPage(expectedHeading = heading)
     else validateStandardPage(expectedHeading = heading)
 }

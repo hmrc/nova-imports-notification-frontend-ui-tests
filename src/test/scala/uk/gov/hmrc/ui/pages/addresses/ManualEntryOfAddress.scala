@@ -41,12 +41,14 @@ object ManualEntryOfAddress extends BasePage {
   def verifyInternationalUrl(): Unit =
     verifyEndOfUrl(endOfInternationalUrl)
 
-  def verifyPageDisplayed(addressPageType: AddressPages): Unit =
-    verifyStandardPageHeading(
-      expectedHeading = addressPageType.getManualEntryOfAddressPageTitle
-    )
+  def verifyPageDisplayed(addressPageType: AddressPages): Unit = {
+    val heading = addressPageType.getManualEntryOfAddressPageTitle
+    logger.info(s"Verifying page: $heading")
+    verifyStandardPageHeading(expectedHeading = heading)
+  }
 
   def inputUserUkAddress(): Unit = {
+    logger.info(s"Inputting a UK address on ${this.getClass.getSimpleName}")
     typeInsideElement(
       locator = ALFPageLocators.line1,
       input = RandomValueGenerator.generateRandomAddressLine
@@ -70,6 +72,7 @@ object ManualEntryOfAddress extends BasePage {
   }
 
   def inputUserInternationalAddress(): Unit = {
+    logger.info(s"Inputting an International address on ${this.getClass.getSimpleName}")
     typeInsideElement(
       locator = ALFPageLocators.line1,
       input = RandomValueGenerator.generateRandomAddressLine

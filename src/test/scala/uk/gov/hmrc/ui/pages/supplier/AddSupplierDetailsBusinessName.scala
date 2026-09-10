@@ -22,5 +22,6 @@ class AddSupplierDetailsBusinessName(supplierNumber: Int = 1) extends BasePage {
   override val pageUrl: String = s"$baseUrl/supplier/$supplierNumber/supplier-business-name"
 
   def verifyPageDisplayed(): Unit =
+    logger.info(s"Verifying page: ${this.getClass.getSimpleName}")
     verifyInputPageHeading(expectedHeading = "What is the supplier’s business name?")
 }

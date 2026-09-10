@@ -24,8 +24,10 @@ object BeforeYouContinue extends BasePage {
 
   val notifyingForMultipleVehiclesHeading: By = By.xpath("//h2[contains(text(), 'Notifying for multiple vehicles')]")
 
-  def verifyPageDisplayed(): Unit =
+  def verifyPageDisplayed(): Unit = {
+    logger.info(s"Verifying page: ${this.getClass.getSimpleName}")
     validateStandardPage(expectedHeading = "Before you continue")
+  }
 
   def verifyMultipleVehiclesSectionNotPresent(): Unit = {
     verifyPageDisplayed()

@@ -31,6 +31,7 @@ object LandingPage extends BasePage {
   }
 
   def verifyPageDisplayed(): Unit =
+    logger.info(s"Verifying page: ${this.getClass.getSimpleName}")
     validateStandardPage(expectedHeading = "Notification of Vehicle Arrivals (NOVA)")
 
   def createANewNotification(): Unit =

@@ -18,11 +18,11 @@ package uk.gov.hmrc.ui.pages.supplier
 
 import uk.gov.hmrc.ui.pages.BasePage
 
-// TODO: I don't think the AS-IS actually allows you to use the supplier details for personal details more than once!
 class UseYourPersonalDetailsAsTheSupplierDetails(supplierNumber: Int = 1) extends BasePage {
   override val pageUrl: String = s"$baseUrl/supplier/$supplierNumber/use-personal-details-as-supplier"
 
   def verifyPageDisplayed(): Unit =
+    logger.info(s"Verifying page: ${this.getClass.getSimpleName}")
     verifyStandardPageHeading(
       expectedHeading = "Use your personal details as the supplier details"
     )

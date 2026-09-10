@@ -22,6 +22,7 @@ object YouHaveNoAuthorisedClients extends BasePage {
   override val pageUrl: String = s"$baseUrl/view-clients/no-clients"
 
   def verifyPageDisplayed(): Unit =
+    logger.info(s"Verifying page: ${this.getClass.getSimpleName}")
     validateStandardPage(
       expectedHeading = "You have no authorised clients"
     )
