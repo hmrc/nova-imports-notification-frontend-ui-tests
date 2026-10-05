@@ -21,8 +21,9 @@ import uk.gov.hmrc.ui.pages.addresses.{ChooseYourAddress, FindYourAddress, Revie
 import uk.gov.hmrc.ui.pages.common.{AreYouABusinessOrPrivateIndividual, AreYouNotifyingAsPurchaserOrOnBehalf, BeforeYouContinue, CheckYourAnswers, HasYourClientBroughtAVehicleIntoTheUkForBusinessUse, HaveYouBroughtAVehicleIntoTheUKForBusinessUse, LandingPage, NotificationTaskList, PurchaserOnBehalfOfABusinessOrIndividual, VehicleBroughtIntoNIFromEUPage}
 import uk.gov.hmrc.ui.pages.notifier.{AddYourDetailsBusinessName, AddYourDetailsEmail, AddYourDetailsGuidancePage, AddYourDetailsName, AddYourDetailsPhoneNumber, IsYourAddressInTheUK}
 import uk.gov.hmrc.ui.pages.purchaser.{AddPurchaserDetailsBusinessName, AddPurchaserDetailsName, IsPurchaserAddressInTheUK}
-import uk.gov.hmrc.ui.pages.supplier.AddVehicleDetails
+import uk.gov.hmrc.ui.pages.supplier.{AddVehicleDetails, CheckTheSupplierDetailsBeforeAddingVehicles, VehicleBoughtFromSupplier}
 import uk.gov.hmrc.ui.pages.AuthLoginPage
+import uk.gov.hmrc.ui.pages.aquisition.WhichDatesDoYouHaveForTheVehicle
 
 /** Base methods that are used to answer repetitive scenarios within journeys to make code more readable */
 object CommonJourney {
@@ -212,9 +213,23 @@ object CommonJourney {
 
   // TODO:
   /** Helper methods for adding vehicles */
+  protected def addingVehicleBySupplier(affinityGroup: AffinityGroup): Unit =
+    if (affinityGroup.userIsVATUser) AddVehicleDetails.addBySupplierAsAVatUser()
+    else AddVehicleDetails.addBySupplierNonVatUser()
+  def addVehicleBySupplierSelfSupply(): Unit                                = {
+    CheckTheSupplierDetailsBeforeAddingVehicles().verifyPageDisplayed()
+    CheckTheSupplierDetailsBeforeAddingVehicles().clickContinue()
+    VehicleBoughtFromSupplier().verifyPageDisplayed()
+    VehicleBoughtFromSupplier().clickContinue()
+    WhichDatesDoYouHaveForTheVehicle().verifyPageDisplayed()
+    // TODO: How do we want to handle all these date options?
+  }
+
+  def addVehicleBySupplierAndProvideSupplyInformation(): Unit = {}
+
   def addVehicleDetailsUploadAVehicleSpreadsheet(): Unit = {
     AddVehicleDetails.verifyPageDisplayed()
-    AddVehicleDetails.selectOptionTwoAndContinue()
+    AddVehicleDetails.addBySpreadsheet()
   }
 
   def validateCheckYourAnswersForAddress(page: CYAPage): Unit = {

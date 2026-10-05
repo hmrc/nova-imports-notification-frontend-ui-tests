@@ -16,9 +16,16 @@
 
 package uk.gov.hmrc.ui.helpers
 
+import scala.util.Random
+
 object CountryList {
+  // Get a random country from a combined list of EU countries & Non-EU countries
+  sealed trait Countries
+  private val allCountries: Seq[Countries] = EuCountries.values.toSeq ++ NonEuCountries.values.toSeq
+  def randomCountry(): Countries           = allCountries(Random.nextInt(allCountries.size))
+
   // All current EU member state countries NOVA allows for a supplier
-  enum EuCountries:
+  enum EuCountries extends Countries:
     case Austria, Belgium, Bulgaria, Croatia, Cyprus, Czechia, Denmark, Estonia, Finland, France, Germany, Greece,
       Hungary,
       Ireland, Italy, Latvia, Lithuania, Luxembourg, Malta, Netherlands, Holland, Poland, Portugal, Romania, Slovakia,
@@ -26,8 +33,27 @@ object CountryList {
       Spain, Sweden
 
   // Including only a handful of the 249 countries, territories, geographical locations currently listed ISO 3166-1.
-  enum NonEuCountries:
-    case Afghanistan, Albania, Algeria, Argentina, Australia, Bangladesh, Barbados, Belarus, Canada, Chad, Chile,
-      Djibouti,
-      Dominica, Ethiopia, Vanuatu, Yemen, Zambia, Zimbabwe
+  enum NonEuCountries extends Countries:
+    case Afghanistan, Albania, Algeria, Argentina, Australia, Bangladesh
+
+  // Get currency used for purchase of vehicle
+  def getEuCurrency(country: EuCountries): String = country match {
+    case EuCountries.Bulgaria  => "Bulgarian lev (BGN)"
+    case EuCountries.Croatia   => "Czech koruna (CZK)"
+    case EuCountries.Denmark   => "Danish krone (DKK)"
+    case EuCountries.Lithuania => "Lithuanian litas (LTL)"
+    case EuCountries.Poland    => "Polish złoty (PLN)"
+    case EuCountries.Romania   => "Romanian leu (RON)"
+    case EuCountries.Sweden    => "Swedish krona (SEK)"
+    case _                     => "Euro (EUR)"
+  }
+
+  def getNonEuCurrency(country: NonEuCountries): String = country match {
+    case NonEuCountries.Afghanistan => "Afghani (AFN)"
+    case NonEuCountries.Albania     => "Albanian lek (ALL)"
+    case NonEuCountries.Algeria     => "Algerian dinar (DZD)"
+    case NonEuCountries.Argentina   => "Argentine peso (ARS)"
+    case NonEuCountries.Australia   => "Australian dollar (AUD)"
+    case NonEuCountries.Bangladesh  => "Bangladeshi taka (BDT)"
+  }
 }

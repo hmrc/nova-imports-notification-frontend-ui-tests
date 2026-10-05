@@ -18,3 +18,8 @@ package uk.gov.hmrc.ui.helpers
 
 enum NotificationType:
   case Acquisition, Import
+
+  def url: String = this match {
+    case Acquisition => "supplier"
+    case Import      => "import"
+  }
