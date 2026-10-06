@@ -53,16 +53,16 @@ object RandomValueGenerator {
   def generateDateOfArrival: LocalDate           = RandomData.last14Days()
   def generatePurchaseInvoiceDate: LocalDate     = RandomData.purchaseDate()
   def generateCountryOfFirstRegistration: String = CountryList.randomCountry().toString
-  def generateTotalAmountPaid: String = Random.between(1, 999999999999L).toString
-  def generatePurchaseInvoiceNumber: String = RandomData.alphaNumeric(Random.between(1, 20))
+  def generateTotalAmountPaid: String            = Random.between(1, 999999999999L).toString
+  def generatePurchaseInvoiceNumber: String      = RandomData.alphaNumeric(Random.between(1, 20))
   def generateReasonForNoPurchaseInvoice: String = RandomData.characters(Random.between(1, 160))
 }
 
 // Generate unique data for us whereas the RandomValueGenerator is used to call the specific data / format we want
 object RandomData {
-  def numbers(lengthOfString: Int): String    = List.fill(lengthOfString)(Random.nextInt(10)).mkString
-  def characters(lengthOfString: Int): String = List.fill(lengthOfString)(('a' + Random.nextInt(26)).toChar).mkString
-  def alphaNumeric(lengthOfString: Int): String = Random.alphanumeric.take(lengthOfString).mkString
+  def numbers(lengthOfString: Int): String          = List.fill(lengthOfString)(Random.nextInt(10)).mkString
+  def characters(lengthOfString: Int): String       = List.fill(lengthOfString)(('a' + Random.nextInt(26)).toChar).mkString
+  def alphaNumeric(lengthOfString: Int): String     = Random.alphanumeric.take(lengthOfString).mkString
   def alphaNumericNoIO(lengthOfString: Int): String = {
     val chars = "ABCDEFGHJKLMNPQRSTUVWXYZ0123456789"
     List.fill(lengthOfString)(chars(Random.nextInt(chars.length))).mkString

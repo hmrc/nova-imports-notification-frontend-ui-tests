@@ -26,4 +26,13 @@ object VehicleBroughtFromOutsideBothTheUkAndEu extends BasePage {
     verifyStandardPageHeading(
       expectedHeading = "Vehicles brought from outside both the UK and the EU"
     )
+
+  def addByImportNumberNoClientSelected(): Unit =
+    clickContinue()
+
+  def addByImportNumber(): Unit =
+    selectOptionOneAndContinue()
+
+  def addBySpreadsheet(): Unit =
+    selectOptionTwoAndContinue()
 }

@@ -17,6 +17,8 @@
 package uk.gov.hmrc.ui.pages.aquisition
 
 import org.openqa.selenium.By
+import uk.gov.hmrc.ui.helpers.Dates
+import uk.gov.hmrc.ui.helpers.Dates.SelectedDates
 import uk.gov.hmrc.ui.pages.BasePage
 
 class WhichDatesDoYouHaveForTheVehicle(supplierNumber: Int = 1, vehicleNumber: Int = 1) extends BasePage {
@@ -36,22 +38,28 @@ class WhichDatesDoYouHaveForTheVehicle(supplierNumber: Int = 1, vehicleNumber: I
     )
   }
 
-  def selectDateVehicleWasRegistered(): Unit =
+  def selectDates(datesToAdd: Seq[SelectedDates]): Unit = {
+    if (datesToAdd.isEmpty) selectNoDates()
+    datesToAdd.foreach {
+      case SelectedDates.FirstRegistration => selectDateVehicleWasRegistered()
+      case SelectedDates.MadeAvailable     => selectDateMadeAvailable()
+      case SelectedDates.PurchaseInvoice   => selectPurchaseInvoice()
+    }
+    clickContinue()
+  }
+
+  private def selectDateVehicleWasRegistered(): Unit =
     clickElement(PageLocators.dateVehicleWasFirstRegistered)
 
-  def selectDateMadeAvailable(): Unit =
+  private def selectDateMadeAvailable(): Unit =
     clickElement(PageLocators.dateVehicleMadeAvailable)
 
-  def selectPurchaseInvoice(): Unit =
+  private def selectPurchaseInvoice(): Unit =
     clickElement(PageLocators.purchaseInvoiceDate)
 
-  def selectNoDates(): Unit =
+  def selectNoDates(): Unit = {
     clickElement(PageLocators.noIDontHaveAnyDates)
-
-  def selectAllDates(): Unit = {
-    selectDateVehicleWasRegistered()
-    selectDateMadeAvailable()
-    selectPurchaseInvoice()
     clickContinue()
+    // TODO: VERIFY END OF FLOW HERE
   }
 }

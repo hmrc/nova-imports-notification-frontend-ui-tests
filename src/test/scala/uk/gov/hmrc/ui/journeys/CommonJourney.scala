@@ -16,7 +16,8 @@
 
 package uk.gov.hmrc.ui.journeys
 
-import uk.gov.hmrc.ui.helpers.{AddressPages, AffinityGroup, CYAPage, NotificationType}
+import uk.gov.hmrc.ui.helpers.Dates.SelectedDates
+import uk.gov.hmrc.ui.helpers.{AddressPages, AffinityGroup, CYAPage, Dates, NotificationType}
 import uk.gov.hmrc.ui.pages.addresses.{ChooseYourAddress, FindYourAddress, ReviewAndConfirmAddress}
 import uk.gov.hmrc.ui.pages.common.{AreYouABusinessOrPrivateIndividual, AreYouNotifyingAsPurchaserOrOnBehalf, BeforeYouContinue, CheckYourAnswers, HasYourClientBroughtAVehicleIntoTheUkForBusinessUse, HaveYouBroughtAVehicleIntoTheUKForBusinessUse, LandingPage, NotificationTaskList, PurchaserOnBehalfOfABusinessOrIndividual, VehicleBroughtIntoNIFromEUPage}
 import uk.gov.hmrc.ui.pages.notifier.{AddYourDetailsBusinessName, AddYourDetailsEmail, AddYourDetailsGuidancePage, AddYourDetailsName, AddYourDetailsPhoneNumber, IsYourAddressInTheUK}
@@ -211,21 +212,28 @@ object CommonJourney {
 
   def supplierHasInternationalDetails(): Unit = {}
 
-  // TODO:
   /** Helper methods for adding vehicles */
   protected def addingVehicleBySupplier(affinityGroup: AffinityGroup): Unit =
     if (affinityGroup.userIsVATUser) AddVehicleDetails.addBySupplierAsAVatUser()
     else AddVehicleDetails.addBySupplierNonVatUser()
-  def addVehicleBySupplierSelfSupply(): Unit                                = {
+
+  def addVehicleBySupplierSelfSupply(datesToAdd: Seq[SelectedDates], notificationType: NotificationType): Unit = {
     CheckTheSupplierDetailsBeforeAddingVehicles().verifyPageDisplayed()
     CheckTheSupplierDetailsBeforeAddingVehicles().clickContinue()
     VehicleBoughtFromSupplier().verifyPageDisplayed()
     VehicleBoughtFromSupplier().clickContinue()
     WhichDatesDoYouHaveForTheVehicle().verifyPageDisplayed()
-    // TODO: How do we want to handle all these date options?
+    WhichDatesDoYouHaveForTheVehicle().selectDates(datesToAdd)
+    handleDatesSelected(datesToAdd, notificationType)
+    //TODO: continue with vehicle selection
   }
 
-  def addVehicleBySupplierAndProvideSupplyInformation(): Unit = {}
+  private def handleDatesSelected(pagesToVerify: Seq[SelectedDates], notificationType: NotificationType): Unit =
+    Dates.verifyPagesDisplayed(pagesToVerify, notificationType)
+
+  def addVehicleBySupplierAndProvideSupplyInformation(): Unit = {
+    // TODO
+  }
 
   def addVehicleDetailsUploadAVehicleSpreadsheet(): Unit = {
     AddVehicleDetails.verifyPageDisplayed()
