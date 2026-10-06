@@ -22,7 +22,7 @@ import uk.gov.hmrc.ui.pages.addresses.{ChooseYourAddress, FindYourAddress, Revie
 import uk.gov.hmrc.ui.pages.common.{AreYouABusinessOrPrivateIndividual, AreYouNotifyingAsPurchaserOrOnBehalf, BeforeYouContinue, CheckYourAnswers, HasYourClientBroughtAVehicleIntoTheUkForBusinessUse, HaveYouBroughtAVehicleIntoTheUKForBusinessUse, LandingPage, NotificationTaskList, PurchaserOnBehalfOfABusinessOrIndividual, VehicleBroughtIntoNIFromEUPage}
 import uk.gov.hmrc.ui.pages.notifier.{AddYourDetailsBusinessName, AddYourDetailsEmail, AddYourDetailsGuidancePage, AddYourDetailsName, AddYourDetailsPhoneNumber, IsYourAddressInTheUK}
 import uk.gov.hmrc.ui.pages.purchaser.{AddPurchaserDetailsBusinessName, AddPurchaserDetailsName, IsPurchaserAddressInTheUK}
-import uk.gov.hmrc.ui.pages.supplier.{AddVehicleDetails, CheckTheSupplierDetailsBeforeAddingVehicles, VehicleBoughtFromSupplier}
+import uk.gov.hmrc.ui.pages.supplier.{AddVehicleDetails, CheckTheSupplierDetailsBeforeAddingVehicles, UseYourPersonalDetailsAsTheSupplierDetails, VehicleBoughtFromSupplier}
 import uk.gov.hmrc.ui.pages.AuthLoginPage
 import uk.gov.hmrc.ui.pages.aquisition.WhichDatesDoYouHaveForTheVehicle
 
@@ -213,11 +213,13 @@ object CommonJourney {
   def supplierHasInternationalDetails(): Unit = {}
 
   /** Helper methods for adding vehicles */
-  protected def addingVehicleBySupplier(affinityGroup: AffinityGroup): Unit =
+  def addingVehicleBySupplier(affinityGroup: AffinityGroup): Unit =
     if (affinityGroup.userIsVATUser) AddVehicleDetails.addBySupplierAsAVatUser()
     else AddVehicleDetails.addBySupplierNonVatUser()
 
   def addVehicleBySupplierSelfSupply(datesToAdd: Seq[SelectedDates], notificationType: NotificationType): Unit = {
+    UseYourPersonalDetailsAsTheSupplierDetails().verifyPageDisplayed()
+    UseYourPersonalDetailsAsTheSupplierDetails().usePersonalDetailsAsSupplierDetails()
     CheckTheSupplierDetailsBeforeAddingVehicles().verifyPageDisplayed()
     CheckTheSupplierDetailsBeforeAddingVehicles().clickContinue()
     VehicleBoughtFromSupplier().verifyPageDisplayed()
@@ -225,7 +227,7 @@ object CommonJourney {
     WhichDatesDoYouHaveForTheVehicle().verifyPageDisplayed()
     WhichDatesDoYouHaveForTheVehicle().selectDates(datesToAdd)
     handleDatesSelected(datesToAdd, notificationType)
-    //TODO: continue with vehicle selection
+    // TODO: continue with vehicle selection
   }
 
   private def handleDatesSelected(pagesToVerify: Seq[SelectedDates], notificationType: NotificationType): Unit =

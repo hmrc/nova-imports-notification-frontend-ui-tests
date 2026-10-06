@@ -44,6 +44,7 @@ class WhichDatesDoYouHaveForTheVehicle(supplierNumber: Int = 1, vehicleNumber: I
       case SelectedDates.FirstRegistration => selectDateVehicleWasRegistered()
       case SelectedDates.MadeAvailable     => selectDateMadeAvailable()
       case SelectedDates.PurchaseInvoice   => selectPurchaseInvoice()
+      case SelectedDates.NoDatesProvided   => selectNoDates()
     }
     clickContinue()
   }
@@ -57,9 +58,6 @@ class WhichDatesDoYouHaveForTheVehicle(supplierNumber: Int = 1, vehicleNumber: I
   private def selectPurchaseInvoice(): Unit =
     clickElement(PageLocators.purchaseInvoiceDate)
 
-  def selectNoDates(): Unit = {
+  def selectNoDates(): Unit =
     clickElement(PageLocators.noIDontHaveAnyDates)
-    clickContinue()
-    // TODO: VERIFY END OF FLOW HERE
-  }
 }

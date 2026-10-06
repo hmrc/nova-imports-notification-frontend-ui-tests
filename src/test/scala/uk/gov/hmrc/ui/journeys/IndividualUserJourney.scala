@@ -16,8 +16,11 @@
 
 package uk.gov.hmrc.ui.journeys
 
+import uk.gov.hmrc.ui.helpers.Dates.SelectedDates
+import uk.gov.hmrc.ui.helpers.Dates.SelectedDates.PurchaseInvoice
 import uk.gov.hmrc.ui.helpers.{AffinityGroup, CYAPage, NotificationType}
 import uk.gov.hmrc.ui.pages.common.{CheckYourAnswers, NotificationTaskList, VehicleBroughtIntoNIFromOutsideEUPage}
+import uk.gov.hmrc.ui.pages.vehicles.DateOfFirstRegistration
 
 object IndividualUserJourney {
   // Acquisition flow
@@ -35,7 +38,11 @@ object IndividualUserJourney {
       CommonJourney.notifierHasUkDetails()
       NotificationTaskList.verifyAddYourAddressStatus("Completed")
       CommonJourney.addVehicleDetails()
-      // TODO: Vehicle stuff
+      CommonJourney.addingVehicleBySupplier(AffinityGroup.Individual)
+      CommonJourney.addVehicleBySupplierSelfSupply(
+        Seq(SelectedDates.NoDatesProvided),
+        NotificationType.Acquisition
+      )
     }
 
     def notifyingAsABusinessAsANotifier(): Unit = {

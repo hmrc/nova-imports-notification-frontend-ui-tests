@@ -27,6 +27,7 @@ import uk.gov.hmrc.ui.data.RandomValueGenerator
 import uk.gov.hmrc.ui.driver.BrowserDriver
 
 import java.time.Duration
+import java.time.format.DateTimeFormatter
 
 trait BasePage extends PageObject with Matchers with BrowserDriver {
   val pageUrl: String
@@ -54,6 +55,7 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
     val dateDayField: By        = By.id("value.day")
     val dateMonthField: By      = By.id("value.month")
     val dateYearField: By       = By.id("value.year")
+    val characterCountInput: By = By.xpath("/html/body/div/main/div/div/form/div/textarea")
   }
 
   private def fluentWait: Wait[WebDriver] = new FluentWait[WebDriver](Driver.instance)
@@ -201,9 +203,9 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
       case "purchase"     => RandomValueGenerator.generatePurchaseInvoiceDate
     }
 
-    val day: String   = date.getDayOfMonth.toString
-    val month: String = date.getMonthValue.toString
-    val year: String  = date.getYear.toString
+    val day: String   = date.format(DateTimeFormatter.ofPattern("dd"))
+    val month: String = date.format(DateTimeFormatter.ofPattern("MM"))
+    val year: String  = date.format(DateTimeFormatter.ofPattern("yyyy"))
 
     logger.info(s"About to enter a date value of: $day $month $year")
     typeInsideElement(Locators.dateDayField, day)

@@ -23,7 +23,7 @@ class WhatIsThePurchaseInvoiceDate(supplierNumber: Int = 1, vehicleNumber: Int =
 
   def verifyPageDisplayed(): Unit = {
     logger.info(s"Verifying page: ${this.getClass.getSimpleName}")
-    verifyInputPageHeading(
+    verifyQuestionPageHeading(
       expectedHeading = "What is the purchase invoice date?"
     )
   }

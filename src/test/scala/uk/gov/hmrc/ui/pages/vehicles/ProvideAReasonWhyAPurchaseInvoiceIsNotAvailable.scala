@@ -33,7 +33,7 @@ class ProvideAReasonWhyAPurchaseInvoiceIsNotAvailable(supplierNumber: Int = 1, v
   def inputReasonForNoInvoice(): Unit = {
     val reason = RandomValueGenerator.generateReasonForNoPurchaseInvoice
     logger.info(s"Entering the random value $reason for reason of no purchase invoice")
-    typeInsideElement(Locators.inputField, reason)
+    typeInsideElement(Locators.characterCountInput, reason)
     clickContinue()
   }
 }

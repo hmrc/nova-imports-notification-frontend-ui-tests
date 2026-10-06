@@ -37,7 +37,7 @@ object Dates {
       SelectedDates.MadeAvailable,
       SelectedDates.PurchaseInvoice
     ),
-    Combinations.Five -> Set(SelectedDates.NoDatesProvided)
+    Combinations.Five  -> Set(SelectedDates.NoDatesProvided)
   )
 
   def verifyPagesDisplayed(datesSelected: Seq[SelectedDates], notificationType: NotificationType): Unit =
@@ -48,8 +48,8 @@ object Dates {
       case Some(Combinations.Two)   => purchaseInvoiceDate()
       case Some(Combinations.Three) => dateOfFirstRegistrationAndDateOfAvailability(notificationType)
       case Some(Combinations.Four)  => allDatesProvided(notificationType)
-      case Some(Combinations.Five) => noDatesProvided()
-      case None => ???
+      case Some(Combinations.Five)  => noDatesProvided()
+      case None                     => ???
 
   private def dateMadeAvailableAndPurchaseInvoiceDate(): Unit = {
     DateOfAvailability().verifyPageDisplayed()
@@ -95,7 +95,6 @@ object Dates {
     // TOTAL... ECT TODO
   }
 
-  private def noDatesProvided(): Unit = {
+  private def noDatesProvided(): Unit =
     IfYouDoNotHaveAnyOfTheseDatesForTheVehicle().verifyPageDisplayed()
-  }
 }
