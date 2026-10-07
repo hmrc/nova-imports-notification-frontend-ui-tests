@@ -49,7 +49,7 @@ object Dates {
       case Some(Combinations.Three) => dateOfFirstRegistrationAndDateOfAvailability(notificationType)
       case Some(Combinations.Four)  => allDatesProvided(notificationType)
       case Some(Combinations.Five)  => noDatesProvided()
-      case None                     => ???
+      case None                     => throw Error("No date combinations found")
 
   private def dateMadeAvailableAndPurchaseInvoiceDate(): Unit = {
     DateOfAvailability().verifyPageDisplayed()
@@ -58,7 +58,6 @@ object Dates {
     WhatIsThePurchaseInvoiceDate().inputDateOfPurchase()
     WhatIsThePurchaseInvoiceNumber().verifyPageDisplayed()
     WhatIsThePurchaseInvoiceNumber().inputPurchaseInvoiceNumber()
-    // TOTAL... ECT TODO
   }
 
   private def purchaseInvoiceDate(): Unit = {
@@ -66,7 +65,6 @@ object Dates {
     WhatIsThePurchaseInvoiceDate().inputDateOfPurchase()
     WhatIsThePurchaseInvoiceNumber().verifyPageDisplayed()
     WhatIsThePurchaseInvoiceNumber().inputPurchaseInvoiceNumber()
-    // TOTAL... ECT TODO
   }
 
   private def dateOfFirstRegistrationAndDateOfAvailability(notificationType: NotificationType): Unit = {
@@ -78,7 +76,6 @@ object Dates {
     DateOfAvailability().inputDateOfArrival()
     ProvideAReasonWhyAPurchaseInvoiceIsNotAvailable().verifyPageDisplayed()
     ProvideAReasonWhyAPurchaseInvoiceIsNotAvailable().inputReasonForNoInvoice()
-    // TOTAL... ECT TODO
   }
 
   private def allDatesProvided(notificationType: NotificationType): Unit = {
@@ -92,7 +89,6 @@ object Dates {
     WhatIsThePurchaseInvoiceDate().inputDateOfPurchase()
     WhatIsThePurchaseInvoiceNumber().verifyPageDisplayed()
     WhatIsThePurchaseInvoiceNumber().inputPurchaseInvoiceNumber()
-    // TOTAL... ECT TODO
   }
 
   private def noDatesProvided(): Unit =

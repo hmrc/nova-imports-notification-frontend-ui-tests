@@ -20,31 +20,29 @@ import uk.gov.hmrc.ui.helpers.Dates.SelectedDates
 import uk.gov.hmrc.ui.helpers.Dates.SelectedDates.PurchaseInvoice
 import uk.gov.hmrc.ui.helpers.{AffinityGroup, CYAPage, NotificationType}
 import uk.gov.hmrc.ui.pages.common.{CheckYourAnswers, NotificationTaskList, VehicleBroughtIntoNIFromOutsideEUPage}
-import uk.gov.hmrc.ui.pages.vehicles.DateOfFirstRegistration
 
 object IndividualUserJourney {
   // Acquisition flow
   object Acquisition {
-    def notifyingAsAPrivateIndividualAsANotifier(): Unit = {
-      CommonJourney.loginAndStartANotification(AffinityGroup.Individual, NotificationType.Acquisition)
-      CommonJourney.notifierIsAPrivateIndividual()
-      CommonJourney.selfNotifying()
-      CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.Individual)
-      CommonJourney.addYourDetails()
-      CommonJourney.addUserDetailsNamePhoneNumberEmailAddress()
-      CheckYourAnswers(CYAPage.YourDetails).clickContinue()
-      NotificationTaskList.verifyAddYourDetailsStatus("Completed")
-      CommonJourney.addYourAddress()
-      CommonJourney.notifierHasUkDetails()
-      NotificationTaskList.verifyAddYourAddressStatus("Completed")
-      CommonJourney.addVehicleDetails()
-      CommonJourney.addingVehicleBySupplier(AffinityGroup.Individual)
-      CommonJourney.addVehicleBySupplierSelfSupply(
-        Seq(SelectedDates.NoDatesProvided),
-        NotificationType.Acquisition
-      )
+    // TODO: could also split on providing new supplier details etc.,
+    def notifyingAsAPrivateIndividualAsANotifierAllScreens(): Unit = {
+      notifyingAsAPrivateIndividualAsANotifierMainFlow()
+      allDatesAvailable()
+      CommonJourney.addAmountPaidAndCurrencyUsed(NotificationType.Acquisition)
     }
 
+    def notifyingAsAPrivateIndividualAsANotifierNoInvoiceScreens(): Unit = {
+      notifyingAsAPrivateIndividualAsANotifierMainFlow()
+      noPurchaseInvoiceDateAvailable()
+      CommonJourney.addAmountPaidAndCurrencyUsed(NotificationType.Acquisition)
+    }
+
+    def notifyingAsAPrivateIndividualAsANotifierNoDatesProvideScreen(): Unit = {
+      notifyingAsAPrivateIndividualAsANotifierMainFlow()
+      noDatesAvailable()
+    }
+
+    // TODO: Break the rest of them up
     def notifyingAsABusinessAsANotifier(): Unit = {
       CommonJourney.loginAndStartANotification(AffinityGroup.Individual, NotificationType.Acquisition)
       CommonJourney.notifierIsABusiness()
@@ -147,6 +145,45 @@ object IndividualUserJourney {
       NotificationTaskList.verifyAddPurchaserAddressStatus("Completed")
       CommonJourney.addVehicleDetails()
     }
+
+    // The journeys are broken down into re-usable sections below
+    private def notifyingAsAPrivateIndividualAsANotifierMainFlow(): Unit = {
+      CommonJourney.loginAndStartANotification(AffinityGroup.Individual, NotificationType.Acquisition)
+      CommonJourney.notifierIsAPrivateIndividual()
+      CommonJourney.selfNotifying()
+      CommonJourney.validateCheckYourAnswers(CYAPage.InitialQuestions, AffinityGroup.Individual)
+      CommonJourney.addYourDetails()
+      CommonJourney.addUserDetailsNamePhoneNumberEmailAddress()
+      CheckYourAnswers(CYAPage.YourDetails).clickContinue()
+      NotificationTaskList.verifyAddYourDetailsStatus("Completed")
+      CommonJourney.addYourAddress()
+      CommonJourney.notifierHasUkDetails()
+      NotificationTaskList.verifyAddYourAddressStatus("Completed")
+      CommonJourney.addVehicleDetails()
+      CommonJourney.addingVehicleBySupplier(AffinityGroup.Individual)
+    }
+
+    private def allDatesAvailable(): Unit =
+      CommonJourney.addVehicleBySupplierSelfSupply(
+        Seq(
+          SelectedDates.FirstRegistration,
+          SelectedDates.MadeAvailable,
+          SelectedDates.PurchaseInvoice
+        ),
+        NotificationType.Acquisition
+      )
+
+    private def noPurchaseInvoiceDateAvailable(): Unit =
+      CommonJourney.addVehicleBySupplierSelfSupply(
+        Seq(
+          SelectedDates.FirstRegistration,
+          SelectedDates.MadeAvailable
+        ),
+        NotificationType.Acquisition
+      )
+
+    private def noDatesAvailable(): Unit =
+      CommonJourney.addVehicleBySupplierSelfSupply(Seq(SelectedDates.NoDatesProvided), NotificationType.Acquisition)
   }
 
   // Import flow

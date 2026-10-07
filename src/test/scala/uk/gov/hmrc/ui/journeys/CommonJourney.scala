@@ -25,6 +25,7 @@ import uk.gov.hmrc.ui.pages.purchaser.{AddPurchaserDetailsBusinessName, AddPurch
 import uk.gov.hmrc.ui.pages.supplier.{AddVehicleDetails, CheckTheSupplierDetailsBeforeAddingVehicles, UseYourPersonalDetailsAsTheSupplierDetails, VehicleBoughtFromSupplier}
 import uk.gov.hmrc.ui.pages.AuthLoginPage
 import uk.gov.hmrc.ui.pages.aquisition.WhichDatesDoYouHaveForTheVehicle
+import uk.gov.hmrc.ui.pages.vehicles.{EnterTheCurrencyUsedToPayForTheVehicle, TotalAmountPaid}
 
 /** Base methods that are used to answer repetitive scenarios within journeys to make code more readable */
 object CommonJourney {
@@ -227,11 +228,18 @@ object CommonJourney {
     WhichDatesDoYouHaveForTheVehicle().verifyPageDisplayed()
     WhichDatesDoYouHaveForTheVehicle().selectDates(datesToAdd)
     handleDatesSelected(datesToAdd, notificationType)
-    // TODO: continue with vehicle selection
   }
 
   private def handleDatesSelected(pagesToVerify: Seq[SelectedDates], notificationType: NotificationType): Unit =
     Dates.verifyPagesDisplayed(pagesToVerify, notificationType)
+
+  def addAmountPaidAndCurrencyUsed(notificationType: NotificationType): Unit = {
+    TotalAmountPaid(notificationType).verifyPageDisplayed()
+    TotalAmountPaid(notificationType).enterAmountPaidForVehicle()
+    EnterTheCurrencyUsedToPayForTheVehicle(notificationType).verifyPageDisplayed()
+    EnterTheCurrencyUsedToPayForTheVehicle(notificationType).inputCurrencyUsed()
+    // TODO: TYPE OF VEHICLE & CYA
+  }
 
   def addVehicleBySupplierAndProvideSupplyInformation(): Unit = {
     // TODO
