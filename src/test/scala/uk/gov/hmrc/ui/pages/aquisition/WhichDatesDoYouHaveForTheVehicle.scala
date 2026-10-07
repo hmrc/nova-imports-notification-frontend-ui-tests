@@ -17,15 +17,18 @@
 package uk.gov.hmrc.ui.pages.aquisition
 
 import org.openqa.selenium.By
+import uk.gov.hmrc.ui.helpers.Dates
+import uk.gov.hmrc.ui.helpers.Dates.SelectedDates
 import uk.gov.hmrc.ui.pages.BasePage
 
-class WhichDatesDoYouHaveForTheVehicle(supplierNumber: Int, vehicleNumber: Int) extends BasePage {
+class WhichDatesDoYouHaveForTheVehicle(supplierNumber: Int = 1, vehicleNumber: Int = 1) extends BasePage {
   override val pageUrl: String = s"$baseUrl/supplier/$supplierNumber/vehicle/$vehicleNumber/vehicle-dates"
 
   object PageLocators {
-    val vehicleAvailabilityDateFirstRegistration: By = By.id("value_0")
-    val purchaseInvoiceDate: By                      = By.id("value_1")
-    val noIDontHaveAnyDates: By                      = By.id("value_2")
+    val dateVehicleWasFirstRegistered: By = By.id("value_0")
+    val dateVehicleMadeAvailable: By      = By.id("value_1")
+    val purchaseInvoiceDate: By           = By.id("value_2")
+    val noIDontHaveAnyDates: By           = By.id("value_3")
   }
 
   def verifyPageDisplayed(): Unit = {
@@ -34,4 +37,27 @@ class WhichDatesDoYouHaveForTheVehicle(supplierNumber: Int, vehicleNumber: Int) 
       expectedHeading = "Which dates do you have for the vehicle?"
     )
   }
+
+  def selectDates(datesToAdd: Seq[SelectedDates]): Unit = {
+    if (datesToAdd.isEmpty) selectNoDates()
+    datesToAdd.foreach {
+      case SelectedDates.FirstRegistration => selectDateVehicleWasRegistered()
+      case SelectedDates.MadeAvailable     => selectDateMadeAvailable()
+      case SelectedDates.PurchaseInvoice   => selectPurchaseInvoice()
+      case SelectedDates.NoDatesProvided   => selectNoDates()
+    }
+    clickContinue()
+  }
+
+  private def selectDateVehicleWasRegistered(): Unit =
+    clickElement(PageLocators.dateVehicleWasFirstRegistered)
+
+  private def selectDateMadeAvailable(): Unit =
+    clickElement(PageLocators.dateVehicleMadeAvailable)
+
+  private def selectPurchaseInvoice(): Unit =
+    clickElement(PageLocators.purchaseInvoiceDate)
+
+  def selectNoDates(): Unit =
+    clickElement(PageLocators.noIDontHaveAnyDates)
 }

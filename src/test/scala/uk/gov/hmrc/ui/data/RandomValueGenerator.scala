@@ -19,6 +19,7 @@ package uk.gov.hmrc.ui.data
 import uk.gov.hmrc.ui.helpers.CountryList.EuCountries
 import uk.gov.hmrc.ui.helpers.CountryList
 
+import java.time.LocalDate
 import scala.util.Random
 
 object RandomValueGenerator {
@@ -46,12 +47,26 @@ object RandomValueGenerator {
   // Used for EU-VAT details
   def generateRandomEuVatNumber(euState: CountryList.EuCountries): String =
     RandomData.getEuMemberStateVatRegNum(euState)
+
+  // Used for vehicle details
+  def generateDateOfFirstRegistration: LocalDate = RandomData.historicDate()
+  def generateDateOfArrival: LocalDate           = RandomData.last14Days()
+  def generatePurchaseInvoiceDate: LocalDate     = RandomData.purchaseDate()
+  def generateCountryOfFirstRegistration: String = CountryList.randomCountry().toString
+  def generateTotalAmountPaid: String            = Random.between(1, 999999999999L).toString
+  def generatePurchaseInvoiceNumber: String      = RandomData.alphaNumeric(Random.between(1, 20))
+  def generateReasonForNoPurchaseInvoice: String = RandomData.characters(Random.between(1, 160))
 }
 
 // Generate unique data for us whereas the RandomValueGenerator is used to call the specific data / format we want
 object RandomData {
-  def numbers(lengthOfString: Int): String    = List.fill(lengthOfString)(Random.nextInt(10)).mkString
-  def characters(lengthOfString: Int): String = List.fill(lengthOfString)(('a' + Random.nextInt(26)).toChar).mkString
+  def numbers(lengthOfString: Int): String          = List.fill(lengthOfString)(Random.nextInt(10)).mkString
+  def characters(lengthOfString: Int): String       = List.fill(lengthOfString)(('a' + Random.nextInt(26)).toChar).mkString
+  def alphaNumeric(lengthOfString: Int): String     = Random.alphanumeric.take(lengthOfString).mkString
+  def alphaNumericNoIO(lengthOfString: Int): String = {
+    val chars = "ABCDEFGHJKLMNPQRSTUVWXYZ0123456789"
+    List.fill(lengthOfString)(chars(Random.nextInt(chars.length))).mkString
+  }
 
   // Used to randomly choose a title
   def title: String = {
@@ -111,8 +126,31 @@ object RandomData {
         }
     }
 
-  def alphaNumericNoIO(length: Int): String = {
-    val chars = "ABCDEFGHJKLMNPQRSTUVWXYZ0123456789"
-    List.fill(length)(chars(Random.nextInt(chars.length))).mkString
+  // Used to grab a random country from EU / Non-EU list for country of first registration
+
+  /** --- Used for generating a variety of dates --- One method is used for date of registration which will be from 1980
+    * -> 2025 allowing us to simulate a variety of vehicles with increasing / decreasing total miles The other method is
+    * used for date of arrival and will be from the current system date - 14 days prior randomly to simulate different
+    * LNP charge The final method is used for date of purchase invoice for testing purposes we are going to assume the
+    * user bought the vehicle a week prior to the arrival date
+    */
+  def historicDate(): LocalDate = randomBetween(
+    LocalDate.of(1980, 1, 1),
+    LocalDate.of(2025, 12, 30)
+  )
+
+  def last14Days(): LocalDate = randomBetween(
+    LocalDate.now.minusDays(14),
+    LocalDate.now
+  )
+
+  def purchaseDate(): LocalDate = {
+    val randomDay: LocalDate = last14Days()
+    randomDay.minusWeeks(1)
+  }
+
+  private def randomBetween(start: LocalDate, end: LocalDate): LocalDate = {
+    val randomDay = Random.between(start.toEpochDay, end.toEpochDay + 1)
+    LocalDate.ofEpochDay(randomDay)
   }
 }

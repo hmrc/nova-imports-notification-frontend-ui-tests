@@ -24,6 +24,6 @@ class VehicleBoughtFromSupplier(supplierNumber: Int = 1) extends BasePage {
   def verifyPageDisplayed(): Unit =
     logger.info(s"Verifying page: ${this.getClass.getSimpleName}")
     verifyPartialHeading(
-      expectedStartOfHeading = "Vehicles brought from"
+      expectedStartOfHeading = "Vehicles bought from"
     )
 }

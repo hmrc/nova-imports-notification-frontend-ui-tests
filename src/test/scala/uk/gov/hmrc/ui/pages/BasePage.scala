@@ -27,6 +27,7 @@ import uk.gov.hmrc.ui.data.RandomValueGenerator
 import uk.gov.hmrc.ui.driver.BrowserDriver
 
 import java.time.Duration
+import java.time.format.DateTimeFormatter
 
 trait BasePage extends PageObject with Matchers with BrowserDriver {
   val pageUrl: String
@@ -51,6 +52,10 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
     val phoneNumber: By         = By.id("phoneNumber")
     val mobileNumber: By        = By.id("mobileNumber")
     val cyaPageTextContent: By  = By.xpath("/html/body/div/main/div/div/dl/div[2]/dt")
+    val dateDayField: By        = By.id("value.day")
+    val dateMonthField: By      = By.id("value.month")
+    val dateYearField: By       = By.id("value.year")
+    val characterCountInput: By = By.xpath("/html/body/div/main/div/div/form/div/textarea")
   }
 
   private def fluentWait: Wait[WebDriver] = new FluentWait[WebDriver](Driver.instance)
@@ -184,6 +189,28 @@ trait BasePage extends PageObject with Matchers with BrowserDriver {
     logger.info(s"About to enter a random business name with the value: $businessName")
 
     typeInsideElement(Locators.inputField, businessName)
+    clickContinue()
+  }
+
+  def inputDateOfRegistration(): Unit = inputDateInformation("registration")
+  def inputDateOfArrival(): Unit      = inputDateInformation("arrival")
+  def inputDateOfPurchase(): Unit     = inputDateInformation("purchase")
+
+  private def inputDateInformation(dateType: String): Unit = {
+    val date = dateType match {
+      case "registration" => RandomValueGenerator.generateDateOfFirstRegistration
+      case "arrival"      => RandomValueGenerator.generateDateOfArrival
+      case "purchase"     => RandomValueGenerator.generatePurchaseInvoiceDate
+    }
+
+    val day: String   = date.format(DateTimeFormatter.ofPattern("dd"))
+    val month: String = date.format(DateTimeFormatter.ofPattern("MM"))
+    val year: String  = date.format(DateTimeFormatter.ofPattern("yyyy"))
+
+    logger.info(s"About to enter a date value of: $day $month $year")
+    typeInsideElement(Locators.dateDayField, day)
+    typeInsideElement(Locators.dateMonthField, month)
+    typeInsideElement(Locators.dateYearField, year)
     clickContinue()
   }
 

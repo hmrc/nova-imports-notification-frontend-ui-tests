@@ -26,4 +26,13 @@ object AddVehicleDetails extends BasePage {
     verifyStandardPageHeading(
       expectedHeading = "Vehicles brought from the EU"
     )
+
+  def addBySupplierNonVatUser(): Unit =
+    clickContinue()
+
+  def addBySupplierAsAVatUser(): Unit =
+    selectOptionOneAndContinue()
+
+  def addBySpreadsheet(): Unit =
+    selectOptionTwoAndContinue()
 }

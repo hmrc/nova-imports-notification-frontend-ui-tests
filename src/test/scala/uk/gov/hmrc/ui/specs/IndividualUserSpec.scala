@@ -23,8 +23,12 @@ class IndividualUserSpec extends BaseSpec {
   Feature("Individual User who is a 'Private Individual' and the 'Notifier'") {
     Scenario("A user completing an notification as a private individual and as the purchaser") {
       When("the user sets out to bring a vehicle into NI from the EU as the buyer and as a private individual")
-      Then("the user successfully imports a vehicle into NI")
-      IndividualUserJourney.Acquisition.notifyingAsAPrivateIndividualAsANotifier()
+      Then("the user adds a vehicle with all dates known")
+      IndividualUserJourney.Acquisition.notifyingAsAPrivateIndividualAsANotifierAllScreens()
+      Then("the user adds a vehicle with out a purchase invoice")
+      IndividualUserJourney.Acquisition.notifyingAsAPrivateIndividualAsANotifierNoInvoiceScreens()
+      Then("the user adds a vehicle without any known dates")
+      IndividualUserJourney.Acquisition.notifyingAsAPrivateIndividualAsANotifierNoDatesProvideScreen()
     }
   }
 

@@ -14,22 +14,20 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.pages.supplier
+package uk.gov.hmrc.ui.pages.vehicles
 
+import uk.gov.hmrc.ui.helpers.NotificationType
 import uk.gov.hmrc.ui.pages.BasePage
 
-class UseYourPersonalDetailsAsTheSupplierDetails(supplierNumber: Int = 1) extends BasePage {
-  override val pageUrl: String = s"$baseUrl/supplier/$supplierNumber/use-personal-details-as-supplier"
+class DateOfFirstRegistration(notificationType: NotificationType, notificationNumber: Int = 1, vehicleNumber: Int = 1)
+    extends BasePage {
+  override val pageUrl: String =
+    s"$baseUrl/${notificationType.url}/$notificationNumber/vehicle/$vehicleNumber/date-of-first-registration"
 
-  def verifyPageDisplayed(): Unit =
+  def verifyPageDisplayed(): Unit = {
     logger.info(s"Verifying page: ${this.getClass.getSimpleName}")
     verifyStandardPageHeading(
-      expectedHeading = "Use your personal details as the supplier details"
+      expectedHeading = "Date of first registration"
     )
-
-  def usePersonalDetailsAsSupplierDetails(): Unit =
-    selectOptionOneAndContinue()
-
-  def provideDifferentSupplierDetails(): Unit =
-    selectOptionTwoAndContinue()
+  }
 }

@@ -14,25 +14,25 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.pages.imports
+package uk.gov.hmrc.ui.pages.vehicles
 
+import uk.gov.hmrc.ui.data.RandomValueGenerator
 import uk.gov.hmrc.ui.pages.BasePage
 
-object VehicleBroughtFromOutsideBothTheUkAndEu extends BasePage {
-  override val pageUrl: String = s"$baseUrl/vehicles-brought-from-outside-uk-or-eu"
+class WhatIsThePurchaseInvoiceNumber(supplierNumber: Int = 1, vehicleNumber: Int = 1) extends BasePage {
+  override val pageUrl: String = s"$baseUrl/supplier/$supplierNumber/vehicle/$vehicleNumber/purchase-invoice-number"
 
-  def verifyPageDisplayed(): Unit =
+  def verifyPageDisplayed(): Unit = {
     logger.info(s"Verifying page: ${this.getClass.getSimpleName}")
-    verifyStandardPageHeading(
-      expectedHeading = "Vehicles brought from outside both the UK and the EU"
+    verifyInputPageHeading(
+      expectedHeading = "What is the purchase invoice number?"
     )
+  }
 
-  def addByImportNumberNoClientSelected(): Unit =
+  def inputPurchaseInvoiceNumber(): Unit = {
+    val invoiceNum = RandomValueGenerator.generatePurchaseInvoiceNumber
+    logger.info(s"Entering $invoiceNum as a random value for purchase invoice number")
+    typeInsideElement(Locators.inputField, invoiceNum)
     clickContinue()
-
-  def addByImportNumber(): Unit =
-    selectOptionOneAndContinue()
-
-  def addBySpreadsheet(): Unit =
-    selectOptionTwoAndContinue()
+  }
 }

@@ -14,22 +14,27 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.pages.supplier
+package uk.gov.hmrc.ui.pages.vehicles
 
+import uk.gov.hmrc.ui.data.RandomValueGenerator
+import uk.gov.hmrc.ui.helpers.NotificationType
 import uk.gov.hmrc.ui.pages.BasePage
+class TotalAmountPaid(notificationType: NotificationType, notificationNumber: Int = 1, vehicleNumber: Int = 1)
+    extends BasePage {
+  override val pageUrl: String =
+    s"$baseUrl/${notificationType.url}/$notificationNumber/vehicle/$vehicleNumber/total-amount-paid"
 
-class UseYourPersonalDetailsAsTheSupplierDetails(supplierNumber: Int = 1) extends BasePage {
-  override val pageUrl: String = s"$baseUrl/supplier/$supplierNumber/use-personal-details-as-supplier"
-
-  def verifyPageDisplayed(): Unit =
+  def verifyPageDisplayed(): Unit = {
     logger.info(s"Verifying page: ${this.getClass.getSimpleName}")
     verifyStandardPageHeading(
-      expectedHeading = "Use your personal details as the supplier details"
+      expectedHeading = "Total amount paid"
     )
+  }
 
-  def usePersonalDetailsAsSupplierDetails(): Unit =
-    selectOptionOneAndContinue()
-
-  def provideDifferentSupplierDetails(): Unit =
-    selectOptionTwoAndContinue()
+  def enterAmountPaidForVehicle(): Unit = {
+    val amountPaid = RandomValueGenerator.generateTotalAmountPaid
+    logger.info(s"Random value for price paid entered: $amountPaid")
+    typeInsideElement(Locators.inputField, amountPaid)
+    clickContinue()
+  }
 }

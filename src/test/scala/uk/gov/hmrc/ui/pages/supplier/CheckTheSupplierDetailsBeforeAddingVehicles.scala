@@ -18,18 +18,13 @@ package uk.gov.hmrc.ui.pages.supplier
 
 import uk.gov.hmrc.ui.pages.BasePage
 
-class UseYourPersonalDetailsAsTheSupplierDetails(supplierNumber: Int = 1) extends BasePage {
-  override val pageUrl: String = s"$baseUrl/supplier/$supplierNumber/use-personal-details-as-supplier"
+class CheckTheSupplierDetailsBeforeAddingVehicles(supplierNumber: Int = 1) extends BasePage {
+  override val pageUrl: String = s"$baseUrl/supplier/$supplierNumber/confirm-supplier-details"
 
-  def verifyPageDisplayed(): Unit =
+  def verifyPageDisplayed(): Unit = {
     logger.info(s"Verifying page: ${this.getClass.getSimpleName}")
     verifyStandardPageHeading(
-      expectedHeading = "Use your personal details as the supplier details"
+      expectedHeading = "Check the supplier details before adding vehicles"
     )
-
-  def usePersonalDetailsAsSupplierDetails(): Unit =
-    selectOptionOneAndContinue()
-
-  def provideDifferentSupplierDetails(): Unit =
-    selectOptionTwoAndContinue()
+  }
 }

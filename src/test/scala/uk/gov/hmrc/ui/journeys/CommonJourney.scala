@@ -16,13 +16,16 @@
 
 package uk.gov.hmrc.ui.journeys
 
-import uk.gov.hmrc.ui.helpers.{AddressPages, AffinityGroup, CYAPage, NotificationType}
+import uk.gov.hmrc.ui.helpers.Dates.SelectedDates
+import uk.gov.hmrc.ui.helpers.{AddressPages, AffinityGroup, CYAPage, Dates, NotificationType}
 import uk.gov.hmrc.ui.pages.addresses.{ChooseYourAddress, FindYourAddress, ReviewAndConfirmAddress}
 import uk.gov.hmrc.ui.pages.common.{AreYouABusinessOrPrivateIndividual, AreYouNotifyingAsPurchaserOrOnBehalf, BeforeYouContinue, CheckYourAnswers, HasYourClientBroughtAVehicleIntoTheUkForBusinessUse, HaveYouBroughtAVehicleIntoTheUKForBusinessUse, LandingPage, NotificationTaskList, PurchaserOnBehalfOfABusinessOrIndividual, VehicleBroughtIntoNIFromEUPage}
 import uk.gov.hmrc.ui.pages.notifier.{AddYourDetailsBusinessName, AddYourDetailsEmail, AddYourDetailsGuidancePage, AddYourDetailsName, AddYourDetailsPhoneNumber, IsYourAddressInTheUK}
 import uk.gov.hmrc.ui.pages.purchaser.{AddPurchaserDetailsBusinessName, AddPurchaserDetailsName, IsPurchaserAddressInTheUK}
-import uk.gov.hmrc.ui.pages.supplier.AddVehicleDetails
+import uk.gov.hmrc.ui.pages.supplier.{AddVehicleDetails, CheckTheSupplierDetailsBeforeAddingVehicles, UseYourPersonalDetailsAsTheSupplierDetails, VehicleBoughtFromSupplier}
 import uk.gov.hmrc.ui.pages.AuthLoginPage
+import uk.gov.hmrc.ui.pages.aquisition.WhichDatesDoYouHaveForTheVehicle
+import uk.gov.hmrc.ui.pages.vehicles.{EnterTheCurrencyUsedToPayForTheVehicle, TotalAmountPaid}
 
 /** Base methods that are used to answer repetitive scenarios within journeys to make code more readable */
 object CommonJourney {
@@ -210,11 +213,41 @@ object CommonJourney {
 
   def supplierHasInternationalDetails(): Unit = {}
 
-  // TODO:
   /** Helper methods for adding vehicles */
+  def addingVehicleBySupplier(affinityGroup: AffinityGroup): Unit =
+    if (affinityGroup.userIsVATUser) AddVehicleDetails.addBySupplierAsAVatUser()
+    else AddVehicleDetails.addBySupplierNonVatUser()
+
+  def addVehicleBySupplierSelfSupply(datesToAdd: Seq[SelectedDates], notificationType: NotificationType): Unit = {
+    UseYourPersonalDetailsAsTheSupplierDetails().verifyPageDisplayed()
+    UseYourPersonalDetailsAsTheSupplierDetails().usePersonalDetailsAsSupplierDetails()
+    CheckTheSupplierDetailsBeforeAddingVehicles().verifyPageDisplayed()
+    CheckTheSupplierDetailsBeforeAddingVehicles().clickContinue()
+    VehicleBoughtFromSupplier().verifyPageDisplayed()
+    VehicleBoughtFromSupplier().clickContinue()
+    WhichDatesDoYouHaveForTheVehicle().verifyPageDisplayed()
+    WhichDatesDoYouHaveForTheVehicle().selectDates(datesToAdd)
+    handleDatesSelected(datesToAdd, notificationType)
+  }
+
+  private def handleDatesSelected(pagesToVerify: Seq[SelectedDates], notificationType: NotificationType): Unit =
+    Dates.verifyPagesDisplayed(pagesToVerify, notificationType)
+
+  def addAmountPaidAndCurrencyUsed(notificationType: NotificationType): Unit = {
+    TotalAmountPaid(notificationType).verifyPageDisplayed()
+    TotalAmountPaid(notificationType).enterAmountPaidForVehicle()
+    EnterTheCurrencyUsedToPayForTheVehicle(notificationType).verifyPageDisplayed()
+    EnterTheCurrencyUsedToPayForTheVehicle(notificationType).inputCurrencyUsed()
+    // TODO: TYPE OF VEHICLE & CYA
+  }
+
+  def addVehicleBySupplierAndProvideSupplyInformation(): Unit = {
+    // TODO
+  }
+
   def addVehicleDetailsUploadAVehicleSpreadsheet(): Unit = {
     AddVehicleDetails.verifyPageDisplayed()
-    AddVehicleDetails.selectOptionTwoAndContinue()
+    AddVehicleDetails.addBySpreadsheet()
   }
 
   def validateCheckYourAnswersForAddress(page: CYAPage): Unit = {
