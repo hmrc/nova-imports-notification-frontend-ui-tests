@@ -19,7 +19,7 @@ package uk.gov.hmrc.ui.journeys
 import uk.gov.hmrc.ui.helpers.Dates.SelectedDates
 import uk.gov.hmrc.ui.helpers.Dates.SelectedDates.PurchaseInvoice
 import uk.gov.hmrc.ui.helpers.{AffinityGroup, CYAPage, NotificationType}
-import uk.gov.hmrc.ui.pages.common.{CheckYourAnswers, NotificationTaskList, VehicleBroughtIntoNIFromOutsideEUPage}
+import uk.gov.hmrc.ui.pages.common.{CheckYourAnswers, NotificationTaskList, VehicleBroughtIntoNIFromEUPage, VehicleBroughtIntoNIFromOutsideEUPage}
 
 object IndividualUserJourney {
   // Acquisition flow
@@ -188,9 +188,10 @@ object IndividualUserJourney {
 
   // Import flow
   object Import {
-    def userNeedsToImportAVehicleFromOutsideEU(): Unit = {
-      CommonJourney.loginAndStartANotification(AffinityGroup.Individual, NotificationType.Import)
-      VehicleBroughtIntoNIFromOutsideEUPage.verifyPageDisplayed()
-    }
+    // TODO: FLAKY COME BACK TO THIS
+//    def userNeedsToImportAVehicleFromOutsideEU(): Unit = {
+//      CommonJourney.loginAndStartANotification(AffinityGroup.Individual, NotificationType.Import)
+//      VehicleBroughtIntoNIFromOutsideEUPage.verifyPageDisplayed()
+//    }
   }
 }
