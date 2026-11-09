@@ -18,7 +18,7 @@ package uk.gov.hmrc.ui.pages.vehicles
 
 import org.openqa.selenium.By
 import uk.gov.hmrc.ui.data.RandomValueGenerator
-import uk.gov.hmrc.ui.helpers.NotificationType
+import uk.gov.hmrc.ui.helpers.{CountryList, NotificationType}
 import uk.gov.hmrc.ui.pages.BasePage
 
 class EnterTheCountryWhereTheVehicleWasFirstRegistered(
@@ -42,8 +42,10 @@ class EnterTheCountryWhereTheVehicleWasFirstRegistered(
 
   def enterCountryOfRegistration(): Unit = {
     val country = RandomValueGenerator.generateCountryOfFirstRegistration
+    val value   = if (country == CountryList.EuCountries.Czechia.toString) "Czech Republic" else country
+
     logger.info(s"About to enter $country as the country of first registration")
-    typeInsideElement(PageLocators.input, country)
+    typeInsideElement(PageLocators.input, value)
     clickContinue()
   }
 }
