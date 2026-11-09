@@ -26,7 +26,7 @@ object CountryList {
 
   // All current EU member state countries NOVA allows for a supplier
   enum EuCountries extends Countries:
-    case Austria, Belgium, Bulgaria, Croatia, Cyprus, Denmark, Estonia, Finland, France, Germany, Greece,
+    case Austria, Belgium, Bulgaria, Croatia, Cyprus, Czechia, Denmark, Estonia, Finland, France, Germany, Greece,
       Hungary,
       Ireland, Italy, Latvia, Lithuania, Luxembourg, Malta, Netherlands, Holland, Poland, Portugal, Romania, Slovakia,
       Slovenia,
@@ -39,7 +39,7 @@ object CountryList {
   // Get currency used for purchase of vehicle
   def getEuCurrency(country: EuCountries): String = country match {
     case EuCountries.Bulgaria  => "Bulgarian lev (BGN)"
-    case EuCountries.Croatia   => "Czech koruna (CZK)"
+    case EuCountries.Czechia   => "Czech koruna (CZK)"
     case EuCountries.Denmark   => "Danish krone (DKK)"
     case EuCountries.Lithuania => "Lithuanian litas (LTL)"
     case EuCountries.Poland    => "Polish złoty (PLN)"
