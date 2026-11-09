@@ -26,7 +26,7 @@ object CountryList {
 
   // All current EU member state countries NOVA allows for a supplier
   enum EuCountries extends Countries:
-    case Austria, Belgium, Bulgaria, Croatia, Cyprus, Czechia, Denmark, Estonia, Finland, France, Germany, Greece,
+    case Austria, Belgium, Bulgaria, Croatia, Cyprus, Denmark, Estonia, Finland, France, Germany, Greece,
       Hungary,
       Ireland, Italy, Latvia, Lithuania, Luxembourg, Malta, Netherlands, Holland, Poland, Portugal, Romania, Slovakia,
       Slovenia,
