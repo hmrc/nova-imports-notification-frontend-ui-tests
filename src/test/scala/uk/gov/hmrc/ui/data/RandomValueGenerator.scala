@@ -105,7 +105,6 @@ object RandomData {
       case EuCountries.Luxembourg  => numbers(8)
       case EuCountries.Malta       => numbers(8)
       case EuCountries.Netherlands => s"${numbers(9)}B${numbers(2)}"
-      case EuCountries.Holland     => s"${numbers(9)}B${numbers(2)}"
       case EuCountries.Poland      => numbers(10)
       case EuCountries.Portugal    => numbers(9)
       case EuCountries.Romania     => numbers(Random.between(2, 10))

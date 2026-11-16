@@ -28,7 +28,7 @@ object CountryList {
   enum EuCountries extends Countries:
     case Austria, Belgium, Bulgaria, Croatia, Cyprus, Czechia, Denmark, Estonia, Finland, France, Germany, Greece,
       Hungary,
-      Ireland, Italy, Latvia, Lithuania, Luxembourg, Malta, Netherlands, Holland, Poland, Portugal, Romania, Slovakia,
+      Ireland, Italy, Latvia, Lithuania, Luxembourg, Malta, Netherlands, Poland, Portugal, Romania, Slovakia,
       Slovenia,
       Spain, Sweden
 
